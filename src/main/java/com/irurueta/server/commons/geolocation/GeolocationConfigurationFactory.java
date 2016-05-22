@@ -97,13 +97,6 @@ public class GeolocationConfigurationFactory extends
             "./GeoLite2-Country.mmdb";
     
     /**
-     * Property indicating license key to use for country database if the 
-     * non-free version needs to be used.
-     */
-    public static final String MAXMIND_IP_GEOLOCATION_COUNTRY_DATABASE_LICENSE_KEY_PROPERTY =
-            "com.irurueta.server.commons.geolocation.MAXMIND_IP_GEOLOCATION_COUNTRY_DATABASE_LICENSE_KEY";    
-
-    /**
      * Property indicating if city IP geolocation database is embedded.
      * By default the embedded free database in the code will be used.
      */        
@@ -130,7 +123,7 @@ public class GeolocationConfigurationFactory extends
      * Default resource where IP city geolocation database is located.
      */        
     public static final String DEFAULT_IP_GEOLOCATION_CITY_EMBEDDED_RESOURCE = 
-            "GeoLite2-City.mmdb";    
+            "GeoLite2-City.mmdb";
 
     /**
      * Property indicating where the IP city geolocation database file can
@@ -147,13 +140,6 @@ public class GeolocationConfigurationFactory extends
     public static final String DEFAULT_IP_GEOLOCATION_CITY_DATABASE_FILE =
             "./GeoLite2-City.mmdb";
     
-    /**
-     * Property indicating license key to use for IP city database if the 
-     * non-free version needs to be used.
-     */        
-    public static final String MAXMIND_IP_GEOLOCATION_CITY_DATABASE_LICENSE_KEY_PROPERTY =
-            "com.irurueta.server.commons.geolocation.MAXMIND_IP_GEOLOCATION_CITY_DATABASE_LICENSE_KEY";    
-
     /**
      * Reference to factory singleton.
      */

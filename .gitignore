@@ -1,2 +1,3 @@
 /target/
 src/main/java/com/irurueta/server/commons/geolocation/build-info.properties
+/nbproject/

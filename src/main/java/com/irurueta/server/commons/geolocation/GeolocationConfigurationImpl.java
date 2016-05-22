@@ -67,14 +67,7 @@ public class GeolocationConfigurationImpl implements GeolocationConfiguration{
      * available.
      */    
     private String mIpGeolocationCountryDatabaseFile;    
-    
-    /**
-     * Indicates license key to use for country IP geolocation database.
-     * This parameter is optional and only needed for the non-free Maxmind 
-     * databases.
-     */    
-    private String mMaxmindIPGeolocationCountryDatabaseLicenseKey;
-            
+                
     /**
      * Indicates if IP geolocation city database is embedded within 
      * application code. If true, then the configured embedded resource will be
@@ -107,14 +100,7 @@ public class GeolocationConfigurationImpl implements GeolocationConfiguration{
      * available.
      */    
     private String mIpGeolocationCityDatabaseFile;
-    
-    /**
-     * Indicates license key to use for city IP geolocation database.
-     * This parameter is optional and only needed for the non-free Maxmind 
-     * databases.
-     */    
-    private String mMaxmindIPGeolocationCityDatabaseLicenseKey;
-    
+        
     /**
      * Constructor.
      */
@@ -129,7 +115,6 @@ public class GeolocationConfigurationImpl implements GeolocationConfiguration{
                 DEFAULT_IP_GEOLOCATION_COUNTRY_EMBEDDED_RESOURCE;
         mIpGeolocationCountryDatabaseFile = GeolocationConfigurationFactory.
                 DEFAULT_IP_GEOLOCATION_COUNTRY_DATABASE_FILE;
-        mMaxmindIPGeolocationCountryDatabaseLicenseKey = null;
         
         mIpGeolocationCityDatabaseEmbedded = GeolocationConfigurationFactory.
                 DEFAULT_IP_GEOLOCATION_CITY_DATABASE_EMBEDDED;
@@ -137,7 +122,6 @@ public class GeolocationConfigurationImpl implements GeolocationConfiguration{
                 DEFAULT_IP_GEOLOCATION_CITY_EMBEDDED_RESOURCE;
         mIpGeolocationCityDatabaseFile = GeolocationConfigurationFactory.
                 DEFAULT_IP_GEOLOCATION_CITY_DATABASE_FILE;
-        mMaxmindIPGeolocationCityDatabaseLicenseKey = null;        
     }
     
     /**
@@ -219,17 +203,6 @@ public class GeolocationConfigurationImpl implements GeolocationConfiguration{
     }
 
     /**
-     * Indicates license key to use for country IP geolocation database.
-     * This parameter is optional and only needed for the non-free Maxmind 
-     * databases.
-     * @return license key to use for country IP geolocation.
-     */    
-    @Override
-    public String getMaxmindIPGeolocationCountryDatabaseLicenseKey() {
-        return mMaxmindIPGeolocationCountryDatabaseLicenseKey;
-    }
-
-    /**
      * Indicates if IP geolocation city database is embedded within 
      * application code. If true, then the configured embedded resource will be
      * copied into provided database file (erasing any previous data), otherwise
@@ -278,17 +251,6 @@ public class GeolocationConfigurationImpl implements GeolocationConfiguration{
     }
 
     /**
-     * Indicates license key to use for city IP geolocation database.
-     * This parameter is optional and only needed for the non-free Maxmind 
-     * databases.
-     * @return license key to use for city IP geolocation.
-     */    
-    @Override
-    public String getMaxmindIPGeolocationCityDatabaseLicenseKey() {
-        return mMaxmindIPGeolocationCityDatabaseLicenseKey;
-    }
-
-    /**
      * Loads configuration from provided properties.
      * @param properties properties containing configuration.
      * @throws ConfigurationException if any properties value is invalid.
@@ -322,9 +284,6 @@ public class GeolocationConfigurationImpl implements GeolocationConfiguration{
                     IP_GEOLOCATION_COUNTRY_DATABASE_FILE_PROPERTY, 
                     GeolocationConfigurationFactory.
                     DEFAULT_IP_GEOLOCATION_COUNTRY_DATABASE_FILE);
-            mMaxmindIPGeolocationCountryDatabaseLicenseKey = properties.
-                    getProperty(GeolocationConfigurationFactory.
-                    MAXMIND_IP_GEOLOCATION_COUNTRY_DATABASE_LICENSE_KEY_PROPERTY);
         
             mIpGeolocationCityDatabaseEmbedded = Boolean.valueOf(properties.
                     getProperty(GeolocationConfigurationFactory.
@@ -342,11 +301,8 @@ public class GeolocationConfigurationImpl implements GeolocationConfiguration{
                     IP_GEOLOCATION_CITY_DATABASE_FILE_PROPERTY, 
                     GeolocationConfigurationFactory.
                     DEFAULT_IP_GEOLOCATION_CITY_DATABASE_FILE);
-            mMaxmindIPGeolocationCityDatabaseLicenseKey = 
-                    properties.getProperty(GeolocationConfigurationFactory.
-                    MAXMIND_IP_GEOLOCATION_CITY_DATABASE_LICENSE_KEY_PROPERTY);        
-        }catch(Throwable t){
-            throw new ConfigurationException(t);
+        }catch(Exception e){
+            throw new ConfigurationException(e);
         }
     }
 
@@ -378,11 +334,6 @@ public class GeolocationConfigurationImpl implements GeolocationConfiguration{
                     IP_GEOLOCATION_COUNTRY_DATABASE_FILE_PROPERTY, 
                     mIpGeolocationCountryDatabaseFile);
         }
-        if(mMaxmindIPGeolocationCountryDatabaseLicenseKey != null){
-            properties.setProperty(GeolocationConfigurationFactory.
-                    MAXMIND_IP_GEOLOCATION_COUNTRY_DATABASE_LICENSE_KEY_PROPERTY, 
-                    mMaxmindIPGeolocationCountryDatabaseLicenseKey);
-        }
                 
         properties.setProperty(GeolocationConfigurationFactory.
                 IP_GEOLOCATION_CITY_DATABASE_EMBEDDED_PROPERTY, 
@@ -394,11 +345,6 @@ public class GeolocationConfigurationImpl implements GeolocationConfiguration{
             properties.setProperty(GeolocationConfigurationFactory.
                     IP_GEOLOCATION_CITY_DATABASE_FILE_PROPERTY, 
                     mIpGeolocationCityDatabaseFile);
-        }
-        if(mMaxmindIPGeolocationCityDatabaseLicenseKey != null){
-            properties.setProperty(GeolocationConfigurationFactory.
-                    MAXMIND_IP_GEOLOCATION_CITY_DATABASE_LICENSE_KEY_PROPERTY, 
-                    mMaxmindIPGeolocationCityDatabaseLicenseKey);
         }
         
         return properties;

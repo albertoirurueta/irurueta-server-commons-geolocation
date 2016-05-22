@@ -75,15 +75,7 @@ public interface GeolocationConfiguration extends Configuration {
      * locally.
      */
     public String getIPGeolocationCountryDatabaseFile();
-    
-    /**
-     * Indicates license key to use for country IP geolocation database.
-     * This parameter is optional and only needed for the non-free Maxmind 
-     * databases.
-     * @return license key to use for country IP geolocation.
-     */
-    public String getMaxmindIPGeolocationCountryDatabaseLicenseKey();
-    
+        
     /**
      * Indicates if IP geolocation city database is embedded within 
      * application code. If true, then the configured embedded resource will be
@@ -121,13 +113,5 @@ public interface GeolocationConfiguration extends Configuration {
      * @return location where city IP geolocation database will be stored
      * locally.
      */
-    public String getIPGeolocationCityDatabaseFile();
-    
-    /**
-     * Indicates license key to use for city IP geolocation database.
-     * This parameter is optional and only needed for the non-free Maxmind 
-     * databases.
-     * @return license key to use for city IP geolocation.
-     */
-    public String getMaxmindIPGeolocationCityDatabaseLicenseKey();    
+    public String getIPGeolocationCityDatabaseFile();    
 }
