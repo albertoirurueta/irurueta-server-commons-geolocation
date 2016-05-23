@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>IPLocation.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-geolocation</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.geolocation</a> &gt; <span class="el_source">IPLocation.java</span></div><h1>IPLocation.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.irurueta.server.commons.geolocation;
+
+import com.irurueta.commons.units.LocationDistanceEstimator;
+import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
+
+/**
+ * Class containing location information obtained for a given IP address
+ */
+public class IPLocation {
+    
+    /**
+     * If available, city name where IP address is located.
+     */
+    protected String mCity;
+        
+    /**
+     * If available, time zone assigned to location where this IP address is 
+     * located as specified by the IANA Time Zone database.
+     * @see &lt;a href=&quot;http://www.iana.org/time-zones&quot;&gt;http://www.iana.org/time-zones&lt;/a&gt;
+     */    
+    protected TimeZone mTimeZone;
+    
+    /**
+     * The radius in kilometers around the specified location where the IP
+     * address is likely to be.
+     */
+    protected Integer mAccuracyRadius;
+    
+    /**
+     * Metro code of the location if the location is in the US as specified
+     * by the Google Adwords API.
+     * @see &lt;a href=&quot;https://developers.google.com/adwords/api/docs/appendix/cities-DMAregions&quot;&gt;
+     * https://developers.google.com/adwords/api/docs/appendix/cities-DMAregions&lt;/a&gt;
+     */
+    protected Integer mMetroCode;
+    
+    /**
+     * The approximate latitude of the location associated with the IP address. 
+     * This value is not precise and should not be used to identify a particular 
+     * address or household.
+     */
+    protected Double mLatitude;
+    
+    /**
+     * The approximate longitude of the location associated with the IP address.
+     * This value is not precise and should not be used to identify a particular
+     * address or household.
+     */
+    protected Double mLongitude;
+    
+    /**
+     * The postal code of the location. Postal codes are not available for all
+     * countries. In some countries, this will only contain part of the postal 
+     * code.
+     */
+    protected String mPostalCode;
+    
+    /**
+     * List of subdivisions where location is likely to be.
+     * A subdivision is a tring of up to three characters long defining a
+     * subdivision (i.e. district, province, autonomous community, region, etc).
+     * Order of subdivision codes is the same as subdivisions' names.
+     * @see &lt;a href=&quot;http://en.wikipedia.org/wiki/ISO_3166-2&quot;&gt;
+     * http://en.wikipedia.org/wiki/ISO_3166-2&lt;/a&gt;
+     */
+    protected List&lt;String&gt; mSubdivisionCodes; 
+    
+    /**
+     * List of subdivisions' names where location is likely to be.
+     * Order of subdivision names is the same as subdivisions' codes.
+     */
+    protected List&lt;String&gt; mSubdivisionNames;
+    
+    /**
+     * The two-character ISO 3166-1 alpha code for the country where the IP 
+     * address is likely to be.
+     * @see &lt;a href=&quot;http://en.wikipedia.org/wiki/ISO_3166-1&quot;&gt;
+     * http://en.wikipedia.org/wiki/ISO_3166-1&lt;/a&gt;
+     */
+    protected String mCountryCode;
+    
+    /**
+     * Name of country where the IP address is likely to be.
+     */
+    protected String mCountryName;
+    
+    /**
+     * Two-character ISO 3166-1 alpha code for the country where the ISP has 
+     * registered a given IP block. This might differ the actual user's country.
+     */
+    protected String mRegisteredCountryCode;
+    
+    /**
+     * Name of country where the ISP has registered a given IP block. This might
+     * differ the actual user's country.
+     */
+    protected String mRegisteredCountryName;
+
+    /**
+     * Autonomous system number associated with the IP address.
+     * @see &lt;a href=&quot;http://en.wikipedia.org/wiki/Autonomous_system_(Internet)&quot;&gt;
+     * http://en.wikipedia.org/wiki/Autonomous_system_(Internet)&lt;/a&gt;
+     */
+    protected Integer mAutonomousSystemNumber;
+    
+    /**
+     * The second level domain associated with the IP address. This will be
+     * something like &quot;example.com&quot; or &quot;example.co.uk&quot;, not &quot;foo.example.com&quot;
+     */
+    protected String mDomain;
+    
+    /**
+     * The name of the ISP associated with the IP address.
+     */
+    protected String mIsp;
+    
+    /**
+     * The name of the organization associated with the IP address.
+     */
+    protected String mOrganization;       
+    
+    /**
+     * A two character continent code like &quot;NA&quot; (North America) or &quot;OC&quot; 
+     * (Oceania).
+     */
+    protected String mContinentCode;
+    
+    /**
+     * Name of continent where request originates from.
+     */
+    protected String mContinentName;
+
+    /**
+     * Assigned geolocation level to this instance.
+     * This is the value assigned when requesting location, it can be either
+     * Organization, City or Country level
+     */
+    protected IPGeolocationLevel mLevel;    
+    
+    /**
+     * Constructor with required geolocation level
+     * @param level accuracy or level of geolocation. Possible values are:
+     * country, city (includes country data) and organization (includes both
+     * city and country data)
+     */
+<span class="fc" id="L163">    public IPLocation(IPGeolocationLevel level) {</span>
+<span class="fc" id="L164">        mLevel = level;</span>
+<span class="fc" id="L165">    }</span>
+    
+    /**
+     * Gets city name where IP address is located.
+     * @return city name where IP address is located.
+     */
+    public String getCity() {
+<span class="fc" id="L172">        return mCity;</span>
+    }
+    
+    /**
+     * Gets the time zone assigned to location where this IP address is located
+     * as specified by the IANA Time Zone database.
+     * @see &lt;a href=&quot;http://www.iana.org/time-zones&quot;&gt;
+     * http://www.iana.org/time-zones&lt;/a&gt;
+     * @return time zone where this IP address is located.
+     */
+    public TimeZone getTimeZone() {
+<span class="fc" id="L183">        return mTimeZone;</span>
+    }
+    
+    /**
+     * Gets the radius in kilometers around the specified location where the IP
+     * address is likely to be.
+     * @return radius in kilometers around the location where the IP address is
+     * likely to be.
+     */
+    public Integer getAccuracyRadius() {
+<span class="fc" id="L193">        return mAccuracyRadius;</span>
+    }
+    
+    /**
+     * Gets the metro code of the location if the location is in the US as 
+     * specified by the Google Adwords API.
+     * @see &lt;a href=&quot;https://developers.google.com/adwords/api/docs/appendix/cities-DMAregions&quot;&gt;
+     * https://developers.google.com/adwords/api/docs/appendix/cities-DMAregions&lt;/a&gt;
+     * @return metro code of the location if the location is in the US.
+     */
+    public Integer getMetroCode() {
+<span class="fc" id="L204">        return mMetroCode;</span>
+    }
+    
+    /**
+     * Gets the approximate latitude of the location associated with the IP 
+     * address.
+     * This value is not precise and should not be used to identify a particular
+     * address or household.
+     * @return approximate latitude of the location associated with the IP
+     * address.
+     */
+    public Double getLatitude() {
+<span class="fc" id="L216">        return mLatitude;</span>
+    }
+    
+    /**
+     * Gets the approximate longitude of the location associated with the IP 
+     * address.
+     * This value is not precise and should not be used to identify a particular
+     * address or household.
+     * @return approximate longitude of the location associated with the IP
+     * address.
+     */
+    public Double getLongitude() {
+<span class="fc" id="L228">        return mLongitude;</span>
+    }
+    
+    /**
+     * Indicates if GPS coordinates are available for a given IP address.
+     * @return true if GPS coordinates are available, false otherwise
+     */
+    public boolean areCoordinatesAvailable() {
+<span class="fc bfc" id="L236" title="All 4 branches covered.">        return mLatitude != null &amp;&amp; mLongitude != null;</span>
+    }    
+    
+    /**
+     * Gets the postal code of the location. Postal codes are not available for 
+     * all countries. In some countries, this will only contain part of the 
+     * postal code.
+     * @return postal code of the location.
+     */
+    public String getPostalCode() {
+<span class="fc" id="L246">        return mPostalCode;</span>
+    }
+    
+    /**
+     * Gets list of subdivisions where location is likely to be.
+     * A subdivision is a tring of up to three characters long defining a
+     * subdivision (i.e. district, province, autonomous community, region, etc).
+     * Order of subdivision codes is the same as subdivisions' names.
+     * @see &lt;a href=&quot;http://en.wikipedia.org/wiki/ISO_3166-2&quot;&gt;
+     * http://en.wikipedia.org/wiki/ISO_3166-2&lt;/a&gt;
+     * @return list of subdivisions where location is likely to be.
+     */
+    public List&lt;String&gt; getSubdivisionCodes() {
+<span class="fc" id="L259">        return mSubdivisionCodes;</span>
+    }
+    
+    /**
+     * Gets list of subdivisions' names where location is likely to be.
+     * Order of subdivision names is the same as subdivisions' codes.
+     * @return list of subdivisions' names where location is likely to be.
+     */
+    public List&lt;String&gt; getSubdivisionNames() {
+<span class="fc" id="L268">        return mSubdivisionNames;</span>
+    }
+    
+    /**
+     * Gets the two-character ISO 3166-1 alpha code for the country where the IP 
+     * address is likely to be.
+     * @see &lt;a href=&quot;http://en.wikipedia.org/wiki/ISO_3166-1&quot;&gt;
+     * http://en.wikipedia.org/wiki/ISO_3166-1&lt;/a&gt;
+     * @return ISO country code.
+     */
+    public String getCountryCode() {
+<span class="fc" id="L279">        return mCountryCode;</span>
+    }
+    
+    /**
+     * If available, returns country name where IP address is located using 
+     * default system locale. If no value is found, the fallback non-localized 
+     * name obtained from database will be returned
+     * @return country name where IP address is located, or null if not 
+     * available
+     */
+    public String getCountryName() {
+<span class="fc" id="L290">        return getCountryName(null);</span>
+    }
+    
+    /**
+     * If available, returns country name where IP address is located using 
+     * provided locale.
+     * If no value is found, the fallback non-localized name obtained from 
+     * database will be returned
+     * @param locale language to return localized country name
+     * @return country name where IP address is located, or null if not 
+     * available
+     */
+    public String getCountryName(Locale locale) {
+<span class="fc bfc" id="L303" title="All 2 branches covered.">        if(mCountryCode != null){</span>
+<span class="fc" id="L304">            Locale l = new Locale(Locale.getDefault().getLanguage(), </span>
+                    mCountryCode);
+            String displayCountry;
+<span class="fc bfc" id="L307" title="All 2 branches covered.">            if (locale != null) {</span>
+<span class="fc" id="L308">                displayCountry = l.getDisplayCountry(locale);</span>
+            } else {
+<span class="fc" id="L310">                displayCountry = l.getDisplayCountry();</span>
+            }
+<span class="fc bfc" id="L312" title="All 2 branches covered.">            if(displayCountry.equals(mCountryCode)) {</span>
+                //country code is invalid and it is returned as display country 
+                //name
+<span class="fc" id="L315">                return mCountryName;</span>
+            } else {
+<span class="fc" id="L317">                return displayCountry;</span>
+            }
+        }else{
+<span class="fc" id="L320">            return mCountryName;</span>
+        }
+    }
+    
+    /**
+     * Gets two-character ISO 3166-1 alpha code for the country where the ISP 
+     * has registered a given IP block. This might differ the actual user's 
+     * country.
+     * @return registered ISO country code.
+     */
+    public String getRegisteredCountryCode() {
+<span class="fc" id="L331">        return mRegisteredCountryCode;</span>
+    }
+    
+    /**
+     * If available, returns registered country name where IP address is 
+     * registered by the ISP using default system locale. If no value is found, 
+     * the fallback non-localized name obtained from database will be returned
+     * @return country name where IP address is located, or null if not 
+     * available
+     */
+    public String getRegisteredCountryName() {
+<span class="fc" id="L342">        return getRegisteredCountryName(null);</span>
+    }
+    
+    /**
+     * If available, returns registered country name where IP address is 
+     * registered by the ISP using provided locale.
+     * If no value is found, the fallback non-localized name obtained from 
+     * database will be returned
+     * @param locale language to return localized country name
+     * @return country name where IP address is located, or null if not 
+     * available
+     */
+    public String getRegisteredCountryName(Locale locale) {
+<span class="fc bfc" id="L355" title="All 2 branches covered.">        if(mRegisteredCountryCode != null){</span>
+<span class="fc" id="L356">            Locale l = new Locale(Locale.getDefault().getLanguage(), </span>
+                    mRegisteredCountryCode);
+            String displayCountry;
+<span class="fc bfc" id="L359" title="All 2 branches covered.">            if (locale != null) {</span>
+<span class="fc" id="L360">                displayCountry = l.getDisplayCountry(locale);</span>
+            } else {
+<span class="fc" id="L362">                displayCountry = l.getDisplayCountry();</span>
+            }
+<span class="fc bfc" id="L364" title="All 2 branches covered.">            if(displayCountry.equals(mRegisteredCountryCode)) {</span>
+                //country code is invalid and it is returned as display country 
+                //name
+<span class="fc" id="L367">                return mRegisteredCountryName;</span>
+            } else {
+<span class="fc" id="L369">                return displayCountry;</span>
+            }
+        }else{
+<span class="fc" id="L372">            return mRegisteredCountryName;</span>
+        }        
+    }    
+    
+    /**
+     * Gets autonomous system number associated with the IP address.
+     * @see &lt;a href=&quot;http://en.wikipedia.org/wiki/Autonomous_system_(Internet)&quot;&gt;
+     * http://en.wikipedia.org/wiki/Autonomous_system_(Internet)&lt;/a&gt;
+     * @return autonomous system number associated with the IP address.
+     */
+    public Integer getAutonomousSystemNumber() {
+<span class="fc" id="L383">        return mAutonomousSystemNumber;</span>
+    }
+    
+    /**
+     * Gets the second level domain associated with the IP address. This will be
+     * something like &quot;eample.com&quot; or &quot;example.co.uk&quot;, not &quot;foo.example.com&quot;.
+     * @return second level domain associated with the IP address.
+     */
+    public String getDomain() {
+<span class="fc" id="L392">        return mDomain;</span>
+    }
+    
+    /**
+     * Gets the name of the ISP associated with the IP address.
+     * @return name of the ISP associated with the IP address.
+     */
+    public String getIsp() {
+<span class="fc" id="L400">        return mIsp;</span>
+    }
+
+    /**
+     * Gets the name of the organization associated with the IP address.
+     * @return name of the organization associated with the IP address.
+     */
+    public String getOrganization() {
+<span class="fc" id="L408">        return mOrganization;</span>
+    }
+    
+    /**
+     * Gets two character continent code like &quot;NA&quot; (North America) or &quot;OC&quot; 
+     * (Oceania).
+     * @return continent code.
+     */
+    public String getContinentCode() {
+<span class="fc" id="L417">        return mContinentCode;</span>
+    }
+    
+    /**
+     * Gets name of continent where request originates from.
+     * @return name of continent.
+     */
+    public String getContinentName(){
+<span class="fc" id="L425">        return mContinentName;</span>
+    }
+        
+    /**
+     * Returns geolocation level or accuracy that was requested to locate an
+     * IP address.
+     * Notice that available levels are: country, city (includes country data)
+     * and organization (includes city and country data)
+     * @return requested geolocation level
+     */
+    public IPGeolocationLevel getLevel() {
+<span class="fc" id="L436">        return mLevel;</span>
+    }
+    
+    /**
+     * Returns distance between current and provided location expressed in 
+     * meters.
+     * @param otherLocation other location to compare against this one
+     * @return distance between locations expressed in meters
+     */
+    public double distance(IPLocation otherLocation) {
+<span class="fc" id="L446">        return LocationDistanceEstimator.distanceInMeters(mLatitude, mLongitude, </span>
+                otherLocation.mLatitude, otherLocation.mLongitude);
+    }    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

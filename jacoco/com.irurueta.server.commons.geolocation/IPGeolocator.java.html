@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>IPGeolocator.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-geolocation</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.geolocation</a> &gt; <span class="el_source">IPGeolocator.java</span></div><h1>IPGeolocator.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.irurueta.server.commons.geolocation;
+
+import com.maxmind.db.CHMCache;
+import com.maxmind.geoip2.DatabaseReader;
+import com.maxmind.geoip2.model.AbstractCountryResponse;
+import com.maxmind.geoip2.model.CityResponse;
+import com.maxmind.geoip2.record.City;
+import com.maxmind.geoip2.record.Continent;
+import com.maxmind.geoip2.record.Country;
+import com.maxmind.geoip2.record.Location;
+import com.maxmind.geoip2.record.Postal;
+import com.maxmind.geoip2.record.Subdivision;
+import com.maxmind.geoip2.record.Traits;
+import java.io.Closeable;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.lang.ref.SoftReference;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TimeZone;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ * Class to locate an IP address.
+ */
+public class IPGeolocator implements Closeable{
+    
+    /**
+     * Logger of this class.
+     */
+<span class="fc" id="L52">    private static final Logger LOGGER = Logger.getLogger(</span>
+            IPGeolocator.class.getName());
+    
+    /**
+     * Buffer size to copy embedded databases into final locations.
+     */
+    private static final int BUFFER_SIZE = 1024;
+    
+    /**
+     * Singleton instance of IPGeolocator.
+     */
+    private static SoftReference&lt;IPGeolocator&gt; mReference;
+    
+    /**
+     * Indicates if geolocation is enabled.
+     */
+    private boolean mEnabled;        
+    
+    /**
+     * Reference to geolocation configuration.
+     */
+    private GeolocationConfiguration mConfiguration;
+    
+    /**
+     * City database reader.
+     */
+    private DatabaseReader mCityReader;
+    
+    /**
+     * Indicates whether city database has already been prepared.
+     */
+    private boolean mCityDatabasePrepared;
+    
+    /**
+     * Country database reader.
+     */
+    private DatabaseReader mCountryReader;
+    
+    /**
+     * Indicates whether country database has already been prepared.
+     */
+    private boolean mCountryDatabasePrepared;
+        
+    /**
+     * Constructor.
+     * Creates and configures an IPGeolocator instance.
+     */
+<span class="fc" id="L99">    private IPGeolocator() {</span>
+<span class="fc" id="L100">        mEnabled = false;</span>
+        try{
+<span class="fc" id="L102">            mConfiguration = GeolocationConfigurationFactory.getInstance().</span>
+                    configure();
+            
+            
+            //copy embedded databases to destination if needed
+<span class="fc" id="L107">            prepareDatabases();</span>
+            
+            //configure lookup services
+<span class="fc" id="L110">            IPGeolocationLevel level = mConfiguration.getIPGeolocationLevel();</span>
+            
+<span class="pc bpc" id="L112" title="1 of 2 branches missed.">            if(level != null){</span>
+<span class="pc bpc" id="L113" title="2 of 3 branches missed.">                switch(level){</span>
+                    case CITY:
+<span class="fc" id="L115">                        mCityReader = createCityReader();</span>
+<span class="fc" id="L116">                        break;</span>
+                    case COUNTRY:
+<span class="nc" id="L118">                        mCountryReader = createCountryReader();</span>
+                        break;
+                }
+                
+<span class="pc bpc" id="L122" title="3 of 4 branches missed.">                if(mCityReader != null || mCountryReader != null) {</span>
+<span class="fc" id="L123">                    mEnabled = true;</span>
+                }                
+            }
+                        
+<span class="pc bpc" id="L127" title="1 of 2 branches missed.">            if(mEnabled){</span>
+<span class="fc" id="L128">                LOGGER.log(Level.INFO, &quot;IP geolocation configured&quot;);            </span>
+            }else{
+<span class="nc" id="L130">                LOGGER.log(Level.INFO, &quot;IP geolocation is disabled&quot;);                </span>
+            }
+<span class="nc" id="L132">        }catch(Exception e){</span>
+<span class="nc bnc" id="L133" title="All 2 branches missed.">            if(mEnabled){</span>
+<span class="nc" id="L134">                LOGGER.log(Level.INFO, &quot;IP geolocation configured&quot;, e);</span>
+            }else{
+<span class="nc" id="L136">                LOGGER.log(Level.INFO, &quot;IP geolocation is disabled&quot;, e);                </span>
+            }
+<span class="fc" id="L138">        }</span>
+<span class="fc" id="L139">    }</span>
+        
+    /**
+     * Factory method to return the singleton instance of IPGeolocator based
+     * on current configuration.
+     * @return singleton instance.
+     */
+    public static synchronized IPGeolocator getInstance() {
+        IPGeolocator singleton;
+<span class="pc bpc" id="L148" title="1 of 4 branches missed.">        if (mReference == null || (singleton = mReference.get()) == null) {</span>
+<span class="fc" id="L149">            singleton = new IPGeolocator();</span>
+<span class="fc" id="L150">            mReference = new SoftReference&lt;&gt;(singleton);</span>
+        }
+<span class="fc" id="L152">        return singleton;</span>
+    }
+    
+    /**
+     * Locates provided IP or IPv6 address using requested level.
+     * Notice that geolocation levels are: Country, City (which includes country
+     * information) and Disabled, which throws an exception.
+     * @param address IP address to evaluate.
+     * @param level level of accuracy of geolocation.
+     * @return location of IP address.
+     * @throws IPGeolocationDisabledException if IP geolocation is disabled or
+     * was not properly configured.
+     * @throws IPLocationNotFoundException if IP address couldn't be geolocated
+     * because it wasn't found in database.
+     */
+    public synchronized IPLocation locate(InetAddress address, 
+            IPGeolocationLevel level) throws IPGeolocationDisabledException, 
+            IPLocationNotFoundException {
+<span class="pc bpc" id="L170" title="1 of 4 branches missed.">        if (!mEnabled || level == IPGeolocationLevel.DISABLED) {</span>
+<span class="fc" id="L171">            throw new IPGeolocationDisabledException();</span>
+        }
+        
+        try{
+<span class="fc" id="L175">            IPLocation location = new IPLocation(level);</span>
+<span class="fc" id="L176">            boolean found = false;</span>
+            DatabaseReader reader;
+                               
+            //city level
+<span class="fc bfc" id="L180" title="All 2 branches covered.">            if (level == IPGeolocationLevel.CITY) {</span>
+<span class="fc" id="L181">                reader = getOrCreateCityReader();</span>
+                
+                //search at city level
+<span class="fc" id="L184">                CityResponse response = reader.city(address);</span>
+<span class="pc bpc" id="L185" title="1 of 2 branches missed.">                if(response != null){</span>
+<span class="fc" id="L186">                    found = true;</span>
+                    
+                    //city level
+<span class="fc" id="L189">                    City city = response.getCity();</span>
+<span class="pc bpc" id="L190" title="1 of 2 branches missed.">                    if (city != null) {</span>
+<span class="fc" id="L191">                        location.mCity = city.getName();</span>
+                    }
+                                        
+<span class="fc" id="L194">                    Location loc = response.getLocation();</span>
+<span class="pc bpc" id="L195" title="1 of 2 branches missed.">                    if(loc != null){</span>
+<span class="fc bfc" id="L196" title="All 2 branches covered.">                        location.mTimeZone = loc.getTimeZone() != null ?</span>
+                                TimeZone.getTimeZone(loc.getTimeZone()) : null;
+<span class="fc" id="L198">                        location.mAccuracyRadius = loc.getAccuracyRadius();</span>
+<span class="fc" id="L199">                        location.mMetroCode = loc.getMetroCode();</span>
+<span class="fc" id="L200">                        location.mLatitude = loc.getLatitude();</span>
+<span class="fc" id="L201">                        location.mLongitude = loc.getLongitude();</span>
+                    }   
+                    
+<span class="fc" id="L204">                    Postal postal = response.getPostal();</span>
+<span class="pc bpc" id="L205" title="1 of 2 branches missed.">                    if (postal != null) {</span>
+<span class="fc" id="L206">                        location.mPostalCode = postal.getCode();</span>
+                    }
+                    
+<span class="fc" id="L209">                    List&lt;Subdivision&gt; subdivisions = response.getSubdivisions();</span>
+<span class="pc bpc" id="L210" title="1 of 2 branches missed.">                    if(subdivisions != null){</span>
+<span class="fc" id="L211">                        location.mSubdivisionCodes = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L212">                        location.mSubdivisionNames = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L213" title="All 2 branches covered.">                        for (Subdivision s : subdivisions) {</span>
+<span class="pc bpc" id="L214" title="2 of 4 branches missed.">                            if(s.getIsoCode() != null &amp;&amp; s.getName() != null){</span>
+<span class="fc" id="L215">                                location.mSubdivisionCodes.add(s.getIsoCode());</span>
+<span class="fc" id="L216">                                location.mSubdivisionNames.add(s.getName());</span>
+                            }
+<span class="fc" id="L218">                        }</span>
+                    }
+                    
+                    
+                    //country level
+<span class="fc" id="L223">                    processCountryResponse(response, location);</span>
+                }
+            }
+            
+            //country or city level (if nothing has been found yet)
+<span class="fc bfc" id="L228" title="All 2 branches covered.">            if(level == IPGeolocationLevel.COUNTRY){</span>
+<span class="fc" id="L229">                reader = getOrCreateCountryReader();</span>
+<span class="fc" id="L230">                AbstractCountryResponse response = reader.country(address);</span>
+<span class="pc bpc" id="L231" title="1 of 2 branches missed.">                found = response != null;</span>
+<span class="fc" id="L232">                processCountryResponse(response, location);</span>
+            }
+            
+<span class="pc bpc" id="L235" title="1 of 2 branches missed.">            if(!found) throw new IPLocationNotFoundException();</span>
+        
+<span class="fc" id="L237">            return location;</span>
+<span class="fc" id="L238">        }catch(Exception e){</span>
+<span class="fc" id="L239">            throw new IPLocationNotFoundException(e);</span>
+        }
+    }
+        
+    /**
+     * Locates provided IP or IPv6 address using requested level.
+     * Notice that geolocation levels are: Country, City (which includes country
+     * information) and Organization (which includes both City and Country 
+     * information)
+     * @param address IP address or DNS host name to evaluate in string form.
+     * @param level level of accuracy of geolocation.
+     * @return location of IP address.
+     * @throws UnknownHostException if provided textual form of IP address is
+     * not valid, or if DNS host name couldn't be resolved into an IP address.
+     * @throws IPGeolocationDisabledException if IP geolocation is disabled or
+     * was not properly configured.
+     * @throws IPLocationNotFoundException if IP address couldn't be geolocated
+     * because it wasn't found in database.
+     */
+    public IPLocation locate(String address, IPGeolocationLevel level) 
+            throws UnknownHostException, IPGeolocationDisabledException, 
+            IPLocationNotFoundException {
+<span class="fc" id="L261">        return locate(InetAddress.getByName(address), level);</span>
+    }
+    
+    /**
+     * Locates provided IP or IPv6 address using default configured geolocation 
+     * level of accuracy.
+     * @param address IP address to evaluate.
+     * @return location of IP address.
+     * @throws IPGeolocationDisabledException if IP geolocation is disabled or
+     * was not properly configured.
+     * @throws IPLocationNotFoundException if IP address couldn't be geolocated
+     * because it wasn't found in database.
+     */    
+    public IPLocation locate(InetAddress address) 
+            throws IPGeolocationDisabledException, IPLocationNotFoundException {
+<span class="fc" id="L276">        return locate(address, mConfiguration.getIPGeolocationLevel());</span>
+    }
+    
+    /**
+     * Locates provided IP or IPv6 address using default configured geolocation 
+     * level of accuracy.
+     * @param address IP address or DNS host name to evaluate in string form
+     * @return location of IP address.
+     * @throws UnknownHostException if provided textual form of IP address is
+     * not valid, or if DNS host name couldn't be resolved into an IP address.
+     * @throws IPGeolocationDisabledException if IP geolocation is disabled or
+     * was not properly configured.
+     * @throws IPLocationNotFoundException if IP address couldn't be geolocated
+     * because it wasn't found in database.
+     */    
+    public IPLocation locate(String address) throws UnknownHostException, 
+            IPGeolocationDisabledException, IPLocationNotFoundException {
+<span class="fc" id="L293">        return locate(InetAddress.getByName(address));</span>
+    }
+    
+    /**
+     * Closes location services. Once closed, geolocation will not be available.
+     * If databases where embedded, then their destination local files will also
+     * be deleted when closing location services.
+     * This method should be called at server shutdown or when application is
+     * undeployed.
+     */
+    @Override
+    public synchronized void close() {
+        //close location services
+<span class="fc bfc" id="L306" title="All 2 branches covered.">        if (mCityReader != null) {</span>
+            try {
+<span class="fc" id="L308">                mCityReader.close();</span>
+<span class="nc" id="L309">            } catch(IOException e) {</span>
+<span class="nc" id="L310">                LOGGER.log(Level.WARNING, &quot;Could not close city database&quot;, e);</span>
+<span class="fc" id="L311">            }</span>
+        }
+<span class="fc bfc" id="L313" title="All 2 branches covered.">        if (mCountryReader != null) {</span>
+            try {
+<span class="fc" id="L315">                mCountryReader.close();</span>
+<span class="nc" id="L316">            } catch(IOException e) {</span>
+<span class="nc" id="L317">                LOGGER.log(Level.WARNING, &quot;Could not close country database&quot;, e);</span>
+<span class="fc" id="L318">            }</span>
+        }   
+        
+<span class="fc" id="L321">        mEnabled = false;</span>
+        
+        //delete database files if they were copied from embedded resources, as
+        //this method will usually be called on server shutdown or application
+        //undeployment
+<span class="fc bfc" id="L326" title="All 2 branches covered.">        if(mCountryDatabasePrepared) {            </span>
+            //delete country database file
+<span class="fc" id="L328">            File f = new File(</span>
+                    mConfiguration.getIPGeolocationCountryDatabaseFile());
+<span class="fc bfc" id="L330" title="All 2 branches covered.">            if (f.exists()) {</span>
+<span class="fc" id="L331">                f.delete();</span>
+            }
+        }
+        
+        //city database
+<span class="pc bpc" id="L336" title="1 of 2 branches missed.">        if(mCityDatabasePrepared){</span>
+            //delete city database file
+<span class="fc" id="L338">            File f = new File(</span>
+                    mConfiguration.getIPGeolocationCityDatabaseFile());
+<span class="fc bfc" id="L340" title="All 2 branches covered.">            if (f.exists()) {</span>
+<span class="fc" id="L341">                f.delete();</span>
+            }            
+        }
+
+<span class="fc" id="L345">        mCityReader = mCountryReader = null;</span>
+<span class="fc" id="L346">    }</span>
+    
+    /**
+     * Closes geolocation services if a configured IPGeolocator exists, and
+     * resets the current singleton instance so a new one can be acquired having
+     * a new configuration if required.
+     */
+    protected static synchronized void reset() {
+        IPGeolocator singleton;
+<span class="pc bpc" id="L355" title="1 of 4 branches missed.">        if(mReference != null &amp;&amp; (singleton = mReference.get()) != null){</span>
+<span class="fc" id="L356">            singleton.close();</span>
+        }
+<span class="fc" id="L358">        mReference = null;</span>
+<span class="fc" id="L359">    }</span>
+    
+    /**
+     * This method is called on garbage collection.
+     * When this method is called, all the location services of this instance
+     * will be closed, and the files where embedded databases were copied will
+     * be deleted.
+     * @throws Throwable if anything fails.
+     */
+    @Override
+    protected void finalize() throws Throwable {
+<span class="nc" id="L370">        close();</span>
+<span class="nc" id="L371">        super.finalize();</span>
+<span class="nc" id="L372">    }  </span>
+    
+    /**
+     * Gets or create city database reader.
+     * @return city database reader.
+     * @throws IOException if an I/O error occurs.
+     */
+    private DatabaseReader getOrCreateCityReader() throws IOException {
+<span class="pc bpc" id="L380" title="1 of 2 branches missed.">        if(mCityReader != null) {</span>
+<span class="fc" id="L381">            return mCityReader;</span>
+        } else {
+<span class="nc" id="L383">            mCityReader = createCityReader();</span>
+        }
+        
+<span class="nc" id="L386">        return mCityReader;</span>
+    }
+    
+    /**
+     * Gets or creates country database reader.
+     * @return country database reader.
+     * @throws IOException if an I/O error occurs.
+     */
+    private DatabaseReader getOrCreateCountryReader() throws IOException {
+<span class="fc bfc" id="L395" title="All 2 branches covered.">        if (mCountryReader != null) {</span>
+<span class="fc" id="L396">           return mCountryReader; </span>
+        } else {
+<span class="fc" id="L398">            mCountryReader = createCountryReader();</span>
+        }
+        
+<span class="fc" id="L401">        return mCountryReader;</span>
+    }
+    
+    /**
+     * Creates a city database reader.
+     * @return a city database reader.
+     * @throws IOException if an I/O error occurs.
+     */
+    private DatabaseReader createCityReader() throws IOException {
+<span class="pc bpc" id="L410" title="1 of 2 branches missed.">        if (!mCityDatabasePrepared) {</span>
+<span class="nc" id="L411">            mCityDatabasePrepared = prepareCityDatabase();</span>
+        }
+<span class="fc" id="L413">        File f = new File(mConfiguration.getIPGeolocationCityDatabaseFile());</span>
+<span class="fc" id="L414">        return createReader(f);</span>
+    }
+    
+    /**
+     * Creates a country database reader.
+     * @return a country database reader.
+     * @throws IOException if an I/O error occurs.
+     */
+    private DatabaseReader createCountryReader() throws IOException {
+<span class="pc bpc" id="L423" title="1 of 2 branches missed.">        if (!mCountryDatabasePrepared) {</span>
+<span class="fc" id="L424">            mCountryDatabasePrepared = prepareCountryDatabase();</span>
+        }
+<span class="fc" id="L426">        File f = new File(mConfiguration.getIPGeolocationCountryDatabaseFile());</span>
+<span class="fc" id="L427">        return createReader(f);        </span>
+    }
+    
+    /**
+     * Creates a database reader.
+     * @param file file to read database from.
+     * @return a database reader.
+     * @throws IOException if an I/O error occurs.
+     */
+    private DatabaseReader createReader(File file) throws IOException{
+<span class="fc" id="L437">        boolean cachingEnabled = mConfiguration.isCachingEnabled();</span>
+
+<span class="fc" id="L439">        DatabaseReader.Builder builder = </span>
+                new DatabaseReader.Builder(file);
+<span class="pc bpc" id="L441" title="1 of 2 branches missed.">        if(cachingEnabled){</span>
+<span class="fc" id="L442">            builder.withCache(new CHMCache());</span>
+        }
+<span class="fc" id="L444">        return builder.build();        </span>
+    }    
+    
+    /**
+     * Processes country level location data.
+     * @param response a response being processed.
+     * @param location location where result will be stored.
+     */
+    private void processCountryResponse(AbstractCountryResponse response, 
+            IPLocation location){
+<span class="pc bpc" id="L454" title="2 of 4 branches missed.">        if(response == null || location == null) return;</span>
+        
+<span class="fc" id="L456">        Continent continent = response.getContinent();</span>
+<span class="pc bpc" id="L457" title="1 of 2 branches missed.">        if (continent != null) {</span>
+<span class="fc" id="L458">            location.mContinentCode = continent.getCode();</span>
+<span class="fc" id="L459">            location.mContinentName = continent.getName();</span>
+        }
+
+<span class="fc" id="L462">        Country country = response.getCountry();</span>
+<span class="pc bpc" id="L463" title="1 of 2 branches missed.">        if(country != null){</span>
+<span class="fc" id="L464">            location.mCountryCode = country.getIsoCode();</span>
+<span class="fc" id="L465">            location.mCountryName = country.getName();</span>
+        }
+<span class="fc" id="L467">        country = response.getRegisteredCountry();</span>
+<span class="pc bpc" id="L468" title="1 of 2 branches missed.">        if(country != null){</span>
+<span class="fc" id="L469">            location.mRegisteredCountryCode = country.getIsoCode();</span>
+<span class="fc" id="L470">            location.mRegisteredCountryName = country.getName();</span>
+        }
+
+<span class="fc" id="L473">        Traits traits = response.getTraits();</span>
+<span class="pc bpc" id="L474" title="1 of 2 branches missed.">        if(traits != null){</span>
+<span class="fc" id="L475">            location.mAutonomousSystemNumber = </span>
+                    traits.getAutonomousSystemNumber();
+<span class="fc" id="L477">            location.mDomain = traits.getDomain();</span>
+<span class="fc" id="L478">            location.mIsp = traits.getIsp();</span>
+<span class="fc" id="L479">            location.mOrganization = traits.getOrganization();</span>
+        }        
+<span class="fc" id="L481">    }    </span>
+    
+    /**
+     * Copies embedded resources into destination files where databases will be
+     * stored locally.
+     * @throws IOException if an I/O error occurs.
+     */
+    private void prepareDatabases() throws IOException {
+
+        //city database
+<span class="fc" id="L491">        IPGeolocationLevel level = mConfiguration.getIPGeolocationLevel();</span>
+<span class="pc bpc" id="L492" title="4 of 8 branches missed.">        if (level == IPGeolocationLevel.CITY &amp;&amp;</span>
+                mConfiguration.isIPGeolocationCityDatabaseEmbedded() &amp;&amp;
+                mConfiguration.getIPGeolocationCityEmbeddedResource() != null &amp;&amp;
+                mConfiguration.getIPGeolocationCityDatabaseFile() != null) {
+<span class="fc" id="L496">            mCityDatabasePrepared = prepareCityDatabase();</span>
+        }
+        
+        //country database
+<span class="pc bpc" id="L500" title="7 of 8 branches missed.">        if (!mCityDatabasePrepared &amp;&amp; </span>
+                mConfiguration.isIPGeolocationCountryDatabaseEmbedded() &amp;&amp;
+                mConfiguration.getIPGeolocationCountryEmbeddedResource() != null &amp;&amp; 
+                mConfiguration.getIPGeolocationCountryDatabaseFile() != null) {
+<span class="nc" id="L504">            mCountryDatabasePrepared = prepareCountryDatabase();</span>
+        }
+<span class="fc" id="L506">    }</span>
+    
+    /**
+     * Copies embedded city resource into destination file where database will
+     * be stored locally.
+     * @return true if database was prepared, false otherwise.
+     * @throws IOException if an I/O error occurs.
+     */
+    private boolean prepareCityDatabase() throws IOException {
+<span class="pc bpc" id="L515" title="3 of 6 branches missed.">        if(mConfiguration.isIPGeolocationCityDatabaseEmbedded() &amp;&amp;</span>
+                mConfiguration.getIPGeolocationCityEmbeddedResource() != null &amp;&amp;
+                mConfiguration.getIPGeolocationCityDatabaseFile() != null) {
+            //copy embedded resource to destination file
+<span class="fc" id="L519">            copyResource(mConfiguration.getIPGeolocationCityEmbeddedResource(),</span>
+                    mConfiguration.getIPGeolocationCityDatabaseFile());        
+<span class="fc" id="L521">            return true;</span>
+        }
+        
+<span class="nc" id="L524">        return false;</span>
+    }
+    
+    /**
+     * Copies country city resource into destination file where database will
+     * be stored locally.
+     * @return true if database was prepared, false otherwise.
+     * @throws IOException if an I/O error occurs.
+     */
+    private boolean prepareCountryDatabase() throws IOException {
+<span class="pc bpc" id="L534" title="3 of 6 branches missed.">        if (mConfiguration.isIPGeolocationCountryDatabaseEmbedded() &amp;&amp;</span>
+                mConfiguration.getIPGeolocationCountryEmbeddedResource() != null &amp;&amp; 
+                mConfiguration.getIPGeolocationCountryDatabaseFile() != null) {
+            //copy embedded resource to destination file
+<span class="fc" id="L538">            copyResource(mConfiguration.getIPGeolocationCountryEmbeddedResource(),</span>
+                    mConfiguration.getIPGeolocationCountryDatabaseFile());
+<span class="fc" id="L540">            return true;</span>
+        }        
+        
+<span class="nc" id="L543">        return false;</span>
+    }
+    
+    /**
+     * Copies a given resource embedded in code into provided destination file.
+     * If file where data is to be stored does not exist, a new one will be 
+     * created. If it already exists, it will be overwritten.
+     * @param resource resource to read data from.
+     * @param file file to store data.
+     * @throws IOException .
+     */
+    private void copyResource(String resource, String file) throws IOException {
+<span class="fc" id="L555">        InputStream inStream = null;</span>
+<span class="fc" id="L556">        OutputStream outStream = null;</span>
+        try{
+<span class="fc" id="L558">            LOGGER.log(Level.INFO, &quot;Copying resource: {0}&quot;, resource);</span>
+<span class="fc" id="L559">            inStream = IPGeolocator.class.getResourceAsStream(</span>
+                    resource);
+<span class="fc" id="L561">            File f = new File(file);</span>
+<span class="fc" id="L562">            File parent = f.getParentFile();</span>
+<span class="pc bpc" id="L563" title="1 of 2 branches missed.">            if(parent != null){</span>
+                //attempt to create parent folders if they don't exist
+<span class="fc bfc" id="L565" title="All 2 branches covered.">                if(!parent.exists()) parent.mkdirs();</span>
+            }
+<span class="pc bpc" id="L567" title="1 of 2 branches missed.">            if(!f.exists()) {</span>
+<span class="fc" id="L568">                outStream = new FileOutputStream(file);</span>
+<span class="fc" id="L569">                byte[] buffer = new byte[BUFFER_SIZE];</span>
+                int n;
+<span class="fc bfc" id="L571" title="All 2 branches covered.">                while((n = inStream.read(buffer)) &gt; 0){</span>
+<span class="fc" id="L572">                    outStream.write(buffer, 0, n);</span>
+                }
+            }
+<span class="fc" id="L575">            LOGGER.log(Level.INFO, &quot;Resource: {0} copied to {1}&quot;, </span>
+                    new Object[]{resource, f.getAbsolutePath()});
+        }finally{
+<span class="pc bpc" id="L578" title="3 of 4 branches missed.">            if(inStream != null) inStream.close();</span>
+<span class="pc bpc" id="L579" title="3 of 4 branches missed.">            if(outStream != null) outStream.close();</span>
+        }
+<span class="fc" id="L581">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
