@@ -33,7 +33,7 @@ public class IPLocation {
     /**
      * If available, time zone assigned to location where this IP address is 
      * located as specified by the IANA Time Zone database.
-     * @see http://www.iana.org/time-zones
+     * @see <a href="http://www.iana.org/time-zones">http://www.iana.org/time-zones</a>
      */    
     protected TimeZone mTimeZone;
     
@@ -46,7 +46,8 @@ public class IPLocation {
     /**
      * Metro code of the location if the location is in the US as specified
      * by the Google Adwords API.
-     * @see https://developers.google.com/adwords/api/docs/appendix/cities-DMAregions
+     * @see <a href="https://developers.google.com/adwords/api/docs/appendix/cities-DMAregions">
+     * https://developers.google.com/adwords/api/docs/appendix/cities-DMAregions</a>
      */
     protected Integer mMetroCode;
     
@@ -76,7 +77,8 @@ public class IPLocation {
      * A subdivision is a tring of up to three characters long defining a
      * subdivision (i.e. district, province, autonomous community, region, etc).
      * Order of subdivision codes is the same as subdivisions' names.
-     * @see http://en.wikipedia.org/wiki/ISO_3166-2
+     * @see <a href="http://en.wikipedia.org/wiki/ISO_3166-2">
+     * http://en.wikipedia.org/wiki/ISO_3166-2</a>
      */
     protected List<String> mSubdivisionCodes; 
     
@@ -89,7 +91,8 @@ public class IPLocation {
     /**
      * The two-character ISO 3166-1 alpha code for the country where the IP 
      * address is likely to be.
-     * @see http://en.wikipedia.org/wiki/ISO_3166-1
+     * @see <a href="http://en.wikipedia.org/wiki/ISO_3166-1">
+     * http://en.wikipedia.org/wiki/ISO_3166-1</a>
      */
     protected String mCountryCode;
     
@@ -112,7 +115,8 @@ public class IPLocation {
 
     /**
      * Autonomous system number associated with the IP address.
-     * @see http://en.wikipedia.org/wiki/Autonomous_system_(Internet)
+     * @see <a href="http://en.wikipedia.org/wiki/Autonomous_system_(Internet)">
+     * http://en.wikipedia.org/wiki/Autonomous_system_(Internet)</a>
      */
     protected Integer mAutonomousSystemNumber;
     
@@ -171,7 +175,8 @@ public class IPLocation {
     /**
      * Gets the time zone assigned to location where this IP address is located
      * as specified by the IANA Time Zone database.
-     * @see http://www.iana.org/time-zones
+     * @see <a href="http://www.iana.org/time-zones">
+     * http://www.iana.org/time-zones</a>
      * @return time zone where this IP address is located.
      */
     public TimeZone getTimeZone() {
@@ -191,7 +196,8 @@ public class IPLocation {
     /**
      * Gets the metro code of the location if the location is in the US as 
      * specified by the Google Adwords API.
-     * @see https://developers.google.com/adwords/api/docs/appendix/cities-DMAregions
+     * @see <a href="https://developers.google.com/adwords/api/docs/appendix/cities-DMAregions">
+     * https://developers.google.com/adwords/api/docs/appendix/cities-DMAregions</a>
      * @return metro code of the location if the location is in the US.
      */
     public Integer getMetroCode() {
@@ -245,7 +251,8 @@ public class IPLocation {
      * A subdivision is a tring of up to three characters long defining a
      * subdivision (i.e. district, province, autonomous community, region, etc).
      * Order of subdivision codes is the same as subdivisions' names.
-     * @see http://en.wikipedia.org/wiki/ISO_3166-2
+     * @see <a href="http://en.wikipedia.org/wiki/ISO_3166-2">
+     * http://en.wikipedia.org/wiki/ISO_3166-2</a>
      * @return list of subdivisions where location is likely to be.
      */
     public List<String> getSubdivisionCodes() {
@@ -264,7 +271,8 @@ public class IPLocation {
     /**
      * Gets the two-character ISO 3166-1 alpha code for the country where the IP 
      * address is likely to be.
-     * @see http://en.wikipedia.org/wiki/ISO_3166-1
+     * @see <a href="http://en.wikipedia.org/wiki/ISO_3166-1">
+     * http://en.wikipedia.org/wiki/ISO_3166-1</a>
      * @return ISO country code.
      */
     public String getCountryCode() {
@@ -296,9 +304,18 @@ public class IPLocation {
             Locale l = new Locale(Locale.getDefault().getLanguage(), 
                     mCountryCode);
             String displayCountry;
-            if(locale != null) displayCountry = l.getDisplayCountry(locale);
-            else displayCountry = l.getDisplayCountry();
-            return displayCountry;
+            if (locale != null) {
+                displayCountry = l.getDisplayCountry(locale);
+            } else {
+                displayCountry = l.getDisplayCountry();
+            }
+            if(displayCountry.equals(mCountryCode)) {
+                //country code is invalid and it is returned as display country 
+                //name
+                return mCountryName;
+            } else {
+                return displayCountry;
+            }
         }else{
             return mCountryName;
         }
@@ -322,7 +339,7 @@ public class IPLocation {
      * available
      */
     public String getRegisteredCountryName() {
-        return getCountryName(null);
+        return getRegisteredCountryName(null);
     }
     
     /**
@@ -339,17 +356,27 @@ public class IPLocation {
             Locale l = new Locale(Locale.getDefault().getLanguage(), 
                     mRegisteredCountryCode);
             String displayCountry;
-            if(locale != null) displayCountry = l.getDisplayCountry(locale);
-            else displayCountry = l.getDisplayCountry();
-            return displayCountry;
+            if (locale != null) {
+                displayCountry = l.getDisplayCountry(locale);
+            } else {
+                displayCountry = l.getDisplayCountry();
+            }
+            if(displayCountry.equals(mRegisteredCountryCode)) {
+                //country code is invalid and it is returned as display country 
+                //name
+                return mRegisteredCountryName;
+            } else {
+                return displayCountry;
+            }
         }else{
             return mRegisteredCountryName;
-        }
+        }        
     }    
     
     /**
      * Gets autonomous system number associated with the IP address.
-     * @see http://en.wikipedia.org/wiki/Autonomous_system_(Internet)
+     * @see <a href="http://en.wikipedia.org/wiki/Autonomous_system_(Internet)">
+     * http://en.wikipedia.org/wiki/Autonomous_system_(Internet)</a>
      * @return autonomous system number associated with the IP address.
      */
     public Integer getAutonomousSystemNumber() {

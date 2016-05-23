@@ -26,6 +26,7 @@ import com.maxmind.geoip2.record.Location;
 import com.maxmind.geoip2.record.Postal;
 import com.maxmind.geoip2.record.Subdivision;
 import com.maxmind.geoip2.record.Traits;
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -43,7 +44,7 @@ import java.util.logging.Logger;
 /**
  * Class to locate an IP address.
  */
-public class IPGeolocator {
+public class IPGeolocator implements Closeable{
     
     /**
      * Logger of this class.
@@ -72,9 +73,24 @@ public class IPGeolocator {
     private GeolocationConfiguration mConfiguration;
     
     /**
-     * Database reader.
+     * City database reader.
      */
-    private DatabaseReader mReader;
+    private DatabaseReader mCityReader;
+    
+    /**
+     * Indicates whether city database has already been prepared.
+     */
+    private boolean mCityDatabasePrepared;
+    
+    /**
+     * Country database reader.
+     */
+    private DatabaseReader mCountryReader;
+    
+    /**
+     * Indicates whether country database has already been prepared.
+     */
+    private boolean mCountryDatabasePrepared;
         
     /**
      * Constructor.
@@ -94,30 +110,18 @@ public class IPGeolocator {
             IPGeolocationLevel level = mConfiguration.getIPGeolocationLevel();
             
             if(level != null){
-                boolean cachingEnabled = mConfiguration.isCachingEnabled();
-                        
-                File file = null;                
                 switch(level){
                     case CITY:
-                        file = new File(mConfiguration.
-                                getIPGeolocationCityDatabaseFile());
+                        mCityReader = createCityReader();
                         break;
                     case COUNTRY:
-                        file = new File(mConfiguration.
-                                getIPGeolocationCountryDatabaseFile());
+                        mCountryReader = createCountryReader();
                         break;
                 }
                 
-                if(file != null){
-                    DatabaseReader.Builder builder = 
-                            new DatabaseReader.Builder(file);
-                    if(cachingEnabled){
-                        builder.withCache(new CHMCache());
-                    }
-                    mReader = builder.build();
+                if(mCityReader != null || mCountryReader != null) {
                     mEnabled = true;
-                }
-                
+                }                
             }
                         
             if(mEnabled){
@@ -133,7 +137,7 @@ public class IPGeolocator {
             }
         }
     }
-    
+        
     /**
      * Factory method to return the singleton instance of IPGeolocator based
      * on current configuration.
@@ -160,8 +164,9 @@ public class IPGeolocator {
      * @throws IPLocationNotFoundException if IP address couldn't be geolocated
      * because it wasn't found in database.
      */
-    public IPLocation locate(InetAddress address, IPGeolocationLevel level) 
-            throws IPGeolocationDisabledException, IPLocationNotFoundException {
+    public synchronized IPLocation locate(InetAddress address, 
+            IPGeolocationLevel level) throws IPGeolocationDisabledException, 
+            IPLocationNotFoundException {
         if (!mEnabled || level == IPGeolocationLevel.DISABLED) {
             throw new IPGeolocationDisabledException();
         }
@@ -169,11 +174,14 @@ public class IPGeolocator {
         try{
             IPLocation location = new IPLocation(level);
             boolean found = false;
+            DatabaseReader reader;
                                
             //city level
-            if (level == IPGeolocationLevel.CITY && mReader != null) {
+            if (level == IPGeolocationLevel.CITY) {
+                reader = getOrCreateCityReader();
+                
                 //search at city level
-                CityResponse response = mReader.city(address);
+                CityResponse response = reader.city(address);
                 if(response != null){
                     found = true;
                     
@@ -185,8 +193,8 @@ public class IPGeolocator {
                                         
                     Location loc = response.getLocation();
                     if(loc != null){
-                        location.mTimeZone = TimeZone.getTimeZone(
-                                loc.getTimeZone());
+                        location.mTimeZone = loc.getTimeZone() != null ?
+                                TimeZone.getTimeZone(loc.getTimeZone()) : null;
                         location.mAccuracyRadius = loc.getAccuracyRadius();
                         location.mMetroCode = loc.getMetroCode();
                         location.mLatitude = loc.getLatitude();
@@ -217,9 +225,9 @@ public class IPGeolocator {
             }
             
             //country or city level (if nothing has been found yet)
-            if((level == IPGeolocationLevel.COUNTRY || 
-                    (level == IPGeolocationLevel.CITY) && !found)){
-                AbstractCountryResponse response = mReader.country(address);
+            if(level == IPGeolocationLevel.COUNTRY){
+                reader = getOrCreateCountryReader();
+                AbstractCountryResponse response = reader.country(address);
                 found = response != null;
                 processCountryResponse(response, location);
             }
@@ -292,26 +300,30 @@ public class IPGeolocator {
      * This method should be called at server shutdown or when application is
      * undeployed.
      */
-    public void close() {
+    @Override
+    public synchronized void close() {
         //close location services
-        if (mReader != null) {
+        if (mCityReader != null) {
             try {
-                mReader.close();
+                mCityReader.close();
             } catch(IOException e) {
-                LOGGER.log(Level.WARNING, "Could not close database", e);
+                LOGGER.log(Level.WARNING, "Could not close city database", e);
             }
         }
-                
+        if (mCountryReader != null) {
+            try {
+                mCountryReader.close();
+            } catch(IOException e) {
+                LOGGER.log(Level.WARNING, "Could not close country database", e);
+            }
+        }   
+        
         mEnabled = false;
         
         //delete database files if they were copied from embedded resources, as
         //this method will usually be called on server shutdown or application
         //undeployment
-        IPGeolocationLevel level = mConfiguration.getIPGeolocationLevel();
-        if (level == IPGeolocationLevel.COUNTRY &&
-                mConfiguration.isIPGeolocationCountryDatabaseEmbedded() &&
-                mConfiguration.getIPGeolocationCountryEmbeddedResource() != null &&
-                mConfiguration.getIPGeolocationCountryDatabaseFile() != null) {
+        if(mCountryDatabasePrepared) {            
             //delete country database file
             File f = new File(
                     mConfiguration.getIPGeolocationCountryDatabaseFile());
@@ -321,10 +333,7 @@ public class IPGeolocator {
         }
         
         //city database
-        if(level == IPGeolocationLevel.CITY &&
-                mConfiguration.isIPGeolocationCityDatabaseEmbedded() &&
-                mConfiguration.getIPGeolocationCityEmbeddedResource() != null &&
-                mConfiguration.getIPGeolocationCityDatabaseFile() != null){
+        if(mCityDatabasePrepared){
             //delete city database file
             File f = new File(
                     mConfiguration.getIPGeolocationCityDatabaseFile());
@@ -333,7 +342,7 @@ public class IPGeolocator {
             }            
         }
 
-        mReader = null;
+        mCityReader = mCountryReader = null;
     }
     
     /**
@@ -358,13 +367,82 @@ public class IPGeolocator {
      */
     @Override
     protected void finalize() throws Throwable {
-        try {
-            close();
-        }catch(Throwable ignore){
-        } finally {
-            super.finalize();
-        }
+        close();
+        super.finalize();
     }  
+    
+    /**
+     * Gets or create city database reader.
+     * @return city database reader.
+     * @throws IOException if an I/O error occurs.
+     */
+    private DatabaseReader getOrCreateCityReader() throws IOException {
+        if(mCityReader != null) {
+            return mCityReader;
+        } else {
+            mCityReader = createCityReader();
+        }
+        
+        return mCityReader;
+    }
+    
+    /**
+     * Gets or creates country database reader.
+     * @return country database reader.
+     * @throws IOException if an I/O error occurs.
+     */
+    private DatabaseReader getOrCreateCountryReader() throws IOException {
+        if (mCountryReader != null) {
+           return mCountryReader; 
+        } else {
+            mCountryReader = createCountryReader();
+        }
+        
+        return mCountryReader;
+    }
+    
+    /**
+     * Creates a city database reader.
+     * @return a city database reader.
+     * @throws IOException if an I/O error occurs.
+     */
+    private DatabaseReader createCityReader() throws IOException {
+        if (!mCityDatabasePrepared) {
+            mCityDatabasePrepared = prepareCityDatabase();
+        }
+        File f = new File(mConfiguration.getIPGeolocationCityDatabaseFile());
+        return createReader(f);
+    }
+    
+    /**
+     * Creates a country database reader.
+     * @return a country database reader.
+     * @throws IOException if an I/O error occurs.
+     */
+    private DatabaseReader createCountryReader() throws IOException {
+        if (!mCountryDatabasePrepared) {
+            mCountryDatabasePrepared = prepareCountryDatabase();
+        }
+        File f = new File(mConfiguration.getIPGeolocationCountryDatabaseFile());
+        return createReader(f);        
+    }
+    
+    /**
+     * Creates a database reader.
+     * @param file file to read database from.
+     * @return a database reader.
+     * @throws IOException if an I/O error occurs.
+     */
+    private DatabaseReader createReader(File file) throws IOException{
+        boolean cachingEnabled = mConfiguration.isCachingEnabled();
+
+        DatabaseReader.Builder builder = 
+                new DatabaseReader.Builder(file);
+        if(cachingEnabled){
+            builder.withCache(new CHMCache());
+        }
+        return builder.build();        
+    }    
     
     /**
      * Processes country level location data.
@@ -409,28 +487,60 @@ public class IPGeolocator {
      */
     private void prepareDatabases() throws IOException {
 
-        boolean cityPrepared = false;
-        
         //city database
         IPGeolocationLevel level = mConfiguration.getIPGeolocationLevel();
         if (level == IPGeolocationLevel.CITY &&
                 mConfiguration.isIPGeolocationCityDatabaseEmbedded() &&
                 mConfiguration.getIPGeolocationCityEmbeddedResource() != null &&
                 mConfiguration.getIPGeolocationCityDatabaseFile() != null) {
-            //copy embedded resource to destination file
-            copyResource(mConfiguration.getIPGeolocationCityEmbeddedResource(),
-                    mConfiguration.getIPGeolocationCityDatabaseFile());
-            cityPrepared = true;
+            mCityDatabasePrepared = prepareCityDatabase();
         }
         
         //country database
-        if (!cityPrepared && mConfiguration.isIPGeolocationCountryDatabaseEmbedded() &&
+        if (!mCityDatabasePrepared && 
+                mConfiguration.isIPGeolocationCountryDatabaseEmbedded() &&
+                mConfiguration.getIPGeolocationCountryEmbeddedResource() != null && 
+                mConfiguration.getIPGeolocationCountryDatabaseFile() != null) {
+            mCountryDatabasePrepared = prepareCountryDatabase();
+        }
+    }
+    
+    /**
+     * Copies embedded city resource into destination file where database will
+     * be stored locally.
+     * @return true if database was prepared, false otherwise.
+     * @throws IOException if an I/O error occurs.
+     */
+    private boolean prepareCityDatabase() throws IOException {
+        if(mConfiguration.isIPGeolocationCityDatabaseEmbedded() &&
+                mConfiguration.getIPGeolocationCityEmbeddedResource() != null &&
+                mConfiguration.getIPGeolocationCityDatabaseFile() != null) {
+            //copy embedded resource to destination file
+            copyResource(mConfiguration.getIPGeolocationCityEmbeddedResource(),
+                    mConfiguration.getIPGeolocationCityDatabaseFile());        
+            return true;
+        }
+        
+        return false;
+    }
+    
+    /**
+     * Copies country city resource into destination file where database will
+     * be stored locally.
+     * @return true if database was prepared, false otherwise.
+     * @throws IOException if an I/O error occurs.
+     */
+    private boolean prepareCountryDatabase() throws IOException {
+        if (mConfiguration.isIPGeolocationCountryDatabaseEmbedded() &&
                 mConfiguration.getIPGeolocationCountryEmbeddedResource() != null && 
                 mConfiguration.getIPGeolocationCountryDatabaseFile() != null) {
             //copy embedded resource to destination file
             copyResource(mConfiguration.getIPGeolocationCountryEmbeddedResource(),
                     mConfiguration.getIPGeolocationCountryDatabaseFile());
-        }
+            return true;
+        }        
+        
+        return false;
     }
     
     /**
@@ -445,6 +555,7 @@ public class IPGeolocator {
         InputStream inStream = null;
         OutputStream outStream = null;
         try{
+            LOGGER.log(Level.INFO, "Copying resource: {0}", resource);
             inStream = IPGeolocator.class.getResourceAsStream(
                     resource);
             File f = new File(file);
@@ -453,12 +564,16 @@ public class IPGeolocator {
                 //attempt to create parent folders if they don't exist
                 if(!parent.exists()) parent.mkdirs();
             }
-            outStream = new FileOutputStream(file);
-            byte[] buffer = new byte[BUFFER_SIZE];
-            int n;
-            while((n = inStream.read(buffer)) > 0){
-                outStream.write(buffer, 0, n);
+            if(!f.exists()) {
+                outStream = new FileOutputStream(file);
+                byte[] buffer = new byte[BUFFER_SIZE];
+                int n;
+                while((n = inStream.read(buffer)) > 0){
+                    outStream.write(buffer, 0, n);
+                }
             }
+            LOGGER.log(Level.INFO, "Resource: {0} copied to {1}", 
+                    new Object[]{resource, f.getAbsolutePath()});
         }finally{
             if(inStream != null) inStream.close();
             if(outStream != null) outStream.close();
