@@ -1,12 +1,12 @@
 /**
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,16 +16,17 @@
 package com.irurueta.server.commons.geolocation;
 
 import com.irurueta.server.commons.configuration.ConfigurationException;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import java.io.File;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Locale;
 import java.util.Properties;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 /**
@@ -33,88 +34,84 @@ import static org.junit.Assert.*;
  * @author albertoirurueta
  */
 public class IPGeolocatorTest {
-    public static final String FOLDER = 
+    public static final String FOLDER =
             "./src/test/java/com/irurueta/server/commons/geolocation/tmp";
-    public static final String COUNTRY_FILE = 
+    public static final String COUNTRY_FILE =
             "./src/test/java/com/irurueta/server/commons/geolocation/tmp/GeoLite2-Country.mmdb";
-    public static final String CITY_FILE = 
+    public static final String CITY_FILE =
             "./src/test/java/com/irurueta/server/commons/geolocation/tmp/GeoLite2-City.mmdb";
-    
-    public static final double ERROR = 1e-4;    
-    
-    public IPGeolocatorTest() { }
-    
+
+    public static final double ERROR = 1e-4;
+
     @BeforeClass
     public static void setUpClass() throws ConfigurationException {
         //check that destination files do not exist
         File f = new File(COUNTRY_FILE);
-        assertFalse(f.exists());        
-        
+        assertFalse(f.exists());
+
         f = new File(CITY_FILE);
-        assertFalse(f.exists());  
-        
+        assertFalse(f.exists());
+
         Properties props = new Properties();
         props.setProperty(GeolocationConfigurationFactory.
                 IP_GEOLOCATION_COUNTRY_DATABASE_FILE_PROPERTY, COUNTRY_FILE);
         props.setProperty(GeolocationConfigurationFactory.
                 IP_GEOLOCATION_CITY_DATABASE_FILE_PROPERTY, CITY_FILE);
-        
-        GeolocationConfigurationFactory.getInstance().configure(props);        
+
+        GeolocationConfigurationFactory.getInstance().configure(props);
     }
-    
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @AfterClass
     public static void tearDownClass() {
         IPGeolocator.getInstance().close();
-        
+
         //check that destination files do not exist
         File f = new File(COUNTRY_FILE);
-        if(f.exists()){
+        if (f.exists()) {
             f.delete();
             fail("Country file was not deleted");
         }
-        
+
         f = new File(CITY_FILE);
-        if(f.exists()){
+        if (f.exists()) {
             f.delete();
             fail("City file was not deleted");
         }
-        
+
         File folder = new File(FOLDER);
         assertTrue(folder.exists());
-        folder.delete();                
+        folder.delete();
     }
-    
+
     @Before
     public void setUp() {
-        IPGeolocator.reset();        
+        IPGeolocator.reset();
     }
-    
-    @After
-    public void tearDown() {}
-    
+
     @Test
     public void testGetInstance() {
         IPGeolocator locator1 = IPGeolocator.getInstance();
         IPGeolocator locator2 = IPGeolocator.getInstance();
-        
+
         assertSame(locator1, locator2);
-        
+
         IPGeolocator.reset();
-        
+
         locator2 = IPGeolocator.getInstance();
-        
-        assertNotSame(locator1, locator2);        
+
+        assertNotSame(locator1, locator2);
     }
-    
+
     @Test
-    public void testLocateMicrosoftAddress() throws UnknownHostException, 
-        IPLocationNotFoundException, IPGeolocationDisabledException{
-        
+    public void testLocateMicrosoftAddress() throws UnknownHostException,
+            IPLocationNotFoundException, IPGeolocationDisabledException {
+
         IPGeolocator locator = IPGeolocator.getInstance();
-        
+
         String address = "64.4.4.4";
         InetAddress inetAddress = InetAddress.getByName(address);
-        
+
         //test with default level
         IPLocation location = locator.locate(address);
         assertNotNull(location);
@@ -125,27 +122,27 @@ public class IPGeolocatorTest {
         assertEquals(location.getLatitude(), 47.68009948730469, ERROR);
         assertEquals(location.getLongitude(), -122.12060546875, ERROR);
         assertTrue(location.areCoordinatesAvailable());
-        assertEquals(location.getPostalCode(), "98052");    
+        assertEquals(location.getPostalCode(), "98052");
         assertTrue(location.getSubdivisionCodes().contains("WA"));
         assertTrue(location.getSubdivisionNames().contains("Washington"));
         assertEquals(location.getCountryCode(), "US");
-        assertEquals(location.getCountryName(Locale.ENGLISH), 
+        assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
-        assertEquals(location.getCountryName(Locale.FRENCH), 
+        assertEquals(location.getCountryName(Locale.FRENCH),
                 "Etats-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
-        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH), 
+        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
-        assertEquals(location.getRegisteredCountryName(Locale.FRENCH), 
-                "Etats-Unis");  
+        assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
+                "Etats-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
         assertEquals(location.getContinentCode(), "NA");
         assertEquals(location.getContinentName(), "North America");
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
-              
-        
+
+
         location = locator.locate(inetAddress);
         assertNotNull(location);
         assertEquals(location.getCity(), "Redmond");
@@ -155,26 +152,26 @@ public class IPGeolocatorTest {
         assertEquals(location.getLatitude(), 47.68009948730469, ERROR);
         assertEquals(location.getLongitude(), -122.12060546875, ERROR);
         assertTrue(location.areCoordinatesAvailable());
-        assertEquals(location.getPostalCode(), "98052");    
+        assertEquals(location.getPostalCode(), "98052");
         assertTrue(location.getSubdivisionCodes().contains("WA"));
         assertTrue(location.getSubdivisionNames().contains("Washington"));
         assertEquals(location.getCountryCode(), "US");
-        assertEquals(location.getCountryName(Locale.ENGLISH), 
+        assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
-        assertEquals(location.getCountryName(Locale.FRENCH), 
+        assertEquals(location.getCountryName(Locale.FRENCH),
                 "Etats-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
-        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH), 
+        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
-        assertEquals(location.getRegisteredCountryName(Locale.FRENCH), 
-                "Etats-Unis");  
+        assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
+                "Etats-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
         assertEquals(location.getContinentCode(), "NA");
         assertEquals(location.getContinentName(), "North America");
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
-        
+
         //test with CITY level
         location = locator.locate(address, IPGeolocationLevel.CITY);
         assertNotNull(location);
@@ -185,19 +182,19 @@ public class IPGeolocatorTest {
         assertEquals(location.getLatitude(), 47.68009948730469, ERROR);
         assertEquals(location.getLongitude(), -122.12060546875, ERROR);
         assertTrue(location.areCoordinatesAvailable());
-        assertEquals(location.getPostalCode(), "98052");    
+        assertEquals(location.getPostalCode(), "98052");
         assertTrue(location.getSubdivisionCodes().contains("WA"));
         assertTrue(location.getSubdivisionNames().contains("Washington"));
         assertEquals(location.getCountryCode(), "US");
-        assertEquals(location.getCountryName(Locale.ENGLISH), 
+        assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
-        assertEquals(location.getCountryName(Locale.FRENCH), 
+        assertEquals(location.getCountryName(Locale.FRENCH),
                 "Etats-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
-        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH), 
+        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
-        assertEquals(location.getRegisteredCountryName(Locale.FRENCH), 
-                "Etats-Unis");  
+        assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
+                "Etats-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -214,19 +211,19 @@ public class IPGeolocatorTest {
         assertEquals(location.getLatitude(), 47.68009948730469, ERROR);
         assertEquals(location.getLongitude(), -122.12060546875, ERROR);
         assertTrue(location.areCoordinatesAvailable());
-        assertEquals(location.getPostalCode(), "98052");    
+        assertEquals(location.getPostalCode(), "98052");
         assertTrue(location.getSubdivisionCodes().contains("WA"));
         assertTrue(location.getSubdivisionNames().contains("Washington"));
         assertEquals(location.getCountryCode(), "US");
-        assertEquals(location.getCountryName(Locale.ENGLISH), 
+        assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
-        assertEquals(location.getCountryName(Locale.FRENCH), 
+        assertEquals(location.getCountryName(Locale.FRENCH),
                 "Etats-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
-        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH), 
+        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
-        assertEquals(location.getRegisteredCountryName(Locale.FRENCH), 
-                "Etats-Unis");  
+        assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
+                "Etats-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -234,7 +231,7 @@ public class IPGeolocatorTest {
         assertEquals(location.getContinentName(), "North America");
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 
-        
+
         //test with COUNTRY level
         location = locator.locate(address, IPGeolocationLevel.COUNTRY);
         assertNotNull(location);
@@ -249,15 +246,15 @@ public class IPGeolocatorTest {
         assertNull(location.getSubdivisionCodes());
         assertNull(location.getSubdivisionNames());
         assertEquals(location.getCountryCode(), "US");
-        assertEquals(location.getCountryName(Locale.ENGLISH), 
+        assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
-        assertEquals(location.getCountryName(Locale.FRENCH), 
+        assertEquals(location.getCountryName(Locale.FRENCH),
                 "Etats-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
-        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH), 
+        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
-        assertEquals(location.getRegisteredCountryName(Locale.FRENCH), 
-                "Etats-Unis");  
+        assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
+                "Etats-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -278,15 +275,15 @@ public class IPGeolocatorTest {
         assertNull(location.getSubdivisionCodes());
         assertNull(location.getSubdivisionNames());
         assertEquals(location.getCountryCode(), "US");
-        assertEquals(location.getCountryName(Locale.ENGLISH), 
+        assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
-        assertEquals(location.getCountryName(Locale.FRENCH), 
+        assertEquals(location.getCountryName(Locale.FRENCH),
                 "Etats-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
-        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH), 
+        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
-        assertEquals(location.getRegisteredCountryName(Locale.FRENCH), 
-                "Etats-Unis");  
+        assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
+                "Etats-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -294,16 +291,16 @@ public class IPGeolocatorTest {
         assertEquals(location.getContinentName(), "North America");
         assertEquals(location.getLevel(), IPGeolocationLevel.COUNTRY);
     }
-    
+
     @Test
-    public void testLocateMicrosoftIpv6Address() throws UnknownHostException, 
-        IPLocationNotFoundException, IPGeolocationDisabledException {
-        
+    public void testLocateMicrosoftIpv6Address() throws UnknownHostException,
+            IPLocationNotFoundException, IPGeolocationDisabledException {
+
         IPGeolocator locator = IPGeolocator.getInstance();
-        
+
         String address = "2002:4136:e383::4136";
         InetAddress inetAddress = InetAddress.getByName(address);
-        
+
         //test with default level
         IPLocation location = locator.locate(address);
         assertNotNull(location);
@@ -314,27 +311,27 @@ public class IPGeolocatorTest {
         assertEquals(location.getLatitude(), 37.3394, ERROR);
         assertEquals(location.getLongitude(), -121.895, ERROR);
         assertTrue(location.areCoordinatesAvailable());
-        assertEquals(location.getPostalCode(), "95141");    
+        assertEquals(location.getPostalCode(), "95141");
         assertTrue(location.getSubdivisionCodes().contains("CA"));
         assertTrue(location.getSubdivisionNames().contains("California"));
         assertEquals(location.getCountryCode(), "US");
-        assertEquals(location.getCountryName(Locale.ENGLISH), 
+        assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
-        assertEquals(location.getCountryName(Locale.FRENCH), 
+        assertEquals(location.getCountryName(Locale.FRENCH),
                 "Etats-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
-        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH), 
+        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
-        assertEquals(location.getRegisteredCountryName(Locale.FRENCH), 
-                "Etats-Unis");  
+        assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
+                "Etats-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
         assertEquals(location.getContinentCode(), "NA");
         assertEquals(location.getContinentName(), "North America");
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
-              
-        
+
+
         location = locator.locate(inetAddress);
         assertNotNull(location);
         assertEquals(location.getCity(), "San Jose");
@@ -344,26 +341,26 @@ public class IPGeolocatorTest {
         assertEquals(location.getLatitude(), 37.3394, ERROR);
         assertEquals(location.getLongitude(), -121.895, ERROR);
         assertTrue(location.areCoordinatesAvailable());
-        assertEquals(location.getPostalCode(), "95141");    
+        assertEquals(location.getPostalCode(), "95141");
         assertTrue(location.getSubdivisionCodes().contains("CA"));
         assertTrue(location.getSubdivisionNames().contains("California"));
         assertEquals(location.getCountryCode(), "US");
-        assertEquals(location.getCountryName(Locale.ENGLISH), 
+        assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
-        assertEquals(location.getCountryName(Locale.FRENCH), 
+        assertEquals(location.getCountryName(Locale.FRENCH),
                 "Etats-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
-        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH), 
+        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
-        assertEquals(location.getRegisteredCountryName(Locale.FRENCH), 
-                "Etats-Unis");  
+        assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
+                "Etats-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
         assertEquals(location.getContinentCode(), "NA");
         assertEquals(location.getContinentName(), "North America");
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
-        
+
         //test with CITY level
         location = locator.locate(address, IPGeolocationLevel.CITY);
         assertNotNull(location);
@@ -374,19 +371,19 @@ public class IPGeolocatorTest {
         assertEquals(location.getLatitude(), 37.3394, ERROR);
         assertEquals(location.getLongitude(), -121.895, ERROR);
         assertTrue(location.areCoordinatesAvailable());
-        assertEquals(location.getPostalCode(), "95141");    
+        assertEquals(location.getPostalCode(), "95141");
         assertTrue(location.getSubdivisionCodes().contains("CA"));
         assertTrue(location.getSubdivisionNames().contains("California"));
         assertEquals(location.getCountryCode(), "US");
-        assertEquals(location.getCountryName(Locale.ENGLISH), 
+        assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
-        assertEquals(location.getCountryName(Locale.FRENCH), 
+        assertEquals(location.getCountryName(Locale.FRENCH),
                 "Etats-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
-        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH), 
+        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
-        assertEquals(location.getRegisteredCountryName(Locale.FRENCH), 
-                "Etats-Unis");  
+        assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
+                "Etats-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -403,19 +400,19 @@ public class IPGeolocatorTest {
         assertEquals(location.getLatitude(), 37.3394, ERROR);
         assertEquals(location.getLongitude(), -121.895, ERROR);
         assertTrue(location.areCoordinatesAvailable());
-        assertEquals(location.getPostalCode(), "95141");    
+        assertEquals(location.getPostalCode(), "95141");
         assertTrue(location.getSubdivisionCodes().contains("CA"));
         assertTrue(location.getSubdivisionNames().contains("California"));
         assertEquals(location.getCountryCode(), "US");
-        assertEquals(location.getCountryName(Locale.ENGLISH), 
+        assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
-        assertEquals(location.getCountryName(Locale.FRENCH), 
+        assertEquals(location.getCountryName(Locale.FRENCH),
                 "Etats-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
-        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH), 
+        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
-        assertEquals(location.getRegisteredCountryName(Locale.FRENCH), 
-                "Etats-Unis");  
+        assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
+                "Etats-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -423,7 +420,7 @@ public class IPGeolocatorTest {
         assertEquals(location.getContinentName(), "North America");
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 
-        
+
         //test with COUNTRY level
         location = locator.locate(address, IPGeolocationLevel.COUNTRY);
         assertNotNull(location);
@@ -438,15 +435,15 @@ public class IPGeolocatorTest {
         assertNull(location.getSubdivisionCodes());
         assertNull(location.getSubdivisionNames());
         assertEquals(location.getCountryCode(), "US");
-        assertEquals(location.getCountryName(Locale.ENGLISH), 
+        assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
-        assertEquals(location.getCountryName(Locale.FRENCH), 
+        assertEquals(location.getCountryName(Locale.FRENCH),
                 "Etats-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
-        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH), 
+        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
-        assertEquals(location.getRegisteredCountryName(Locale.FRENCH), 
-                "Etats-Unis");  
+        assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
+                "Etats-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -467,32 +464,32 @@ public class IPGeolocatorTest {
         assertNull(location.getSubdivisionCodes());
         assertNull(location.getSubdivisionNames());
         assertEquals(location.getCountryCode(), "US");
-        assertEquals(location.getCountryName(Locale.ENGLISH), 
+        assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
-        assertEquals(location.getCountryName(Locale.FRENCH), 
+        assertEquals(location.getCountryName(Locale.FRENCH),
                 "Etats-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
-        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH), 
+        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
-        assertEquals(location.getRegisteredCountryName(Locale.FRENCH), 
-                "Etats-Unis");  
+        assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
+                "Etats-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
         assertEquals(location.getContinentCode(), "NA");
         assertEquals(location.getContinentName(), "North America");
-        assertEquals(location.getLevel(), IPGeolocationLevel.COUNTRY);        
+        assertEquals(location.getLevel(), IPGeolocationLevel.COUNTRY);
     }
-        
+
     @Test
-    public void testLocateNorwayAddress() throws UnknownHostException, 
-        IPLocationNotFoundException, IPGeolocationDisabledException{
-        
+    public void testLocateNorwayAddress() throws UnknownHostException,
+            IPLocationNotFoundException, IPGeolocationDisabledException {
+
         IPGeolocator locator = IPGeolocator.getInstance();
-        
+
         String address = "213.52.50.8";
         InetAddress inetAddress = InetAddress.getByName(address);
-        
+
         //test with default level
         IPLocation location = locator.locate(address);
         assertNotNull(location);
@@ -503,27 +500,27 @@ public class IPGeolocatorTest {
         assertEquals(location.getLatitude(), 59.95, ERROR);
         assertEquals(location.getLongitude(), 10.75, ERROR);
         assertTrue(location.areCoordinatesAvailable());
-        assertNull(location.getPostalCode());    
+        assertNull(location.getPostalCode());
         assertTrue(location.getSubdivisionCodes().isEmpty());
         assertTrue(location.getSubdivisionNames().isEmpty());
         assertEquals(location.getCountryCode(), "NO");
-        assertEquals(location.getCountryName(Locale.ENGLISH), 
+        assertEquals(location.getCountryName(Locale.ENGLISH),
                 "Norway");
-        assertEquals(location.getCountryName(Locale.FRENCH), 
+        assertEquals(location.getCountryName(Locale.FRENCH),
                 "Norvège");
         assertEquals(location.getRegisteredCountryCode(), "NO");
-        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH), 
+        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "Norway");
-        assertEquals(location.getRegisteredCountryName(Locale.FRENCH), 
-                "Norvège");  
+        assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
+                "Norvège");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
         assertEquals(location.getContinentCode(), "EU");
         assertEquals(location.getContinentName(), "Europe");
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
-              
-        
+
+
         location = locator.locate(inetAddress);
         assertNotNull(location);
         assertNull(location.getCity());
@@ -533,26 +530,26 @@ public class IPGeolocatorTest {
         assertEquals(location.getLatitude(), 59.95, ERROR);
         assertEquals(location.getLongitude(), 10.75, ERROR);
         assertTrue(location.areCoordinatesAvailable());
-        assertNull(location.getPostalCode());    
+        assertNull(location.getPostalCode());
         assertTrue(location.getSubdivisionCodes().isEmpty());
         assertTrue(location.getSubdivisionNames().isEmpty());
         assertEquals(location.getCountryCode(), "NO");
-        assertEquals(location.getCountryName(Locale.ENGLISH), 
+        assertEquals(location.getCountryName(Locale.ENGLISH),
                 "Norway");
-        assertEquals(location.getCountryName(Locale.FRENCH), 
+        assertEquals(location.getCountryName(Locale.FRENCH),
                 "Norvège");
         assertEquals(location.getRegisteredCountryCode(), "NO");
-        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH), 
+        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "Norway");
-        assertEquals(location.getRegisteredCountryName(Locale.FRENCH), 
-                "Norvège");  
+        assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
+                "Norvège");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
         assertEquals(location.getContinentCode(), "EU");
         assertEquals(location.getContinentName(), "Europe");
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
-        
+
         //test with CITY level
         location = locator.locate(address, IPGeolocationLevel.CITY);
         assertNotNull(location);
@@ -563,19 +560,19 @@ public class IPGeolocatorTest {
         assertEquals(location.getLatitude(), 59.95, ERROR);
         assertEquals(location.getLongitude(), 10.75, ERROR);
         assertTrue(location.areCoordinatesAvailable());
-        assertNull(location.getPostalCode());    
+        assertNull(location.getPostalCode());
         assertTrue(location.getSubdivisionCodes().isEmpty());
         assertTrue(location.getSubdivisionNames().isEmpty());
         assertEquals(location.getCountryCode(), "NO");
-        assertEquals(location.getCountryName(Locale.ENGLISH), 
+        assertEquals(location.getCountryName(Locale.ENGLISH),
                 "Norway");
-        assertEquals(location.getCountryName(Locale.FRENCH), 
+        assertEquals(location.getCountryName(Locale.FRENCH),
                 "Norvège");
         assertEquals(location.getRegisteredCountryCode(), "NO");
-        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH), 
+        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "Norway");
-        assertEquals(location.getRegisteredCountryName(Locale.FRENCH), 
-                "Norvège");  
+        assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
+                "Norvège");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -592,19 +589,19 @@ public class IPGeolocatorTest {
         assertEquals(location.getLatitude(), 59.95, ERROR);
         assertEquals(location.getLongitude(), 10.75, ERROR);
         assertTrue(location.areCoordinatesAvailable());
-        assertNull(location.getPostalCode());    
+        assertNull(location.getPostalCode());
         assertTrue(location.getSubdivisionCodes().isEmpty());
         assertTrue(location.getSubdivisionNames().isEmpty());
         assertEquals(location.getCountryCode(), "NO");
-        assertEquals(location.getCountryName(Locale.ENGLISH), 
+        assertEquals(location.getCountryName(Locale.ENGLISH),
                 "Norway");
-        assertEquals(location.getCountryName(Locale.FRENCH), 
+        assertEquals(location.getCountryName(Locale.FRENCH),
                 "Norvège");
         assertEquals(location.getRegisteredCountryCode(), "NO");
-        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH), 
+        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "Norway");
-        assertEquals(location.getRegisteredCountryName(Locale.FRENCH), 
-                "Norvège");  
+        assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
+                "Norvège");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -612,7 +609,7 @@ public class IPGeolocatorTest {
         assertEquals(location.getContinentName(), "Europe");
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 
-        
+
         //test with COUNTRY level
         location = locator.locate(address, IPGeolocationLevel.COUNTRY);
         assertNotNull(location);
@@ -623,19 +620,19 @@ public class IPGeolocatorTest {
         assertNull(location.getLatitude());
         assertNull(location.getLongitude());
         assertFalse(location.areCoordinatesAvailable());
-        assertNull(location.getPostalCode());    
+        assertNull(location.getPostalCode());
         assertNull(location.getSubdivisionCodes());
         assertNull(location.getSubdivisionNames());
         assertEquals(location.getCountryCode(), "NO");
-        assertEquals(location.getCountryName(Locale.ENGLISH), 
+        assertEquals(location.getCountryName(Locale.ENGLISH),
                 "Norway");
-        assertEquals(location.getCountryName(Locale.FRENCH), 
+        assertEquals(location.getCountryName(Locale.FRENCH),
                 "Norvège");
         assertEquals(location.getRegisteredCountryCode(), "NO");
-        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH), 
+        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "Norway");
-        assertEquals(location.getRegisteredCountryName(Locale.FRENCH), 
-                "Norvège");  
+        assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
+                "Norvège");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -652,19 +649,19 @@ public class IPGeolocatorTest {
         assertNull(location.getLatitude());
         assertNull(location.getLongitude());
         assertFalse(location.areCoordinatesAvailable());
-        assertNull(location.getPostalCode());    
+        assertNull(location.getPostalCode());
         assertNull(location.getSubdivisionCodes());
         assertNull(location.getSubdivisionNames());
         assertEquals(location.getCountryCode(), "NO");
-        assertEquals(location.getCountryName(Locale.ENGLISH), 
+        assertEquals(location.getCountryName(Locale.ENGLISH),
                 "Norway");
-        assertEquals(location.getCountryName(Locale.FRENCH), 
+        assertEquals(location.getCountryName(Locale.FRENCH),
                 "Norvège");
         assertEquals(location.getRegisteredCountryCode(), "NO");
-        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH), 
+        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "Norway");
-        assertEquals(location.getRegisteredCountryName(Locale.FRENCH), 
-                "Norvège");  
+        assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
+                "Norvège");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -672,16 +669,16 @@ public class IPGeolocatorTest {
         assertEquals(location.getContinentName(), "Europe");
         assertEquals(location.getLevel(), IPGeolocationLevel.COUNTRY);
     }
-    
+
     @Test
-    public void testLocateNorwayIpv6Address() throws UnknownHostException, 
-        IPLocationNotFoundException, IPGeolocationDisabledException{
-        
+    public void testLocateNorwayIpv6Address() throws UnknownHostException,
+            IPLocationNotFoundException, IPGeolocationDisabledException {
+
         IPGeolocator locator = IPGeolocator.getInstance();
-        
+
         String address = "::213.52.50.8";
         InetAddress inetAddress = InetAddress.getByName(address);
-        
+
         //test with default level
         IPLocation location = locator.locate(address);
         assertNotNull(location);
@@ -692,27 +689,27 @@ public class IPGeolocatorTest {
         assertEquals(location.getLatitude(), 59.95, ERROR);
         assertEquals(location.getLongitude(), 10.75, ERROR);
         assertTrue(location.areCoordinatesAvailable());
-        assertNull(location.getPostalCode());    
+        assertNull(location.getPostalCode());
         assertTrue(location.getSubdivisionCodes().isEmpty());
         assertTrue(location.getSubdivisionNames().isEmpty());
         assertEquals(location.getCountryCode(), "NO");
-        assertEquals(location.getCountryName(Locale.ENGLISH), 
+        assertEquals(location.getCountryName(Locale.ENGLISH),
                 "Norway");
-        assertEquals(location.getCountryName(Locale.FRENCH), 
+        assertEquals(location.getCountryName(Locale.FRENCH),
                 "Norvège");
         assertEquals(location.getRegisteredCountryCode(), "NO");
-        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH), 
+        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "Norway");
-        assertEquals(location.getRegisteredCountryName(Locale.FRENCH), 
-                "Norvège");  
+        assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
+                "Norvège");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
         assertEquals(location.getContinentCode(), "EU");
         assertEquals(location.getContinentName(), "Europe");
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
-              
-        
+
+
         location = locator.locate(inetAddress);
         assertNotNull(location);
         assertNull(location.getCity());
@@ -722,26 +719,26 @@ public class IPGeolocatorTest {
         assertEquals(location.getLatitude(), 59.95, ERROR);
         assertEquals(location.getLongitude(), 10.75, ERROR);
         assertTrue(location.areCoordinatesAvailable());
-        assertNull(location.getPostalCode());    
+        assertNull(location.getPostalCode());
         assertTrue(location.getSubdivisionCodes().isEmpty());
         assertTrue(location.getSubdivisionNames().isEmpty());
         assertEquals(location.getCountryCode(), "NO");
-        assertEquals(location.getCountryName(Locale.ENGLISH), 
+        assertEquals(location.getCountryName(Locale.ENGLISH),
                 "Norway");
-        assertEquals(location.getCountryName(Locale.FRENCH), 
+        assertEquals(location.getCountryName(Locale.FRENCH),
                 "Norvège");
         assertEquals(location.getRegisteredCountryCode(), "NO");
-        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH), 
+        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "Norway");
-        assertEquals(location.getRegisteredCountryName(Locale.FRENCH), 
-                "Norvège");  
+        assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
+                "Norvège");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
         assertEquals(location.getContinentCode(), "EU");
         assertEquals(location.getContinentName(), "Europe");
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
-        
+
         //test with CITY level
         location = locator.locate(address, IPGeolocationLevel.CITY);
         assertNotNull(location);
@@ -752,19 +749,19 @@ public class IPGeolocatorTest {
         assertEquals(location.getLatitude(), 59.95, ERROR);
         assertEquals(location.getLongitude(), 10.75, ERROR);
         assertTrue(location.areCoordinatesAvailable());
-        assertNull(location.getPostalCode());    
+        assertNull(location.getPostalCode());
         assertTrue(location.getSubdivisionCodes().isEmpty());
         assertTrue(location.getSubdivisionNames().isEmpty());
         assertEquals(location.getCountryCode(), "NO");
-        assertEquals(location.getCountryName(Locale.ENGLISH), 
+        assertEquals(location.getCountryName(Locale.ENGLISH),
                 "Norway");
-        assertEquals(location.getCountryName(Locale.FRENCH), 
+        assertEquals(location.getCountryName(Locale.FRENCH),
                 "Norvège");
         assertEquals(location.getRegisteredCountryCode(), "NO");
-        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH), 
+        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "Norway");
-        assertEquals(location.getRegisteredCountryName(Locale.FRENCH), 
-                "Norvège");  
+        assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
+                "Norvège");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -781,19 +778,19 @@ public class IPGeolocatorTest {
         assertEquals(location.getLatitude(), 59.95, ERROR);
         assertEquals(location.getLongitude(), 10.75, ERROR);
         assertTrue(location.areCoordinatesAvailable());
-        assertNull(location.getPostalCode());    
+        assertNull(location.getPostalCode());
         assertTrue(location.getSubdivisionCodes().isEmpty());
         assertTrue(location.getSubdivisionNames().isEmpty());
         assertEquals(location.getCountryCode(), "NO");
-        assertEquals(location.getCountryName(Locale.ENGLISH), 
+        assertEquals(location.getCountryName(Locale.ENGLISH),
                 "Norway");
-        assertEquals(location.getCountryName(Locale.FRENCH), 
+        assertEquals(location.getCountryName(Locale.FRENCH),
                 "Norvège");
         assertEquals(location.getRegisteredCountryCode(), "NO");
-        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH), 
+        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "Norway");
-        assertEquals(location.getRegisteredCountryName(Locale.FRENCH), 
-                "Norvège");  
+        assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
+                "Norvège");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -801,7 +798,7 @@ public class IPGeolocatorTest {
         assertEquals(location.getContinentName(), "Europe");
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 
-        
+
         //test with COUNTRY level
         location = locator.locate(address, IPGeolocationLevel.COUNTRY);
         assertNotNull(location);
@@ -812,19 +809,19 @@ public class IPGeolocatorTest {
         assertNull(location.getLatitude());
         assertNull(location.getLongitude());
         assertFalse(location.areCoordinatesAvailable());
-        assertNull(location.getPostalCode());    
+        assertNull(location.getPostalCode());
         assertNull(location.getSubdivisionCodes());
         assertNull(location.getSubdivisionNames());
         assertEquals(location.getCountryCode(), "NO");
-        assertEquals(location.getCountryName(Locale.ENGLISH), 
+        assertEquals(location.getCountryName(Locale.ENGLISH),
                 "Norway");
-        assertEquals(location.getCountryName(Locale.FRENCH), 
+        assertEquals(location.getCountryName(Locale.FRENCH),
                 "Norvège");
         assertEquals(location.getRegisteredCountryCode(), "NO");
-        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH), 
+        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "Norway");
-        assertEquals(location.getRegisteredCountryName(Locale.FRENCH), 
-                "Norvège");  
+        assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
+                "Norvège");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -841,19 +838,19 @@ public class IPGeolocatorTest {
         assertNull(location.getLatitude());
         assertNull(location.getLongitude());
         assertFalse(location.areCoordinatesAvailable());
-        assertNull(location.getPostalCode());    
+        assertNull(location.getPostalCode());
         assertNull(location.getSubdivisionCodes());
         assertNull(location.getSubdivisionNames());
         assertEquals(location.getCountryCode(), "NO");
-        assertEquals(location.getCountryName(Locale.ENGLISH), 
+        assertEquals(location.getCountryName(Locale.ENGLISH),
                 "Norway");
-        assertEquals(location.getCountryName(Locale.FRENCH), 
+        assertEquals(location.getCountryName(Locale.FRENCH),
                 "Norvège");
         assertEquals(location.getRegisteredCountryCode(), "NO");
-        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH), 
+        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "Norway");
-        assertEquals(location.getRegisteredCountryName(Locale.FRENCH), 
-                "Norvège");  
+        assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
+                "Norvège");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -861,16 +858,16 @@ public class IPGeolocatorTest {
         assertEquals(location.getContinentName(), "Europe");
         assertEquals(location.getLevel(), IPGeolocationLevel.COUNTRY);
     }
-    
+
     @Test
-    public void testLocateSpainAddress() throws UnknownHostException, 
-        IPLocationNotFoundException, IPGeolocationDisabledException{
-        
+    public void testLocateSpainAddress() throws UnknownHostException,
+            IPLocationNotFoundException, IPGeolocationDisabledException {
+
         IPGeolocator locator = IPGeolocator.getInstance();
-        
+
         String address = "37.15.50.115";
         InetAddress inetAddress = InetAddress.getByName(address);
-        
+
         //test with default level
         IPLocation location = locator.locate(address);
         assertNotNull(location);
@@ -881,27 +878,27 @@ public class IPGeolocatorTest {
         assertEquals(location.getLatitude(), 40.4172, ERROR);
         assertEquals(location.getLongitude(), -3.684, ERROR);
         assertTrue(location.areCoordinatesAvailable());
-        assertNull(location.getPostalCode());    
+        assertNull(location.getPostalCode());
         assertTrue(location.getSubdivisionCodes().isEmpty());
         assertTrue(location.getSubdivisionNames().isEmpty());
         assertEquals(location.getCountryCode(), "ES");
-        assertEquals(location.getCountryName(Locale.ENGLISH), 
+        assertEquals(location.getCountryName(Locale.ENGLISH),
                 "Spain");
-        assertEquals(location.getCountryName(Locale.FRENCH), 
+        assertEquals(location.getCountryName(Locale.FRENCH),
                 "Espagne");
         assertEquals(location.getRegisteredCountryCode(), "ES");
-        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH), 
+        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "Spain");
-        assertEquals(location.getRegisteredCountryName(Locale.FRENCH), 
-                "Espagne");  
+        assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
+                "Espagne");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
         assertEquals(location.getContinentCode(), "EU");
         assertEquals(location.getContinentName(), "Europe");
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
-              
-        
+
+
         location = locator.locate(inetAddress);
         assertNotNull(location);
         assertNull(location.getCity());
@@ -930,7 +927,7 @@ public class IPGeolocatorTest {
         assertEquals(location.getContinentCode(), "EU");
         assertEquals(location.getContinentName(), "Europe");
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
-        
+
         //test with CITY level
         location = locator.locate(address, IPGeolocationLevel.CITY);
         assertNotNull(location);
@@ -990,7 +987,7 @@ public class IPGeolocatorTest {
         assertEquals(location.getContinentName(), "Europe");
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 
-        
+
         //test with COUNTRY level
         location = locator.locate(address, IPGeolocationLevel.COUNTRY);
         assertNotNull(location);
@@ -1001,7 +998,7 @@ public class IPGeolocatorTest {
         assertNull(location.getLatitude());
         assertNull(location.getLongitude());
         assertFalse(location.areCoordinatesAvailable());
-        assertNull(location.getPostalCode());    
+        assertNull(location.getPostalCode());
         assertNull(location.getSubdivisionCodes());
         assertNull(location.getSubdivisionNames());
         assertEquals(location.getCountryCode(), "ES");
@@ -1030,7 +1027,7 @@ public class IPGeolocatorTest {
         assertNull(location.getLatitude());
         assertNull(location.getLongitude());
         assertFalse(location.areCoordinatesAvailable());
-        assertNull(location.getPostalCode());    
+        assertNull(location.getPostalCode());
         assertNull(location.getSubdivisionCodes());
         assertNull(location.getSubdivisionNames());
         assertEquals(location.getCountryCode(), "ES");
@@ -1053,7 +1050,7 @@ public class IPGeolocatorTest {
 
     @Test
     public void testLocateSpainIpv6Address() throws UnknownHostException,
-            IPLocationNotFoundException, IPGeolocationDisabledException{
+            IPLocationNotFoundException, IPGeolocationDisabledException {
 
         IPGeolocator locator = IPGeolocator.getInstance();
 
@@ -1242,7 +1239,7 @@ public class IPGeolocatorTest {
 
     @Test
     public void testLocateItalyAddress() throws UnknownHostException,
-            IPLocationNotFoundException, IPGeolocationDisabledException{
+            IPLocationNotFoundException, IPGeolocationDisabledException {
 
         IPGeolocator locator = IPGeolocator.getInstance();
 
@@ -1439,7 +1436,7 @@ public class IPGeolocatorTest {
 
     @Test
     public void testLocateUnitedStatesAddress() throws UnknownHostException,
-            IPLocationNotFoundException, IPGeolocationDisabledException{
+            IPLocationNotFoundException, IPGeolocationDisabledException {
 
         IPGeolocator locator = IPGeolocator.getInstance();
 
@@ -1628,7 +1625,7 @@ public class IPGeolocatorTest {
 
     @Test
     public void testLocateUnitedStatesAddress2() throws UnknownHostException,
-            IPLocationNotFoundException, IPGeolocationDisabledException{
+            IPLocationNotFoundException, IPGeolocationDisabledException {
 
         IPGeolocator locator = IPGeolocator.getInstance();
 
@@ -1817,7 +1814,7 @@ public class IPGeolocatorTest {
 
     @Test
     public void testLocateColombiaAddress() throws UnknownHostException,
-            IPLocationNotFoundException, IPGeolocationDisabledException{
+            IPLocationNotFoundException, IPGeolocationDisabledException {
 
         IPGeolocator locator = IPGeolocator.getInstance();
 
@@ -2006,7 +2003,7 @@ public class IPGeolocatorTest {
 
     @Test
     public void testLocateDnsAddress() throws UnknownHostException,
-            IPLocationNotFoundException, IPGeolocationDisabledException{
+            IPLocationNotFoundException, IPGeolocationDisabledException {
 
         IPGeolocator locator = IPGeolocator.getInstance();
 
@@ -2016,16 +2013,16 @@ public class IPGeolocatorTest {
         //test with default level
         IPLocation location = locator.locate(address);
         assertNotNull(location);
-        assertEquals(location.getCity(), "Ashburn");
-        assertEquals(location.getTimeZone().getID(), "America/New_York");
+        assertEquals(location.getCity(), "Scottsdale");
+        assertEquals(location.getTimeZone().getID(), "America/Phoenix");
         assertEquals(location.getAccuracyRadius().intValue(), 937);
-        assertEquals(location.getMetroCode().intValue(), 511);
-        assertEquals(location.getLatitude(), 39.018, ERROR);
-        assertEquals(location.getLongitude(), -77.539, ERROR);
+        assertEquals(location.getMetroCode().intValue(), 753);
+        assertEquals(location.getLatitude(), 33.6119, ERROR);
+        assertEquals(location.getLongitude(), -111.8906, ERROR);
         assertTrue(location.areCoordinatesAvailable());
-        assertEquals(location.getPostalCode(), "20147");
-        assertTrue(location.getSubdivisionCodes().contains("VA"));
-        assertTrue(location.getSubdivisionNames().contains("Virginia"));
+        assertEquals(location.getPostalCode(), "85260");
+        assertTrue(location.getSubdivisionCodes().contains("AZ"));
+        assertTrue(location.getSubdivisionNames().contains("Arizona"));
         assertEquals(location.getCountryCode(), "US");
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
@@ -2046,16 +2043,16 @@ public class IPGeolocatorTest {
 
         location = locator.locate(inetAddress);
         assertNotNull(location);
-        assertEquals(location.getCity(), "Ashburn");
-        assertEquals(location.getTimeZone().getID(), "America/New_York");
+        assertEquals(location.getCity(), "Scottsdale");
+        assertEquals(location.getTimeZone().getID(), "America/Phoenix");
         assertEquals(location.getAccuracyRadius().intValue(), 937);
-        assertEquals(location.getMetroCode().intValue(), 511);
-        assertEquals(location.getLatitude(), 39.018, ERROR);
-        assertEquals(location.getLongitude(), -77.539, ERROR);
+        assertEquals(location.getMetroCode().intValue(), 753);
+        assertEquals(location.getLatitude(), 33.6119, ERROR);
+        assertEquals(location.getLongitude(), -111.8906, ERROR);
         assertTrue(location.areCoordinatesAvailable());
-        assertEquals(location.getPostalCode(), "20147");
-        assertTrue(location.getSubdivisionCodes().contains("VA"));
-        assertTrue(location.getSubdivisionNames().contains("Virginia"));
+        assertEquals(location.getPostalCode(), "85260");
+        assertTrue(location.getSubdivisionCodes().contains("AZ"));
+        assertTrue(location.getSubdivisionNames().contains("Arizona"));
         assertEquals(location.getCountryCode(), "US");
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
@@ -2075,16 +2072,16 @@ public class IPGeolocatorTest {
 
         //test with CITY level
         assertNotNull(location);
-        assertEquals(location.getCity(), "Ashburn");
-        assertEquals(location.getTimeZone().getID(), "America/New_York");
+        assertEquals(location.getCity(), "Scottsdale");
+        assertEquals(location.getTimeZone().getID(), "America/Phoenix");
         assertEquals(location.getAccuracyRadius().intValue(), 937);
-        assertEquals(location.getMetroCode().intValue(), 511);
-        assertEquals(location.getLatitude(), 39.018, ERROR);
-        assertEquals(location.getLongitude(), -77.539, ERROR);
+        assertEquals(location.getMetroCode().intValue(), 753);
+        assertEquals(location.getLatitude(), 33.6119, ERROR);
+        assertEquals(location.getLongitude(), -111.8906, ERROR);
         assertTrue(location.areCoordinatesAvailable());
-        assertEquals(location.getPostalCode(), "20147");
-        assertTrue(location.getSubdivisionCodes().contains("VA"));
-        assertTrue(location.getSubdivisionNames().contains("Virginia"));
+        assertEquals(location.getPostalCode(), "85260");
+        assertTrue(location.getSubdivisionCodes().contains("AZ"));
+        assertTrue(location.getSubdivisionNames().contains("Arizona"));
         assertEquals(location.getCountryCode(), "US");
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
@@ -2104,16 +2101,16 @@ public class IPGeolocatorTest {
 
         location = locator.locate(inetAddress, IPGeolocationLevel.CITY);
         assertNotNull(location);
-        assertEquals(location.getCity(), "Ashburn");
-        assertEquals(location.getTimeZone().getID(), "America/New_York");
+        assertEquals(location.getCity(), "Scottsdale");
+        assertEquals(location.getTimeZone().getID(), "America/Phoenix");
         assertEquals(location.getAccuracyRadius().intValue(), 937);
-        assertEquals(location.getMetroCode().intValue(), 511);
-        assertEquals(location.getLatitude(), 39.018, ERROR);
-        assertEquals(location.getLongitude(), -77.539, ERROR);
+        assertEquals(location.getMetroCode().intValue(), 753);
+        assertEquals(location.getLatitude(), 33.6119, ERROR);
+        assertEquals(location.getLongitude(), -111.8906, ERROR);
         assertTrue(location.areCoordinatesAvailable());
-        assertEquals(location.getPostalCode(), "20147");
-        assertTrue(location.getSubdivisionCodes().contains("VA"));
-        assertTrue(location.getSubdivisionNames().contains("Virginia"));
+        assertEquals(location.getPostalCode(), "85260");
+        assertTrue(location.getSubdivisionCodes().contains("AZ"));
+        assertTrue(location.getSubdivisionNames().contains("Arizona"));
         assertEquals(location.getCountryCode(), "US");
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
@@ -2194,7 +2191,7 @@ public class IPGeolocatorTest {
 
     @Test
     public void testLocateIpv6Address() throws UnknownHostException,
-            IPLocationNotFoundException, IPGeolocationDisabledException{
+            IPLocationNotFoundException, IPGeolocationDisabledException {
 
         IPGeolocator locator = IPGeolocator.getInstance();
 
@@ -2383,7 +2380,7 @@ public class IPGeolocatorTest {
 
     @Test
     public void testLocateLocalAddress() throws UnknownHostException,
-            IPLocationNotFoundException, IPGeolocationDisabledException{
+            IPGeolocationDisabledException {
 
         IPGeolocator locator = IPGeolocator.getInstance();
 
@@ -2392,76 +2389,88 @@ public class IPGeolocatorTest {
 
         //test with default level
         IPLocation location = null;
-        try{
+        try {
             location = locator.locate(address);
             fail("IPLocationNotFoundException expected but not thrown");
-        }catch(IPLocationNotFoundException e){}
+        } catch (IPLocationNotFoundException ignore) {
+        }
 
-        try{
+        try {
             location = locator.locate(inetAddress);
             fail("IPLocationNotFoundException expected but not thrown");
-        }catch(IPLocationNotFoundException e){}
+        } catch (IPLocationNotFoundException ignore) {
+        }
 
         //test with CITY level
-        try{
+        try {
             location = locator.locate(address, IPGeolocationLevel.CITY);
             fail("IPLocationNotFoundException expected but not thrown");
-        }catch(IPLocationNotFoundException e){}
+        } catch (IPLocationNotFoundException ignore) {
+        }
 
-        try{
+        try {
             location = locator.locate(inetAddress, IPGeolocationLevel.CITY);
             fail("IPLocationNotFoundException expected but not thrown");
-        }catch(IPLocationNotFoundException e){}
+        } catch (IPLocationNotFoundException ignore) {
+        }
 
         //test with COUNTRY level
-        try{
+        try {
             location = locator.locate(address, IPGeolocationLevel.COUNTRY);
             fail("IPLocationNotFoundException expected but not thrown");
-        }catch(IPLocationNotFoundException e){}
+        } catch (IPLocationNotFoundException ignore) {
+        }
 
-        try{
+        try {
             location = locator.locate(inetAddress, IPGeolocationLevel.COUNTRY);
             fail("IPLocationNotFoundException expected but not thrown");
-        }catch(IPLocationNotFoundException e){}
+        } catch (IPLocationNotFoundException ignore) {
+        }
         assertNull(location);
     }
 
     @Test
     public void testForceIPLocationDisabledException()
-            throws UnknownHostException, IPLocationNotFoundException{
+            throws UnknownHostException, IPLocationNotFoundException {
         IPGeolocator locator = IPGeolocator.getInstance();
         String address = "64.4.4.4";
         locator.close();
 
         //Force IPLocationDisabledException
-        try{
+        try {
             locator.locate(address);
             fail("IPLocationDisabledException expected but not thrown");
-        }catch(IPGeolocationDisabledException e){}
-        try{
+        } catch (IPGeolocationDisabledException ignore) {
+        }
+        try {
             locator.locate(InetAddress.getByName(address));
             fail("IPLocationDisabledException expected but not thrown");
-        }catch(IPGeolocationDisabledException e){}
+        } catch (IPGeolocationDisabledException ignore) {
+        }
 
-        try{
+        try {
             locator.locate(address, IPGeolocationLevel.CITY);
             fail("IPLocationDisabledException expected but not thrown");
-        }catch(IPGeolocationDisabledException e){}
-        try{
+        } catch (IPGeolocationDisabledException ignore) {
+        }
+        try {
             locator.locate(InetAddress.getByName(address),
                     IPGeolocationLevel.CITY);
             fail("IPLocationDisabledException expected but not thrown");
-        }catch(IPGeolocationDisabledException e){}
+        } catch (IPGeolocationDisabledException ignore) {
+        }
 
-        try{
+        try {
             locator.locate(address, IPGeolocationLevel.COUNTRY);
             fail("IPLocationDisabledException expected but not thrown");
-        }catch(IPGeolocationDisabledException e){}
-        try{
+        } catch (IPGeolocationDisabledException ignore) {
+        }
+        try {
             locator.locate(InetAddress.getByName(address),
                     IPGeolocationLevel.COUNTRY);
             fail("IPLocationDisabledException expected but not thrown");
-        }catch(IPGeolocationDisabledException e){}
+        } catch (IPGeolocationDisabledException ignore) {
+        }
 
         IPGeolocator.reset();
     }

@@ -15,7 +15,7 @@
  */
 package com.irurueta.server.commons.geolocation;
 
-import com.irurueta.commons.units.LocationDistanceEstimator;
+import com.irurueta.navigation.utils.LocationUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -356,8 +356,8 @@ public class IPLocationTest {
         location2.mLatitude = latitude2;
         location2.mLongitude = longitude2;
         
-        assertEquals(location1.distance(location2), 
-                LocationDistanceEstimator.distanceInMeters(
+        assertEquals(location1.distance(location2),
+                LocationUtils.distanceBetweenMeters(
                         latitude1, longitude1, latitude2, longitude2), 0.0);
     }    
 }

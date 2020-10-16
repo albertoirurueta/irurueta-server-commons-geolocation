@@ -34,14 +34,21 @@
             <id>ossrh</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
-    </distributionManagement>    
-    
+    </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>maven-central-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <!-- dependencies for unit tests -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.11</version>
+            <version>4.13.1</version>
             <scope>test</scope>
             <type>jar</type>
         </dependency>
@@ -61,7 +68,12 @@
             <groupId>com.irurueta</groupId>
             <artifactId>irurueta-commons</artifactId>
             <version>1.0-SNAPSHOT</version>
-        </dependency>        
+        </dependency>
+        <dependency>
+            <groupId>com.irurueta</groupId>
+            <artifactId>irurueta-navigation</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>com.maxmind.geoip2</groupId>
             <artifactId>geoip2</artifactId>
@@ -104,14 +116,7 @@
                                 <phase>site</phase>
                             </execution>
                         </executions>
-                    </plugin>    
-                    
-                    <!-- publishes coverage info to coveralls -->
-                    <plugin>
-                        <groupId>org.eluder.coveralls</groupId>
-                        <artifactId>coveralls-maven-plugin</artifactId>
-                        <version>4.1.0</version>
-                    </plugin>                
+                    </plugin>
                 </plugins>
             </build>
         </profile>
@@ -146,7 +151,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
-                        <version>3.0.0</version>
+                        <version>3.0.1</version>
                         <executions>
                             <execution>
                                 <id>attach-sources</id>
@@ -159,7 +164,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>2.10.3</version>
+                        <version>3.0.1</version>
                         <executions>
                             <execution>
                                 <id>attach-javadocs</id>
@@ -201,18 +206,18 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.19.1</version>               
+                <version>2.22.0</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.19.1</version>
+                <version>2.22.0</version>
             </plugin>     
             <!-- code coverage plugin -->                          
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.7.6.201602180812</version>
+                <version>0.8.2</version>
                 <executions>
                     <execution>
                         <id>jacoco-initialize</id>
@@ -233,7 +238,13 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>
-                <version>3.0.3</version>
+                <version>3.0.5</version>
+            </plugin>
+            <!-- maven site -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.7.1</version>
             </plugin>
             <!-- save build info into generated package -->
             <plugin>
@@ -358,33 +369,30 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.10.3</version>
+                <version>3.0.1</version>
                 <configuration>
                     <show>private</show>
                     <nohelp>true</nohelp>
-                    <aggregate>true</aggregate>
-                    <links>
-                        <link>http://docs.oracle.com/javase/7/docs/api/</link>
-                    </links>
+                    <detectJavaApiLink>true</detectJavaApiLink>
                 </configuration>
             </plugin>
             <!-- adds unit tests report into site -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>2.19.1</version>
+                <version>2.22.0</version>
             </plugin> 
             <!-- adds code coverage report into site -->  
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.7.6.201602180812</version>
+                <version>0.8.2</version>
             </plugin>     
             <!-- adds code quality reports into site -->               
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>2.17</version>
+                <version>3.0.0</version>
                 <configuration>
                     <configLocation>checkstyle.xml</configLocation>
                 </configuration>                
@@ -405,7 +413,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.6</version>
+                <version>3.10.0</version>
             </plugin>
             <!-- 
             adds cross reference into source for easier navigation of source in 

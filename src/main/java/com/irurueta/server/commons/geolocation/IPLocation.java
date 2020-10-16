@@ -15,7 +15,7 @@
  */
 package com.irurueta.server.commons.geolocation;
 
-import com.irurueta.commons.units.LocationDistanceEstimator;
+import com.irurueta.navigation.utils.LocationUtils;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -443,7 +443,7 @@ public class IPLocation {
      * @return distance between locations expressed in meters
      */
     public double distance(IPLocation otherLocation) {
-        return LocationDistanceEstimator.distanceInMeters(mLatitude, mLongitude, 
+        return LocationUtils.distanceBetweenMeters(mLatitude, mLongitude,
                 otherLocation.mLatitude, otherLocation.mLongitude);
-    }    
+    }
 }
