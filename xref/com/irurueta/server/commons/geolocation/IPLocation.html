@@ -23,7 +23,7 @@
 <a class="jxr_linenumber" name="L15" href="#L15">15</a>  <em class="jxr_javadoccomment"> */</em>
 <a class="jxr_linenumber" name="L16" href="#L16">16</a>  <strong class="jxr_keyword">package</strong> com.irurueta.server.commons.geolocation;
 <a class="jxr_linenumber" name="L17" href="#L17">17</a>  
-<a class="jxr_linenumber" name="L18" href="#L18">18</a>  <strong class="jxr_keyword">import</strong> com.irurueta.commons.units.LocationDistanceEstimator;
+<a class="jxr_linenumber" name="L18" href="#L18">18</a>  <strong class="jxr_keyword">import</strong> com.irurueta.navigation.utils.LocationUtils;
 <a class="jxr_linenumber" name="L19" href="#L19">19</a>  <strong class="jxr_keyword">import</strong> java.util.List;
 <a class="jxr_linenumber" name="L20" href="#L20">20</a>  <strong class="jxr_keyword">import</strong> java.util.Locale;
 <a class="jxr_linenumber" name="L21" href="#L21">21</a>  <strong class="jxr_keyword">import</strong> java.util.TimeZone;
@@ -451,12 +451,12 @@
 <a class="jxr_linenumber" name="L443" href="#L443">443</a> <em class="jxr_javadoccomment">     * @return distance between locations expressed in meters</em>
 <a class="jxr_linenumber" name="L444" href="#L444">444</a> <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L445" href="#L445">445</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">double</strong> distance(<a href="../../../../../com/irurueta/server/commons/geolocation/IPLocation.html">IPLocation</a> otherLocation) {
-<a class="jxr_linenumber" name="L446" href="#L446">446</a>         <strong class="jxr_keyword">return</strong> LocationDistanceEstimator.distanceInMeters(mLatitude, mLongitude, 
+<a class="jxr_linenumber" name="L446" href="#L446">446</a>         <strong class="jxr_keyword">return</strong> LocationUtils.distanceBetweenMeters(mLatitude, mLongitude,
 <a class="jxr_linenumber" name="L447" href="#L447">447</a>                 otherLocation.mLatitude, otherLocation.mLongitude);
-<a class="jxr_linenumber" name="L448" href="#L448">448</a>     }    
+<a class="jxr_linenumber" name="L448" href="#L448">448</a>     }
 <a class="jxr_linenumber" name="L449" href="#L449">449</a> }
 </pre>
 <hr/>
-<div id="footer">Copyright &#169; 2016. All rights reserved.</div>
+<div id="footer">Copyright &#169; 2016&#x2013;2020. All rights reserved.</div>
 </body>
 </html>

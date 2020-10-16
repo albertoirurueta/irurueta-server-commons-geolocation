@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>IPGeolocator.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-geolocation</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.geolocation</a> &gt; <span class="el_source">IPGeolocator.java</span></div><h1>IPGeolocator.java</h1><pre class="source lang-java linenums">/**
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>IPGeolocator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-geolocation</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.geolocation</a> &gt; <span class="el_source">IPGeolocator.java</span></div><h1>IPGeolocator.java</h1><pre class="source lang-java linenums">/**
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -50,7 +50,7 @@ public class IPGeolocator implements Closeable{
      * Logger of this class.
      */
 <span class="fc" id="L52">    private static final Logger LOGGER = Logger.getLogger(</span>
-            IPGeolocator.class.getName());
+<span class="fc" id="L53">            IPGeolocator.class.getName());</span>
     
     /**
      * Buffer size to copy embedded databases into final locations.
@@ -100,7 +100,7 @@ public class IPGeolocator implements Closeable{
 <span class="fc" id="L100">        mEnabled = false;</span>
         try{
 <span class="fc" id="L102">            mConfiguration = GeolocationConfigurationFactory.getInstance().</span>
-                    configure();
+<span class="fc" id="L103">                    configure();</span>
             
             
             //copy embedded databases to destination if needed
@@ -194,7 +194,7 @@ public class IPGeolocator implements Closeable{
 <span class="fc" id="L194">                    Location loc = response.getLocation();</span>
 <span class="pc bpc" id="L195" title="1 of 2 branches missed.">                    if(loc != null){</span>
 <span class="fc bfc" id="L196" title="All 2 branches covered.">                        location.mTimeZone = loc.getTimeZone() != null ?</span>
-                                TimeZone.getTimeZone(loc.getTimeZone()) : null;
+<span class="fc" id="L197">                                TimeZone.getTimeZone(loc.getTimeZone()) : null;</span>
 <span class="fc" id="L198">                        location.mAccuracyRadius = loc.getAccuracyRadius();</span>
 <span class="fc" id="L199">                        location.mMetroCode = loc.getMetroCode();</span>
 <span class="fc" id="L200">                        location.mLatitude = loc.getLatitude();</span>
@@ -326,7 +326,7 @@ public class IPGeolocator implements Closeable{
 <span class="fc bfc" id="L326" title="All 2 branches covered.">        if(mCountryDatabasePrepared) {            </span>
             //delete country database file
 <span class="fc" id="L328">            File f = new File(</span>
-                    mConfiguration.getIPGeolocationCountryDatabaseFile());
+<span class="fc" id="L329">                    mConfiguration.getIPGeolocationCountryDatabaseFile());</span>
 <span class="fc bfc" id="L330" title="All 2 branches covered.">            if (f.exists()) {</span>
 <span class="fc" id="L331">                f.delete();</span>
             }
@@ -336,7 +336,7 @@ public class IPGeolocator implements Closeable{
 <span class="pc bpc" id="L336" title="1 of 2 branches missed.">        if(mCityDatabasePrepared){</span>
             //delete city database file
 <span class="fc" id="L338">            File f = new File(</span>
-                    mConfiguration.getIPGeolocationCityDatabaseFile());
+<span class="fc" id="L339">                    mConfiguration.getIPGeolocationCityDatabaseFile());</span>
 <span class="fc bfc" id="L340" title="All 2 branches covered.">            if (f.exists()) {</span>
 <span class="fc" id="L341">                f.delete();</span>
             }            
@@ -473,7 +473,7 @@ public class IPGeolocator implements Closeable{
 <span class="fc" id="L473">        Traits traits = response.getTraits();</span>
 <span class="pc bpc" id="L474" title="1 of 2 branches missed.">        if(traits != null){</span>
 <span class="fc" id="L475">            location.mAutonomousSystemNumber = </span>
-                    traits.getAutonomousSystemNumber();
+<span class="fc" id="L476">                    traits.getAutonomousSystemNumber();</span>
 <span class="fc" id="L477">            location.mDomain = traits.getDomain();</span>
 <span class="fc" id="L478">            location.mIsp = traits.getIsp();</span>
 <span class="fc" id="L479">            location.mOrganization = traits.getOrganization();</span>
@@ -489,18 +489,18 @@ public class IPGeolocator implements Closeable{
 
         //city database
 <span class="fc" id="L491">        IPGeolocationLevel level = mConfiguration.getIPGeolocationLevel();</span>
-<span class="pc bpc" id="L492" title="4 of 8 branches missed.">        if (level == IPGeolocationLevel.CITY &amp;&amp;</span>
-                mConfiguration.isIPGeolocationCityDatabaseEmbedded() &amp;&amp;
-                mConfiguration.getIPGeolocationCityEmbeddedResource() != null &amp;&amp;
-                mConfiguration.getIPGeolocationCityDatabaseFile() != null) {
+<span class="pc bpc" id="L492" title="1 of 2 branches missed.">        if (level == IPGeolocationLevel.CITY &amp;&amp;</span>
+<span class="pc bpc" id="L493" title="1 of 2 branches missed.">                mConfiguration.isIPGeolocationCityDatabaseEmbedded() &amp;&amp;</span>
+<span class="pc bpc" id="L494" title="1 of 2 branches missed.">                mConfiguration.getIPGeolocationCityEmbeddedResource() != null &amp;&amp;</span>
+<span class="pc bpc" id="L495" title="1 of 2 branches missed.">                mConfiguration.getIPGeolocationCityDatabaseFile() != null) {</span>
 <span class="fc" id="L496">            mCityDatabasePrepared = prepareCityDatabase();</span>
         }
         
         //country database
-<span class="pc bpc" id="L500" title="7 of 8 branches missed.">        if (!mCityDatabasePrepared &amp;&amp; </span>
-                mConfiguration.isIPGeolocationCountryDatabaseEmbedded() &amp;&amp;
-                mConfiguration.getIPGeolocationCountryEmbeddedResource() != null &amp;&amp; 
-                mConfiguration.getIPGeolocationCountryDatabaseFile() != null) {
+<span class="pc bpc" id="L500" title="1 of 2 branches missed.">        if (!mCityDatabasePrepared &amp;&amp; </span>
+<span class="nc bnc" id="L501" title="All 2 branches missed.">                mConfiguration.isIPGeolocationCountryDatabaseEmbedded() &amp;&amp;</span>
+<span class="nc bnc" id="L502" title="All 2 branches missed.">                mConfiguration.getIPGeolocationCountryEmbeddedResource() != null &amp;&amp; </span>
+<span class="nc bnc" id="L503" title="All 2 branches missed.">                mConfiguration.getIPGeolocationCountryDatabaseFile() != null) {</span>
 <span class="nc" id="L504">            mCountryDatabasePrepared = prepareCountryDatabase();</span>
         }
 <span class="fc" id="L506">    }</span>
@@ -512,12 +512,12 @@ public class IPGeolocator implements Closeable{
      * @throws IOException if an I/O error occurs.
      */
     private boolean prepareCityDatabase() throws IOException {
-<span class="pc bpc" id="L515" title="3 of 6 branches missed.">        if(mConfiguration.isIPGeolocationCityDatabaseEmbedded() &amp;&amp;</span>
-                mConfiguration.getIPGeolocationCityEmbeddedResource() != null &amp;&amp;
-                mConfiguration.getIPGeolocationCityDatabaseFile() != null) {
+<span class="pc bpc" id="L515" title="1 of 2 branches missed.">        if(mConfiguration.isIPGeolocationCityDatabaseEmbedded() &amp;&amp;</span>
+<span class="pc bpc" id="L516" title="1 of 2 branches missed.">                mConfiguration.getIPGeolocationCityEmbeddedResource() != null &amp;&amp;</span>
+<span class="pc bpc" id="L517" title="1 of 2 branches missed.">                mConfiguration.getIPGeolocationCityDatabaseFile() != null) {</span>
             //copy embedded resource to destination file
 <span class="fc" id="L519">            copyResource(mConfiguration.getIPGeolocationCityEmbeddedResource(),</span>
-                    mConfiguration.getIPGeolocationCityDatabaseFile());        
+<span class="fc" id="L520">                    mConfiguration.getIPGeolocationCityDatabaseFile());        </span>
 <span class="fc" id="L521">            return true;</span>
         }
         
@@ -531,12 +531,12 @@ public class IPGeolocator implements Closeable{
      * @throws IOException if an I/O error occurs.
      */
     private boolean prepareCountryDatabase() throws IOException {
-<span class="pc bpc" id="L534" title="3 of 6 branches missed.">        if (mConfiguration.isIPGeolocationCountryDatabaseEmbedded() &amp;&amp;</span>
-                mConfiguration.getIPGeolocationCountryEmbeddedResource() != null &amp;&amp; 
-                mConfiguration.getIPGeolocationCountryDatabaseFile() != null) {
+<span class="pc bpc" id="L534" title="1 of 2 branches missed.">        if (mConfiguration.isIPGeolocationCountryDatabaseEmbedded() &amp;&amp;</span>
+<span class="pc bpc" id="L535" title="1 of 2 branches missed.">                mConfiguration.getIPGeolocationCountryEmbeddedResource() != null &amp;&amp; </span>
+<span class="pc bpc" id="L536" title="1 of 2 branches missed.">                mConfiguration.getIPGeolocationCountryDatabaseFile() != null) {</span>
             //copy embedded resource to destination file
 <span class="fc" id="L538">            copyResource(mConfiguration.getIPGeolocationCountryEmbeddedResource(),</span>
-                    mConfiguration.getIPGeolocationCountryDatabaseFile());
+<span class="fc" id="L539">                    mConfiguration.getIPGeolocationCountryDatabaseFile());</span>
 <span class="fc" id="L540">            return true;</span>
         }        
         
@@ -573,11 +573,11 @@ public class IPGeolocator implements Closeable{
                 }
             }
 <span class="fc" id="L575">            LOGGER.log(Level.INFO, &quot;Resource: {0} copied to {1}&quot;, </span>
-                    new Object[]{resource, f.getAbsolutePath()});
+<span class="fc" id="L576">                    new Object[]{resource, f.getAbsolutePath()});</span>
         }finally{
-<span class="pc bpc" id="L578" title="3 of 4 branches missed.">            if(inStream != null) inStream.close();</span>
-<span class="pc bpc" id="L579" title="3 of 4 branches missed.">            if(outStream != null) outStream.close();</span>
+<span class="pc bpc" id="L578" title="1 of 2 branches missed.">            if(inStream != null) inStream.close();</span>
+<span class="pc bpc" id="L579" title="1 of 2 branches missed.">            if(outStream != null) outStream.close();</span>
         }
 <span class="fc" id="L581">    }</span>
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
