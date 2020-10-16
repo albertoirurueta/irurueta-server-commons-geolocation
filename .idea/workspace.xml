@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab8c12a9-c5bb-4626-bea6-549dfee5bf16" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/geolocation/IPGeolocatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/geolocation/IPGeolocatorTest.java" afterDir="false" />
     </list>
@@ -41,6 +42,15 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
@@ -48,7 +58,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.IPGeolocatorTest.testLocateDnsAddress">
+  <component name="RunManager" selected="JUnit.IPGeolocatorTest">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
       <module name="" />
       <option name="DEPLOY" value="true" />
@@ -314,8 +324,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.IPGeolocatorTest.testLocateDnsAddress" />
         <item itemvalue="JUnit.IPGeolocatorTest" />
+        <item itemvalue="JUnit.IPGeolocatorTest.testLocateDnsAddress" />
         <item itemvalue="JUnit.IPGeolocatorTest.testLocateIpv6Address" />
         <item itemvalue="JUnit.IPGeolocatorTest.testLocateColombiaAddress" />
         <item itemvalue="JUnit.IPGeolocatorTest.testLocateUnitedStatesAddress2" />
@@ -334,7 +344,7 @@
       <option name="presentableId" value="Default" />
       <updated>1464000355333</updated>
       <workItem from="1602861711398" duration="1568000" />
-      <workItem from="1602874553241" duration="1744000" />
+      <workItem from="1602874553241" duration="2695000" />
     </task>
     <servers />
   </component>
@@ -350,22 +360,22 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state width="1494" height="250" key="GridCell.Tab.0.bottom" timestamp="1602875193250">
+    <state width="1494" height="250" key="GridCell.Tab.0.bottom" timestamp="1602877292846">
       <screen x="0" y="23" width="1536" height="937" />
     </state>
-    <state width="1494" height="250" key="GridCell.Tab.0.bottom/0.23.1536.937@0.23.1536.937" timestamp="1602875193250" />
-    <state width="1494" height="250" key="GridCell.Tab.0.center" timestamp="1602875193249">
+    <state width="1494" height="250" key="GridCell.Tab.0.bottom/0.23.1536.937@0.23.1536.937" timestamp="1602877292846" />
+    <state width="1494" height="250" key="GridCell.Tab.0.center" timestamp="1602877292845">
       <screen x="0" y="23" width="1536" height="937" />
     </state>
-    <state width="1494" height="250" key="GridCell.Tab.0.center/0.23.1536.937@0.23.1536.937" timestamp="1602875193249" />
-    <state width="1494" height="250" key="GridCell.Tab.0.left" timestamp="1602875193249">
+    <state width="1494" height="250" key="GridCell.Tab.0.center/0.23.1536.937@0.23.1536.937" timestamp="1602877292845" />
+    <state width="1494" height="250" key="GridCell.Tab.0.left" timestamp="1602877292845">
       <screen x="0" y="23" width="1536" height="937" />
     </state>
-    <state width="1494" height="250" key="GridCell.Tab.0.left/0.23.1536.937@0.23.1536.937" timestamp="1602875193249" />
-    <state width="1494" height="250" key="GridCell.Tab.0.right" timestamp="1602875193250">
+    <state width="1494" height="250" key="GridCell.Tab.0.left/0.23.1536.937@0.23.1536.937" timestamp="1602877292845" />
+    <state width="1494" height="250" key="GridCell.Tab.0.right" timestamp="1602877292846">
       <screen x="0" y="23" width="1536" height="937" />
     </state>
-    <state width="1494" height="250" key="GridCell.Tab.0.right/0.23.1536.937@0.23.1536.937" timestamp="1602875193250" />
+    <state width="1494" height="250" key="GridCell.Tab.0.right/0.23.1536.937@0.23.1536.937" timestamp="1602877292846" />
     <state width="1494" height="309" key="GridCell.Tab.1.bottom" timestamp="1602874863330">
       <screen x="0" y="23" width="1536" height="937" />
     </state>
@@ -382,10 +392,10 @@
       <screen x="0" y="23" width="1536" height="937" />
     </state>
     <state width="1494" height="309" key="GridCell.Tab.1.right/0.23.1536.937@0.23.1536.937" timestamp="1602874863330" />
-    <state x="180" y="130" key="SettingsEditor" timestamp="1602861891652">
+    <state x="180" y="123" key="SettingsEditor" timestamp="1602876767211">
       <screen x="0" y="23" width="1536" height="937" />
     </state>
-    <state x="180" y="130" key="SettingsEditor/0.23.1536.937@0.23.1536.937" timestamp="1602861891652" />
+    <state x="180" y="123" key="SettingsEditor/0.23.1536.937@0.23.1536.937" timestamp="1602876767211" />
     <state x="607" y="246" width="652" height="490" key="find.popup" timestamp="1602876311515">
       <screen x="0" y="23" width="1536" height="937" />
     </state>

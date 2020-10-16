@@ -129,12 +129,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -159,12 +159,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -189,12 +189,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -218,12 +218,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -249,12 +249,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -278,12 +278,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -318,12 +318,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -348,12 +348,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -378,12 +378,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -407,12 +407,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -438,12 +438,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -467,12 +467,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -1460,12 +1460,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -1490,12 +1490,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -1520,12 +1520,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -1549,12 +1549,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -1580,12 +1580,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -1609,12 +1609,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -1649,12 +1649,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -1679,12 +1679,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -1709,12 +1709,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -1738,12 +1738,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -1769,12 +1769,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -1798,12 +1798,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -2027,12 +2027,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -2057,12 +2057,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -2086,12 +2086,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -2115,12 +2115,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -2146,12 +2146,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -2175,12 +2175,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -2215,12 +2215,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -2245,12 +2245,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -2275,12 +2275,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -2304,12 +2304,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -2335,12 +2335,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
@@ -2364,12 +2364,12 @@ public class IPGeolocatorTest {
         assertEquals(location.getCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertEquals(location.getRegisteredCountryCode(), "US");
         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
                 "United States");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
-                "Etats-Unis");
+                "États-Unis");
         assertNull(location.getDomain());
         assertNull(location.getIsp());
         assertNull(location.getOrganization());
