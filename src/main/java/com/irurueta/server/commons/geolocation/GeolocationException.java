@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,7 +33,7 @@ public class GeolocationException extends ServerCommonsException {
      * Constructor with message.
      * @param message message describing the cause of the exception.
      */
-    public GeolocationException(String message) {
+    public GeolocationException(final String message) {
         super(message);
     }
 
@@ -43,7 +43,7 @@ public class GeolocationException extends ServerCommonsException {
      * @param cause originating exception that caused this exception. This can
      * be used to obtain stack traces.
      */
-    public GeolocationException(String message, Throwable cause) {
+    public GeolocationException(final String message, final Throwable cause) {
         super(message, cause);
     }
 
@@ -52,7 +52,7 @@ public class GeolocationException extends ServerCommonsException {
      * @param cause originating exception that caused this exception. This can
      * be used to obtain stack traces.
      */
-    public GeolocationException(Throwable cause) {
+    public GeolocationException(final Throwable cause) {
         super(cause);
     }    
 }

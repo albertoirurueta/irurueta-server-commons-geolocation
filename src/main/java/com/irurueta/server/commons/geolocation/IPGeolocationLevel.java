@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,50 +23,53 @@ public enum IPGeolocationLevel {
      * Geolocation disabled.
      */
     DISABLED("disabled"),
-    
+
     /**
      * Country level geolocation.
      */
     COUNTRY("country"),
-    
+
     /**
      * City level geolocation.
      */
     CITY("city");
-    
+
     /**
      * String representation of this enumerator.
-     */    
-    private String mValue;
-    
+     */
+    private final String mValue;
+
     /**
      * Constructor.
+     *
      * @param value string representation.
-     */    
-    private IPGeolocationLevel(String value){
+     */
+    IPGeolocationLevel(final String value) {
         mValue = value;
     }
-    
+
     /**
      * Returns string representation.
+     *
      * @return string representation.
      */
-    public String getValue(){
+    public String getValue() {
         return mValue;
     }
-    
+
     /**
-     * Factory method to create an enumerator value from its string 
+     * Factory method to create an enumerator value from its string
      * representation.
+     *
      * @param value string representation.
      * @return enumerator value.
      */
-    public static IPGeolocationLevel fromValue(String value) {
-        if(value != null){
-            if(value.equalsIgnoreCase("disabled")) return DISABLED;
-            if(value.equalsIgnoreCase("country")) return COUNTRY;
-            if(value.equalsIgnoreCase("city")) return CITY;
+    public static IPGeolocationLevel fromValue(final String value) {
+        if (value != null) {
+            if (value.equalsIgnoreCase("disabled")) return DISABLED;
+            if (value.equalsIgnoreCase("country")) return COUNTRY;
+            if (value.equalsIgnoreCase("city")) return CITY;
         }
         return IPGeolocationLevel.DISABLED;
-    }    
+    }
 }

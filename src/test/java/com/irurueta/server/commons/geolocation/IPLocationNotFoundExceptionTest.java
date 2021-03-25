@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,42 +15,24 @@
  */
 package com.irurueta.server.commons.geolocation;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertNotNull;
 
 public class IPLocationNotFoundExceptionTest {
-    
-    public IPLocationNotFoundExceptionTest() {}
-    
-    @BeforeClass
-    public static void setUpClass() {}
-    
-    @AfterClass
-    public static void tearDownClass() {}
-    
-    @Before
-    public void setUp() {}
-    
-    @After
-    public void tearDown() {}
-    
+
     @Test
-    public void testConstructor(){
-        IPLocationNotFoundException ex;
-        assertNotNull(ex = new IPLocationNotFoundException());
-        
-        ex = null;
-        assertNotNull(ex = new IPLocationNotFoundException("message"));
-        
-        ex = null;
-        assertNotNull(ex = new IPLocationNotFoundException(new Exception()));
-        
-        ex = null;
-        assertNotNull(ex = new IPLocationNotFoundException("message", 
-                new Exception()));
-    }    
+    public void testConstructor() {
+        IPLocationNotFoundException ex = new IPLocationNotFoundException();
+        assertNotNull(ex);
+
+        ex = new IPLocationNotFoundException("message");
+        assertNotNull(ex);
+
+        ex = new IPLocationNotFoundException(new Exception());
+        assertNotNull(ex);
+
+        ex = new IPLocationNotFoundException("message", new Exception());
+        assertNotNull(ex);
+    }
 }

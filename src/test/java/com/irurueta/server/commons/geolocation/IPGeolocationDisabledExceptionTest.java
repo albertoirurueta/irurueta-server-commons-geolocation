@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,42 +15,24 @@
  */
 package com.irurueta.server.commons.geolocation;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertNotNull;
 
 public class IPGeolocationDisabledExceptionTest {
-    
-    public IPGeolocationDisabledExceptionTest() {}
-    
-    @BeforeClass
-    public static void setUpClass() {}
-    
-    @AfterClass
-    public static void tearDownClass() {}
-    
-    @Before
-    public void setUp() {}
-    
-    @After
-    public void tearDown() {}
-    
+
     @Test
-    public void testConstructor(){
-        IPGeolocationDisabledException ex;
-        assertNotNull(ex = new IPGeolocationDisabledException());
-        
-        ex = null;
-        assertNotNull(ex = new IPGeolocationDisabledException("message"));
-        
-        ex = null;
-        assertNotNull(ex = new IPGeolocationDisabledException(new Exception()));
-        
-        ex = null;
-        assertNotNull(ex = new IPGeolocationDisabledException("message", 
-                new Exception()));
+    public void testConstructor() {
+        IPGeolocationDisabledException ex = new IPGeolocationDisabledException();
+        assertNotNull(ex);
+
+        ex = new IPGeolocationDisabledException("message");
+        assertNotNull(ex);
+
+        ex = new IPGeolocationDisabledException(new Exception());
+        assertNotNull(ex);
+
+        ex = new IPGeolocationDisabledException("message", new Exception());
+        assertNotNull(ex);
     }
 }

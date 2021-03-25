@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,7 @@ public class IPGeolocationDisabledException extends GeolocationException {
      * Constructor with message.
      * @param message message describing the cause of the exception.
      */
-    public IPGeolocationDisabledException(String message) {
+    public IPGeolocationDisabledException(final String message) {
         super(message);
     }
 
@@ -41,7 +41,7 @@ public class IPGeolocationDisabledException extends GeolocationException {
      * @param cause originating exception that caused this exception. This can
      * be used to obtain stack traces.
      */
-    public IPGeolocationDisabledException(String message, Throwable cause) {
+    public IPGeolocationDisabledException(final String message, final Throwable cause) {
         super(message, cause);
     }
 
@@ -50,7 +50,7 @@ public class IPGeolocationDisabledException extends GeolocationException {
      * @param cause originating exception that caused this exception. This can
      * be used to obtain stack traces.
      */
-    public IPGeolocationDisabledException(Throwable cause) {
+    public IPGeolocationDisabledException(final Throwable cause) {
         super(cause);
     }        
 }

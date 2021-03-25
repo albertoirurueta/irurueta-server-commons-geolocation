@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,29 +15,12 @@
  */
 package com.irurueta.server.commons.geolocation;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
 
 public class IPGeolocationLevelTest {
-    
-    public IPGeolocationLevelTest() {}
-    
-    @BeforeClass
-    public static void setUpClass() {}
-    
-    @AfterClass
-    public static void tearDownClass() {}
-    
-    @Before
-    public void setUp() {}
-    
-    @After
-    public void tearDown() {}
-    
+
     @Test
     public void testGetValue() {
         assertEquals(IPGeolocationLevel.DISABLED.getValue(), "disabled");
@@ -56,7 +39,7 @@ public class IPGeolocationLevelTest {
         assertEquals(IPGeolocationLevel.fromValue(
                 IPGeolocationLevel.CITY.getValue()),
                 IPGeolocationLevel.CITY);
-        
+
         assertEquals(IPGeolocationLevel.fromValue(null),
                 IPGeolocationLevel.DISABLED);
         assertEquals(IPGeolocationLevel.fromValue("wrong"),

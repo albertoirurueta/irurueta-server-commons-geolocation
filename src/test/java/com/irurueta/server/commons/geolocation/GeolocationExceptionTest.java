@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,42 +15,24 @@
  */
 package com.irurueta.server.commons.geolocation;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertNotNull;
 
 public class GeolocationExceptionTest {
-    
-    public GeolocationExceptionTest() {}
-    
-    @BeforeClass
-    public static void setUpClass() {}
-    
-    @AfterClass
-    public static void tearDownClass() {}
-    
-    @Before
-    public void setUp() {}
-    
-    @After
-    public void tearDown() {}
-    
+
     @Test
-    public void testConstructor(){
-        GeolocationException ex;
-        assertNotNull(ex = new GeolocationException());
-        
-        ex = null;
-        assertNotNull(ex = new GeolocationException("message"));
-        
-        ex = null;
-        assertNotNull(ex = new GeolocationException(new Exception()));
-        
-        ex = null;
-        assertNotNull(ex = new GeolocationException("message", 
-                new Exception()));
+    public void testConstructor() {
+        GeolocationException ex = new GeolocationException();
+        assertNotNull(ex);
+
+        ex = new GeolocationException("message");
+        assertNotNull(ex);
+
+        ex = new GeolocationException(new Exception());
+        assertNotNull(ex);
+
+        ex = new GeolocationException("message", new Exception());
+        assertNotNull(ex);
     }
 }

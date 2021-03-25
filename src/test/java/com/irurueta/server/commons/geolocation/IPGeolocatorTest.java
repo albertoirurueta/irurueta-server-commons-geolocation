@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,6 +22,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Locale;
@@ -30,7 +31,6 @@ import java.util.Properties;
 import static org.junit.Assert.*;
 
 /**
- *
  * @author albertoirurueta
  */
 public class IPGeolocatorTest {
@@ -45,14 +45,14 @@ public class IPGeolocatorTest {
 
     @BeforeClass
     public static void setUpClass() throws ConfigurationException {
-        //check that destination files do not exist
+        // check that destination files do not exist
         File f = new File(COUNTRY_FILE);
         assertFalse(f.exists());
 
         f = new File(CITY_FILE);
         assertFalse(f.exists());
 
-        Properties props = new Properties();
+        final Properties props = new Properties();
         props.setProperty(GeolocationConfigurationFactory.
                 IP_GEOLOCATION_COUNTRY_DATABASE_FILE_PROPERTY, COUNTRY_FILE);
         props.setProperty(GeolocationConfigurationFactory.
@@ -63,10 +63,10 @@ public class IPGeolocatorTest {
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     @AfterClass
-    public static void tearDownClass() {
+    public static void tearDownClass() throws IOException {
         IPGeolocator.getInstance().close();
 
-        //check that destination files do not exist
+        // check that destination files do not exist
         File f = new File(COUNTRY_FILE);
         if (f.exists()) {
             f.delete();
@@ -79,19 +79,19 @@ public class IPGeolocatorTest {
             fail("City file was not deleted");
         }
 
-        File folder = new File(FOLDER);
+        final File folder = new File(FOLDER);
         assertTrue(folder.exists());
         folder.delete();
     }
 
     @Before
-    public void setUp() {
+    public void setUp() throws IOException {
         IPGeolocator.reset();
     }
 
     @Test
-    public void testGetInstance() {
-        IPGeolocator locator1 = IPGeolocator.getInstance();
+    public void testGetInstance() throws IOException {
+        final IPGeolocator locator1 = IPGeolocator.getInstance();
         IPGeolocator locator2 = IPGeolocator.getInstance();
 
         assertSame(locator1, locator2);
@@ -107,12 +107,12 @@ public class IPGeolocatorTest {
     public void testLocateMicrosoftAddress() throws UnknownHostException,
             IPLocationNotFoundException, IPGeolocationDisabledException {
 
-        IPGeolocator locator = IPGeolocator.getInstance();
+        final IPGeolocator locator = IPGeolocator.getInstance();
 
-        String address = "64.4.4.4";
-        InetAddress inetAddress = InetAddress.getByName(address);
+        final String address = "64.4.4.4";
+        final InetAddress inetAddress = InetAddress.getByName(address);
 
-        //test with default level
+        // test with default level
         IPLocation location = locator.locate(address);
         assertNotNull(location);
         assertEquals(location.getCity(), "Redmond");
@@ -172,7 +172,7 @@ public class IPGeolocatorTest {
         assertEquals(location.getContinentName(), "North America");
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 
-        //test with CITY level
+        // test with CITY level
         location = locator.locate(address, IPGeolocationLevel.CITY);
         assertNotNull(location);
         assertEquals(location.getCity(), "Redmond");
@@ -232,7 +232,7 @@ public class IPGeolocatorTest {
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 
 
-        //test with COUNTRY level
+        // test with COUNTRY level
         location = locator.locate(address, IPGeolocationLevel.COUNTRY);
         assertNotNull(location);
         assertNull(location.getCity());
@@ -296,12 +296,12 @@ public class IPGeolocatorTest {
     public void testLocateMicrosoftIpv6Address() throws UnknownHostException,
             IPLocationNotFoundException, IPGeolocationDisabledException {
 
-        IPGeolocator locator = IPGeolocator.getInstance();
+        final IPGeolocator locator = IPGeolocator.getInstance();
 
-        String address = "2002:4136:e383::4136";
-        InetAddress inetAddress = InetAddress.getByName(address);
+        final String address = "2002:4136:e383::4136";
+        final InetAddress inetAddress = InetAddress.getByName(address);
 
-        //test with default level
+        // test with default level
         IPLocation location = locator.locate(address);
         assertNotNull(location);
         assertEquals(location.getCity(), "San Jose");
@@ -361,7 +361,7 @@ public class IPGeolocatorTest {
         assertEquals(location.getContinentName(), "North America");
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 
-        //test with CITY level
+        // test with CITY level
         location = locator.locate(address, IPGeolocationLevel.CITY);
         assertNotNull(location);
         assertEquals(location.getCity(), "San Jose");
@@ -421,7 +421,7 @@ public class IPGeolocatorTest {
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 
 
-        //test with COUNTRY level
+        // test with COUNTRY level
         location = locator.locate(address, IPGeolocationLevel.COUNTRY);
         assertNotNull(location);
         assertNull(location.getCity());
@@ -485,12 +485,12 @@ public class IPGeolocatorTest {
     public void testLocateNorwayAddress() throws UnknownHostException,
             IPLocationNotFoundException, IPGeolocationDisabledException {
 
-        IPGeolocator locator = IPGeolocator.getInstance();
+        final IPGeolocator locator = IPGeolocator.getInstance();
 
-        String address = "213.52.50.8";
-        InetAddress inetAddress = InetAddress.getByName(address);
+        final String address = "213.52.50.8";
+        final InetAddress inetAddress = InetAddress.getByName(address);
 
-        //test with default level
+        // test with default level
         IPLocation location = locator.locate(address);
         assertNotNull(location);
         assertNull(location.getCity());
@@ -550,7 +550,7 @@ public class IPGeolocatorTest {
         assertEquals(location.getContinentName(), "Europe");
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 
-        //test with CITY level
+        // test with CITY level
         location = locator.locate(address, IPGeolocationLevel.CITY);
         assertNotNull(location);
         assertNull(location.getCity());
@@ -610,7 +610,7 @@ public class IPGeolocatorTest {
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 
 
-        //test with COUNTRY level
+        // test with COUNTRY level
         location = locator.locate(address, IPGeolocationLevel.COUNTRY);
         assertNotNull(location);
         assertNull(location.getCity());
@@ -674,12 +674,12 @@ public class IPGeolocatorTest {
     public void testLocateNorwayIpv6Address() throws UnknownHostException,
             IPLocationNotFoundException, IPGeolocationDisabledException {
 
-        IPGeolocator locator = IPGeolocator.getInstance();
+        final IPGeolocator locator = IPGeolocator.getInstance();
 
-        String address = "::213.52.50.8";
-        InetAddress inetAddress = InetAddress.getByName(address);
+        final String address = "::213.52.50.8";
+        final InetAddress inetAddress = InetAddress.getByName(address);
 
-        //test with default level
+        // test with default level
         IPLocation location = locator.locate(address);
         assertNotNull(location);
         assertNull(location.getCity());
@@ -739,7 +739,7 @@ public class IPGeolocatorTest {
         assertEquals(location.getContinentName(), "Europe");
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 
-        //test with CITY level
+        // test with CITY level
         location = locator.locate(address, IPGeolocationLevel.CITY);
         assertNotNull(location);
         assertNull(location.getCity());
@@ -799,7 +799,7 @@ public class IPGeolocatorTest {
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 
 
-        //test with COUNTRY level
+        // test with COUNTRY level
         location = locator.locate(address, IPGeolocationLevel.COUNTRY);
         assertNotNull(location);
         assertNull(location.getCity());
@@ -863,12 +863,12 @@ public class IPGeolocatorTest {
     public void testLocateSpainAddress() throws UnknownHostException,
             IPLocationNotFoundException, IPGeolocationDisabledException {
 
-        IPGeolocator locator = IPGeolocator.getInstance();
+        final IPGeolocator locator = IPGeolocator.getInstance();
 
-        String address = "37.15.50.115";
-        InetAddress inetAddress = InetAddress.getByName(address);
+        final String address = "37.15.50.115";
+        final InetAddress inetAddress = InetAddress.getByName(address);
 
-        //test with default level
+        // test with default level
         IPLocation location = locator.locate(address);
         assertNotNull(location);
         assertNull(location.getCity());
@@ -928,7 +928,7 @@ public class IPGeolocatorTest {
         assertEquals(location.getContinentName(), "Europe");
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 
-        //test with CITY level
+        // test with CITY level
         location = locator.locate(address, IPGeolocationLevel.CITY);
         assertNotNull(location);
         assertNull(location.getCity());
@@ -988,7 +988,7 @@ public class IPGeolocatorTest {
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 
 
-        //test with COUNTRY level
+        // test with COUNTRY level
         location = locator.locate(address, IPGeolocationLevel.COUNTRY);
         assertNotNull(location);
         assertNull(location.getCity());
@@ -1052,12 +1052,12 @@ public class IPGeolocatorTest {
     public void testLocateSpainIpv6Address() throws UnknownHostException,
             IPLocationNotFoundException, IPGeolocationDisabledException {
 
-        IPGeolocator locator = IPGeolocator.getInstance();
+        final IPGeolocator locator = IPGeolocator.getInstance();
 
-        String address = "::37.15.50.115";
-        InetAddress inetAddress = InetAddress.getByName(address);
+        final String address = "::37.15.50.115";
+        final InetAddress inetAddress = InetAddress.getByName(address);
 
-        //test with default level
+        // test with default level
         IPLocation location = locator.locate(address);
         assertNotNull(location);
         assertNull(location.getCity());
@@ -1117,7 +1117,7 @@ public class IPGeolocatorTest {
         assertEquals(location.getContinentName(), "Europe");
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 
-        //test with CITY level
+        // test with CITY level
         location = locator.locate(address, IPGeolocationLevel.CITY);
         assertNotNull(location);
         assertNull(location.getCity());
@@ -1177,7 +1177,7 @@ public class IPGeolocatorTest {
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 
 
-        //test with COUNTRY level
+        // test with COUNTRY level
         location = locator.locate(address, IPGeolocationLevel.COUNTRY);
         assertNotNull(location);
         assertNull(location.getCity());
@@ -1241,12 +1241,12 @@ public class IPGeolocatorTest {
     public void testLocateItalyAddress() throws UnknownHostException,
             IPLocationNotFoundException, IPGeolocationDisabledException {
 
-        IPGeolocator locator = IPGeolocator.getInstance();
+        final IPGeolocator locator = IPGeolocator.getInstance();
 
-        String address = "151.38.39.114";
-        InetAddress inetAddress = InetAddress.getByName(address);
+        final String address = "151.38.39.114";
+        final InetAddress inetAddress = InetAddress.getByName(address);
 
-        //test with default level
+        // test with default level
         IPLocation location = locator.locate(address);
         assertNotNull(location);
         assertEquals(location.getCity(), "Milan");
@@ -1310,7 +1310,7 @@ public class IPGeolocatorTest {
         assertEquals(location.getContinentName(), "Europe");
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 
-        //test with CITY level
+        // test with CITY level
         location = locator.locate(address, IPGeolocationLevel.CITY);
         assertNotNull(location);
         assertEquals(location.getCity(), "Milan");
@@ -1374,7 +1374,7 @@ public class IPGeolocatorTest {
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 
 
-        //test with COUNTRY level
+        // test with COUNTRY level
         location = locator.locate(address, IPGeolocationLevel.COUNTRY);
         assertNotNull(location);
         assertNull(location.getCity());
@@ -1438,12 +1438,12 @@ public class IPGeolocatorTest {
     public void testLocateUnitedStatesAddress() throws UnknownHostException,
             IPLocationNotFoundException, IPGeolocationDisabledException {
 
-        IPGeolocator locator = IPGeolocator.getInstance();
+        final IPGeolocator locator = IPGeolocator.getInstance();
 
-        String address = "12.25.205.51";
-        InetAddress inetAddress = InetAddress.getByName(address);
+        final String address = "12.25.205.51";
+        final InetAddress inetAddress = InetAddress.getByName(address);
 
-        //test with default level
+        // test with default level
         IPLocation location = locator.locate(address);
         assertNotNull(location);
         assertNull(location.getCity());
@@ -1503,7 +1503,7 @@ public class IPGeolocatorTest {
         assertEquals(location.getContinentName(), "North America");
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 
-        //test with CITY level
+        // test with CITY level
         location = locator.locate(address, IPGeolocationLevel.CITY);
         assertNotNull(location);
         assertNull(location.getCity());
@@ -1563,7 +1563,7 @@ public class IPGeolocatorTest {
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 
 
-        //test with COUNTRY level
+        // test with COUNTRY level
         location = locator.locate(address, IPGeolocationLevel.COUNTRY);
         assertNotNull(location);
         assertNull(location.getCity());
@@ -1627,12 +1627,12 @@ public class IPGeolocatorTest {
     public void testLocateUnitedStatesAddress2() throws UnknownHostException,
             IPLocationNotFoundException, IPGeolocationDisabledException {
 
-        IPGeolocator locator = IPGeolocator.getInstance();
+        final IPGeolocator locator = IPGeolocator.getInstance();
 
-        String address = "64.81.104.131";
-        InetAddress inetAddress = InetAddress.getByName(address);
+        final String address = "64.81.104.131";
+        final InetAddress inetAddress = InetAddress.getByName(address);
 
-        //test with default level
+        // test with default level
         IPLocation location = locator.locate(address);
         assertNotNull(location);
         assertEquals(location.getCity(), "San Jose");
@@ -1692,7 +1692,7 @@ public class IPGeolocatorTest {
         assertEquals(location.getContinentName(), "North America");
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 
-        //test with CITY level
+        // test with CITY level
         location = locator.locate(address, IPGeolocationLevel.CITY);
         assertNotNull(location);
         assertEquals(location.getCity(), "San Jose");
@@ -1752,7 +1752,7 @@ public class IPGeolocatorTest {
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 
 
-        //test with COUNTRY level
+        // test with COUNTRY level
         location = locator.locate(address, IPGeolocationLevel.COUNTRY);
         assertNotNull(location);
         assertNull(location.getCity());
@@ -1816,12 +1816,12 @@ public class IPGeolocatorTest {
     public void testLocateColombiaAddress() throws UnknownHostException,
             IPLocationNotFoundException, IPGeolocationDisabledException {
 
-        IPGeolocator locator = IPGeolocator.getInstance();
+        final IPGeolocator locator = IPGeolocator.getInstance();
 
-        String address = "200.21.225.82";
-        InetAddress inetAddress = InetAddress.getByName(address);
+        final String address = "200.21.225.82";
+        final InetAddress inetAddress = InetAddress.getByName(address);
 
-        //test with default level
+        // test with default level
         IPLocation location = locator.locate(address);
         assertNotNull(location);
         assertEquals(location.getCity(), "Bogotá");
@@ -1881,7 +1881,7 @@ public class IPGeolocatorTest {
         assertEquals(location.getContinentName(), "South America");
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 
-        //test with CITY level
+        // test with CITY level
         location = locator.locate(address, IPGeolocationLevel.CITY);
         assertNotNull(location);
         assertEquals(location.getCity(), "Bogotá");
@@ -1941,7 +1941,7 @@ public class IPGeolocatorTest {
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 
 
-        //test with COUNTRY level
+        // test with COUNTRY level
         location = locator.locate(address, IPGeolocationLevel.COUNTRY);
         assertNotNull(location);
         assertNull(location.getCity());
@@ -2005,12 +2005,12 @@ public class IPGeolocatorTest {
     public void testLocateDnsAddress() throws UnknownHostException,
             IPLocationNotFoundException, IPGeolocationDisabledException {
 
-        IPGeolocator locator = IPGeolocator.getInstance();
+        final IPGeolocator locator = IPGeolocator.getInstance();
 
-        String address = "www.mobbio.com";
-        InetAddress inetAddress = InetAddress.getByName(address);
+        final String address = "www.mobbio.com";
+        final InetAddress inetAddress = InetAddress.getByName(address);
 
-        //test with default level
+        // test with default level
         IPLocation location = locator.locate(address);
         assertNotNull(location);
         assertEquals(location.getCity(), "Scottsdale");
@@ -2070,7 +2070,7 @@ public class IPGeolocatorTest {
         assertEquals(location.getContinentName(), "North America");
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 
-        //test with CITY level
+        // test with CITY level
         assertNotNull(location);
         assertEquals(location.getCity(), "Scottsdale");
         assertEquals(location.getTimeZone().getID(), "America/Phoenix");
@@ -2129,7 +2129,7 @@ public class IPGeolocatorTest {
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 
 
-        //test with COUNTRY level
+        // test with COUNTRY level
         location = locator.locate(address, IPGeolocationLevel.COUNTRY);
         assertNotNull(location);
         assertNull(location.getCity());
@@ -2193,12 +2193,12 @@ public class IPGeolocatorTest {
     public void testLocateIpv6Address() throws UnknownHostException,
             IPLocationNotFoundException, IPGeolocationDisabledException {
 
-        IPGeolocator locator = IPGeolocator.getInstance();
+        final IPGeolocator locator = IPGeolocator.getInstance();
 
-        String address = "2001:4860:0:1001::68";
-        InetAddress inetAddress = InetAddress.getByName(address);
+        final String address = "2001:4860:0:1001::68";
+        final InetAddress inetAddress = InetAddress.getByName(address);
 
-        //test with default level
+        // test with default level
         IPLocation location = locator.locate(address);
         assertNotNull(location);
         assertNull(location.getCity());
@@ -2258,7 +2258,7 @@ public class IPGeolocatorTest {
         assertEquals(location.getContinentName(), "North America");
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 
-        //test with CITY level
+        // test with CITY level
         location = locator.locate(address, IPGeolocationLevel.CITY);
         assertNotNull(location);
         assertNull(location.getCity());
@@ -2318,7 +2318,7 @@ public class IPGeolocatorTest {
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 
 
-        //test with COUNTRY level
+        // test with COUNTRY level
         location = locator.locate(address, IPGeolocationLevel.COUNTRY);
         assertNotNull(location);
         assertNull(location.getCity());
@@ -2382,94 +2382,94 @@ public class IPGeolocatorTest {
     public void testLocateLocalAddress() throws UnknownHostException,
             IPGeolocationDisabledException {
 
-        IPGeolocator locator = IPGeolocator.getInstance();
+        final IPGeolocator locator = IPGeolocator.getInstance();
 
-        String address = "127.0.0.1";
-        InetAddress inetAddress = InetAddress.getByName(address);
+        final String address = "127.0.0.1";
+        final InetAddress inetAddress = InetAddress.getByName(address);
 
-        //test with default level
+        // test with default level
         IPLocation location = null;
         try {
             location = locator.locate(address);
             fail("IPLocationNotFoundException expected but not thrown");
-        } catch (IPLocationNotFoundException ignore) {
+        } catch (final IPLocationNotFoundException ignore) {
         }
 
         try {
             location = locator.locate(inetAddress);
             fail("IPLocationNotFoundException expected but not thrown");
-        } catch (IPLocationNotFoundException ignore) {
+        } catch (final IPLocationNotFoundException ignore) {
         }
 
-        //test with CITY level
+        // test with CITY level
         try {
             location = locator.locate(address, IPGeolocationLevel.CITY);
             fail("IPLocationNotFoundException expected but not thrown");
-        } catch (IPLocationNotFoundException ignore) {
+        } catch (final IPLocationNotFoundException ignore) {
         }
 
         try {
             location = locator.locate(inetAddress, IPGeolocationLevel.CITY);
             fail("IPLocationNotFoundException expected but not thrown");
-        } catch (IPLocationNotFoundException ignore) {
+        } catch (final IPLocationNotFoundException ignore) {
         }
 
-        //test with COUNTRY level
+        // test with COUNTRY level
         try {
             location = locator.locate(address, IPGeolocationLevel.COUNTRY);
             fail("IPLocationNotFoundException expected but not thrown");
-        } catch (IPLocationNotFoundException ignore) {
+        } catch (final IPLocationNotFoundException ignore) {
         }
 
         try {
             location = locator.locate(inetAddress, IPGeolocationLevel.COUNTRY);
             fail("IPLocationNotFoundException expected but not thrown");
-        } catch (IPLocationNotFoundException ignore) {
+        } catch (final IPLocationNotFoundException ignore) {
         }
         assertNull(location);
     }
 
     @Test
     public void testForceIPLocationDisabledException()
-            throws UnknownHostException, IPLocationNotFoundException {
-        IPGeolocator locator = IPGeolocator.getInstance();
-        String address = "64.4.4.4";
+            throws IOException, IPLocationNotFoundException {
+        final IPGeolocator locator = IPGeolocator.getInstance();
+        final String address = "64.4.4.4";
         locator.close();
 
-        //Force IPLocationDisabledException
+        // Force IPLocationDisabledException
         try {
             locator.locate(address);
             fail("IPLocationDisabledException expected but not thrown");
-        } catch (IPGeolocationDisabledException ignore) {
+        } catch (final IPGeolocationDisabledException ignore) {
         }
         try {
             locator.locate(InetAddress.getByName(address));
             fail("IPLocationDisabledException expected but not thrown");
-        } catch (IPGeolocationDisabledException ignore) {
+        } catch (final IPGeolocationDisabledException ignore) {
         }
 
         try {
             locator.locate(address, IPGeolocationLevel.CITY);
             fail("IPLocationDisabledException expected but not thrown");
-        } catch (IPGeolocationDisabledException ignore) {
+        } catch (final IPGeolocationDisabledException ignore) {
         }
         try {
             locator.locate(InetAddress.getByName(address),
                     IPGeolocationLevel.CITY);
             fail("IPLocationDisabledException expected but not thrown");
-        } catch (IPGeolocationDisabledException ignore) {
+        } catch (final IPGeolocationDisabledException ignore) {
         }
 
         try {
             locator.locate(address, IPGeolocationLevel.COUNTRY);
             fail("IPLocationDisabledException expected but not thrown");
-        } catch (IPGeolocationDisabledException ignore) {
+        } catch (final IPGeolocationDisabledException ignore) {
         }
         try {
             locator.locate(InetAddress.getByName(address),
                     IPGeolocationLevel.COUNTRY);
             fail("IPLocationDisabledException expected but not thrown");
-        } catch (IPGeolocationDisabledException ignore) {
+        } catch (final IPGeolocationDisabledException ignore) {
         }
 
         IPGeolocator.reset();

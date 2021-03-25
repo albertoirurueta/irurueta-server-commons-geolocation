@@ -5,8 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab8c12a9-c5bb-4626-bea6-549dfee5bf16" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_irurueta_irurueta_commons_1_0_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_irurueta_irurueta_commons_1_0_SNAPSHOT.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_irurueta_irurueta_server_commons_1_0_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_irurueta_irurueta_server_commons_1_0_SNAPSHOT.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/geolocation/BuildInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/geolocation/BuildInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/geolocation/GeolocationConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/geolocation/GeolocationConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/geolocation/GeolocationConfigurationFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/geolocation/GeolocationConfigurationFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/geolocation/GeolocationConfigurationImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/geolocation/GeolocationConfigurationImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/geolocation/GeolocationException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/geolocation/GeolocationException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/geolocation/IPGeolocationDisabledException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/geolocation/IPGeolocationDisabledException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/geolocation/IPGeolocationLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/geolocation/IPGeolocationLevel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/geolocation/IPGeolocator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/geolocation/IPGeolocator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/geolocation/BuildInfoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/geolocation/BuildInfoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/geolocation/GeolocationConfigurationFactoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/geolocation/GeolocationConfigurationFactoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/geolocation/GeolocationConfigurationImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/geolocation/GeolocationConfigurationImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/geolocation/GeolocationExceptionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/geolocation/GeolocationExceptionTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/geolocation/IPGeolocationDisabledExceptionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/geolocation/IPGeolocationDisabledExceptionTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/geolocation/IPGeolocationLevelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/geolocation/IPGeolocationLevelTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/geolocation/IPGeolocatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/geolocation/IPGeolocatorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/geolocation/IPLocationNotFoundExceptionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/geolocation/IPLocationNotFoundExceptionTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/geolocation/IPLocationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/geolocation/IPLocationTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,13 +37,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="mavenHome" value="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven3" />
-      </MavenGeneralSettings>
-    </option>
   </component>
   <component name="ProjectId" id="1ixukmTEzxc7hJ2qwPdytPzGoxD" />
   <component name="ProjectViewState">
@@ -50,14 +62,14 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.IPGeolocatorTest">
+  <component name="RunManager" selected="JUnit.com.irurueta.server.commons.geolocation in irurueta-server-commons-geolocation">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
       <module name="" />
       <option name="DEPLOY" value="true" />
@@ -158,13 +170,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -236,7 +250,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="IPGeolocatorTest.testLocateUnitedStatesAddress2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="com.irurueta.server.commons.geolocation in irurueta-server-commons-geolocation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="irurueta-server-commons-geolocation" />
       <extension name="coverage">
         <pattern>
@@ -245,16 +266,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.irurueta.server.commons.geolocation" />
-      <option name="MAIN_CLASS_NAME" value="com.irurueta.server.commons.geolocation.IPGeolocatorTest" />
-      <option name="METHOD_NAME" value="testLocateUnitedStatesAddress2" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="package" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -314,18 +326,18 @@
     </configuration>
     <list>
       <item itemvalue="JUnit.IPGeolocatorTest" />
-      <item itemvalue="JUnit.IPGeolocatorTest.testLocateUnitedStatesAddress2" />
       <item itemvalue="JUnit.IPGeolocatorTest.testLocateColombiaAddress" />
       <item itemvalue="JUnit.IPGeolocatorTest.testLocateDnsAddress" />
       <item itemvalue="JUnit.IPGeolocatorTest.testLocateIpv6Address" />
+      <item itemvalue="JUnit.com.irurueta.server.commons.geolocation in irurueta-server-commons-geolocation" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.com.irurueta.server.commons.geolocation in irurueta-server-commons-geolocation" />
         <item itemvalue="JUnit.IPGeolocatorTest" />
         <item itemvalue="JUnit.IPGeolocatorTest.testLocateDnsAddress" />
         <item itemvalue="JUnit.IPGeolocatorTest.testLocateIpv6Address" />
         <item itemvalue="JUnit.IPGeolocatorTest.testLocateColombiaAddress" />
-        <item itemvalue="JUnit.IPGeolocatorTest.testLocateUnitedStatesAddress2" />
       </list>
     </recent_temporary>
   </component>
@@ -343,6 +355,7 @@
       <workItem from="1602861711398" duration="1568000" />
       <workItem from="1602874553241" duration="2695000" />
       <workItem from="1602945577797" duration="674000" />
+      <workItem from="1616712995810" duration="3314000" />
     </task>
     <servers />
   </component>
@@ -356,48 +369,6 @@
     <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
       <collection />
     </option>
-  </component>
-  <component name="WindowStateProjectService">
-    <state width="1494" height="250" key="GridCell.Tab.0.bottom" timestamp="1602877292846">
-      <screen x="0" y="23" width="1536" height="937" />
-    </state>
-    <state width="1494" height="250" key="GridCell.Tab.0.bottom/0.23.1536.937@0.23.1536.937" timestamp="1602877292846" />
-    <state width="1494" height="250" key="GridCell.Tab.0.center" timestamp="1602877292845">
-      <screen x="0" y="23" width="1536" height="937" />
-    </state>
-    <state width="1494" height="250" key="GridCell.Tab.0.center/0.23.1536.937@0.23.1536.937" timestamp="1602877292845" />
-    <state width="1494" height="250" key="GridCell.Tab.0.left" timestamp="1602877292845">
-      <screen x="0" y="23" width="1536" height="937" />
-    </state>
-    <state width="1494" height="250" key="GridCell.Tab.0.left/0.23.1536.937@0.23.1536.937" timestamp="1602877292845" />
-    <state width="1494" height="250" key="GridCell.Tab.0.right" timestamp="1602877292846">
-      <screen x="0" y="23" width="1536" height="937" />
-    </state>
-    <state width="1494" height="250" key="GridCell.Tab.0.right/0.23.1536.937@0.23.1536.937" timestamp="1602877292846" />
-    <state width="1494" height="309" key="GridCell.Tab.1.bottom" timestamp="1602874863330">
-      <screen x="0" y="23" width="1536" height="937" />
-    </state>
-    <state width="1494" height="309" key="GridCell.Tab.1.bottom/0.23.1536.937@0.23.1536.937" timestamp="1602874863330" />
-    <state width="1494" height="309" key="GridCell.Tab.1.center" timestamp="1602874863329">
-      <screen x="0" y="23" width="1536" height="937" />
-    </state>
-    <state width="1494" height="309" key="GridCell.Tab.1.center/0.23.1536.937@0.23.1536.937" timestamp="1602874863329" />
-    <state width="1494" height="309" key="GridCell.Tab.1.left" timestamp="1602874863329">
-      <screen x="0" y="23" width="1536" height="937" />
-    </state>
-    <state width="1494" height="309" key="GridCell.Tab.1.left/0.23.1536.937@0.23.1536.937" timestamp="1602874863329" />
-    <state width="1494" height="309" key="GridCell.Tab.1.right" timestamp="1602874863330">
-      <screen x="0" y="23" width="1536" height="937" />
-    </state>
-    <state width="1494" height="309" key="GridCell.Tab.1.right/0.23.1536.937@0.23.1536.937" timestamp="1602874863330" />
-    <state x="180" y="123" key="SettingsEditor" timestamp="1602876767211">
-      <screen x="0" y="23" width="1536" height="937" />
-    </state>
-    <state x="180" y="123" key="SettingsEditor/0.23.1536.937@0.23.1536.937" timestamp="1602876767211" />
-    <state x="607" y="246" width="652" height="490" key="find.popup" timestamp="1602876311515">
-      <screen x="0" y="23" width="1536" height="937" />
-    </state>
-    <state x="607" y="246" width="652" height="490" key="find.popup/0.23.1536.937@0.23.1536.937" timestamp="1602876311515" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

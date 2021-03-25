@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,36 +16,20 @@
 package com.irurueta.server.commons.geolocation;
 
 import com.irurueta.navigation.utils.LocationUtils;
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 public class IPLocationTest {
-    
-    public IPLocationTest() { }
-    
-    @BeforeClass
-    public static void setUpClass() { }
-    
-    @AfterClass
-    public static void tearDownClass() { }
-    
-    @Before
-    public void setUp() { }
-    
-    @After
-    public void tearDown() { }
 
     @Test
     public void testConstructor() {
-        IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
+        final IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
         
         assertNull(location.getCity());
         assertNull(location.getTimeZone());
@@ -74,7 +58,7 @@ public class IPLocationTest {
     
     @Test
     public void testGetCity() {
-        IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
+        final IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
         
         assertNull(location.getCity());
         
@@ -85,7 +69,7 @@ public class IPLocationTest {
     
     @Test
     public void testGetTimeZone() {
-        IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
+        final IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
         
         assertNull(location.getTimeZone());
         
@@ -97,7 +81,7 @@ public class IPLocationTest {
     
     @Test
     public void testGetAccuracyRadius() {
-        IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
+        final IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
         
         assertNull(location.getAccuracyRadius());
         
@@ -108,7 +92,7 @@ public class IPLocationTest {
     
     @Test
     public void testGetMetroCode() {
-        IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
+        final IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
         
         assertNull(location.getMetroCode());
         
@@ -119,7 +103,7 @@ public class IPLocationTest {
     
     @Test
     public void testGetLatitude() {
-        IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
+        final IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
         
         assertNull(location.getLatitude());
         
@@ -130,7 +114,7 @@ public class IPLocationTest {
     
     @Test
     public void testGetLongitude() {
-        IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
+        final IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
         
         assertNull(location.getLongitude());
         
@@ -141,7 +125,7 @@ public class IPLocationTest {
     
     @Test
     public void testAreCoordinatesAvailable() {
-        IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
+        final IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
         
         assertFalse(location.areCoordinatesAvailable());
         
@@ -154,7 +138,7 @@ public class IPLocationTest {
     
     @Test
     public void testGetPostalCode() {
-        IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
+        final IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
         
         assertNull(location.getPostalCode());
         
@@ -165,11 +149,11 @@ public class IPLocationTest {
     
     @Test
     public void testGetSubdivisionCodes() {
-        IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
+        final IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
         
         assertNull(location.getSubdivisionCodes());
         
-        List<String> subdivisionCodes = new ArrayList<>();
+        final List<String> subdivisionCodes = new ArrayList<>();
         subdivisionCodes.add("CAT");
         
         location.mSubdivisionCodes = subdivisionCodes;
@@ -179,11 +163,11 @@ public class IPLocationTest {
     
     @Test
     public void testGetSubdivisionNames() {
-        IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
+        final IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
         
         assertNull(location.getSubdivisionNames());
         
-        List<String> subdivisionNames = new ArrayList<>();
+        final List<String> subdivisionNames = new ArrayList<>();
         subdivisionNames.add("Catalonia");
         
         location.mSubdivisionNames = subdivisionNames;
@@ -193,7 +177,7 @@ public class IPLocationTest {
     
     @Test
     public void testGetCountryCodeAndGetCountryName() {
-        IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
+        final IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
         
         assertNull(location.getCountryCode());
         assertNull(location.getCountryName());
@@ -206,18 +190,18 @@ public class IPLocationTest {
                 Locale.getDefault()));
         assertEquals(location.getCountryName(Locale.FRENCH), "Espagne");
         
-        //sets wrong country code
+        // sets wrong country code
         location.mCountryCode = "WRONG";
         assertNull(location.getCountryName());
         assertNull(location.getCountryName(Locale.FRENCH));        
         
-        //fallback country name
+        // fallback country name
         location.mCountryName = "Spain";
         
         assertEquals(location.getCountryName(), "Spain");
         assertEquals(location.getCountryName(Locale.FRENCH), "Spain");
         
-        //set null country code
+        // set null country code
         location.mCountryCode = null;
         
         assertEquals(location.getCountryName(), "Spain");
@@ -226,7 +210,7 @@ public class IPLocationTest {
     
     @Test
     public void testGetRegisteredCountryCodeAndGetRegisteredCountryName() {
-        IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
+        final IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
         
         assertNull(location.getRegisteredCountryCode());
         assertNull(location.getRegisteredCountryName());
@@ -240,18 +224,18 @@ public class IPLocationTest {
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH), 
                 "Espagne");
         
-        //sets wrong country code
+        // sets wrong country code
         location.mRegisteredCountryCode = "WRONG";
         assertNull(location.getRegisteredCountryName());
         assertNull(location.getRegisteredCountryName(Locale.FRENCH));        
         
-        //fallback country name
+        // fallback country name
         location.mRegisteredCountryName = "Spain";
         
         assertEquals(location.getRegisteredCountryName(), "Spain");
         assertEquals(location.getRegisteredCountryName(Locale.FRENCH), "Spain");
         
-        //set null country code
+        // set null country code
         location.mRegisteredCountryCode = null;
         
         assertEquals(location.getRegisteredCountryName(), "Spain");
@@ -260,11 +244,11 @@ public class IPLocationTest {
     
     @Test
     public void testGetAutonomousSystemNumber() {
-        IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
+        final IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
         
         assertNull(location.getAutonomousSystemNumber());
         
-        //new value
+        // new value
         location.mAutonomousSystemNumber = 123;
         
         assertEquals(location.getAutonomousSystemNumber().intValue(), 123);
@@ -272,7 +256,7 @@ public class IPLocationTest {
     
     @Test
     public void testGetDomain() {
-        IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
+        final IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
         
         assertNull(location.getDomain());
         
@@ -283,7 +267,7 @@ public class IPLocationTest {
     
     @Test
     public void testGetIsp() {
-        IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
+        final IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
         
         assertNull(location.getIsp());
         
@@ -294,7 +278,7 @@ public class IPLocationTest {
     
     @Test
     public void testGetOrganization() {
-        IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
+        final IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
         
         assertNull(location.getOrganization());
         
@@ -305,7 +289,7 @@ public class IPLocationTest {
     
     @Test
     public void testGetContinentCode() {
-        IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
+        final IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
         
         assertNull(location.getContinentCode());
         
@@ -316,7 +300,7 @@ public class IPLocationTest {
     
     @Test
     public void testGetContinentName() {
-        IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
+        final IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
         
         assertNull(location.getContinentName());
         
@@ -327,7 +311,7 @@ public class IPLocationTest {
     
     @Test
     public void testGetLevel(){
-        IPLocation location = new IPLocation(IPGeolocationLevel.CITY);        
+        IPLocation location = new IPLocation(IPGeolocationLevel.CITY);
         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
         
         location = new IPLocation(IPGeolocationLevel.COUNTRY);
@@ -342,17 +326,17 @@ public class IPLocationTest {
     
     @Test
     public void testDistance(){
-        double latitude1 = 41.0;
-        double longitude1 = 2.0;
+        final double latitude1 = 41.0;
+        final double longitude1 = 2.0;
         
-        double latitude2 = 41.5;
-        double longitude2 = 2.0;
+        final double latitude2 = 41.5;
+        final double longitude2 = 2.0;
         
-        IPLocation location1 = new IPLocation(IPGeolocationLevel.CITY);
+        final IPLocation location1 = new IPLocation(IPGeolocationLevel.CITY);
         location1.mLatitude = latitude1;
         location1.mLongitude = longitude1;
         
-        IPLocation location2 = new IPLocation(IPGeolocationLevel.CITY);
+        final IPLocation location2 = new IPLocation(IPGeolocationLevel.CITY);
         location2.mLatitude = latitude2;
         location2.mLongitude = longitude2;
         
