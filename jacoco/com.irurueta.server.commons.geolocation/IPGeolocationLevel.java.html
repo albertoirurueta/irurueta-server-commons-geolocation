@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>IPGeolocationLevel.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-geolocation</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.geolocation</a> &gt; <span class="el_source">IPGeolocationLevel.java</span></div><h1>IPGeolocationLevel.java</h1><pre class="source lang-java linenums">/**
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>IPGeolocationLevel.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-geolocation</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.geolocation</a> &gt; <span class="el_source">IPGeolocationLevel.java</span></div><h1>IPGeolocationLevel.java</h1><pre class="source lang-java linenums">/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -23,51 +23,54 @@ package com.irurueta.server.commons.geolocation;
      * Geolocation disabled.
      */
 <span class="fc" id="L25">    DISABLED(&quot;disabled&quot;),</span>
-    
+
     /**
      * Country level geolocation.
      */
 <span class="fc" id="L30">    COUNTRY(&quot;country&quot;),</span>
-    
+
     /**
      * City level geolocation.
      */
 <span class="fc" id="L35">    CITY(&quot;city&quot;);</span>
-    
+
     /**
      * String representation of this enumerator.
-     */    
-    private String mValue;
-    
+     */
+    private final String mValue;
+
     /**
      * Constructor.
+     *
      * @param value string representation.
-     */    
-<span class="fc" id="L46">    private IPGeolocationLevel(String value){</span>
-<span class="fc" id="L47">        mValue = value;</span>
-<span class="fc" id="L48">    }</span>
-    
+     */
+<span class="fc" id="L47">    IPGeolocationLevel(final String value) {</span>
+<span class="fc" id="L48">        mValue = value;</span>
+<span class="fc" id="L49">    }</span>
+
     /**
      * Returns string representation.
+     *
      * @return string representation.
      */
-    public String getValue(){
-<span class="fc" id="L55">        return mValue;</span>
+    public String getValue() {
+<span class="fc" id="L57">        return mValue;</span>
     }
-    
+
     /**
-     * Factory method to create an enumerator value from its string 
+     * Factory method to create an enumerator value from its string
      * representation.
+     *
      * @param value string representation.
      * @return enumerator value.
      */
-    public static IPGeolocationLevel fromValue(String value) {
-<span class="fc bfc" id="L65" title="All 2 branches covered.">        if(value != null){</span>
-<span class="fc bfc" id="L66" title="All 2 branches covered.">            if(value.equalsIgnoreCase(&quot;disabled&quot;)) return DISABLED;</span>
-<span class="fc bfc" id="L67" title="All 2 branches covered.">            if(value.equalsIgnoreCase(&quot;country&quot;)) return COUNTRY;</span>
-<span class="fc bfc" id="L68" title="All 2 branches covered.">            if(value.equalsIgnoreCase(&quot;city&quot;)) return CITY;</span>
+    public static IPGeolocationLevel fromValue(final String value) {
+<span class="fc bfc" id="L68" title="All 2 branches covered.">        if (value != null) {</span>
+<span class="fc bfc" id="L69" title="All 2 branches covered.">            if (value.equalsIgnoreCase(&quot;disabled&quot;)) return DISABLED;</span>
+<span class="fc bfc" id="L70" title="All 2 branches covered.">            if (value.equalsIgnoreCase(&quot;country&quot;)) return COUNTRY;</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">            if (value.equalsIgnoreCase(&quot;city&quot;)) return CITY;</span>
         }
-<span class="fc" id="L70">        return IPGeolocationLevel.DISABLED;</span>
-    }    
+<span class="fc" id="L73">        return IPGeolocationLevel.DISABLED;</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

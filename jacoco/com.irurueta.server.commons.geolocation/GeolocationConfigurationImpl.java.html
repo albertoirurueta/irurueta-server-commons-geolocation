@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GeolocationConfigurationImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-geolocation</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.geolocation</a> &gt; <span class="el_source">GeolocationConfigurationImpl.java</span></div><h1>GeolocationConfigurationImpl.java</h1><pre class="source lang-java linenums">/**
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GeolocationConfigurationImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-geolocation</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.geolocation</a> &gt; <span class="el_source">GeolocationConfigurationImpl.java</span></div><h1>GeolocationConfigurationImpl.java</h1><pre class="source lang-java linenums">/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -16,35 +16,36 @@
 package com.irurueta.server.commons.geolocation;
 
 import com.irurueta.server.commons.configuration.ConfigurationException;
+
 import java.util.Properties;
 
 /**
  * Class containing configuration for geolocation services.
  */
-public class GeolocationConfigurationImpl implements GeolocationConfiguration{
+public class GeolocationConfigurationImpl implements GeolocationConfiguration {
 
     /**
      * Default geolocation level to use when none is specified.
-     */    
+     */
     private IPGeolocationLevel mIpGeolocationLevel;
-    
+
     /**
      * Indicates whether database must be cached in memory or not.
      * When caching is enabled, performance increases significantly at the
      * expense of an overhea din memory usage of approximately 2MB.
      */
     private boolean mCachingEnabled;
-    
+
     /**
-     * Indicates if IP geolocation country database is embedded within 
+     * Indicates if IP geolocation country database is embedded within
      * application code. If true, then the configured embedded resource will be
      * copied into provided database file (erasing any previous data), otherwise
      * provided external database file will simply be used for geolocation.
-     * By default the Maxmind geolite database will be used as an embedded 
+     * By default the Maxmind geolite database will be used as an embedded
      * resource.
-     */    
+     */
     private boolean mIpGeolocationCountryDatabaseEmbedded;
-    
+
     /**
      * If provided, the embedded resource will be used to obtain the database
      * and copy it into the file system on provided location (and erasing any
@@ -52,11 +53,11 @@ public class GeolocationConfigurationImpl implements GeolocationConfiguration{
      * If not provided, but an embedded database is required, then the default
      * embedded resource will be used instead.
      * By default no embedded resource will be specified, and since an embedded
-     * database will be used, it will be use the maxmind geolite database 
+     * database will be used, it will be use the maxmind geolite database
      * embeddded in the code.
-     */    
-    private String mIpGeolocationCountryEmbeddedResource;    
-    
+     */
+    private String mIpGeolocationCountryEmbeddedResource;
+
     /**
      * File where country IP geolocation database is stored locally.
      * If no embedded database is used, then this file will be used to read the
@@ -65,19 +66,19 @@ public class GeolocationConfigurationImpl implements GeolocationConfiguration{
      * there.
      * Notice that Country IP geolocation will only be enabled if a location is
      * available.
-     */    
-    private String mIpGeolocationCountryDatabaseFile;    
-                
+     */
+    private String mIpGeolocationCountryDatabaseFile;
+
     /**
-     * Indicates if IP geolocation city database is embedded within 
+     * Indicates if IP geolocation city database is embedded within
      * application code. If true, then the configured embedded resource will be
      * copied into provided database file (erasing any previous data), otherwise
      * provided external database file will simply be used for geolocation.
-     * By default the Maxmind geolite database will be used as an embedded 
+     * By default the Maxmind geolite database will be used as an embedded
      * resource.
-     */    
-    private boolean mIpGeolocationCityDatabaseEmbedded;    
-    
+     */
+    private boolean mIpGeolocationCityDatabaseEmbedded;
+
     /**
      * If provided, the embedded resource will be used to obtain the database
      * and copy it into the file system on provided location (and erasing any
@@ -85,11 +86,11 @@ public class GeolocationConfigurationImpl implements GeolocationConfiguration{
      * If not provided, but an embedded database is required, then the default
      * embedded resource will be used instead.
      * By default no embedded resource will be specified, and since an embedded
-     * database will be used, it will be use the maxmind geolite database 
+     * database will be used, it will be use the maxmind geolite database
      * embeddded in the code.
-     */    
-    private String mIpGeolocationCityEmbeddedResource;    
-    
+     */
+    private String mIpGeolocationCityEmbeddedResource;
+
     /**
      * File where city IP geolocation database is stored locally.
      * If no embedded database is used, then this file will be used to read the
@@ -98,76 +99,80 @@ public class GeolocationConfigurationImpl implements GeolocationConfiguration{
      * there.
      * Notice that City IP geolocation will only be enabled if a location is
      * available.
-     */    
+     */
     private String mIpGeolocationCityDatabaseFile;
-        
+
     /**
      * Constructor.
      */
-<span class="fc" id="L107">    public GeolocationConfigurationImpl() {</span>
-<span class="fc" id="L108">        mIpGeolocationLevel = GeolocationConfigurationFactory.</span>
+<span class="fc" id="L108">    public GeolocationConfigurationImpl() {</span>
+<span class="fc" id="L109">        mIpGeolocationLevel = GeolocationConfigurationFactory.</span>
                 DEFAULT_IP_GEOLOCATION_LEVEL;
-<span class="fc" id="L110">        mCachingEnabled = GeolocationConfigurationFactory.</span>
+<span class="fc" id="L111">        mCachingEnabled = GeolocationConfigurationFactory.</span>
                 DEFAULT_CACHING_ENABLED;
-<span class="fc" id="L112">        mIpGeolocationCountryDatabaseEmbedded = GeolocationConfigurationFactory.</span>
+<span class="fc" id="L113">        mIpGeolocationCountryDatabaseEmbedded = GeolocationConfigurationFactory.</span>
                 DEFAULT_IP_GEOLOCATION_COUNTRY_DATABASE_EMBEDDED;
-<span class="fc" id="L114">        mIpGeolocationCountryEmbeddedResource = GeolocationConfigurationFactory.</span>
+<span class="fc" id="L115">        mIpGeolocationCountryEmbeddedResource = GeolocationConfigurationFactory.</span>
                 DEFAULT_IP_GEOLOCATION_COUNTRY_EMBEDDED_RESOURCE;
-<span class="fc" id="L116">        mIpGeolocationCountryDatabaseFile = GeolocationConfigurationFactory.</span>
+<span class="fc" id="L117">        mIpGeolocationCountryDatabaseFile = GeolocationConfigurationFactory.</span>
                 DEFAULT_IP_GEOLOCATION_COUNTRY_DATABASE_FILE;
-        
-<span class="fc" id="L119">        mIpGeolocationCityDatabaseEmbedded = GeolocationConfigurationFactory.</span>
+
+<span class="fc" id="L120">        mIpGeolocationCityDatabaseEmbedded = GeolocationConfigurationFactory.</span>
                 DEFAULT_IP_GEOLOCATION_CITY_DATABASE_EMBEDDED;
-<span class="fc" id="L121">        mIpGeolocationCityEmbeddedResource = GeolocationConfigurationFactory.</span>
+<span class="fc" id="L122">        mIpGeolocationCityEmbeddedResource = GeolocationConfigurationFactory.</span>
                 DEFAULT_IP_GEOLOCATION_CITY_EMBEDDED_RESOURCE;
-<span class="fc" id="L123">        mIpGeolocationCityDatabaseFile = GeolocationConfigurationFactory.</span>
+<span class="fc" id="L124">        mIpGeolocationCityDatabaseFile = GeolocationConfigurationFactory.</span>
                 DEFAULT_IP_GEOLOCATION_CITY_DATABASE_FILE;
-<span class="fc" id="L125">    }</span>
-    
+<span class="fc" id="L126">    }</span>
+
     /**
      * Constructor from properties.
+     *
      * @param properties properties containing configuration.
      * @throws ConfigurationException if any property value is invalid.
      */
-    public GeolocationConfigurationImpl(Properties properties) 
-<span class="fc" id="L133">            throws ConfigurationException {</span>
-<span class="fc" id="L134">        fromProperties(properties);</span>
-<span class="fc" id="L135">    }    </span>
-    
+    public GeolocationConfigurationImpl(final Properties properties)
+<span class="fc" id="L135">            throws ConfigurationException {</span>
+<span class="fc" id="L136">        fromProperties(properties);</span>
+<span class="fc" id="L137">    }</span>
+
     /**
      * Default geolocation level to use when none is specified.
+     *
      * @return geolocation level to use when none is specified.
-     */    
+     */
     @Override
     public IPGeolocationLevel getIPGeolocationLevel() {
-<span class="fc" id="L143">        return mIpGeolocationLevel;</span>
+<span class="fc" id="L146">        return mIpGeolocationLevel;</span>
     }
 
     /**
      * Indicates whether database must be cached in memory or not.
      * When caching is enabled, performance increases significantly at the
      * expense of an overhead in memory of approximately 2MB.
+     *
      * @return true if database must be cached in memory, false otherwise.
      */
     @Override
     public boolean isCachingEnabled() {
-<span class="fc" id="L154">        return mCachingEnabled;</span>
-    }    
-    
+<span class="fc" id="L158">        return mCachingEnabled;</span>
+    }
+
     /**
-     * Indicates if IP geolocation country database is embedded within 
+     * Indicates if IP geolocation country database is embedded within
      * application code. If true, then the configured embedded resource will be
      * copied into provided database file (erasing any previous data), otherwise
      * provided external database file will simply be used for geolocation.
-     * By default the Maxmind geolite database will be used as an embedded 
+     * By default the Maxmind geolite database will be used as an embedded
      * resource.
+     *
      * @return true if IP geolocation country database is embedded and copied
      * into provided database file, false if database is simply read from
      * provided file.
-     */    
+     */
     @Override
     public boolean isIPGeolocationCountryDatabaseEmbedded() {
-<span class="fc" id="L170">        return mIpGeolocationCountryDatabaseEmbedded;</span>
+<span class="fc" id="L175">        return mIpGeolocationCountryDatabaseEmbedded;</span>
     }
 
     /**
@@ -177,13 +182,14 @@ public class GeolocationConfigurationImpl implements GeolocationConfiguration{
      * If not provided, but an embedded database is required, then the default
      * embedded resource will be used instead.
      * By default no embedded resource will be specified, and since an embedded
-     * database will be used, it will be use the maxmind geolite database 
+     * database will be used, it will be use the maxmind geolite database
      * embeddded in the code.
+     *
      * @return embedded resource containing IP geolocation country database.
-     */    
+     */
     @Override
     public String getIPGeolocationCountryEmbeddedResource() {
-<span class="fc" id="L186">        return mIpGeolocationCountryEmbeddedResource;</span>
+<span class="fc" id="L192">        return mIpGeolocationCountryEmbeddedResource;</span>
     }
 
     /**
@@ -194,28 +200,30 @@ public class GeolocationConfigurationImpl implements GeolocationConfiguration{
      * there.
      * Notice that Country IP geolocation will only be enabled if a location is
      * available.
+     *
      * @return location where country IP geolocation database will be stored
      * locally.
-     */    
+     */
     @Override
     public String getIPGeolocationCountryDatabaseFile() {
-<span class="fc" id="L202">        return mIpGeolocationCountryDatabaseFile;</span>
+<span class="fc" id="L209">        return mIpGeolocationCountryDatabaseFile;</span>
     }
 
     /**
-     * Indicates if IP geolocation city database is embedded within 
+     * Indicates if IP geolocation city database is embedded within
      * application code. If true, then the configured embedded resource will be
      * copied into provided database file (erasing any previous data), otherwise
      * provided external database file will simply be used for geolocation.
-     * By default the Maxmind geolite database will be used as an embedded 
+     * By default the Maxmind geolite database will be used as an embedded
      * resource.
+     *
      * @return true if IP geolocation city database is embedded and copied
      * into provided database file, false if database is simply read from
      * provided file.
-     */    
+     */
     @Override
     public boolean isIPGeolocationCityDatabaseEmbedded() {
-<span class="fc" id="L218">        return mIpGeolocationCityDatabaseEmbedded;</span>
+<span class="fc" id="L226">        return mIpGeolocationCityDatabaseEmbedded;</span>
     }
 
     /**
@@ -225,13 +233,14 @@ public class GeolocationConfigurationImpl implements GeolocationConfiguration{
      * If not provided, but an embedded database is required, then the default
      * embedded resource will be used instead.
      * By default no embedded resource will be specified, and since an embedded
-     * database will be used, it will be use the maxmind geolite database 
+     * database will be used, it will be use the maxmind geolite database
      * embeddded in the code.
+     *
      * @return embedded resource containing IP geolocation city database.
-     */    
+     */
     @Override
     public String getIPGeolocationCityEmbeddedResource() {
-<span class="fc" id="L234">        return mIpGeolocationCityEmbeddedResource;</span>
+<span class="fc" id="L243">        return mIpGeolocationCityEmbeddedResource;</span>
     }
 
     /**
@@ -242,113 +251,116 @@ public class GeolocationConfigurationImpl implements GeolocationConfiguration{
      * there.
      * Notice that City IP geolocation will only be enabled if a location is
      * available.
+     *
      * @return location where city IP geolocation database will be stored
      * locally.
-     */    
+     */
     @Override
     public String getIPGeolocationCityDatabaseFile() {
-<span class="fc" id="L250">        return mIpGeolocationCityDatabaseFile;</span>
+<span class="fc" id="L260">        return mIpGeolocationCityDatabaseFile;</span>
     }
 
     /**
      * Loads configuration from provided properties.
+     *
      * @param properties properties containing configuration.
      * @throws ConfigurationException if any properties value is invalid.
-     */    
+     */
     @Override
-    public final void fromProperties(Properties properties) 
+    public final void fromProperties(Properties properties)
             throws ConfigurationException {
-        try{
-<span class="fc" id="L262">            mIpGeolocationLevel = IPGeolocationLevel.fromValue(</span>
-<span class="fc" id="L263">                    properties.getProperty(GeolocationConfigurationFactory.</span>
-                    IP_GEOLOCATION_LEVEL_PROPERTY, 
-                    GeolocationConfigurationFactory.
-<span class="fc" id="L266">                    DEFAULT_IP_GEOLOCATION_LEVEL.toString()));</span>
-<span class="fc" id="L267">            mCachingEnabled = Boolean.valueOf(properties.getProperty(</span>
-                    GeolocationConfigurationFactory.CACHING_ENABLED_PROPERTY, 
-<span class="fc" id="L269">                    Boolean.toString(GeolocationConfigurationFactory.</span>
-                    DEFAULT_CACHING_ENABLED)));
+        try {
+<span class="fc" id="L273">            mIpGeolocationLevel = IPGeolocationLevel.fromValue(</span>
+<span class="fc" id="L274">                    properties.getProperty(GeolocationConfigurationFactory.</span>
+                                    IP_GEOLOCATION_LEVEL_PROPERTY,
+                            GeolocationConfigurationFactory.
+<span class="fc" id="L277">                                    DEFAULT_IP_GEOLOCATION_LEVEL.toString()));</span>
+<span class="fc" id="L278">            mCachingEnabled = Boolean.parseBoolean(properties.getProperty(</span>
+                    GeolocationConfigurationFactory.CACHING_ENABLED_PROPERTY,
+<span class="fc" id="L280">                    Boolean.toString(GeolocationConfigurationFactory.</span>
+                            DEFAULT_CACHING_ENABLED)));
 
-<span class="fc" id="L272">            mIpGeolocationCountryDatabaseEmbedded = Boolean.valueOf(properties.</span>
-<span class="fc" id="L273">                    getProperty(GeolocationConfigurationFactory.</span>
-                    IP_GEOLOCATION_COUNTRY_DATABASE_EMBEDDED_PROPERTY, 
-<span class="fc" id="L275">                    Boolean.toString(GeolocationConfigurationFactory.</span>
-                    DEFAULT_IP_GEOLOCATION_COUNTRY_DATABASE_EMBEDDED)));
-<span class="fc" id="L277">            mIpGeolocationCountryEmbeddedResource = properties.getProperty(</span>
+<span class="fc" id="L283">            mIpGeolocationCountryDatabaseEmbedded = Boolean.parseBoolean(properties.</span>
+<span class="fc" id="L284">                    getProperty(GeolocationConfigurationFactory.</span>
+                                    IP_GEOLOCATION_COUNTRY_DATABASE_EMBEDDED_PROPERTY,
+<span class="fc" id="L286">                            Boolean.toString(GeolocationConfigurationFactory.</span>
+                                    DEFAULT_IP_GEOLOCATION_COUNTRY_DATABASE_EMBEDDED)));
+<span class="fc" id="L288">            mIpGeolocationCountryEmbeddedResource = properties.getProperty(</span>
                     GeolocationConfigurationFactory.
-                    IP_GEOLOCATION_COUNTRY_EMBEDDED_RESOURCE_PROPERTY, 
+                            IP_GEOLOCATION_COUNTRY_EMBEDDED_RESOURCE_PROPERTY,
                     GeolocationConfigurationFactory.
-                    DEFAULT_IP_GEOLOCATION_COUNTRY_EMBEDDED_RESOURCE);
-<span class="fc" id="L282">            mIpGeolocationCountryDatabaseFile = properties.getProperty(</span>
+                            DEFAULT_IP_GEOLOCATION_COUNTRY_EMBEDDED_RESOURCE);
+<span class="fc" id="L293">            mIpGeolocationCountryDatabaseFile = properties.getProperty(</span>
                     GeolocationConfigurationFactory.
-                    IP_GEOLOCATION_COUNTRY_DATABASE_FILE_PROPERTY, 
+                            IP_GEOLOCATION_COUNTRY_DATABASE_FILE_PROPERTY,
                     GeolocationConfigurationFactory.
-                    DEFAULT_IP_GEOLOCATION_COUNTRY_DATABASE_FILE);
-        
-<span class="fc" id="L288">            mIpGeolocationCityDatabaseEmbedded = Boolean.valueOf(properties.</span>
-<span class="fc" id="L289">                    getProperty(GeolocationConfigurationFactory.</span>
-                    IP_GEOLOCATION_CITY_DATABASE_EMBEDDED_PROPERTY, 
-<span class="fc" id="L291">                    Boolean.toString(</span>
+                            DEFAULT_IP_GEOLOCATION_COUNTRY_DATABASE_FILE);
+
+<span class="fc" id="L299">            mIpGeolocationCityDatabaseEmbedded = Boolean.parseBoolean(properties.</span>
+<span class="fc" id="L300">                    getProperty(GeolocationConfigurationFactory.</span>
+                                    IP_GEOLOCATION_CITY_DATABASE_EMBEDDED_PROPERTY,
+<span class="fc" id="L302">                            Boolean.toString(</span>
+                                    GeolocationConfigurationFactory.
+                                            DEFAULT_IP_GEOLOCATION_CITY_DATABASE_EMBEDDED)));
+<span class="fc" id="L305">            mIpGeolocationCityEmbeddedResource = properties.getProperty(</span>
                     GeolocationConfigurationFactory.
-                    DEFAULT_IP_GEOLOCATION_CITY_DATABASE_EMBEDDED)));
-<span class="fc" id="L294">            mIpGeolocationCityEmbeddedResource = properties.getProperty(</span>
+                            IP_GEOLOCATION_CITY_EMBEDDED_RESOURCE_PROPERTY,
                     GeolocationConfigurationFactory.
-                    IP_GEOLOCATION_CITY_EMBEDDED_RESOURCE_PROPERTY, 
+                            DEFAULT_IP_GEOLOCATION_CITY_EMBEDDED_RESOURCE);
+<span class="fc" id="L310">            mIpGeolocationCityDatabaseFile = properties.getProperty(</span>
                     GeolocationConfigurationFactory.
-                    DEFAULT_IP_GEOLOCATION_CITY_EMBEDDED_RESOURCE);
-<span class="fc" id="L299">            mIpGeolocationCityDatabaseFile = properties.getProperty(</span>
+                            IP_GEOLOCATION_CITY_DATABASE_FILE_PROPERTY,
                     GeolocationConfigurationFactory.
-                    IP_GEOLOCATION_CITY_DATABASE_FILE_PROPERTY, 
-                    GeolocationConfigurationFactory.
-                    DEFAULT_IP_GEOLOCATION_CITY_DATABASE_FILE);
-<span class="nc" id="L304">        }catch(Exception e){</span>
-<span class="nc" id="L305">            throw new ConfigurationException(e);</span>
-<span class="fc" id="L306">        }</span>
-<span class="fc" id="L307">    }</span>
+                            DEFAULT_IP_GEOLOCATION_CITY_DATABASE_FILE);
+<span class="nc" id="L315">        } catch (final Exception e) {</span>
+<span class="nc" id="L316">            throw new ConfigurationException(e);</span>
+<span class="fc" id="L317">        }</span>
+<span class="fc" id="L318">    }</span>
 
     /**
      * Converts current configuration into properties.
+     *
      * @return properties containing configuration.
-     */    
+     */
     @Override
     public Properties toProperties() {
-<span class="fc" id="L315">        Properties properties = new Properties();</span>
-<span class="pc bpc" id="L316" title="1 of 2 branches missed.">        if(mIpGeolocationLevel != null){</span>
-<span class="fc" id="L317">            properties.setProperty(GeolocationConfigurationFactory.</span>
+<span class="fc" id="L327">        final Properties properties = new Properties();</span>
+<span class="pc bpc" id="L328" title="1 of 2 branches missed.">        if (mIpGeolocationLevel != null) {</span>
+<span class="fc" id="L329">            properties.setProperty(GeolocationConfigurationFactory.</span>
                     IP_GEOLOCATION_LEVEL_PROPERTY, mIpGeolocationLevel.
-<span class="fc" id="L319">                    getValue());</span>
+<span class="fc" id="L331">                    getValue());</span>
         }
-<span class="fc" id="L321">        properties.setProperty(</span>
-                GeolocationConfigurationFactory.CACHING_ENABLED_PROPERTY, 
-<span class="fc" id="L323">                Boolean.toString(mCachingEnabled));</span>
-<span class="fc" id="L324">        properties.setProperty(GeolocationConfigurationFactory.</span>
-                IP_GEOLOCATION_COUNTRY_DATABASE_EMBEDDED_PROPERTY, 
-<span class="fc" id="L326">                Boolean.toString(mIpGeolocationCountryDatabaseEmbedded));</span>
-<span class="pc bpc" id="L327" title="1 of 2 branches missed.">        if(mIpGeolocationCountryEmbeddedResource != null){</span>
-<span class="fc" id="L328">            properties.setProperty(GeolocationConfigurationFactory.</span>
-                    IP_GEOLOCATION_COUNTRY_EMBEDDED_RESOURCE_PROPERTY, 
+<span class="fc" id="L333">        properties.setProperty(</span>
+                GeolocationConfigurationFactory.CACHING_ENABLED_PROPERTY,
+<span class="fc" id="L335">                Boolean.toString(mCachingEnabled));</span>
+<span class="fc" id="L336">        properties.setProperty(GeolocationConfigurationFactory.</span>
+                        IP_GEOLOCATION_COUNTRY_DATABASE_EMBEDDED_PROPERTY,
+<span class="fc" id="L338">                Boolean.toString(mIpGeolocationCountryDatabaseEmbedded));</span>
+<span class="pc bpc" id="L339" title="1 of 2 branches missed.">        if (mIpGeolocationCountryEmbeddedResource != null) {</span>
+<span class="fc" id="L340">            properties.setProperty(GeolocationConfigurationFactory.</span>
+                            IP_GEOLOCATION_COUNTRY_EMBEDDED_RESOURCE_PROPERTY,
                     mIpGeolocationCountryEmbeddedResource);
         }
-<span class="pc bpc" id="L332" title="1 of 2 branches missed.">        if(mIpGeolocationCountryDatabaseFile != null){</span>
-<span class="fc" id="L333">            properties.setProperty(GeolocationConfigurationFactory.</span>
-                    IP_GEOLOCATION_COUNTRY_DATABASE_FILE_PROPERTY, 
+<span class="pc bpc" id="L344" title="1 of 2 branches missed.">        if (mIpGeolocationCountryDatabaseFile != null) {</span>
+<span class="fc" id="L345">            properties.setProperty(GeolocationConfigurationFactory.</span>
+                            IP_GEOLOCATION_COUNTRY_DATABASE_FILE_PROPERTY,
                     mIpGeolocationCountryDatabaseFile);
         }
-                
-<span class="fc" id="L338">        properties.setProperty(GeolocationConfigurationFactory.</span>
-                IP_GEOLOCATION_CITY_DATABASE_EMBEDDED_PROPERTY, 
-<span class="fc" id="L340">                Boolean.toString(mIpGeolocationCityDatabaseEmbedded));</span>
-<span class="fc" id="L341">        properties.setProperty(GeolocationConfigurationFactory.</span>
-                IP_GEOLOCATION_CITY_EMBEDDED_RESOURCE_PROPERTY, 
+
+<span class="fc" id="L350">        properties.setProperty(GeolocationConfigurationFactory.</span>
+                        IP_GEOLOCATION_CITY_DATABASE_EMBEDDED_PROPERTY,
+<span class="fc" id="L352">                Boolean.toString(mIpGeolocationCityDatabaseEmbedded));</span>
+<span class="fc" id="L353">        properties.setProperty(GeolocationConfigurationFactory.</span>
+                        IP_GEOLOCATION_CITY_EMBEDDED_RESOURCE_PROPERTY,
                 mIpGeolocationCityEmbeddedResource);
-<span class="pc bpc" id="L344" title="1 of 2 branches missed.">        if(mIpGeolocationCityDatabaseFile != null){</span>
-<span class="fc" id="L345">            properties.setProperty(GeolocationConfigurationFactory.</span>
-                    IP_GEOLOCATION_CITY_DATABASE_FILE_PROPERTY, 
+<span class="pc bpc" id="L356" title="1 of 2 branches missed.">        if (mIpGeolocationCityDatabaseFile != null) {</span>
+<span class="fc" id="L357">            properties.setProperty(GeolocationConfigurationFactory.</span>
+                            IP_GEOLOCATION_CITY_DATABASE_FILE_PROPERTY,
                     mIpGeolocationCityDatabaseFile);
         }
-        
-<span class="fc" id="L350">        return properties;</span>
+
+<span class="fc" id="L362">        return properties;</span>
     }
-    
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

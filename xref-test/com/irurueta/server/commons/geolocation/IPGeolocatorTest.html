@@ -6,21 +6,21 @@
 </head>
 <body>
 <div id="overview"><a href="../../../../../../testapidocs/com/irurueta/server/commons/geolocation/IPGeolocatorTest.html">View Javadoc</a></div><pre>
-<a class="jxr_linenumber" name="L1" href="#L1">1</a>   <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L2" href="#L2">2</a>   <em class="jxr_javadoccomment"> * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)</em>
-<a class="jxr_linenumber" name="L3" href="#L3">3</a>   <em class="jxr_javadoccomment"> *</em>
-<a class="jxr_linenumber" name="L4" href="#L4">4</a>   <em class="jxr_javadoccomment"> * Licensed under the Apache License, Version 2.0 (the "License");</em>
-<a class="jxr_linenumber" name="L5" href="#L5">5</a>   <em class="jxr_javadoccomment"> * you may not use this file except in compliance with the License.</em>
-<a class="jxr_linenumber" name="L6" href="#L6">6</a>   <em class="jxr_javadoccomment"> * You may obtain a copy of the License at</em>
-<a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_javadoccomment"> *</em>
-<a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_javadoccomment"> *         <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
-<a class="jxr_linenumber" name="L9" href="#L9">9</a>   <em class="jxr_javadoccomment"> *</em>
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_javadoccomment"> * Unless required by applicable law or agreed to in writing, software</em>
-<a class="jxr_linenumber" name="L11" href="#L11">11</a>  <em class="jxr_javadoccomment"> * distributed under the License is distributed on an "AS IS" BASIS,</em>
-<a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_javadoccomment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</em>
-<a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_javadoccomment"> * See the License for the specific language governing permissions and</em>
-<a class="jxr_linenumber" name="L14" href="#L14">14</a>  <em class="jxr_javadoccomment"> * limitations under the License.</em>
-<a class="jxr_linenumber" name="L15" href="#L15">15</a>  <em class="jxr_javadoccomment"> */</em>
+<a class="jxr_linenumber" name="L1" href="#L1">1</a>   <em class="jxr_comment">/*</em>
+<a class="jxr_linenumber" name="L2" href="#L2">2</a>   <em class="jxr_comment"> * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)</em>
+<a class="jxr_linenumber" name="L3" href="#L3">3</a>   <em class="jxr_comment"> *</em>
+<a class="jxr_linenumber" name="L4" href="#L4">4</a>   <em class="jxr_comment"> * Licensed under the Apache License, Version 2.0 (the "License");</em>
+<a class="jxr_linenumber" name="L5" href="#L5">5</a>   <em class="jxr_comment"> * you may not use this file except in compliance with the License.</em>
+<a class="jxr_linenumber" name="L6" href="#L6">6</a>   <em class="jxr_comment"> * You may obtain a copy of the License at</em>
+<a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment"> *</em>
+<a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment"> *         <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L9" href="#L9">9</a>   <em class="jxr_comment"> *</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment"> * Unless required by applicable law or agreed to in writing, software</em>
+<a class="jxr_linenumber" name="L11" href="#L11">11</a>  <em class="jxr_comment"> * distributed under the License is distributed on an "AS IS" BASIS,</em>
+<a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</em>
+<a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment"> * See the License for the specific language governing permissions and</em>
+<a class="jxr_linenumber" name="L14" href="#L14">14</a>  <em class="jxr_comment"> * limitations under the License.</em>
+<a class="jxr_linenumber" name="L15" href="#L15">15</a>  <em class="jxr_comment"> */</em>
 <a class="jxr_linenumber" name="L16" href="#L16">16</a>  <strong class="jxr_keyword">package</strong> com.irurueta.server.commons.geolocation;
 <a class="jxr_linenumber" name="L17" href="#L17">17</a>  
 <a class="jxr_linenumber" name="L18" href="#L18">18</a>  <strong class="jxr_keyword">import</strong> com.irurueta.server.commons.configuration.ConfigurationException;
@@ -30,15 +30,15 @@
 <a class="jxr_linenumber" name="L22" href="#L22">22</a>  <strong class="jxr_keyword">import</strong> org.junit.Test;
 <a class="jxr_linenumber" name="L23" href="#L23">23</a>  
 <a class="jxr_linenumber" name="L24" href="#L24">24</a>  <strong class="jxr_keyword">import</strong> java.io.File;
-<a class="jxr_linenumber" name="L25" href="#L25">25</a>  <strong class="jxr_keyword">import</strong> java.net.InetAddress;
-<a class="jxr_linenumber" name="L26" href="#L26">26</a>  <strong class="jxr_keyword">import</strong> java.net.UnknownHostException;
-<a class="jxr_linenumber" name="L27" href="#L27">27</a>  <strong class="jxr_keyword">import</strong> java.util.Locale;
-<a class="jxr_linenumber" name="L28" href="#L28">28</a>  <strong class="jxr_keyword">import</strong> java.util.Properties;
-<a class="jxr_linenumber" name="L29" href="#L29">29</a>  
-<a class="jxr_linenumber" name="L30" href="#L30">30</a>  <strong class="jxr_keyword">import</strong> <strong class="jxr_keyword">static</strong> org.junit.Assert.*;
-<a class="jxr_linenumber" name="L31" href="#L31">31</a>  
-<a class="jxr_linenumber" name="L32" href="#L32">32</a>  <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L33" href="#L33">33</a>  <em class="jxr_javadoccomment"> *</em>
+<a class="jxr_linenumber" name="L25" href="#L25">25</a>  <strong class="jxr_keyword">import</strong> java.io.IOException;
+<a class="jxr_linenumber" name="L26" href="#L26">26</a>  <strong class="jxr_keyword">import</strong> java.net.InetAddress;
+<a class="jxr_linenumber" name="L27" href="#L27">27</a>  <strong class="jxr_keyword">import</strong> java.net.UnknownHostException;
+<a class="jxr_linenumber" name="L28" href="#L28">28</a>  <strong class="jxr_keyword">import</strong> java.util.Locale;
+<a class="jxr_linenumber" name="L29" href="#L29">29</a>  <strong class="jxr_keyword">import</strong> java.util.Properties;
+<a class="jxr_linenumber" name="L30" href="#L30">30</a>  
+<a class="jxr_linenumber" name="L31" href="#L31">31</a>  <strong class="jxr_keyword">import</strong> <strong class="jxr_keyword">static</strong> org.junit.Assert.*;
+<a class="jxr_linenumber" name="L32" href="#L32">32</a>  
+<a class="jxr_linenumber" name="L33" href="#L33">33</a>  <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L34" href="#L34">34</a>  <em class="jxr_javadoccomment"> * @author albertoirurueta</em>
 <a class="jxr_linenumber" name="L35" href="#L35">35</a>  <em class="jxr_javadoccomment"> */</em>
 <a class="jxr_linenumber" name="L36" href="#L36">36</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../com/irurueta/server/commons/geolocation/IPGeolocatorTest.html">IPGeolocatorTest</a> {
@@ -53,14 +53,14 @@
 <a class="jxr_linenumber" name="L45" href="#L45">45</a>  
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>      @BeforeClass
 <a class="jxr_linenumber" name="L47" href="#L47">47</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">void</strong> setUpClass() <strong class="jxr_keyword">throws</strong> ConfigurationException {
-<a class="jxr_linenumber" name="L48" href="#L48">48</a>          <em class="jxr_comment">//check that destination files do not exist</em>
+<a class="jxr_linenumber" name="L48" href="#L48">48</a>          <em class="jxr_comment">// check that destination files do not exist</em>
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>          File f = <strong class="jxr_keyword">new</strong> File(COUNTRY_FILE);
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>          assertFalse(f.exists());
 <a class="jxr_linenumber" name="L51" href="#L51">51</a>  
 <a class="jxr_linenumber" name="L52" href="#L52">52</a>          f = <strong class="jxr_keyword">new</strong> File(CITY_FILE);
 <a class="jxr_linenumber" name="L53" href="#L53">53</a>          assertFalse(f.exists());
 <a class="jxr_linenumber" name="L54" href="#L54">54</a>  
-<a class="jxr_linenumber" name="L55" href="#L55">55</a>          Properties props = <strong class="jxr_keyword">new</strong> Properties();
+<a class="jxr_linenumber" name="L55" href="#L55">55</a>          <strong class="jxr_keyword">final</strong> Properties props = <strong class="jxr_keyword">new</strong> Properties();
 <a class="jxr_linenumber" name="L56" href="#L56">56</a>          props.setProperty(GeolocationConfigurationFactory.
 <a class="jxr_linenumber" name="L57" href="#L57">57</a>                  IP_GEOLOCATION_COUNTRY_DATABASE_FILE_PROPERTY, COUNTRY_FILE);
 <a class="jxr_linenumber" name="L58" href="#L58">58</a>          props.setProperty(GeolocationConfigurationFactory.
@@ -71,10 +71,10 @@
 <a class="jxr_linenumber" name="L63" href="#L63">63</a>  
 <a class="jxr_linenumber" name="L64" href="#L64">64</a>      @SuppressWarnings(<span class="jxr_string">"ResultOfMethodCallIgnored"</span>)
 <a class="jxr_linenumber" name="L65" href="#L65">65</a>      @AfterClass
-<a class="jxr_linenumber" name="L66" href="#L66">66</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">void</strong> tearDownClass() {
+<a class="jxr_linenumber" name="L66" href="#L66">66</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">void</strong> tearDownClass() <strong class="jxr_keyword">throws</strong> IOException {
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>          IPGeolocator.getInstance().close();
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>  
-<a class="jxr_linenumber" name="L69" href="#L69">69</a>          <em class="jxr_comment">//check that destination files do not exist</em>
+<a class="jxr_linenumber" name="L69" href="#L69">69</a>          <em class="jxr_comment">// check that destination files do not exist</em>
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>          File f = <strong class="jxr_keyword">new</strong> File(COUNTRY_FILE);
 <a class="jxr_linenumber" name="L71" href="#L71">71</a>          <strong class="jxr_keyword">if</strong> (f.exists()) {
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>              f.delete();
@@ -87,19 +87,19 @@
 <a class="jxr_linenumber" name="L79" href="#L79">79</a>              fail(<span class="jxr_string">"City file was not deleted"</span>);
 <a class="jxr_linenumber" name="L80" href="#L80">80</a>          }
 <a class="jxr_linenumber" name="L81" href="#L81">81</a>  
-<a class="jxr_linenumber" name="L82" href="#L82">82</a>          File folder = <strong class="jxr_keyword">new</strong> File(FOLDER);
+<a class="jxr_linenumber" name="L82" href="#L82">82</a>          <strong class="jxr_keyword">final</strong> File folder = <strong class="jxr_keyword">new</strong> File(FOLDER);
 <a class="jxr_linenumber" name="L83" href="#L83">83</a>          assertTrue(folder.exists());
 <a class="jxr_linenumber" name="L84" href="#L84">84</a>          folder.delete();
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>      }
 <a class="jxr_linenumber" name="L86" href="#L86">86</a>  
 <a class="jxr_linenumber" name="L87" href="#L87">87</a>      @Before
-<a class="jxr_linenumber" name="L88" href="#L88">88</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> setUp() {
+<a class="jxr_linenumber" name="L88" href="#L88">88</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> setUp() <strong class="jxr_keyword">throws</strong> IOException {
 <a class="jxr_linenumber" name="L89" href="#L89">89</a>          IPGeolocator.reset();
 <a class="jxr_linenumber" name="L90" href="#L90">90</a>      }
 <a class="jxr_linenumber" name="L91" href="#L91">91</a>  
 <a class="jxr_linenumber" name="L92" href="#L92">92</a>      @Test
-<a class="jxr_linenumber" name="L93" href="#L93">93</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testGetInstance() {
-<a class="jxr_linenumber" name="L94" href="#L94">94</a>          IPGeolocator locator1 = IPGeolocator.getInstance();
+<a class="jxr_linenumber" name="L93" href="#L93">93</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testGetInstance() <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L94" href="#L94">94</a>          <strong class="jxr_keyword">final</strong> IPGeolocator locator1 = IPGeolocator.getInstance();
 <a class="jxr_linenumber" name="L95" href="#L95">95</a>          IPGeolocator locator2 = IPGeolocator.getInstance();
 <a class="jxr_linenumber" name="L96" href="#L96">96</a>  
 <a class="jxr_linenumber" name="L97" href="#L97">97</a>          assertSame(locator1, locator2);
@@ -115,12 +115,12 @@
 <a class="jxr_linenumber" name="L107" href="#L107">107</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testLocateMicrosoftAddress() <strong class="jxr_keyword">throws</strong> UnknownHostException,
 <a class="jxr_linenumber" name="L108" href="#L108">108</a>             IPLocationNotFoundException, IPGeolocationDisabledException {
 <a class="jxr_linenumber" name="L109" href="#L109">109</a> 
-<a class="jxr_linenumber" name="L110" href="#L110">110</a>         IPGeolocator locator = IPGeolocator.getInstance();
+<a class="jxr_linenumber" name="L110" href="#L110">110</a>         <strong class="jxr_keyword">final</strong> IPGeolocator locator = IPGeolocator.getInstance();
 <a class="jxr_linenumber" name="L111" href="#L111">111</a> 
-<a class="jxr_linenumber" name="L112" href="#L112">112</a>         String address = <span class="jxr_string">"64.4.4.4"</span>;
-<a class="jxr_linenumber" name="L113" href="#L113">113</a>         InetAddress inetAddress = InetAddress.getByName(address);
+<a class="jxr_linenumber" name="L112" href="#L112">112</a>         <strong class="jxr_keyword">final</strong> String address = <span class="jxr_string">"64.4.4.4"</span>;
+<a class="jxr_linenumber" name="L113" href="#L113">113</a>         <strong class="jxr_keyword">final</strong> InetAddress inetAddress = InetAddress.getByName(address);
 <a class="jxr_linenumber" name="L114" href="#L114">114</a> 
-<a class="jxr_linenumber" name="L115" href="#L115">115</a>         <em class="jxr_comment">//test with default level</em>
+<a class="jxr_linenumber" name="L115" href="#L115">115</a>         <em class="jxr_comment">// test with default level</em>
 <a class="jxr_linenumber" name="L116" href="#L116">116</a>         IPLocation location = locator.locate(address);
 <a class="jxr_linenumber" name="L117" href="#L117">117</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L118" href="#L118">118</a>         assertEquals(location.getCity(), <span class="jxr_string">"Redmond"</span>);
@@ -180,7 +180,7 @@
 <a class="jxr_linenumber" name="L172" href="#L172">172</a>         assertEquals(location.getContinentName(), <span class="jxr_string">"North America"</span>);
 <a class="jxr_linenumber" name="L173" href="#L173">173</a>         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L174" href="#L174">174</a> 
-<a class="jxr_linenumber" name="L175" href="#L175">175</a>         <em class="jxr_comment">//test with CITY level</em>
+<a class="jxr_linenumber" name="L175" href="#L175">175</a>         <em class="jxr_comment">// test with CITY level</em>
 <a class="jxr_linenumber" name="L176" href="#L176">176</a>         location = locator.locate(address, IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L177" href="#L177">177</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L178" href="#L178">178</a>         assertEquals(location.getCity(), <span class="jxr_string">"Redmond"</span>);
@@ -240,7 +240,7 @@
 <a class="jxr_linenumber" name="L232" href="#L232">232</a>         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L233" href="#L233">233</a> 
 <a class="jxr_linenumber" name="L234" href="#L234">234</a> 
-<a class="jxr_linenumber" name="L235" href="#L235">235</a>         <em class="jxr_comment">//test with COUNTRY level</em>
+<a class="jxr_linenumber" name="L235" href="#L235">235</a>         <em class="jxr_comment">// test with COUNTRY level</em>
 <a class="jxr_linenumber" name="L236" href="#L236">236</a>         location = locator.locate(address, IPGeolocationLevel.COUNTRY);
 <a class="jxr_linenumber" name="L237" href="#L237">237</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L238" href="#L238">238</a>         assertNull(location.getCity());
@@ -304,12 +304,12 @@
 <a class="jxr_linenumber" name="L296" href="#L296">296</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testLocateMicrosoftIpv6Address() <strong class="jxr_keyword">throws</strong> UnknownHostException,
 <a class="jxr_linenumber" name="L297" href="#L297">297</a>             IPLocationNotFoundException, IPGeolocationDisabledException {
 <a class="jxr_linenumber" name="L298" href="#L298">298</a> 
-<a class="jxr_linenumber" name="L299" href="#L299">299</a>         IPGeolocator locator = IPGeolocator.getInstance();
+<a class="jxr_linenumber" name="L299" href="#L299">299</a>         <strong class="jxr_keyword">final</strong> IPGeolocator locator = IPGeolocator.getInstance();
 <a class="jxr_linenumber" name="L300" href="#L300">300</a> 
-<a class="jxr_linenumber" name="L301" href="#L301">301</a>         String address = <span class="jxr_string">"2002:4136:e383::4136"</span>;
-<a class="jxr_linenumber" name="L302" href="#L302">302</a>         InetAddress inetAddress = InetAddress.getByName(address);
+<a class="jxr_linenumber" name="L301" href="#L301">301</a>         <strong class="jxr_keyword">final</strong> String address = <span class="jxr_string">"2002:4136:e383::4136"</span>;
+<a class="jxr_linenumber" name="L302" href="#L302">302</a>         <strong class="jxr_keyword">final</strong> InetAddress inetAddress = InetAddress.getByName(address);
 <a class="jxr_linenumber" name="L303" href="#L303">303</a> 
-<a class="jxr_linenumber" name="L304" href="#L304">304</a>         <em class="jxr_comment">//test with default level</em>
+<a class="jxr_linenumber" name="L304" href="#L304">304</a>         <em class="jxr_comment">// test with default level</em>
 <a class="jxr_linenumber" name="L305" href="#L305">305</a>         IPLocation location = locator.locate(address);
 <a class="jxr_linenumber" name="L306" href="#L306">306</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L307" href="#L307">307</a>         assertEquals(location.getCity(), <span class="jxr_string">"San Jose"</span>);
@@ -369,7 +369,7 @@
 <a class="jxr_linenumber" name="L361" href="#L361">361</a>         assertEquals(location.getContinentName(), <span class="jxr_string">"North America"</span>);
 <a class="jxr_linenumber" name="L362" href="#L362">362</a>         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L363" href="#L363">363</a> 
-<a class="jxr_linenumber" name="L364" href="#L364">364</a>         <em class="jxr_comment">//test with CITY level</em>
+<a class="jxr_linenumber" name="L364" href="#L364">364</a>         <em class="jxr_comment">// test with CITY level</em>
 <a class="jxr_linenumber" name="L365" href="#L365">365</a>         location = locator.locate(address, IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L366" href="#L366">366</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L367" href="#L367">367</a>         assertEquals(location.getCity(), <span class="jxr_string">"San Jose"</span>);
@@ -429,7 +429,7 @@
 <a class="jxr_linenumber" name="L421" href="#L421">421</a>         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L422" href="#L422">422</a> 
 <a class="jxr_linenumber" name="L423" href="#L423">423</a> 
-<a class="jxr_linenumber" name="L424" href="#L424">424</a>         <em class="jxr_comment">//test with COUNTRY level</em>
+<a class="jxr_linenumber" name="L424" href="#L424">424</a>         <em class="jxr_comment">// test with COUNTRY level</em>
 <a class="jxr_linenumber" name="L425" href="#L425">425</a>         location = locator.locate(address, IPGeolocationLevel.COUNTRY);
 <a class="jxr_linenumber" name="L426" href="#L426">426</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L427" href="#L427">427</a>         assertNull(location.getCity());
@@ -493,12 +493,12 @@
 <a class="jxr_linenumber" name="L485" href="#L485">485</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testLocateNorwayAddress() <strong class="jxr_keyword">throws</strong> UnknownHostException,
 <a class="jxr_linenumber" name="L486" href="#L486">486</a>             IPLocationNotFoundException, IPGeolocationDisabledException {
 <a class="jxr_linenumber" name="L487" href="#L487">487</a> 
-<a class="jxr_linenumber" name="L488" href="#L488">488</a>         IPGeolocator locator = IPGeolocator.getInstance();
+<a class="jxr_linenumber" name="L488" href="#L488">488</a>         <strong class="jxr_keyword">final</strong> IPGeolocator locator = IPGeolocator.getInstance();
 <a class="jxr_linenumber" name="L489" href="#L489">489</a> 
-<a class="jxr_linenumber" name="L490" href="#L490">490</a>         String address = <span class="jxr_string">"213.52.50.8"</span>;
-<a class="jxr_linenumber" name="L491" href="#L491">491</a>         InetAddress inetAddress = InetAddress.getByName(address);
+<a class="jxr_linenumber" name="L490" href="#L490">490</a>         <strong class="jxr_keyword">final</strong> String address = <span class="jxr_string">"213.52.50.8"</span>;
+<a class="jxr_linenumber" name="L491" href="#L491">491</a>         <strong class="jxr_keyword">final</strong> InetAddress inetAddress = InetAddress.getByName(address);
 <a class="jxr_linenumber" name="L492" href="#L492">492</a> 
-<a class="jxr_linenumber" name="L493" href="#L493">493</a>         <em class="jxr_comment">//test with default level</em>
+<a class="jxr_linenumber" name="L493" href="#L493">493</a>         <em class="jxr_comment">// test with default level</em>
 <a class="jxr_linenumber" name="L494" href="#L494">494</a>         IPLocation location = locator.locate(address);
 <a class="jxr_linenumber" name="L495" href="#L495">495</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L496" href="#L496">496</a>         assertNull(location.getCity());
@@ -558,7 +558,7 @@
 <a class="jxr_linenumber" name="L550" href="#L550">550</a>         assertEquals(location.getContinentName(), <span class="jxr_string">"Europe"</span>);
 <a class="jxr_linenumber" name="L551" href="#L551">551</a>         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L552" href="#L552">552</a> 
-<a class="jxr_linenumber" name="L553" href="#L553">553</a>         <em class="jxr_comment">//test with CITY level</em>
+<a class="jxr_linenumber" name="L553" href="#L553">553</a>         <em class="jxr_comment">// test with CITY level</em>
 <a class="jxr_linenumber" name="L554" href="#L554">554</a>         location = locator.locate(address, IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L555" href="#L555">555</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L556" href="#L556">556</a>         assertNull(location.getCity());
@@ -618,7 +618,7 @@
 <a class="jxr_linenumber" name="L610" href="#L610">610</a>         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L611" href="#L611">611</a> 
 <a class="jxr_linenumber" name="L612" href="#L612">612</a> 
-<a class="jxr_linenumber" name="L613" href="#L613">613</a>         <em class="jxr_comment">//test with COUNTRY level</em>
+<a class="jxr_linenumber" name="L613" href="#L613">613</a>         <em class="jxr_comment">// test with COUNTRY level</em>
 <a class="jxr_linenumber" name="L614" href="#L614">614</a>         location = locator.locate(address, IPGeolocationLevel.COUNTRY);
 <a class="jxr_linenumber" name="L615" href="#L615">615</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L616" href="#L616">616</a>         assertNull(location.getCity());
@@ -682,12 +682,12 @@
 <a class="jxr_linenumber" name="L674" href="#L674">674</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testLocateNorwayIpv6Address() <strong class="jxr_keyword">throws</strong> UnknownHostException,
 <a class="jxr_linenumber" name="L675" href="#L675">675</a>             IPLocationNotFoundException, IPGeolocationDisabledException {
 <a class="jxr_linenumber" name="L676" href="#L676">676</a> 
-<a class="jxr_linenumber" name="L677" href="#L677">677</a>         IPGeolocator locator = IPGeolocator.getInstance();
+<a class="jxr_linenumber" name="L677" href="#L677">677</a>         <strong class="jxr_keyword">final</strong> IPGeolocator locator = IPGeolocator.getInstance();
 <a class="jxr_linenumber" name="L678" href="#L678">678</a> 
-<a class="jxr_linenumber" name="L679" href="#L679">679</a>         String address = <span class="jxr_string">"::213.52.50.8"</span>;
-<a class="jxr_linenumber" name="L680" href="#L680">680</a>         InetAddress inetAddress = InetAddress.getByName(address);
+<a class="jxr_linenumber" name="L679" href="#L679">679</a>         <strong class="jxr_keyword">final</strong> String address = <span class="jxr_string">"::213.52.50.8"</span>;
+<a class="jxr_linenumber" name="L680" href="#L680">680</a>         <strong class="jxr_keyword">final</strong> InetAddress inetAddress = InetAddress.getByName(address);
 <a class="jxr_linenumber" name="L681" href="#L681">681</a> 
-<a class="jxr_linenumber" name="L682" href="#L682">682</a>         <em class="jxr_comment">//test with default level</em>
+<a class="jxr_linenumber" name="L682" href="#L682">682</a>         <em class="jxr_comment">// test with default level</em>
 <a class="jxr_linenumber" name="L683" href="#L683">683</a>         IPLocation location = locator.locate(address);
 <a class="jxr_linenumber" name="L684" href="#L684">684</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L685" href="#L685">685</a>         assertNull(location.getCity());
@@ -747,7 +747,7 @@
 <a class="jxr_linenumber" name="L739" href="#L739">739</a>         assertEquals(location.getContinentName(), <span class="jxr_string">"Europe"</span>);
 <a class="jxr_linenumber" name="L740" href="#L740">740</a>         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L741" href="#L741">741</a> 
-<a class="jxr_linenumber" name="L742" href="#L742">742</a>         <em class="jxr_comment">//test with CITY level</em>
+<a class="jxr_linenumber" name="L742" href="#L742">742</a>         <em class="jxr_comment">// test with CITY level</em>
 <a class="jxr_linenumber" name="L743" href="#L743">743</a>         location = locator.locate(address, IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L744" href="#L744">744</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L745" href="#L745">745</a>         assertNull(location.getCity());
@@ -807,7 +807,7 @@
 <a class="jxr_linenumber" name="L799" href="#L799">799</a>         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L800" href="#L800">800</a> 
 <a class="jxr_linenumber" name="L801" href="#L801">801</a> 
-<a class="jxr_linenumber" name="L802" href="#L802">802</a>         <em class="jxr_comment">//test with COUNTRY level</em>
+<a class="jxr_linenumber" name="L802" href="#L802">802</a>         <em class="jxr_comment">// test with COUNTRY level</em>
 <a class="jxr_linenumber" name="L803" href="#L803">803</a>         location = locator.locate(address, IPGeolocationLevel.COUNTRY);
 <a class="jxr_linenumber" name="L804" href="#L804">804</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L805" href="#L805">805</a>         assertNull(location.getCity());
@@ -871,12 +871,12 @@
 <a class="jxr_linenumber" name="L863" href="#L863">863</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testLocateSpainAddress() <strong class="jxr_keyword">throws</strong> UnknownHostException,
 <a class="jxr_linenumber" name="L864" href="#L864">864</a>             IPLocationNotFoundException, IPGeolocationDisabledException {
 <a class="jxr_linenumber" name="L865" href="#L865">865</a> 
-<a class="jxr_linenumber" name="L866" href="#L866">866</a>         IPGeolocator locator = IPGeolocator.getInstance();
+<a class="jxr_linenumber" name="L866" href="#L866">866</a>         <strong class="jxr_keyword">final</strong> IPGeolocator locator = IPGeolocator.getInstance();
 <a class="jxr_linenumber" name="L867" href="#L867">867</a> 
-<a class="jxr_linenumber" name="L868" href="#L868">868</a>         String address = <span class="jxr_string">"37.15.50.115"</span>;
-<a class="jxr_linenumber" name="L869" href="#L869">869</a>         InetAddress inetAddress = InetAddress.getByName(address);
+<a class="jxr_linenumber" name="L868" href="#L868">868</a>         <strong class="jxr_keyword">final</strong> String address = <span class="jxr_string">"37.15.50.115"</span>;
+<a class="jxr_linenumber" name="L869" href="#L869">869</a>         <strong class="jxr_keyword">final</strong> InetAddress inetAddress = InetAddress.getByName(address);
 <a class="jxr_linenumber" name="L870" href="#L870">870</a> 
-<a class="jxr_linenumber" name="L871" href="#L871">871</a>         <em class="jxr_comment">//test with default level</em>
+<a class="jxr_linenumber" name="L871" href="#L871">871</a>         <em class="jxr_comment">// test with default level</em>
 <a class="jxr_linenumber" name="L872" href="#L872">872</a>         IPLocation location = locator.locate(address);
 <a class="jxr_linenumber" name="L873" href="#L873">873</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L874" href="#L874">874</a>         assertNull(location.getCity());
@@ -936,7 +936,7 @@
 <a class="jxr_linenumber" name="L928" href="#L928">928</a>         assertEquals(location.getContinentName(), <span class="jxr_string">"Europe"</span>);
 <a class="jxr_linenumber" name="L929" href="#L929">929</a>         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L930" href="#L930">930</a> 
-<a class="jxr_linenumber" name="L931" href="#L931">931</a>         <em class="jxr_comment">//test with CITY level</em>
+<a class="jxr_linenumber" name="L931" href="#L931">931</a>         <em class="jxr_comment">// test with CITY level</em>
 <a class="jxr_linenumber" name="L932" href="#L932">932</a>         location = locator.locate(address, IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L933" href="#L933">933</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L934" href="#L934">934</a>         assertNull(location.getCity());
@@ -996,7 +996,7 @@
 <a class="jxr_linenumber" name="L988" href="#L988">988</a>         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L989" href="#L989">989</a> 
 <a class="jxr_linenumber" name="L990" href="#L990">990</a> 
-<a class="jxr_linenumber" name="L991" href="#L991">991</a>         <em class="jxr_comment">//test with COUNTRY level</em>
+<a class="jxr_linenumber" name="L991" href="#L991">991</a>         <em class="jxr_comment">// test with COUNTRY level</em>
 <a class="jxr_linenumber" name="L992" href="#L992">992</a>         location = locator.locate(address, IPGeolocationLevel.COUNTRY);
 <a class="jxr_linenumber" name="L993" href="#L993">993</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L994" href="#L994">994</a>         assertNull(location.getCity());
@@ -1060,12 +1060,12 @@
 <a class="jxr_linenumber" name="L1052" href="#L1052">1052</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testLocateSpainIpv6Address() <strong class="jxr_keyword">throws</strong> UnknownHostException,
 <a class="jxr_linenumber" name="L1053" href="#L1053">1053</a>             IPLocationNotFoundException, IPGeolocationDisabledException {
 <a class="jxr_linenumber" name="L1054" href="#L1054">1054</a> 
-<a class="jxr_linenumber" name="L1055" href="#L1055">1055</a>         IPGeolocator locator = IPGeolocator.getInstance();
+<a class="jxr_linenumber" name="L1055" href="#L1055">1055</a>         <strong class="jxr_keyword">final</strong> IPGeolocator locator = IPGeolocator.getInstance();
 <a class="jxr_linenumber" name="L1056" href="#L1056">1056</a> 
-<a class="jxr_linenumber" name="L1057" href="#L1057">1057</a>         String address = <span class="jxr_string">"::37.15.50.115"</span>;
-<a class="jxr_linenumber" name="L1058" href="#L1058">1058</a>         InetAddress inetAddress = InetAddress.getByName(address);
+<a class="jxr_linenumber" name="L1057" href="#L1057">1057</a>         <strong class="jxr_keyword">final</strong> String address = <span class="jxr_string">"::37.15.50.115"</span>;
+<a class="jxr_linenumber" name="L1058" href="#L1058">1058</a>         <strong class="jxr_keyword">final</strong> InetAddress inetAddress = InetAddress.getByName(address);
 <a class="jxr_linenumber" name="L1059" href="#L1059">1059</a> 
-<a class="jxr_linenumber" name="L1060" href="#L1060">1060</a>         <em class="jxr_comment">//test with default level</em>
+<a class="jxr_linenumber" name="L1060" href="#L1060">1060</a>         <em class="jxr_comment">// test with default level</em>
 <a class="jxr_linenumber" name="L1061" href="#L1061">1061</a>         IPLocation location = locator.locate(address);
 <a class="jxr_linenumber" name="L1062" href="#L1062">1062</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L1063" href="#L1063">1063</a>         assertNull(location.getCity());
@@ -1125,7 +1125,7 @@
 <a class="jxr_linenumber" name="L1117" href="#L1117">1117</a>         assertEquals(location.getContinentName(), <span class="jxr_string">"Europe"</span>);
 <a class="jxr_linenumber" name="L1118" href="#L1118">1118</a>         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L1119" href="#L1119">1119</a> 
-<a class="jxr_linenumber" name="L1120" href="#L1120">1120</a>         <em class="jxr_comment">//test with CITY level</em>
+<a class="jxr_linenumber" name="L1120" href="#L1120">1120</a>         <em class="jxr_comment">// test with CITY level</em>
 <a class="jxr_linenumber" name="L1121" href="#L1121">1121</a>         location = locator.locate(address, IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L1122" href="#L1122">1122</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L1123" href="#L1123">1123</a>         assertNull(location.getCity());
@@ -1185,7 +1185,7 @@
 <a class="jxr_linenumber" name="L1177" href="#L1177">1177</a>         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L1178" href="#L1178">1178</a> 
 <a class="jxr_linenumber" name="L1179" href="#L1179">1179</a> 
-<a class="jxr_linenumber" name="L1180" href="#L1180">1180</a>         <em class="jxr_comment">//test with COUNTRY level</em>
+<a class="jxr_linenumber" name="L1180" href="#L1180">1180</a>         <em class="jxr_comment">// test with COUNTRY level</em>
 <a class="jxr_linenumber" name="L1181" href="#L1181">1181</a>         location = locator.locate(address, IPGeolocationLevel.COUNTRY);
 <a class="jxr_linenumber" name="L1182" href="#L1182">1182</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L1183" href="#L1183">1183</a>         assertNull(location.getCity());
@@ -1249,12 +1249,12 @@
 <a class="jxr_linenumber" name="L1241" href="#L1241">1241</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testLocateItalyAddress() <strong class="jxr_keyword">throws</strong> UnknownHostException,
 <a class="jxr_linenumber" name="L1242" href="#L1242">1242</a>             IPLocationNotFoundException, IPGeolocationDisabledException {
 <a class="jxr_linenumber" name="L1243" href="#L1243">1243</a> 
-<a class="jxr_linenumber" name="L1244" href="#L1244">1244</a>         IPGeolocator locator = IPGeolocator.getInstance();
+<a class="jxr_linenumber" name="L1244" href="#L1244">1244</a>         <strong class="jxr_keyword">final</strong> IPGeolocator locator = IPGeolocator.getInstance();
 <a class="jxr_linenumber" name="L1245" href="#L1245">1245</a> 
-<a class="jxr_linenumber" name="L1246" href="#L1246">1246</a>         String address = <span class="jxr_string">"151.38.39.114"</span>;
-<a class="jxr_linenumber" name="L1247" href="#L1247">1247</a>         InetAddress inetAddress = InetAddress.getByName(address);
+<a class="jxr_linenumber" name="L1246" href="#L1246">1246</a>         <strong class="jxr_keyword">final</strong> String address = <span class="jxr_string">"151.38.39.114"</span>;
+<a class="jxr_linenumber" name="L1247" href="#L1247">1247</a>         <strong class="jxr_keyword">final</strong> InetAddress inetAddress = InetAddress.getByName(address);
 <a class="jxr_linenumber" name="L1248" href="#L1248">1248</a> 
-<a class="jxr_linenumber" name="L1249" href="#L1249">1249</a>         <em class="jxr_comment">//test with default level</em>
+<a class="jxr_linenumber" name="L1249" href="#L1249">1249</a>         <em class="jxr_comment">// test with default level</em>
 <a class="jxr_linenumber" name="L1250" href="#L1250">1250</a>         IPLocation location = locator.locate(address);
 <a class="jxr_linenumber" name="L1251" href="#L1251">1251</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L1252" href="#L1252">1252</a>         assertEquals(location.getCity(), <span class="jxr_string">"Milan"</span>);
@@ -1318,7 +1318,7 @@
 <a class="jxr_linenumber" name="L1310" href="#L1310">1310</a>         assertEquals(location.getContinentName(), <span class="jxr_string">"Europe"</span>);
 <a class="jxr_linenumber" name="L1311" href="#L1311">1311</a>         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L1312" href="#L1312">1312</a> 
-<a class="jxr_linenumber" name="L1313" href="#L1313">1313</a>         <em class="jxr_comment">//test with CITY level</em>
+<a class="jxr_linenumber" name="L1313" href="#L1313">1313</a>         <em class="jxr_comment">// test with CITY level</em>
 <a class="jxr_linenumber" name="L1314" href="#L1314">1314</a>         location = locator.locate(address, IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L1315" href="#L1315">1315</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L1316" href="#L1316">1316</a>         assertEquals(location.getCity(), <span class="jxr_string">"Milan"</span>);
@@ -1382,7 +1382,7 @@
 <a class="jxr_linenumber" name="L1374" href="#L1374">1374</a>         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L1375" href="#L1375">1375</a> 
 <a class="jxr_linenumber" name="L1376" href="#L1376">1376</a> 
-<a class="jxr_linenumber" name="L1377" href="#L1377">1377</a>         <em class="jxr_comment">//test with COUNTRY level</em>
+<a class="jxr_linenumber" name="L1377" href="#L1377">1377</a>         <em class="jxr_comment">// test with COUNTRY level</em>
 <a class="jxr_linenumber" name="L1378" href="#L1378">1378</a>         location = locator.locate(address, IPGeolocationLevel.COUNTRY);
 <a class="jxr_linenumber" name="L1379" href="#L1379">1379</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L1380" href="#L1380">1380</a>         assertNull(location.getCity());
@@ -1446,12 +1446,12 @@
 <a class="jxr_linenumber" name="L1438" href="#L1438">1438</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testLocateUnitedStatesAddress() <strong class="jxr_keyword">throws</strong> UnknownHostException,
 <a class="jxr_linenumber" name="L1439" href="#L1439">1439</a>             IPLocationNotFoundException, IPGeolocationDisabledException {
 <a class="jxr_linenumber" name="L1440" href="#L1440">1440</a> 
-<a class="jxr_linenumber" name="L1441" href="#L1441">1441</a>         IPGeolocator locator = IPGeolocator.getInstance();
+<a class="jxr_linenumber" name="L1441" href="#L1441">1441</a>         <strong class="jxr_keyword">final</strong> IPGeolocator locator = IPGeolocator.getInstance();
 <a class="jxr_linenumber" name="L1442" href="#L1442">1442</a> 
-<a class="jxr_linenumber" name="L1443" href="#L1443">1443</a>         String address = <span class="jxr_string">"12.25.205.51"</span>;
-<a class="jxr_linenumber" name="L1444" href="#L1444">1444</a>         InetAddress inetAddress = InetAddress.getByName(address);
+<a class="jxr_linenumber" name="L1443" href="#L1443">1443</a>         <strong class="jxr_keyword">final</strong> String address = <span class="jxr_string">"12.25.205.51"</span>;
+<a class="jxr_linenumber" name="L1444" href="#L1444">1444</a>         <strong class="jxr_keyword">final</strong> InetAddress inetAddress = InetAddress.getByName(address);
 <a class="jxr_linenumber" name="L1445" href="#L1445">1445</a> 
-<a class="jxr_linenumber" name="L1446" href="#L1446">1446</a>         <em class="jxr_comment">//test with default level</em>
+<a class="jxr_linenumber" name="L1446" href="#L1446">1446</a>         <em class="jxr_comment">// test with default level</em>
 <a class="jxr_linenumber" name="L1447" href="#L1447">1447</a>         IPLocation location = locator.locate(address);
 <a class="jxr_linenumber" name="L1448" href="#L1448">1448</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L1449" href="#L1449">1449</a>         assertNull(location.getCity());
@@ -1511,7 +1511,7 @@
 <a class="jxr_linenumber" name="L1503" href="#L1503">1503</a>         assertEquals(location.getContinentName(), <span class="jxr_string">"North America"</span>);
 <a class="jxr_linenumber" name="L1504" href="#L1504">1504</a>         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L1505" href="#L1505">1505</a> 
-<a class="jxr_linenumber" name="L1506" href="#L1506">1506</a>         <em class="jxr_comment">//test with CITY level</em>
+<a class="jxr_linenumber" name="L1506" href="#L1506">1506</a>         <em class="jxr_comment">// test with CITY level</em>
 <a class="jxr_linenumber" name="L1507" href="#L1507">1507</a>         location = locator.locate(address, IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L1508" href="#L1508">1508</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L1509" href="#L1509">1509</a>         assertNull(location.getCity());
@@ -1571,7 +1571,7 @@
 <a class="jxr_linenumber" name="L1563" href="#L1563">1563</a>         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L1564" href="#L1564">1564</a> 
 <a class="jxr_linenumber" name="L1565" href="#L1565">1565</a> 
-<a class="jxr_linenumber" name="L1566" href="#L1566">1566</a>         <em class="jxr_comment">//test with COUNTRY level</em>
+<a class="jxr_linenumber" name="L1566" href="#L1566">1566</a>         <em class="jxr_comment">// test with COUNTRY level</em>
 <a class="jxr_linenumber" name="L1567" href="#L1567">1567</a>         location = locator.locate(address, IPGeolocationLevel.COUNTRY);
 <a class="jxr_linenumber" name="L1568" href="#L1568">1568</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L1569" href="#L1569">1569</a>         assertNull(location.getCity());
@@ -1635,12 +1635,12 @@
 <a class="jxr_linenumber" name="L1627" href="#L1627">1627</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testLocateUnitedStatesAddress2() <strong class="jxr_keyword">throws</strong> UnknownHostException,
 <a class="jxr_linenumber" name="L1628" href="#L1628">1628</a>             IPLocationNotFoundException, IPGeolocationDisabledException {
 <a class="jxr_linenumber" name="L1629" href="#L1629">1629</a> 
-<a class="jxr_linenumber" name="L1630" href="#L1630">1630</a>         IPGeolocator locator = IPGeolocator.getInstance();
+<a class="jxr_linenumber" name="L1630" href="#L1630">1630</a>         <strong class="jxr_keyword">final</strong> IPGeolocator locator = IPGeolocator.getInstance();
 <a class="jxr_linenumber" name="L1631" href="#L1631">1631</a> 
-<a class="jxr_linenumber" name="L1632" href="#L1632">1632</a>         String address = <span class="jxr_string">"64.81.104.131"</span>;
-<a class="jxr_linenumber" name="L1633" href="#L1633">1633</a>         InetAddress inetAddress = InetAddress.getByName(address);
+<a class="jxr_linenumber" name="L1632" href="#L1632">1632</a>         <strong class="jxr_keyword">final</strong> String address = <span class="jxr_string">"64.81.104.131"</span>;
+<a class="jxr_linenumber" name="L1633" href="#L1633">1633</a>         <strong class="jxr_keyword">final</strong> InetAddress inetAddress = InetAddress.getByName(address);
 <a class="jxr_linenumber" name="L1634" href="#L1634">1634</a> 
-<a class="jxr_linenumber" name="L1635" href="#L1635">1635</a>         <em class="jxr_comment">//test with default level</em>
+<a class="jxr_linenumber" name="L1635" href="#L1635">1635</a>         <em class="jxr_comment">// test with default level</em>
 <a class="jxr_linenumber" name="L1636" href="#L1636">1636</a>         IPLocation location = locator.locate(address);
 <a class="jxr_linenumber" name="L1637" href="#L1637">1637</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L1638" href="#L1638">1638</a>         assertEquals(location.getCity(), <span class="jxr_string">"San Jose"</span>);
@@ -1700,7 +1700,7 @@
 <a class="jxr_linenumber" name="L1692" href="#L1692">1692</a>         assertEquals(location.getContinentName(), <span class="jxr_string">"North America"</span>);
 <a class="jxr_linenumber" name="L1693" href="#L1693">1693</a>         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L1694" href="#L1694">1694</a> 
-<a class="jxr_linenumber" name="L1695" href="#L1695">1695</a>         <em class="jxr_comment">//test with CITY level</em>
+<a class="jxr_linenumber" name="L1695" href="#L1695">1695</a>         <em class="jxr_comment">// test with CITY level</em>
 <a class="jxr_linenumber" name="L1696" href="#L1696">1696</a>         location = locator.locate(address, IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L1697" href="#L1697">1697</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L1698" href="#L1698">1698</a>         assertEquals(location.getCity(), <span class="jxr_string">"San Jose"</span>);
@@ -1760,7 +1760,7 @@
 <a class="jxr_linenumber" name="L1752" href="#L1752">1752</a>         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L1753" href="#L1753">1753</a> 
 <a class="jxr_linenumber" name="L1754" href="#L1754">1754</a> 
-<a class="jxr_linenumber" name="L1755" href="#L1755">1755</a>         <em class="jxr_comment">//test with COUNTRY level</em>
+<a class="jxr_linenumber" name="L1755" href="#L1755">1755</a>         <em class="jxr_comment">// test with COUNTRY level</em>
 <a class="jxr_linenumber" name="L1756" href="#L1756">1756</a>         location = locator.locate(address, IPGeolocationLevel.COUNTRY);
 <a class="jxr_linenumber" name="L1757" href="#L1757">1757</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L1758" href="#L1758">1758</a>         assertNull(location.getCity());
@@ -1824,12 +1824,12 @@
 <a class="jxr_linenumber" name="L1816" href="#L1816">1816</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testLocateColombiaAddress() <strong class="jxr_keyword">throws</strong> UnknownHostException,
 <a class="jxr_linenumber" name="L1817" href="#L1817">1817</a>             IPLocationNotFoundException, IPGeolocationDisabledException {
 <a class="jxr_linenumber" name="L1818" href="#L1818">1818</a> 
-<a class="jxr_linenumber" name="L1819" href="#L1819">1819</a>         IPGeolocator locator = IPGeolocator.getInstance();
+<a class="jxr_linenumber" name="L1819" href="#L1819">1819</a>         <strong class="jxr_keyword">final</strong> IPGeolocator locator = IPGeolocator.getInstance();
 <a class="jxr_linenumber" name="L1820" href="#L1820">1820</a> 
-<a class="jxr_linenumber" name="L1821" href="#L1821">1821</a>         String address = <span class="jxr_string">"200.21.225.82"</span>;
-<a class="jxr_linenumber" name="L1822" href="#L1822">1822</a>         InetAddress inetAddress = InetAddress.getByName(address);
+<a class="jxr_linenumber" name="L1821" href="#L1821">1821</a>         <strong class="jxr_keyword">final</strong> String address = <span class="jxr_string">"200.21.225.82"</span>;
+<a class="jxr_linenumber" name="L1822" href="#L1822">1822</a>         <strong class="jxr_keyword">final</strong> InetAddress inetAddress = InetAddress.getByName(address);
 <a class="jxr_linenumber" name="L1823" href="#L1823">1823</a> 
-<a class="jxr_linenumber" name="L1824" href="#L1824">1824</a>         <em class="jxr_comment">//test with default level</em>
+<a class="jxr_linenumber" name="L1824" href="#L1824">1824</a>         <em class="jxr_comment">// test with default level</em>
 <a class="jxr_linenumber" name="L1825" href="#L1825">1825</a>         IPLocation location = locator.locate(address);
 <a class="jxr_linenumber" name="L1826" href="#L1826">1826</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L1827" href="#L1827">1827</a>         assertEquals(location.getCity(), <span class="jxr_string">"Bogotá"</span>);
@@ -1889,7 +1889,7 @@
 <a class="jxr_linenumber" name="L1881" href="#L1881">1881</a>         assertEquals(location.getContinentName(), <span class="jxr_string">"South America"</span>);
 <a class="jxr_linenumber" name="L1882" href="#L1882">1882</a>         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L1883" href="#L1883">1883</a> 
-<a class="jxr_linenumber" name="L1884" href="#L1884">1884</a>         <em class="jxr_comment">//test with CITY level</em>
+<a class="jxr_linenumber" name="L1884" href="#L1884">1884</a>         <em class="jxr_comment">// test with CITY level</em>
 <a class="jxr_linenumber" name="L1885" href="#L1885">1885</a>         location = locator.locate(address, IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L1886" href="#L1886">1886</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L1887" href="#L1887">1887</a>         assertEquals(location.getCity(), <span class="jxr_string">"Bogotá"</span>);
@@ -1949,7 +1949,7 @@
 <a class="jxr_linenumber" name="L1941" href="#L1941">1941</a>         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L1942" href="#L1942">1942</a> 
 <a class="jxr_linenumber" name="L1943" href="#L1943">1943</a> 
-<a class="jxr_linenumber" name="L1944" href="#L1944">1944</a>         <em class="jxr_comment">//test with COUNTRY level</em>
+<a class="jxr_linenumber" name="L1944" href="#L1944">1944</a>         <em class="jxr_comment">// test with COUNTRY level</em>
 <a class="jxr_linenumber" name="L1945" href="#L1945">1945</a>         location = locator.locate(address, IPGeolocationLevel.COUNTRY);
 <a class="jxr_linenumber" name="L1946" href="#L1946">1946</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L1947" href="#L1947">1947</a>         assertNull(location.getCity());
@@ -2013,12 +2013,12 @@
 <a class="jxr_linenumber" name="L2005" href="#L2005">2005</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testLocateDnsAddress() <strong class="jxr_keyword">throws</strong> UnknownHostException,
 <a class="jxr_linenumber" name="L2006" href="#L2006">2006</a>             IPLocationNotFoundException, IPGeolocationDisabledException {
 <a class="jxr_linenumber" name="L2007" href="#L2007">2007</a> 
-<a class="jxr_linenumber" name="L2008" href="#L2008">2008</a>         IPGeolocator locator = IPGeolocator.getInstance();
+<a class="jxr_linenumber" name="L2008" href="#L2008">2008</a>         <strong class="jxr_keyword">final</strong> IPGeolocator locator = IPGeolocator.getInstance();
 <a class="jxr_linenumber" name="L2009" href="#L2009">2009</a> 
-<a class="jxr_linenumber" name="L2010" href="#L2010">2010</a>         String address = <span class="jxr_string">"www.mobbio.com"</span>;
-<a class="jxr_linenumber" name="L2011" href="#L2011">2011</a>         InetAddress inetAddress = InetAddress.getByName(address);
+<a class="jxr_linenumber" name="L2010" href="#L2010">2010</a>         <strong class="jxr_keyword">final</strong> String address = <span class="jxr_string">"www.mobbio.com"</span>;
+<a class="jxr_linenumber" name="L2011" href="#L2011">2011</a>         <strong class="jxr_keyword">final</strong> InetAddress inetAddress = InetAddress.getByName(address);
 <a class="jxr_linenumber" name="L2012" href="#L2012">2012</a> 
-<a class="jxr_linenumber" name="L2013" href="#L2013">2013</a>         <em class="jxr_comment">//test with default level</em>
+<a class="jxr_linenumber" name="L2013" href="#L2013">2013</a>         <em class="jxr_comment">// test with default level</em>
 <a class="jxr_linenumber" name="L2014" href="#L2014">2014</a>         IPLocation location = locator.locate(address);
 <a class="jxr_linenumber" name="L2015" href="#L2015">2015</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L2016" href="#L2016">2016</a>         assertEquals(location.getCity(), <span class="jxr_string">"Scottsdale"</span>);
@@ -2078,7 +2078,7 @@
 <a class="jxr_linenumber" name="L2070" href="#L2070">2070</a>         assertEquals(location.getContinentName(), <span class="jxr_string">"North America"</span>);
 <a class="jxr_linenumber" name="L2071" href="#L2071">2071</a>         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L2072" href="#L2072">2072</a> 
-<a class="jxr_linenumber" name="L2073" href="#L2073">2073</a>         <em class="jxr_comment">//test with CITY level</em>
+<a class="jxr_linenumber" name="L2073" href="#L2073">2073</a>         <em class="jxr_comment">// test with CITY level</em>
 <a class="jxr_linenumber" name="L2074" href="#L2074">2074</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L2075" href="#L2075">2075</a>         assertEquals(location.getCity(), <span class="jxr_string">"Scottsdale"</span>);
 <a class="jxr_linenumber" name="L2076" href="#L2076">2076</a>         assertEquals(location.getTimeZone().getID(), <span class="jxr_string">"America/Phoenix"</span>);
@@ -2137,7 +2137,7 @@
 <a class="jxr_linenumber" name="L2129" href="#L2129">2129</a>         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L2130" href="#L2130">2130</a> 
 <a class="jxr_linenumber" name="L2131" href="#L2131">2131</a> 
-<a class="jxr_linenumber" name="L2132" href="#L2132">2132</a>         <em class="jxr_comment">//test with COUNTRY level</em>
+<a class="jxr_linenumber" name="L2132" href="#L2132">2132</a>         <em class="jxr_comment">// test with COUNTRY level</em>
 <a class="jxr_linenumber" name="L2133" href="#L2133">2133</a>         location = locator.locate(address, IPGeolocationLevel.COUNTRY);
 <a class="jxr_linenumber" name="L2134" href="#L2134">2134</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L2135" href="#L2135">2135</a>         assertNull(location.getCity());
@@ -2201,12 +2201,12 @@
 <a class="jxr_linenumber" name="L2193" href="#L2193">2193</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testLocateIpv6Address() <strong class="jxr_keyword">throws</strong> UnknownHostException,
 <a class="jxr_linenumber" name="L2194" href="#L2194">2194</a>             IPLocationNotFoundException, IPGeolocationDisabledException {
 <a class="jxr_linenumber" name="L2195" href="#L2195">2195</a> 
-<a class="jxr_linenumber" name="L2196" href="#L2196">2196</a>         IPGeolocator locator = IPGeolocator.getInstance();
+<a class="jxr_linenumber" name="L2196" href="#L2196">2196</a>         <strong class="jxr_keyword">final</strong> IPGeolocator locator = IPGeolocator.getInstance();
 <a class="jxr_linenumber" name="L2197" href="#L2197">2197</a> 
-<a class="jxr_linenumber" name="L2198" href="#L2198">2198</a>         String address = <span class="jxr_string">"2001:4860:0:1001::68"</span>;
-<a class="jxr_linenumber" name="L2199" href="#L2199">2199</a>         InetAddress inetAddress = InetAddress.getByName(address);
+<a class="jxr_linenumber" name="L2198" href="#L2198">2198</a>         <strong class="jxr_keyword">final</strong> String address = <span class="jxr_string">"2001:4860:0:1001::68"</span>;
+<a class="jxr_linenumber" name="L2199" href="#L2199">2199</a>         <strong class="jxr_keyword">final</strong> InetAddress inetAddress = InetAddress.getByName(address);
 <a class="jxr_linenumber" name="L2200" href="#L2200">2200</a> 
-<a class="jxr_linenumber" name="L2201" href="#L2201">2201</a>         <em class="jxr_comment">//test with default level</em>
+<a class="jxr_linenumber" name="L2201" href="#L2201">2201</a>         <em class="jxr_comment">// test with default level</em>
 <a class="jxr_linenumber" name="L2202" href="#L2202">2202</a>         IPLocation location = locator.locate(address);
 <a class="jxr_linenumber" name="L2203" href="#L2203">2203</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L2204" href="#L2204">2204</a>         assertNull(location.getCity());
@@ -2266,7 +2266,7 @@
 <a class="jxr_linenumber" name="L2258" href="#L2258">2258</a>         assertEquals(location.getContinentName(), <span class="jxr_string">"North America"</span>);
 <a class="jxr_linenumber" name="L2259" href="#L2259">2259</a>         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L2260" href="#L2260">2260</a> 
-<a class="jxr_linenumber" name="L2261" href="#L2261">2261</a>         <em class="jxr_comment">//test with CITY level</em>
+<a class="jxr_linenumber" name="L2261" href="#L2261">2261</a>         <em class="jxr_comment">// test with CITY level</em>
 <a class="jxr_linenumber" name="L2262" href="#L2262">2262</a>         location = locator.locate(address, IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L2263" href="#L2263">2263</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L2264" href="#L2264">2264</a>         assertNull(location.getCity());
@@ -2326,7 +2326,7 @@
 <a class="jxr_linenumber" name="L2318" href="#L2318">2318</a>         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L2319" href="#L2319">2319</a> 
 <a class="jxr_linenumber" name="L2320" href="#L2320">2320</a> 
-<a class="jxr_linenumber" name="L2321" href="#L2321">2321</a>         <em class="jxr_comment">//test with COUNTRY level</em>
+<a class="jxr_linenumber" name="L2321" href="#L2321">2321</a>         <em class="jxr_comment">// test with COUNTRY level</em>
 <a class="jxr_linenumber" name="L2322" href="#L2322">2322</a>         location = locator.locate(address, IPGeolocationLevel.COUNTRY);
 <a class="jxr_linenumber" name="L2323" href="#L2323">2323</a>         assertNotNull(location);
 <a class="jxr_linenumber" name="L2324" href="#L2324">2324</a>         assertNull(location.getCity());
@@ -2390,94 +2390,94 @@
 <a class="jxr_linenumber" name="L2382" href="#L2382">2382</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testLocateLocalAddress() <strong class="jxr_keyword">throws</strong> UnknownHostException,
 <a class="jxr_linenumber" name="L2383" href="#L2383">2383</a>             IPGeolocationDisabledException {
 <a class="jxr_linenumber" name="L2384" href="#L2384">2384</a> 
-<a class="jxr_linenumber" name="L2385" href="#L2385">2385</a>         IPGeolocator locator = IPGeolocator.getInstance();
+<a class="jxr_linenumber" name="L2385" href="#L2385">2385</a>         <strong class="jxr_keyword">final</strong> IPGeolocator locator = IPGeolocator.getInstance();
 <a class="jxr_linenumber" name="L2386" href="#L2386">2386</a> 
-<a class="jxr_linenumber" name="L2387" href="#L2387">2387</a>         String address = <span class="jxr_string">"127.0.0.1"</span>;
-<a class="jxr_linenumber" name="L2388" href="#L2388">2388</a>         InetAddress inetAddress = InetAddress.getByName(address);
+<a class="jxr_linenumber" name="L2387" href="#L2387">2387</a>         <strong class="jxr_keyword">final</strong> String address = <span class="jxr_string">"127.0.0.1"</span>;
+<a class="jxr_linenumber" name="L2388" href="#L2388">2388</a>         <strong class="jxr_keyword">final</strong> InetAddress inetAddress = InetAddress.getByName(address);
 <a class="jxr_linenumber" name="L2389" href="#L2389">2389</a> 
-<a class="jxr_linenumber" name="L2390" href="#L2390">2390</a>         <em class="jxr_comment">//test with default level</em>
+<a class="jxr_linenumber" name="L2390" href="#L2390">2390</a>         <em class="jxr_comment">// test with default level</em>
 <a class="jxr_linenumber" name="L2391" href="#L2391">2391</a>         IPLocation location = <strong class="jxr_keyword">null</strong>;
 <a class="jxr_linenumber" name="L2392" href="#L2392">2392</a>         <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L2393" href="#L2393">2393</a>             location = locator.locate(address);
 <a class="jxr_linenumber" name="L2394" href="#L2394">2394</a>             fail(<span class="jxr_string">"IPLocationNotFoundException expected but not thrown"</span>);
-<a class="jxr_linenumber" name="L2395" href="#L2395">2395</a>         } <strong class="jxr_keyword">catch</strong> (IPLocationNotFoundException ignore) {
+<a class="jxr_linenumber" name="L2395" href="#L2395">2395</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPLocationNotFoundException ignore) {
 <a class="jxr_linenumber" name="L2396" href="#L2396">2396</a>         }
 <a class="jxr_linenumber" name="L2397" href="#L2397">2397</a> 
 <a class="jxr_linenumber" name="L2398" href="#L2398">2398</a>         <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L2399" href="#L2399">2399</a>             location = locator.locate(inetAddress);
 <a class="jxr_linenumber" name="L2400" href="#L2400">2400</a>             fail(<span class="jxr_string">"IPLocationNotFoundException expected but not thrown"</span>);
-<a class="jxr_linenumber" name="L2401" href="#L2401">2401</a>         } <strong class="jxr_keyword">catch</strong> (IPLocationNotFoundException ignore) {
+<a class="jxr_linenumber" name="L2401" href="#L2401">2401</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPLocationNotFoundException ignore) {
 <a class="jxr_linenumber" name="L2402" href="#L2402">2402</a>         }
 <a class="jxr_linenumber" name="L2403" href="#L2403">2403</a> 
-<a class="jxr_linenumber" name="L2404" href="#L2404">2404</a>         <em class="jxr_comment">//test with CITY level</em>
+<a class="jxr_linenumber" name="L2404" href="#L2404">2404</a>         <em class="jxr_comment">// test with CITY level</em>
 <a class="jxr_linenumber" name="L2405" href="#L2405">2405</a>         <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L2406" href="#L2406">2406</a>             location = locator.locate(address, IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L2407" href="#L2407">2407</a>             fail(<span class="jxr_string">"IPLocationNotFoundException expected but not thrown"</span>);
-<a class="jxr_linenumber" name="L2408" href="#L2408">2408</a>         } <strong class="jxr_keyword">catch</strong> (IPLocationNotFoundException ignore) {
+<a class="jxr_linenumber" name="L2408" href="#L2408">2408</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPLocationNotFoundException ignore) {
 <a class="jxr_linenumber" name="L2409" href="#L2409">2409</a>         }
 <a class="jxr_linenumber" name="L2410" href="#L2410">2410</a> 
 <a class="jxr_linenumber" name="L2411" href="#L2411">2411</a>         <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L2412" href="#L2412">2412</a>             location = locator.locate(inetAddress, IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L2413" href="#L2413">2413</a>             fail(<span class="jxr_string">"IPLocationNotFoundException expected but not thrown"</span>);
-<a class="jxr_linenumber" name="L2414" href="#L2414">2414</a>         } <strong class="jxr_keyword">catch</strong> (IPLocationNotFoundException ignore) {
+<a class="jxr_linenumber" name="L2414" href="#L2414">2414</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPLocationNotFoundException ignore) {
 <a class="jxr_linenumber" name="L2415" href="#L2415">2415</a>         }
 <a class="jxr_linenumber" name="L2416" href="#L2416">2416</a> 
-<a class="jxr_linenumber" name="L2417" href="#L2417">2417</a>         <em class="jxr_comment">//test with COUNTRY level</em>
+<a class="jxr_linenumber" name="L2417" href="#L2417">2417</a>         <em class="jxr_comment">// test with COUNTRY level</em>
 <a class="jxr_linenumber" name="L2418" href="#L2418">2418</a>         <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L2419" href="#L2419">2419</a>             location = locator.locate(address, IPGeolocationLevel.COUNTRY);
 <a class="jxr_linenumber" name="L2420" href="#L2420">2420</a>             fail(<span class="jxr_string">"IPLocationNotFoundException expected but not thrown"</span>);
-<a class="jxr_linenumber" name="L2421" href="#L2421">2421</a>         } <strong class="jxr_keyword">catch</strong> (IPLocationNotFoundException ignore) {
+<a class="jxr_linenumber" name="L2421" href="#L2421">2421</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPLocationNotFoundException ignore) {
 <a class="jxr_linenumber" name="L2422" href="#L2422">2422</a>         }
 <a class="jxr_linenumber" name="L2423" href="#L2423">2423</a> 
 <a class="jxr_linenumber" name="L2424" href="#L2424">2424</a>         <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L2425" href="#L2425">2425</a>             location = locator.locate(inetAddress, IPGeolocationLevel.COUNTRY);
 <a class="jxr_linenumber" name="L2426" href="#L2426">2426</a>             fail(<span class="jxr_string">"IPLocationNotFoundException expected but not thrown"</span>);
-<a class="jxr_linenumber" name="L2427" href="#L2427">2427</a>         } <strong class="jxr_keyword">catch</strong> (IPLocationNotFoundException ignore) {
+<a class="jxr_linenumber" name="L2427" href="#L2427">2427</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPLocationNotFoundException ignore) {
 <a class="jxr_linenumber" name="L2428" href="#L2428">2428</a>         }
 <a class="jxr_linenumber" name="L2429" href="#L2429">2429</a>         assertNull(location);
 <a class="jxr_linenumber" name="L2430" href="#L2430">2430</a>     }
 <a class="jxr_linenumber" name="L2431" href="#L2431">2431</a> 
 <a class="jxr_linenumber" name="L2432" href="#L2432">2432</a>     @Test
 <a class="jxr_linenumber" name="L2433" href="#L2433">2433</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testForceIPLocationDisabledException()
-<a class="jxr_linenumber" name="L2434" href="#L2434">2434</a>             <strong class="jxr_keyword">throws</strong> UnknownHostException, IPLocationNotFoundException {
-<a class="jxr_linenumber" name="L2435" href="#L2435">2435</a>         IPGeolocator locator = IPGeolocator.getInstance();
-<a class="jxr_linenumber" name="L2436" href="#L2436">2436</a>         String address = <span class="jxr_string">"64.4.4.4"</span>;
+<a class="jxr_linenumber" name="L2434" href="#L2434">2434</a>             <strong class="jxr_keyword">throws</strong> IOException, IPLocationNotFoundException {
+<a class="jxr_linenumber" name="L2435" href="#L2435">2435</a>         <strong class="jxr_keyword">final</strong> IPGeolocator locator = IPGeolocator.getInstance();
+<a class="jxr_linenumber" name="L2436" href="#L2436">2436</a>         <strong class="jxr_keyword">final</strong> String address = <span class="jxr_string">"64.4.4.4"</span>;
 <a class="jxr_linenumber" name="L2437" href="#L2437">2437</a>         locator.close();
 <a class="jxr_linenumber" name="L2438" href="#L2438">2438</a> 
-<a class="jxr_linenumber" name="L2439" href="#L2439">2439</a>         <em class="jxr_comment">//Force IPLocationDisabledException</em>
+<a class="jxr_linenumber" name="L2439" href="#L2439">2439</a>         <em class="jxr_comment">// Force IPLocationDisabledException</em>
 <a class="jxr_linenumber" name="L2440" href="#L2440">2440</a>         <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L2441" href="#L2441">2441</a>             locator.locate(address);
 <a class="jxr_linenumber" name="L2442" href="#L2442">2442</a>             fail(<span class="jxr_string">"IPLocationDisabledException expected but not thrown"</span>);
-<a class="jxr_linenumber" name="L2443" href="#L2443">2443</a>         } <strong class="jxr_keyword">catch</strong> (IPGeolocationDisabledException ignore) {
+<a class="jxr_linenumber" name="L2443" href="#L2443">2443</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPGeolocationDisabledException ignore) {
 <a class="jxr_linenumber" name="L2444" href="#L2444">2444</a>         }
 <a class="jxr_linenumber" name="L2445" href="#L2445">2445</a>         <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L2446" href="#L2446">2446</a>             locator.locate(InetAddress.getByName(address));
 <a class="jxr_linenumber" name="L2447" href="#L2447">2447</a>             fail(<span class="jxr_string">"IPLocationDisabledException expected but not thrown"</span>);
-<a class="jxr_linenumber" name="L2448" href="#L2448">2448</a>         } <strong class="jxr_keyword">catch</strong> (IPGeolocationDisabledException ignore) {
+<a class="jxr_linenumber" name="L2448" href="#L2448">2448</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPGeolocationDisabledException ignore) {
 <a class="jxr_linenumber" name="L2449" href="#L2449">2449</a>         }
 <a class="jxr_linenumber" name="L2450" href="#L2450">2450</a> 
 <a class="jxr_linenumber" name="L2451" href="#L2451">2451</a>         <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L2452" href="#L2452">2452</a>             locator.locate(address, IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L2453" href="#L2453">2453</a>             fail(<span class="jxr_string">"IPLocationDisabledException expected but not thrown"</span>);
-<a class="jxr_linenumber" name="L2454" href="#L2454">2454</a>         } <strong class="jxr_keyword">catch</strong> (IPGeolocationDisabledException ignore) {
+<a class="jxr_linenumber" name="L2454" href="#L2454">2454</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPGeolocationDisabledException ignore) {
 <a class="jxr_linenumber" name="L2455" href="#L2455">2455</a>         }
 <a class="jxr_linenumber" name="L2456" href="#L2456">2456</a>         <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L2457" href="#L2457">2457</a>             locator.locate(InetAddress.getByName(address),
 <a class="jxr_linenumber" name="L2458" href="#L2458">2458</a>                     IPGeolocationLevel.CITY);
 <a class="jxr_linenumber" name="L2459" href="#L2459">2459</a>             fail(<span class="jxr_string">"IPLocationDisabledException expected but not thrown"</span>);
-<a class="jxr_linenumber" name="L2460" href="#L2460">2460</a>         } <strong class="jxr_keyword">catch</strong> (IPGeolocationDisabledException ignore) {
+<a class="jxr_linenumber" name="L2460" href="#L2460">2460</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPGeolocationDisabledException ignore) {
 <a class="jxr_linenumber" name="L2461" href="#L2461">2461</a>         }
 <a class="jxr_linenumber" name="L2462" href="#L2462">2462</a> 
 <a class="jxr_linenumber" name="L2463" href="#L2463">2463</a>         <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L2464" href="#L2464">2464</a>             locator.locate(address, IPGeolocationLevel.COUNTRY);
 <a class="jxr_linenumber" name="L2465" href="#L2465">2465</a>             fail(<span class="jxr_string">"IPLocationDisabledException expected but not thrown"</span>);
-<a class="jxr_linenumber" name="L2466" href="#L2466">2466</a>         } <strong class="jxr_keyword">catch</strong> (IPGeolocationDisabledException ignore) {
+<a class="jxr_linenumber" name="L2466" href="#L2466">2466</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPGeolocationDisabledException ignore) {
 <a class="jxr_linenumber" name="L2467" href="#L2467">2467</a>         }
 <a class="jxr_linenumber" name="L2468" href="#L2468">2468</a>         <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L2469" href="#L2469">2469</a>             locator.locate(InetAddress.getByName(address),
 <a class="jxr_linenumber" name="L2470" href="#L2470">2470</a>                     IPGeolocationLevel.COUNTRY);
 <a class="jxr_linenumber" name="L2471" href="#L2471">2471</a>             fail(<span class="jxr_string">"IPLocationDisabledException expected but not thrown"</span>);
-<a class="jxr_linenumber" name="L2472" href="#L2472">2472</a>         } <strong class="jxr_keyword">catch</strong> (IPGeolocationDisabledException ignore) {
+<a class="jxr_linenumber" name="L2472" href="#L2472">2472</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPGeolocationDisabledException ignore) {
 <a class="jxr_linenumber" name="L2473" href="#L2473">2473</a>         }
 <a class="jxr_linenumber" name="L2474" href="#L2474">2474</a> 
 <a class="jxr_linenumber" name="L2475" href="#L2475">2475</a>         IPGeolocator.reset();
@@ -2485,6 +2485,6 @@
 <a class="jxr_linenumber" name="L2477" href="#L2477">2477</a> }
 </pre>
 <hr/>
-<div id="footer">Copyright &#169; 2016&#x2013;2020. All rights reserved.</div>
+<div id="footer">Copyright &#169; 2016&#x2013;2021. All rights reserved.</div>
 </body>
 </html>

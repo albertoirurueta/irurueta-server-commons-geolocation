@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GeolocationConfigurationFactory.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-geolocation</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.geolocation</a> &gt; <span class="el_source">GeolocationConfigurationFactory.java</span></div><h1>GeolocationConfigurationFactory.java</h1><pre class="source lang-java linenums">/**
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GeolocationConfigurationFactory.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-geolocation</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.geolocation</a> &gt; <span class="el_source">GeolocationConfigurationFactory.java</span></div><h1>GeolocationConfigurationFactory.java</h1><pre class="source lang-java linenums">/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -17,186 +17,197 @@ package com.irurueta.server.commons.geolocation;
 
 import com.irurueta.server.commons.configuration.BaseConfigurationFactory;
 import com.irurueta.server.commons.configuration.ConfigurationException;
+
+import java.io.IOException;
 import java.util.Properties;
 
 /**
  * Class in charge of loading and configuring geolocation services.
  */
-public class GeolocationConfigurationFactory extends 
-        BaseConfigurationFactory&lt;GeolocationConfiguration&gt;{
-    
+public class GeolocationConfigurationFactory extends
+        BaseConfigurationFactory&lt;GeolocationConfiguration&gt; {
+
     /**
-     * Property indicating which geolocation level must be used if none is 
+     * Property indicating which geolocation level must be used if none is
      * provided. When looking at City level Country information is also
      * included.
      */
     public static final String IP_GEOLOCATION_LEVEL_PROPERTY =
             &quot;com.irurueta.server.commons.geolocation.IP_GEOLOCATION_LEVEL&quot;;
-    
+
     /**
      * Default IP geolocation level.
      */
-<span class="fc" id="L39">    public static final IPGeolocationLevel DEFAULT_IP_GEOLOCATION_LEVEL =</span>
+<span class="fc" id="L41">    public static final IPGeolocationLevel DEFAULT_IP_GEOLOCATION_LEVEL =</span>
             IPGeolocationLevel.CITY;
-    
+
     /**
      * Indicates whether geolocation database must be cached in memory or not.
-     * When caching is enabled, performance increases significantly at the 
+     * When caching is enabled, performance increases significantly at the
      * expense of an overhead in memory of approximately 2MB.
      */
-    public static final String CACHING_ENABLED_PROPERTY = 
+    public static final String CACHING_ENABLED_PROPERTY =
             &quot;com.irurueta.server.commons.geolocation.CACHING_ENABLED&quot;;
-    
+
     /**
      * Default value for geolocation caching.
      */
     public static final boolean DEFAULT_CACHING_ENABLED = true;
-                
+
     /**
      * Property indicating if country IP geolocation database is embedded.
      * By default the embedded free database in the code will be used.
      */
-    public static final String IP_GEOLOCATION_COUNTRY_DATABASE_EMBEDDED_PROPERTY = 
+    public static final String IP_GEOLOCATION_COUNTRY_DATABASE_EMBEDDED_PROPERTY =
             &quot;com.irurueta.server.commons.geolocation.IP_GEOLOCATION_COUNTRY_DATABASE_EMBEDDED&quot;;
-    
+
     /**
-     * By default the embedded free database in the code will be used for 
+     * By default the embedded free database in the code will be used for
      * country IP geolocation.
      */
-    public static final boolean DEFAULT_IP_GEOLOCATION_COUNTRY_DATABASE_EMBEDDED = 
+    public static final boolean DEFAULT_IP_GEOLOCATION_COUNTRY_DATABASE_EMBEDDED =
             true;
-    
+
     /**
-     * Property indicating resource where IP country geolocation database is 
+     * Property indicating resource where IP country geolocation database is
      * embedded.
-     * This value should rarely be modified. Only if other embedded databases 
+     * This value should rarely be modified. Only if other embedded databases
      * are required in the code.
      */
-    public static final String IP_GEOLOCATION_COUNTRY_EMBEDDED_RESOURCE_PROPERTY = 
+    public static final String IP_GEOLOCATION_COUNTRY_EMBEDDED_RESOURCE_PROPERTY =
             &quot;com.irurueta.server.commons.geolocation.IP_GEOLOCATION_COUNTRY_EMBEDDED_RESOURCE&quot;;
-    
+
     /**
      * Default resource where IP country geolocation database is located.
      */
-    public static final String DEFAULT_IP_GEOLOCATION_COUNTRY_EMBEDDED_RESOURCE = 
-            &quot;GeoLite2-Country.mmdb&quot;;    
-        
+    public static final String DEFAULT_IP_GEOLOCATION_COUNTRY_EMBEDDED_RESOURCE =
+            &quot;GeoLite2-Country.mmdb&quot;;
+
     /**
      * Property indicating where the IP country geolocation database file can
-     * be found, or if such database is embedded, then the destination file 
+     * be found, or if such database is embedded, then the destination file
      * where if will be copied while the IPGeolocator is running.
      */
     public static final String IP_GEOLOCATION_COUNTRY_DATABASE_FILE_PROPERTY =
             &quot;com.irurueta.server.commons.geolocation.IP_GEOLOCATION_COUNTRY_DATABASE_FILE&quot;;
-    
+
     /**
      * Default file location where IP country geolocation database can be found
      * or where it will be copied if it is embedded in the code.
      */
     public static final String DEFAULT_IP_GEOLOCATION_COUNTRY_DATABASE_FILE =
             &quot;./GeoLite2-Country.mmdb&quot;;
-    
+
     /**
      * Property indicating if city IP geolocation database is embedded.
      * By default the embedded free database in the code will be used.
-     */        
-    public static final String IP_GEOLOCATION_CITY_DATABASE_EMBEDDED_PROPERTY = 
+     */
+    public static final String IP_GEOLOCATION_CITY_DATABASE_EMBEDDED_PROPERTY =
             &quot;com.irurueta.server.commons.geolocation.IP_GEOLOCATION_CITY_DATABASE_EMBEDDED&quot;;
-    
+
     /**
-     * By default the embedded free database in the code will be used for 
+     * By default the embedded free database in the code will be used for
      * city IP geolocation.
-     */        
-    public static final boolean DEFAULT_IP_GEOLOCATION_CITY_DATABASE_EMBEDDED = 
+     */
+    public static final boolean DEFAULT_IP_GEOLOCATION_CITY_DATABASE_EMBEDDED =
             true;
-    
+
     /**
-     * Property indicating resource where IP city geolocation database is 
+     * Property indicating resource where IP city geolocation database is
      * embedded.
-     * This value should rarely be modified. Only if other embedded databases 
+     * This value should rarely be modified. Only if other embedded databases
      * are required in the code.
-     */        
-    public static final String IP_GEOLOCATION_CITY_EMBEDDED_RESOURCE_PROPERTY = 
+     */
+    public static final String IP_GEOLOCATION_CITY_EMBEDDED_RESOURCE_PROPERTY =
             &quot;com.irurueta.server.commons.geolocation.IP_GEOLOCATION_CITY_EMBEDDED_RESOURCE&quot;;
 
     /**
      * Default resource where IP city geolocation database is located.
-     */        
-    public static final String DEFAULT_IP_GEOLOCATION_CITY_EMBEDDED_RESOURCE = 
+     */
+    public static final String DEFAULT_IP_GEOLOCATION_CITY_EMBEDDED_RESOURCE =
             &quot;GeoLite2-City.mmdb&quot;;
 
     /**
      * Property indicating where the IP city geolocation database file can
-     * be found, or if such database is embedded, then the destination file 
+     * be found, or if such database is embedded, then the destination file
      * where if will be copied while the IPGeolocator is running.
-     */        
+     */
     public static final String IP_GEOLOCATION_CITY_DATABASE_FILE_PROPERTY =
             &quot;com.irurueta.server.commons.geolocation.IP_GEOLOCATION_CITY_DATABASE_FILE&quot;;
-    
+
     /**
-     * Default file location where IP city geolocation database can be 
+     * Default file location where IP city geolocation database can be
      * found or where it will be copied if it is embedded in the code.
-     */        
+     */
     public static final String DEFAULT_IP_GEOLOCATION_CITY_DATABASE_FILE =
             &quot;./GeoLite2-City.mmdb&quot;;
-    
+
     /**
      * Reference to factory singleton.
      */
-<span class="fc" id="L146">    private static GeolocationConfigurationFactory mSingleton = null;</span>
-    
+<span class="fc" id="L148">    private static GeolocationConfigurationFactory mSingleton = null;</span>
+
     /**
      * Constructor.
      */
-    private GeolocationConfigurationFactory(){}
-    
+    private GeolocationConfigurationFactory() {
+    }
+
     /**
      * Factory method to create or return singleton instance.
+     *
      * @return factory singleton.
      */
-    public synchronized static GeolocationConfigurationFactory getInstance(){
-<span class="fc bfc" id="L158" title="All 2 branches covered.">        if(mSingleton == null) mSingleton = new GeolocationConfigurationFactory();</span>
-<span class="fc" id="L159">        return mSingleton;</span>
+    public static synchronized GeolocationConfigurationFactory getInstance() {
+<span class="fc bfc" id="L162" title="All 2 branches covered.">        if (mSingleton == null) {</span>
+<span class="fc" id="L163">            mSingleton = new GeolocationConfigurationFactory();</span>
+        }
+<span class="fc" id="L165">        return mSingleton;</span>
     }
-    
+
     /**
      * Configures the geolocation layer using provided properties.
+     *
      * @param properties properties containing geolocation configuration
      * @return geolocation configuration.
      * @throws ConfigurationException if any property value was invalid.
-     */    
+     */
     @Override
-    public GeolocationConfiguration configure(Properties properties) 
+    public GeolocationConfiguration configure(final Properties properties)
             throws ConfigurationException {
-<span class="fc bfc" id="L171" title="All 2 branches covered.">        if(mConfiguration != null) return mConfiguration;</span>
-        
-<span class="fc bfc" id="L173" title="All 2 branches covered.">        if(properties == null){</span>
-            //use default configuration
-<span class="fc" id="L175">            mConfiguration = new GeolocationConfigurationImpl();</span>
-        }else{
-<span class="fc" id="L177">            mConfiguration = new GeolocationConfigurationImpl(properties);</span>
+<span class="fc bfc" id="L178" title="All 2 branches covered.">        if (mConfiguration != null) return mConfiguration;</span>
+
+<span class="fc bfc" id="L180" title="All 2 branches covered.">        if (properties == null) {</span>
+            // use default configuration
+<span class="fc" id="L182">            mConfiguration = new GeolocationConfigurationImpl();</span>
+        } else {
+<span class="fc" id="L184">            mConfiguration = new GeolocationConfigurationImpl(properties);</span>
         }
-        
-        //configure IPGeolocator
-<span class="fc" id="L181">        IPGeolocator.getInstance();</span>
-        
-<span class="fc" id="L183">        return mConfiguration;</span>
+
+        // configure IPGeolocator
+<span class="fc" id="L188">        IPGeolocator.getInstance();</span>
+
+<span class="fc" id="L190">        return mConfiguration;</span>
     }
-    
+
     /**
      * Resets configuration by removing any existing configuration if already
      * defined.
+     *
      * @return returns this instance so that this method can be chained .
      * @throws ConfigurationException if something fails during configuration
-     * reset.
+     *                                reset.
      */
     @Override
-    public synchronized 
-            BaseConfigurationFactory&lt;GeolocationConfiguration&gt; reset() 
-            throws ConfigurationException{
-<span class="fc" id="L197">        IPGeolocator.reset();</span>
-<span class="fc" id="L198">        mConfiguration = null;</span>
-<span class="fc" id="L199">        return super.reset();</span>
-    }    
+    public synchronized BaseConfigurationFactory&lt;GeolocationConfiguration&gt; reset()
+            throws ConfigurationException {
+        try {
+<span class="fc" id="L205">            IPGeolocator.reset();</span>
+<span class="nc" id="L206">        } catch (final IOException e) {</span>
+<span class="nc" id="L207">            throw new ConfigurationException(e);</span>
+<span class="fc" id="L208">        }</span>
+<span class="fc" id="L209">        mConfiguration = null;</span>
+<span class="fc" id="L210">        return super.reset();</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
