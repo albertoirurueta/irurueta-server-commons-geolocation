@@ -2503,6 +2503,60 @@ public class IPGeolocatorTest {
     }
 
     @Test
+    public void testLocateWhenDisabledLevel() throws ConfigurationException, IOException {
+        final Properties props = new Properties();
+        props.setProperty(GeolocationConfigurationFactory.
+                IP_GEOLOCATION_COUNTRY_DATABASE_FILE_PROPERTY, COUNTRY_FILE);
+        props.setProperty(GeolocationConfigurationFactory.
+                IP_GEOLOCATION_CITY_DATABASE_FILE_PROPERTY, CITY_FILE);
+        props.setProperty(GeolocationConfigurationFactory.IP_GEOLOCATION_LEVEL_PROPERTY,
+                IPGeolocationLevel.DISABLED.getValue());
+
+        GeolocationConfigurationFactory.getInstance().configure(props);
+
+        final IPGeolocator locator = IPGeolocator.getInstance();
+        final String address = "64.4.4.4";
+
+        // Force IPLocationDisabledException
+        try {
+            locator.locate(address);
+            fail("IPLocationDisabledException expected but not thrown");
+        } catch (final IPGeolocationDisabledException | IPLocationNotFoundException ignore) {
+        }
+        try {
+            locator.locate(InetAddress.getByName(address));
+            fail("IPLocationDisabledException expected but not thrown");
+        } catch (final IPGeolocationDisabledException | IPLocationNotFoundException ignore) {
+        }
+
+        try {
+            locator.locate(address, IPGeolocationLevel.CITY);
+            fail("IPLocationDisabledException expected but not thrown");
+        } catch (final IPGeolocationDisabledException | IPLocationNotFoundException ignore) {
+        }
+        try {
+            locator.locate(InetAddress.getByName(address),
+                    IPGeolocationLevel.CITY);
+            fail("IPLocationDisabledException expected but not thrown");
+        } catch (final IPGeolocationDisabledException | IPLocationNotFoundException ignore) {
+        }
+
+        try {
+            locator.locate(address, IPGeolocationLevel.COUNTRY);
+            fail("IPLocationDisabledException expected but not thrown");
+        } catch (final IPGeolocationDisabledException | IPLocationNotFoundException ignore) {
+        }
+        try {
+            locator.locate(InetAddress.getByName(address),
+                    IPGeolocationLevel.COUNTRY);
+            fail("IPLocationDisabledException expected but not thrown");
+        } catch (final IPGeolocationDisabledException | IPLocationNotFoundException ignore) {
+        }
+
+        IPGeolocator.reset();
+    }
+
+    @Test
     public void testForceIPLocationDisabledException()
             throws IOException, IPLocationNotFoundException {
         final IPGeolocator locator = IPGeolocator.getInstance();

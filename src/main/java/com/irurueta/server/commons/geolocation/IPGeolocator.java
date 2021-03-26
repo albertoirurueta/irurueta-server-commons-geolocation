@@ -17,6 +17,7 @@ package com.irurueta.server.commons.geolocation;
 
 import com.maxmind.db.CHMCache;
 import com.maxmind.geoip2.DatabaseReader;
+import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.model.AbstractCountryResponse;
 import com.maxmind.geoip2.model.CityResponse;
 import com.maxmind.geoip2.record.City;
@@ -175,7 +176,6 @@ public class IPGeolocator implements Closeable {
 
         try {
             final IPLocation location = new IPLocation(level);
-            boolean found = false;
             DatabaseReader reader;
 
             // city level
@@ -184,62 +184,54 @@ public class IPGeolocator implements Closeable {
 
                 // search at city level
                 final CityResponse response = reader.city(address);
-                if (response != null) {
-                    found = true;
 
-                    // city level
-                    final City city = response.getCity();
-                    if (city != null) {
-                        location.mCity = city.getName();
-                    }
+                // city level
+                final City city = response.getCity();
+                if (city != null) {
+                    location.mCity = city.getName();
+                }
 
-                    final Location loc = response.getLocation();
-                    if (loc != null) {
-                        location.mTimeZone = loc.getTimeZone() != null ?
-                                TimeZone.getTimeZone(loc.getTimeZone()) : null;
-                        location.mAccuracyRadius = loc.getAccuracyRadius();
-                        location.mMetroCode = loc.getMetroCode();
-                        location.mLatitude = loc.getLatitude();
-                        location.mLongitude = loc.getLongitude();
-                    }
+                final Location loc = response.getLocation();
+                if (loc != null) {
+                    location.mTimeZone = loc.getTimeZone() != null ?
+                            TimeZone.getTimeZone(loc.getTimeZone()) : null;
+                    location.mAccuracyRadius = loc.getAccuracyRadius();
+                    location.mMetroCode = loc.getMetroCode();
+                    location.mLatitude = loc.getLatitude();
+                    location.mLongitude = loc.getLongitude();
+                }
 
-                    final Postal postal = response.getPostal();
-                    if (postal != null) {
-                        location.mPostalCode = postal.getCode();
-                    }
+                final Postal postal = response.getPostal();
+                if (postal != null) {
+                    location.mPostalCode = postal.getCode();
+                }
 
-                    final List<Subdivision> subdivisions = response.getSubdivisions();
-                    if (subdivisions != null) {
-                        location.mSubdivisionCodes = new ArrayList<>();
-                        location.mSubdivisionNames = new ArrayList<>();
-                        for (final Subdivision s : subdivisions) {
-                            if (s.getIsoCode() != null && s.getName() != null) {
-                                location.mSubdivisionCodes.add(s.getIsoCode());
-                                location.mSubdivisionNames.add(s.getName());
-                            }
+                final List<Subdivision> subdivisions = response.getSubdivisions();
+                if (subdivisions != null) {
+                    location.mSubdivisionCodes = new ArrayList<>();
+                    location.mSubdivisionNames = new ArrayList<>();
+                    for (final Subdivision s : subdivisions) {
+                        if (s.getIsoCode() != null && s.getName() != null) {
+                            location.mSubdivisionCodes.add(s.getIsoCode());
+                            location.mSubdivisionNames.add(s.getName());
                         }
                     }
-
-
-                    // country level
-                    processCountryResponse(response, location);
                 }
+
+
+                // country level
+                processCountryResponse(response, location);
             }
 
             // country or city level (if nothing has been found yet)
             if (level == IPGeolocationLevel.COUNTRY) {
                 reader = getOrCreateCountryReader();
                 final AbstractCountryResponse response = reader.country(address);
-                found = response != null;
                 processCountryResponse(response, location);
             }
 
-            if (!found) {
-                throw new IPLocationNotFoundException();
-            }
-
             return location;
-        } catch (final Exception e) {
+        } catch (final GeoIp2Exception | IOException e) {
             throw new IPLocationNotFoundException(e);
         }
     }
