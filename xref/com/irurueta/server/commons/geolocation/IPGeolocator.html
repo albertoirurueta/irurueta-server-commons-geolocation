@@ -391,237 +391,223 @@
 <a class="jxr_linenumber" name="L383" href="#L383">383</a>     }
 <a class="jxr_linenumber" name="L384" href="#L384">384</a> 
 <a class="jxr_linenumber" name="L385" href="#L385">385</a>     <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L386" href="#L386">386</a> <em class="jxr_javadoccomment">     * This method is called on garbage collection.</em>
-<a class="jxr_linenumber" name="L387" href="#L387">387</a> <em class="jxr_javadoccomment">     * When this method is called, all the location services of this instance</em>
-<a class="jxr_linenumber" name="L388" href="#L388">388</a> <em class="jxr_javadoccomment">     * will be closed, and the files where embedded databases were copied will</em>
-<a class="jxr_linenumber" name="L389" href="#L389">389</a> <em class="jxr_javadoccomment">     * be deleted.</em>
-<a class="jxr_linenumber" name="L390" href="#L390">390</a> <em class="jxr_javadoccomment">     *</em>
-<a class="jxr_linenumber" name="L391" href="#L391">391</a> <em class="jxr_javadoccomment">     * @throws Throwable if anything fails.</em>
-<a class="jxr_linenumber" name="L392" href="#L392">392</a> <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L393" href="#L393">393</a>     @Override
-<a class="jxr_linenumber" name="L394" href="#L394">394</a>     <strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">void</strong> finalize() <strong class="jxr_keyword">throws</strong> Throwable {
-<a class="jxr_linenumber" name="L395" href="#L395">395</a>         close();
-<a class="jxr_linenumber" name="L396" href="#L396">396</a>         <strong class="jxr_keyword">super</strong>.finalize();
-<a class="jxr_linenumber" name="L397" href="#L397">397</a>     }
-<a class="jxr_linenumber" name="L398" href="#L398">398</a> 
-<a class="jxr_linenumber" name="L399" href="#L399">399</a>     <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L400" href="#L400">400</a> <em class="jxr_javadoccomment">     * Gets or create city database reader.</em>
-<a class="jxr_linenumber" name="L401" href="#L401">401</a> <em class="jxr_javadoccomment">     *</em>
-<a class="jxr_linenumber" name="L402" href="#L402">402</a> <em class="jxr_javadoccomment">     * @return city database reader.</em>
-<a class="jxr_linenumber" name="L403" href="#L403">403</a> <em class="jxr_javadoccomment">     * @throws IOException if an I/O error occurs.</em>
-<a class="jxr_linenumber" name="L404" href="#L404">404</a> <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L405" href="#L405">405</a>     <strong class="jxr_keyword">private</strong> DatabaseReader getOrCreateCityReader() <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L406" href="#L406">406</a>         <strong class="jxr_keyword">if</strong> (mCityReader != <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="L407" href="#L407">407</a>             <strong class="jxr_keyword">return</strong> mCityReader;
-<a class="jxr_linenumber" name="L408" href="#L408">408</a>         } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L409" href="#L409">409</a>             mCityReader = createCityReader();
-<a class="jxr_linenumber" name="L410" href="#L410">410</a>         }
-<a class="jxr_linenumber" name="L411" href="#L411">411</a> 
-<a class="jxr_linenumber" name="L412" href="#L412">412</a>         <strong class="jxr_keyword">return</strong> mCityReader;
-<a class="jxr_linenumber" name="L413" href="#L413">413</a>     }
-<a class="jxr_linenumber" name="L414" href="#L414">414</a> 
-<a class="jxr_linenumber" name="L415" href="#L415">415</a>     <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L416" href="#L416">416</a> <em class="jxr_javadoccomment">     * Gets or creates country database reader.</em>
-<a class="jxr_linenumber" name="L417" href="#L417">417</a> <em class="jxr_javadoccomment">     *</em>
-<a class="jxr_linenumber" name="L418" href="#L418">418</a> <em class="jxr_javadoccomment">     * @return country database reader.</em>
-<a class="jxr_linenumber" name="L419" href="#L419">419</a> <em class="jxr_javadoccomment">     * @throws IOException if an I/O error occurs.</em>
-<a class="jxr_linenumber" name="L420" href="#L420">420</a> <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L421" href="#L421">421</a>     <strong class="jxr_keyword">private</strong> DatabaseReader getOrCreateCountryReader() <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L422" href="#L422">422</a>         <strong class="jxr_keyword">if</strong> (mCountryReader != <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="L423" href="#L423">423</a>             <strong class="jxr_keyword">return</strong> mCountryReader;
-<a class="jxr_linenumber" name="L424" href="#L424">424</a>         } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L425" href="#L425">425</a>             mCountryReader = createCountryReader();
+<a class="jxr_linenumber" name="L386" href="#L386">386</a> <em class="jxr_javadoccomment">     * Gets or create city database reader.</em>
+<a class="jxr_linenumber" name="L387" href="#L387">387</a> <em class="jxr_javadoccomment">     *</em>
+<a class="jxr_linenumber" name="L388" href="#L388">388</a> <em class="jxr_javadoccomment">     * @return city database reader.</em>
+<a class="jxr_linenumber" name="L389" href="#L389">389</a> <em class="jxr_javadoccomment">     * @throws IOException if an I/O error occurs.</em>
+<a class="jxr_linenumber" name="L390" href="#L390">390</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L391" href="#L391">391</a>     <strong class="jxr_keyword">private</strong> DatabaseReader getOrCreateCityReader() <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L392" href="#L392">392</a>         <strong class="jxr_keyword">if</strong> (mCityReader != <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="L393" href="#L393">393</a>             <strong class="jxr_keyword">return</strong> mCityReader;
+<a class="jxr_linenumber" name="L394" href="#L394">394</a>         } <strong class="jxr_keyword">else</strong> {
+<a class="jxr_linenumber" name="L395" href="#L395">395</a>             mCityReader = createCityReader();
+<a class="jxr_linenumber" name="L396" href="#L396">396</a>         }
+<a class="jxr_linenumber" name="L397" href="#L397">397</a> 
+<a class="jxr_linenumber" name="L398" href="#L398">398</a>         <strong class="jxr_keyword">return</strong> mCityReader;
+<a class="jxr_linenumber" name="L399" href="#L399">399</a>     }
+<a class="jxr_linenumber" name="L400" href="#L400">400</a> 
+<a class="jxr_linenumber" name="L401" href="#L401">401</a>     <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L402" href="#L402">402</a> <em class="jxr_javadoccomment">     * Gets or creates country database reader.</em>
+<a class="jxr_linenumber" name="L403" href="#L403">403</a> <em class="jxr_javadoccomment">     *</em>
+<a class="jxr_linenumber" name="L404" href="#L404">404</a> <em class="jxr_javadoccomment">     * @return country database reader.</em>
+<a class="jxr_linenumber" name="L405" href="#L405">405</a> <em class="jxr_javadoccomment">     * @throws IOException if an I/O error occurs.</em>
+<a class="jxr_linenumber" name="L406" href="#L406">406</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L407" href="#L407">407</a>     <strong class="jxr_keyword">private</strong> DatabaseReader getOrCreateCountryReader() <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L408" href="#L408">408</a>         <strong class="jxr_keyword">if</strong> (mCountryReader != <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="L409" href="#L409">409</a>             <strong class="jxr_keyword">return</strong> mCountryReader;
+<a class="jxr_linenumber" name="L410" href="#L410">410</a>         } <strong class="jxr_keyword">else</strong> {
+<a class="jxr_linenumber" name="L411" href="#L411">411</a>             mCountryReader = createCountryReader();
+<a class="jxr_linenumber" name="L412" href="#L412">412</a>         }
+<a class="jxr_linenumber" name="L413" href="#L413">413</a> 
+<a class="jxr_linenumber" name="L414" href="#L414">414</a>         <strong class="jxr_keyword">return</strong> mCountryReader;
+<a class="jxr_linenumber" name="L415" href="#L415">415</a>     }
+<a class="jxr_linenumber" name="L416" href="#L416">416</a> 
+<a class="jxr_linenumber" name="L417" href="#L417">417</a>     <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L418" href="#L418">418</a> <em class="jxr_javadoccomment">     * Creates a city database reader.</em>
+<a class="jxr_linenumber" name="L419" href="#L419">419</a> <em class="jxr_javadoccomment">     *</em>
+<a class="jxr_linenumber" name="L420" href="#L420">420</a> <em class="jxr_javadoccomment">     * @return a city database reader.</em>
+<a class="jxr_linenumber" name="L421" href="#L421">421</a> <em class="jxr_javadoccomment">     * @throws IOException if an I/O error occurs.</em>
+<a class="jxr_linenumber" name="L422" href="#L422">422</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L423" href="#L423">423</a>     <strong class="jxr_keyword">private</strong> DatabaseReader createCityReader() <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L424" href="#L424">424</a>         <strong class="jxr_keyword">if</strong> (!mCityDatabasePrepared) {
+<a class="jxr_linenumber" name="L425" href="#L425">425</a>             mCityDatabasePrepared = prepareCityDatabase();
 <a class="jxr_linenumber" name="L426" href="#L426">426</a>         }
-<a class="jxr_linenumber" name="L427" href="#L427">427</a> 
-<a class="jxr_linenumber" name="L428" href="#L428">428</a>         <strong class="jxr_keyword">return</strong> mCountryReader;
+<a class="jxr_linenumber" name="L427" href="#L427">427</a>         <strong class="jxr_keyword">final</strong> File f = <strong class="jxr_keyword">new</strong> File(mConfiguration.getIPGeolocationCityDatabaseFile());
+<a class="jxr_linenumber" name="L428" href="#L428">428</a>         <strong class="jxr_keyword">return</strong> createReader(f);
 <a class="jxr_linenumber" name="L429" href="#L429">429</a>     }
 <a class="jxr_linenumber" name="L430" href="#L430">430</a> 
 <a class="jxr_linenumber" name="L431" href="#L431">431</a>     <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L432" href="#L432">432</a> <em class="jxr_javadoccomment">     * Creates a city database reader.</em>
+<a class="jxr_linenumber" name="L432" href="#L432">432</a> <em class="jxr_javadoccomment">     * Creates a country database reader.</em>
 <a class="jxr_linenumber" name="L433" href="#L433">433</a> <em class="jxr_javadoccomment">     *</em>
-<a class="jxr_linenumber" name="L434" href="#L434">434</a> <em class="jxr_javadoccomment">     * @return a city database reader.</em>
+<a class="jxr_linenumber" name="L434" href="#L434">434</a> <em class="jxr_javadoccomment">     * @return a country database reader.</em>
 <a class="jxr_linenumber" name="L435" href="#L435">435</a> <em class="jxr_javadoccomment">     * @throws IOException if an I/O error occurs.</em>
 <a class="jxr_linenumber" name="L436" href="#L436">436</a> <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L437" href="#L437">437</a>     <strong class="jxr_keyword">private</strong> DatabaseReader createCityReader() <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L438" href="#L438">438</a>         <strong class="jxr_keyword">if</strong> (!mCityDatabasePrepared) {
-<a class="jxr_linenumber" name="L439" href="#L439">439</a>             mCityDatabasePrepared = prepareCityDatabase();
+<a class="jxr_linenumber" name="L437" href="#L437">437</a>     <strong class="jxr_keyword">private</strong> DatabaseReader createCountryReader() <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L438" href="#L438">438</a>         <strong class="jxr_keyword">if</strong> (!mCountryDatabasePrepared) {
+<a class="jxr_linenumber" name="L439" href="#L439">439</a>             mCountryDatabasePrepared = prepareCountryDatabase();
 <a class="jxr_linenumber" name="L440" href="#L440">440</a>         }
-<a class="jxr_linenumber" name="L441" href="#L441">441</a>         <strong class="jxr_keyword">final</strong> File f = <strong class="jxr_keyword">new</strong> File(mConfiguration.getIPGeolocationCityDatabaseFile());
+<a class="jxr_linenumber" name="L441" href="#L441">441</a>         <strong class="jxr_keyword">final</strong> File f = <strong class="jxr_keyword">new</strong> File(mConfiguration.getIPGeolocationCountryDatabaseFile());
 <a class="jxr_linenumber" name="L442" href="#L442">442</a>         <strong class="jxr_keyword">return</strong> createReader(f);
 <a class="jxr_linenumber" name="L443" href="#L443">443</a>     }
 <a class="jxr_linenumber" name="L444" href="#L444">444</a> 
 <a class="jxr_linenumber" name="L445" href="#L445">445</a>     <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L446" href="#L446">446</a> <em class="jxr_javadoccomment">     * Creates a country database reader.</em>
+<a class="jxr_linenumber" name="L446" href="#L446">446</a> <em class="jxr_javadoccomment">     * Creates a database reader.</em>
 <a class="jxr_linenumber" name="L447" href="#L447">447</a> <em class="jxr_javadoccomment">     *</em>
-<a class="jxr_linenumber" name="L448" href="#L448">448</a> <em class="jxr_javadoccomment">     * @return a country database reader.</em>
-<a class="jxr_linenumber" name="L449" href="#L449">449</a> <em class="jxr_javadoccomment">     * @throws IOException if an I/O error occurs.</em>
-<a class="jxr_linenumber" name="L450" href="#L450">450</a> <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L451" href="#L451">451</a>     <strong class="jxr_keyword">private</strong> DatabaseReader createCountryReader() <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L452" href="#L452">452</a>         <strong class="jxr_keyword">if</strong> (!mCountryDatabasePrepared) {
-<a class="jxr_linenumber" name="L453" href="#L453">453</a>             mCountryDatabasePrepared = prepareCountryDatabase();
-<a class="jxr_linenumber" name="L454" href="#L454">454</a>         }
-<a class="jxr_linenumber" name="L455" href="#L455">455</a>         <strong class="jxr_keyword">final</strong> File f = <strong class="jxr_keyword">new</strong> File(mConfiguration.getIPGeolocationCountryDatabaseFile());
-<a class="jxr_linenumber" name="L456" href="#L456">456</a>         <strong class="jxr_keyword">return</strong> createReader(f);
-<a class="jxr_linenumber" name="L457" href="#L457">457</a>     }
-<a class="jxr_linenumber" name="L458" href="#L458">458</a> 
-<a class="jxr_linenumber" name="L459" href="#L459">459</a>     <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L460" href="#L460">460</a> <em class="jxr_javadoccomment">     * Creates a database reader.</em>
-<a class="jxr_linenumber" name="L461" href="#L461">461</a> <em class="jxr_javadoccomment">     *</em>
-<a class="jxr_linenumber" name="L462" href="#L462">462</a> <em class="jxr_javadoccomment">     * @param file file to read database from.</em>
-<a class="jxr_linenumber" name="L463" href="#L463">463</a> <em class="jxr_javadoccomment">     * @return a database reader.</em>
-<a class="jxr_linenumber" name="L464" href="#L464">464</a> <em class="jxr_javadoccomment">     * @throws IOException if an I/O error occurs.</em>
-<a class="jxr_linenumber" name="L465" href="#L465">465</a> <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L466" href="#L466">466</a>     <strong class="jxr_keyword">private</strong> DatabaseReader createReader(<strong class="jxr_keyword">final</strong> File file) <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L467" href="#L467">467</a>         <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">boolean</strong> cachingEnabled = mConfiguration.isCachingEnabled();
-<a class="jxr_linenumber" name="L468" href="#L468">468</a> 
-<a class="jxr_linenumber" name="L469" href="#L469">469</a>         <strong class="jxr_keyword">final</strong> DatabaseReader.Builder builder =
-<a class="jxr_linenumber" name="L470" href="#L470">470</a>                 <strong class="jxr_keyword">new</strong> DatabaseReader.Builder(file);
-<a class="jxr_linenumber" name="L471" href="#L471">471</a>         <strong class="jxr_keyword">if</strong> (cachingEnabled) {
-<a class="jxr_linenumber" name="L472" href="#L472">472</a>             builder.withCache(<strong class="jxr_keyword">new</strong> CHMCache());
+<a class="jxr_linenumber" name="L448" href="#L448">448</a> <em class="jxr_javadoccomment">     * @param file file to read database from.</em>
+<a class="jxr_linenumber" name="L449" href="#L449">449</a> <em class="jxr_javadoccomment">     * @return a database reader.</em>
+<a class="jxr_linenumber" name="L450" href="#L450">450</a> <em class="jxr_javadoccomment">     * @throws IOException if an I/O error occurs.</em>
+<a class="jxr_linenumber" name="L451" href="#L451">451</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L452" href="#L452">452</a>     <strong class="jxr_keyword">private</strong> DatabaseReader createReader(<strong class="jxr_keyword">final</strong> File file) <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L453" href="#L453">453</a>         <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">boolean</strong> cachingEnabled = mConfiguration.isCachingEnabled();
+<a class="jxr_linenumber" name="L454" href="#L454">454</a> 
+<a class="jxr_linenumber" name="L455" href="#L455">455</a>         <strong class="jxr_keyword">final</strong> DatabaseReader.Builder builder =
+<a class="jxr_linenumber" name="L456" href="#L456">456</a>                 <strong class="jxr_keyword">new</strong> DatabaseReader.Builder(file);
+<a class="jxr_linenumber" name="L457" href="#L457">457</a>         <strong class="jxr_keyword">if</strong> (cachingEnabled) {
+<a class="jxr_linenumber" name="L458" href="#L458">458</a>             builder.withCache(<strong class="jxr_keyword">new</strong> CHMCache());
+<a class="jxr_linenumber" name="L459" href="#L459">459</a>         }
+<a class="jxr_linenumber" name="L460" href="#L460">460</a>         <strong class="jxr_keyword">return</strong> builder.build();
+<a class="jxr_linenumber" name="L461" href="#L461">461</a>     }
+<a class="jxr_linenumber" name="L462" href="#L462">462</a> 
+<a class="jxr_linenumber" name="L463" href="#L463">463</a>     <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L464" href="#L464">464</a> <em class="jxr_javadoccomment">     * Processes country level location data.</em>
+<a class="jxr_linenumber" name="L465" href="#L465">465</a> <em class="jxr_javadoccomment">     *</em>
+<a class="jxr_linenumber" name="L466" href="#L466">466</a> <em class="jxr_javadoccomment">     * @param response a response being processed.</em>
+<a class="jxr_linenumber" name="L467" href="#L467">467</a> <em class="jxr_javadoccomment">     * @param location location where result will be stored.</em>
+<a class="jxr_linenumber" name="L468" href="#L468">468</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L469" href="#L469">469</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> processCountryResponse(<strong class="jxr_keyword">final</strong> AbstractCountryResponse response,
+<a class="jxr_linenumber" name="L470" href="#L470">470</a>                                         <strong class="jxr_keyword">final</strong> <a href="../../../../../com/irurueta/server/commons/geolocation/IPLocation.html">IPLocation</a> location) {
+<a class="jxr_linenumber" name="L471" href="#L471">471</a>         <strong class="jxr_keyword">if</strong> (response == <strong class="jxr_keyword">null</strong> || location == <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="L472" href="#L472">472</a>             <strong class="jxr_keyword">return</strong>;
 <a class="jxr_linenumber" name="L473" href="#L473">473</a>         }
-<a class="jxr_linenumber" name="L474" href="#L474">474</a>         <strong class="jxr_keyword">return</strong> builder.build();
-<a class="jxr_linenumber" name="L475" href="#L475">475</a>     }
-<a class="jxr_linenumber" name="L476" href="#L476">476</a> 
-<a class="jxr_linenumber" name="L477" href="#L477">477</a>     <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L478" href="#L478">478</a> <em class="jxr_javadoccomment">     * Processes country level location data.</em>
-<a class="jxr_linenumber" name="L479" href="#L479">479</a> <em class="jxr_javadoccomment">     *</em>
-<a class="jxr_linenumber" name="L480" href="#L480">480</a> <em class="jxr_javadoccomment">     * @param response a response being processed.</em>
-<a class="jxr_linenumber" name="L481" href="#L481">481</a> <em class="jxr_javadoccomment">     * @param location location where result will be stored.</em>
-<a class="jxr_linenumber" name="L482" href="#L482">482</a> <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L483" href="#L483">483</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> processCountryResponse(<strong class="jxr_keyword">final</strong> AbstractCountryResponse response,
-<a class="jxr_linenumber" name="L484" href="#L484">484</a>                                         <strong class="jxr_keyword">final</strong> <a href="../../../../../com/irurueta/server/commons/geolocation/IPLocation.html">IPLocation</a> location) {
-<a class="jxr_linenumber" name="L485" href="#L485">485</a>         <strong class="jxr_keyword">if</strong> (response == <strong class="jxr_keyword">null</strong> || location == <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="L486" href="#L486">486</a>             <strong class="jxr_keyword">return</strong>;
-<a class="jxr_linenumber" name="L487" href="#L487">487</a>         }
-<a class="jxr_linenumber" name="L488" href="#L488">488</a> 
-<a class="jxr_linenumber" name="L489" href="#L489">489</a>         <strong class="jxr_keyword">final</strong> Continent continent = response.getContinent();
-<a class="jxr_linenumber" name="L490" href="#L490">490</a>         <strong class="jxr_keyword">if</strong> (continent != <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="L491" href="#L491">491</a>             location.mContinentCode = continent.getCode();
-<a class="jxr_linenumber" name="L492" href="#L492">492</a>             location.mContinentName = continent.getName();
-<a class="jxr_linenumber" name="L493" href="#L493">493</a>         }
-<a class="jxr_linenumber" name="L494" href="#L494">494</a> 
-<a class="jxr_linenumber" name="L495" href="#L495">495</a>         Country country = response.getCountry();
-<a class="jxr_linenumber" name="L496" href="#L496">496</a>         <strong class="jxr_keyword">if</strong> (country != <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="L497" href="#L497">497</a>             location.mCountryCode = country.getIsoCode();
-<a class="jxr_linenumber" name="L498" href="#L498">498</a>             location.mCountryName = country.getName();
+<a class="jxr_linenumber" name="L474" href="#L474">474</a> 
+<a class="jxr_linenumber" name="L475" href="#L475">475</a>         <strong class="jxr_keyword">final</strong> Continent continent = response.getContinent();
+<a class="jxr_linenumber" name="L476" href="#L476">476</a>         <strong class="jxr_keyword">if</strong> (continent != <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="L477" href="#L477">477</a>             location.mContinentCode = continent.getCode();
+<a class="jxr_linenumber" name="L478" href="#L478">478</a>             location.mContinentName = continent.getName();
+<a class="jxr_linenumber" name="L479" href="#L479">479</a>         }
+<a class="jxr_linenumber" name="L480" href="#L480">480</a> 
+<a class="jxr_linenumber" name="L481" href="#L481">481</a>         Country country = response.getCountry();
+<a class="jxr_linenumber" name="L482" href="#L482">482</a>         <strong class="jxr_keyword">if</strong> (country != <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="L483" href="#L483">483</a>             location.mCountryCode = country.getIsoCode();
+<a class="jxr_linenumber" name="L484" href="#L484">484</a>             location.mCountryName = country.getName();
+<a class="jxr_linenumber" name="L485" href="#L485">485</a>         }
+<a class="jxr_linenumber" name="L486" href="#L486">486</a>         country = response.getRegisteredCountry();
+<a class="jxr_linenumber" name="L487" href="#L487">487</a>         <strong class="jxr_keyword">if</strong> (country != <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="L488" href="#L488">488</a>             location.mRegisteredCountryCode = country.getIsoCode();
+<a class="jxr_linenumber" name="L489" href="#L489">489</a>             location.mRegisteredCountryName = country.getName();
+<a class="jxr_linenumber" name="L490" href="#L490">490</a>         }
+<a class="jxr_linenumber" name="L491" href="#L491">491</a> 
+<a class="jxr_linenumber" name="L492" href="#L492">492</a>         <strong class="jxr_keyword">final</strong> Traits traits = response.getTraits();
+<a class="jxr_linenumber" name="L493" href="#L493">493</a>         <strong class="jxr_keyword">if</strong> (traits != <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="L494" href="#L494">494</a>             location.mAutonomousSystemNumber =
+<a class="jxr_linenumber" name="L495" href="#L495">495</a>                     traits.getAutonomousSystemNumber();
+<a class="jxr_linenumber" name="L496" href="#L496">496</a>             location.mDomain = traits.getDomain();
+<a class="jxr_linenumber" name="L497" href="#L497">497</a>             location.mIsp = traits.getIsp();
+<a class="jxr_linenumber" name="L498" href="#L498">498</a>             location.mOrganization = traits.getOrganization();
 <a class="jxr_linenumber" name="L499" href="#L499">499</a>         }
-<a class="jxr_linenumber" name="L500" href="#L500">500</a>         country = response.getRegisteredCountry();
-<a class="jxr_linenumber" name="L501" href="#L501">501</a>         <strong class="jxr_keyword">if</strong> (country != <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="L502" href="#L502">502</a>             location.mRegisteredCountryCode = country.getIsoCode();
-<a class="jxr_linenumber" name="L503" href="#L503">503</a>             location.mRegisteredCountryName = country.getName();
-<a class="jxr_linenumber" name="L504" href="#L504">504</a>         }
-<a class="jxr_linenumber" name="L505" href="#L505">505</a> 
-<a class="jxr_linenumber" name="L506" href="#L506">506</a>         <strong class="jxr_keyword">final</strong> Traits traits = response.getTraits();
-<a class="jxr_linenumber" name="L507" href="#L507">507</a>         <strong class="jxr_keyword">if</strong> (traits != <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="L508" href="#L508">508</a>             location.mAutonomousSystemNumber =
-<a class="jxr_linenumber" name="L509" href="#L509">509</a>                     traits.getAutonomousSystemNumber();
-<a class="jxr_linenumber" name="L510" href="#L510">510</a>             location.mDomain = traits.getDomain();
-<a class="jxr_linenumber" name="L511" href="#L511">511</a>             location.mIsp = traits.getIsp();
-<a class="jxr_linenumber" name="L512" href="#L512">512</a>             location.mOrganization = traits.getOrganization();
-<a class="jxr_linenumber" name="L513" href="#L513">513</a>         }
-<a class="jxr_linenumber" name="L514" href="#L514">514</a>     }
-<a class="jxr_linenumber" name="L515" href="#L515">515</a> 
-<a class="jxr_linenumber" name="L516" href="#L516">516</a>     <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L517" href="#L517">517</a> <em class="jxr_javadoccomment">     * Copies embedded resources into destination files where databases will be</em>
-<a class="jxr_linenumber" name="L518" href="#L518">518</a> <em class="jxr_javadoccomment">     * stored locally.</em>
-<a class="jxr_linenumber" name="L519" href="#L519">519</a> <em class="jxr_javadoccomment">     *</em>
-<a class="jxr_linenumber" name="L520" href="#L520">520</a> <em class="jxr_javadoccomment">     * @throws IOException if an I/O error occurs.</em>
-<a class="jxr_linenumber" name="L521" href="#L521">521</a> <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L522" href="#L522">522</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> prepareDatabases() <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L523" href="#L523">523</a> 
-<a class="jxr_linenumber" name="L524" href="#L524">524</a>         <em class="jxr_comment">// city database</em>
-<a class="jxr_linenumber" name="L525" href="#L525">525</a>         <strong class="jxr_keyword">final</strong> <a href="../../../../../com/irurueta/server/commons/geolocation/IPGeolocationLevel.html">IPGeolocationLevel</a> level = mConfiguration.getIPGeolocationLevel();
-<a class="jxr_linenumber" name="L526" href="#L526">526</a>         <strong class="jxr_keyword">if</strong> (level == IPGeolocationLevel.CITY &amp;&amp;
-<a class="jxr_linenumber" name="L527" href="#L527">527</a>                 mConfiguration.isIPGeolocationCityDatabaseEmbedded() &amp;&amp;
-<a class="jxr_linenumber" name="L528" href="#L528">528</a>                 mConfiguration.getIPGeolocationCityEmbeddedResource() != <strong class="jxr_keyword">null</strong> &amp;&amp;
-<a class="jxr_linenumber" name="L529" href="#L529">529</a>                 mConfiguration.getIPGeolocationCityDatabaseFile() != <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="L530" href="#L530">530</a>             mCityDatabasePrepared = prepareCityDatabase();
-<a class="jxr_linenumber" name="L531" href="#L531">531</a>         }
-<a class="jxr_linenumber" name="L532" href="#L532">532</a> 
-<a class="jxr_linenumber" name="L533" href="#L533">533</a>         <em class="jxr_comment">// country database</em>
-<a class="jxr_linenumber" name="L534" href="#L534">534</a>         <strong class="jxr_keyword">if</strong> (!mCityDatabasePrepared &amp;&amp;
-<a class="jxr_linenumber" name="L535" href="#L535">535</a>                 mConfiguration.isIPGeolocationCountryDatabaseEmbedded() &amp;&amp;
-<a class="jxr_linenumber" name="L536" href="#L536">536</a>                 mConfiguration.getIPGeolocationCountryEmbeddedResource() != <strong class="jxr_keyword">null</strong> &amp;&amp;
-<a class="jxr_linenumber" name="L537" href="#L537">537</a>                 mConfiguration.getIPGeolocationCountryDatabaseFile() != <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="L538" href="#L538">538</a>             mCountryDatabasePrepared = prepareCountryDatabase();
-<a class="jxr_linenumber" name="L539" href="#L539">539</a>         }
-<a class="jxr_linenumber" name="L540" href="#L540">540</a>     }
-<a class="jxr_linenumber" name="L541" href="#L541">541</a> 
-<a class="jxr_linenumber" name="L542" href="#L542">542</a>     <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L543" href="#L543">543</a> <em class="jxr_javadoccomment">     * Copies embedded city resource into destination file where database will</em>
-<a class="jxr_linenumber" name="L544" href="#L544">544</a> <em class="jxr_javadoccomment">     * be stored locally.</em>
-<a class="jxr_linenumber" name="L545" href="#L545">545</a> <em class="jxr_javadoccomment">     *</em>
-<a class="jxr_linenumber" name="L546" href="#L546">546</a> <em class="jxr_javadoccomment">     * @return true if database was prepared, false otherwise.</em>
-<a class="jxr_linenumber" name="L547" href="#L547">547</a> <em class="jxr_javadoccomment">     * @throws IOException if an I/O error occurs.</em>
-<a class="jxr_linenumber" name="L548" href="#L548">548</a> <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L549" href="#L549">549</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">boolean</strong> prepareCityDatabase() <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L550" href="#L550">550</a>         <strong class="jxr_keyword">if</strong> (mConfiguration.isIPGeolocationCityDatabaseEmbedded() &amp;&amp;
-<a class="jxr_linenumber" name="L551" href="#L551">551</a>                 mConfiguration.getIPGeolocationCityEmbeddedResource() != <strong class="jxr_keyword">null</strong> &amp;&amp;
-<a class="jxr_linenumber" name="L552" href="#L552">552</a>                 mConfiguration.getIPGeolocationCityDatabaseFile() != <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="L553" href="#L553">553</a>             <em class="jxr_comment">// copy embedded resource to destination file</em>
-<a class="jxr_linenumber" name="L554" href="#L554">554</a>             copyResource(mConfiguration.getIPGeolocationCityEmbeddedResource(),
-<a class="jxr_linenumber" name="L555" href="#L555">555</a>                     mConfiguration.getIPGeolocationCityDatabaseFile());
-<a class="jxr_linenumber" name="L556" href="#L556">556</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">true</strong>;
-<a class="jxr_linenumber" name="L557" href="#L557">557</a>         }
-<a class="jxr_linenumber" name="L558" href="#L558">558</a> 
-<a class="jxr_linenumber" name="L559" href="#L559">559</a>         <strong class="jxr_keyword">return</strong> false;
-<a class="jxr_linenumber" name="L560" href="#L560">560</a>     }
-<a class="jxr_linenumber" name="L561" href="#L561">561</a> 
-<a class="jxr_linenumber" name="L562" href="#L562">562</a>     <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L563" href="#L563">563</a> <em class="jxr_javadoccomment">     * Copies country city resource into destination file where database will</em>
-<a class="jxr_linenumber" name="L564" href="#L564">564</a> <em class="jxr_javadoccomment">     * be stored locally.</em>
-<a class="jxr_linenumber" name="L565" href="#L565">565</a> <em class="jxr_javadoccomment">     *</em>
-<a class="jxr_linenumber" name="L566" href="#L566">566</a> <em class="jxr_javadoccomment">     * @return true if database was prepared, false otherwise.</em>
-<a class="jxr_linenumber" name="L567" href="#L567">567</a> <em class="jxr_javadoccomment">     * @throws IOException if an I/O error occurs.</em>
-<a class="jxr_linenumber" name="L568" href="#L568">568</a> <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L569" href="#L569">569</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">boolean</strong> prepareCountryDatabase() <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L570" href="#L570">570</a>         <strong class="jxr_keyword">if</strong> (mConfiguration.isIPGeolocationCountryDatabaseEmbedded() &amp;&amp;
-<a class="jxr_linenumber" name="L571" href="#L571">571</a>                 mConfiguration.getIPGeolocationCountryEmbeddedResource() != <strong class="jxr_keyword">null</strong> &amp;&amp;
-<a class="jxr_linenumber" name="L572" href="#L572">572</a>                 mConfiguration.getIPGeolocationCountryDatabaseFile() != <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="L573" href="#L573">573</a>             <em class="jxr_comment">// copy embedded resource to destination file</em>
-<a class="jxr_linenumber" name="L574" href="#L574">574</a>             copyResource(mConfiguration.getIPGeolocationCountryEmbeddedResource(),
-<a class="jxr_linenumber" name="L575" href="#L575">575</a>                     mConfiguration.getIPGeolocationCountryDatabaseFile());
-<a class="jxr_linenumber" name="L576" href="#L576">576</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">true</strong>;
-<a class="jxr_linenumber" name="L577" href="#L577">577</a>         }
-<a class="jxr_linenumber" name="L578" href="#L578">578</a> 
-<a class="jxr_linenumber" name="L579" href="#L579">579</a>         <strong class="jxr_keyword">return</strong> false;
-<a class="jxr_linenumber" name="L580" href="#L580">580</a>     }
-<a class="jxr_linenumber" name="L581" href="#L581">581</a> 
-<a class="jxr_linenumber" name="L582" href="#L582">582</a>     <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L583" href="#L583">583</a> <em class="jxr_javadoccomment">     * Copies a given resource embedded in code into provided destination file.</em>
-<a class="jxr_linenumber" name="L584" href="#L584">584</a> <em class="jxr_javadoccomment">     * If file where data is to be stored does not exist, a new one will be</em>
-<a class="jxr_linenumber" name="L585" href="#L585">585</a> <em class="jxr_javadoccomment">     * created. If it already exists, it will be overwritten.</em>
-<a class="jxr_linenumber" name="L586" href="#L586">586</a> <em class="jxr_javadoccomment">     *</em>
-<a class="jxr_linenumber" name="L587" href="#L587">587</a> <em class="jxr_javadoccomment">     * @param resource resource to read data from.</em>
-<a class="jxr_linenumber" name="L588" href="#L588">588</a> <em class="jxr_javadoccomment">     * @param file     file to store data.</em>
-<a class="jxr_linenumber" name="L589" href="#L589">589</a> <em class="jxr_javadoccomment">     * @throws IOException .</em>
-<a class="jxr_linenumber" name="L590" href="#L590">590</a> <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L591" href="#L591">591</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> copyResource(<strong class="jxr_keyword">final</strong> String resource, <strong class="jxr_keyword">final</strong> String file) <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L592" href="#L592">592</a>         <strong class="jxr_keyword">final</strong> File f = <strong class="jxr_keyword">new</strong> File(file);
-<a class="jxr_linenumber" name="L593" href="#L593">593</a>         <strong class="jxr_keyword">final</strong> File parent = f.getParentFile();
-<a class="jxr_linenumber" name="L594" href="#L594">594</a>         <em class="jxr_comment">// attempt to create parent folders if they don't exist</em>
-<a class="jxr_linenumber" name="L595" href="#L595">595</a>         <strong class="jxr_keyword">if</strong> (parent != <strong class="jxr_keyword">null</strong> &amp;&amp; !parent.exists() &amp;&amp; !parent.mkdirs()) {
-<a class="jxr_linenumber" name="L596" href="#L596">596</a>             <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IOException();
-<a class="jxr_linenumber" name="L597" href="#L597">597</a>         }
-<a class="jxr_linenumber" name="L598" href="#L598">598</a> 
-<a class="jxr_linenumber" name="L599" href="#L599">599</a>         <strong class="jxr_keyword">if</strong> (!f.exists()) {
-<a class="jxr_linenumber" name="L600" href="#L600">600</a>             <strong class="jxr_keyword">try</strong> (<strong class="jxr_keyword">final</strong> InputStream inStream = IPGeolocator.<strong class="jxr_keyword">class</strong>.getResourceAsStream(resource)) {
-<a class="jxr_linenumber" name="L601" href="#L601">601</a>                 <strong class="jxr_keyword">try</strong> (<strong class="jxr_keyword">final</strong> OutputStream outStream = <strong class="jxr_keyword">new</strong> FileOutputStream(file)) {
-<a class="jxr_linenumber" name="L602" href="#L602">602</a>                     LOGGER.log(Level.INFO, <span class="jxr_string">"Copying resource: {0}"</span>, resource);
-<a class="jxr_linenumber" name="L603" href="#L603">603</a> 
-<a class="jxr_linenumber" name="L604" href="#L604">604</a> 
-<a class="jxr_linenumber" name="L605" href="#L605">605</a>                     <strong class="jxr_keyword">final</strong> byte[] buffer = <strong class="jxr_keyword">new</strong> byte[BUFFER_SIZE];
-<a class="jxr_linenumber" name="L606" href="#L606">606</a>                     <strong class="jxr_keyword">int</strong> n;
-<a class="jxr_linenumber" name="L607" href="#L607">607</a>                     <strong class="jxr_keyword">while</strong> ((n = inStream.read(buffer)) &gt; 0) {
-<a class="jxr_linenumber" name="L608" href="#L608">608</a>                         outStream.write(buffer, 0, n);
-<a class="jxr_linenumber" name="L609" href="#L609">609</a>                     }
-<a class="jxr_linenumber" name="L610" href="#L610">610</a>                     LOGGER.log(Level.INFO, <span class="jxr_string">"Resource: {0} copied to {1}"</span>,
-<a class="jxr_linenumber" name="L611" href="#L611">611</a>                             <strong class="jxr_keyword">new</strong> Object[]{resource, f.getAbsolutePath()});
-<a class="jxr_linenumber" name="L612" href="#L612">612</a>                 }
-<a class="jxr_linenumber" name="L613" href="#L613">613</a>             }
-<a class="jxr_linenumber" name="L614" href="#L614">614</a>         }
-<a class="jxr_linenumber" name="L615" href="#L615">615</a>     }
-<a class="jxr_linenumber" name="L616" href="#L616">616</a> }
+<a class="jxr_linenumber" name="L500" href="#L500">500</a>     }
+<a class="jxr_linenumber" name="L501" href="#L501">501</a> 
+<a class="jxr_linenumber" name="L502" href="#L502">502</a>     <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L503" href="#L503">503</a> <em class="jxr_javadoccomment">     * Copies embedded resources into destination files where databases will be</em>
+<a class="jxr_linenumber" name="L504" href="#L504">504</a> <em class="jxr_javadoccomment">     * stored locally.</em>
+<a class="jxr_linenumber" name="L505" href="#L505">505</a> <em class="jxr_javadoccomment">     *</em>
+<a class="jxr_linenumber" name="L506" href="#L506">506</a> <em class="jxr_javadoccomment">     * @throws IOException if an I/O error occurs.</em>
+<a class="jxr_linenumber" name="L507" href="#L507">507</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L508" href="#L508">508</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> prepareDatabases() <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L509" href="#L509">509</a> 
+<a class="jxr_linenumber" name="L510" href="#L510">510</a>         <em class="jxr_comment">// city database</em>
+<a class="jxr_linenumber" name="L511" href="#L511">511</a>         <strong class="jxr_keyword">final</strong> <a href="../../../../../com/irurueta/server/commons/geolocation/IPGeolocationLevel.html">IPGeolocationLevel</a> level = mConfiguration.getIPGeolocationLevel();
+<a class="jxr_linenumber" name="L512" href="#L512">512</a>         <strong class="jxr_keyword">if</strong> (level == IPGeolocationLevel.CITY &amp;&amp;
+<a class="jxr_linenumber" name="L513" href="#L513">513</a>                 mConfiguration.isIPGeolocationCityDatabaseEmbedded() &amp;&amp;
+<a class="jxr_linenumber" name="L514" href="#L514">514</a>                 mConfiguration.getIPGeolocationCityEmbeddedResource() != <strong class="jxr_keyword">null</strong> &amp;&amp;
+<a class="jxr_linenumber" name="L515" href="#L515">515</a>                 mConfiguration.getIPGeolocationCityDatabaseFile() != <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="L516" href="#L516">516</a>             mCityDatabasePrepared = prepareCityDatabase();
+<a class="jxr_linenumber" name="L517" href="#L517">517</a>         }
+<a class="jxr_linenumber" name="L518" href="#L518">518</a> 
+<a class="jxr_linenumber" name="L519" href="#L519">519</a>         <em class="jxr_comment">// country database</em>
+<a class="jxr_linenumber" name="L520" href="#L520">520</a>         <strong class="jxr_keyword">if</strong> (!mCityDatabasePrepared &amp;&amp;
+<a class="jxr_linenumber" name="L521" href="#L521">521</a>                 mConfiguration.isIPGeolocationCountryDatabaseEmbedded() &amp;&amp;
+<a class="jxr_linenumber" name="L522" href="#L522">522</a>                 mConfiguration.getIPGeolocationCountryEmbeddedResource() != <strong class="jxr_keyword">null</strong> &amp;&amp;
+<a class="jxr_linenumber" name="L523" href="#L523">523</a>                 mConfiguration.getIPGeolocationCountryDatabaseFile() != <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="L524" href="#L524">524</a>             mCountryDatabasePrepared = prepareCountryDatabase();
+<a class="jxr_linenumber" name="L525" href="#L525">525</a>         }
+<a class="jxr_linenumber" name="L526" href="#L526">526</a>     }
+<a class="jxr_linenumber" name="L527" href="#L527">527</a> 
+<a class="jxr_linenumber" name="L528" href="#L528">528</a>     <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L529" href="#L529">529</a> <em class="jxr_javadoccomment">     * Copies embedded city resource into destination file where database will</em>
+<a class="jxr_linenumber" name="L530" href="#L530">530</a> <em class="jxr_javadoccomment">     * be stored locally.</em>
+<a class="jxr_linenumber" name="L531" href="#L531">531</a> <em class="jxr_javadoccomment">     *</em>
+<a class="jxr_linenumber" name="L532" href="#L532">532</a> <em class="jxr_javadoccomment">     * @return true if database was prepared, false otherwise.</em>
+<a class="jxr_linenumber" name="L533" href="#L533">533</a> <em class="jxr_javadoccomment">     * @throws IOException if an I/O error occurs.</em>
+<a class="jxr_linenumber" name="L534" href="#L534">534</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L535" href="#L535">535</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">boolean</strong> prepareCityDatabase() <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L536" href="#L536">536</a>         <strong class="jxr_keyword">if</strong> (mConfiguration.isIPGeolocationCityDatabaseEmbedded() &amp;&amp;
+<a class="jxr_linenumber" name="L537" href="#L537">537</a>                 mConfiguration.getIPGeolocationCityEmbeddedResource() != <strong class="jxr_keyword">null</strong> &amp;&amp;
+<a class="jxr_linenumber" name="L538" href="#L538">538</a>                 mConfiguration.getIPGeolocationCityDatabaseFile() != <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="L539" href="#L539">539</a>             <em class="jxr_comment">// copy embedded resource to destination file</em>
+<a class="jxr_linenumber" name="L540" href="#L540">540</a>             copyResource(mConfiguration.getIPGeolocationCityEmbeddedResource(),
+<a class="jxr_linenumber" name="L541" href="#L541">541</a>                     mConfiguration.getIPGeolocationCityDatabaseFile());
+<a class="jxr_linenumber" name="L542" href="#L542">542</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">true</strong>;
+<a class="jxr_linenumber" name="L543" href="#L543">543</a>         }
+<a class="jxr_linenumber" name="L544" href="#L544">544</a> 
+<a class="jxr_linenumber" name="L545" href="#L545">545</a>         <strong class="jxr_keyword">return</strong> false;
+<a class="jxr_linenumber" name="L546" href="#L546">546</a>     }
+<a class="jxr_linenumber" name="L547" href="#L547">547</a> 
+<a class="jxr_linenumber" name="L548" href="#L548">548</a>     <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L549" href="#L549">549</a> <em class="jxr_javadoccomment">     * Copies country city resource into destination file where database will</em>
+<a class="jxr_linenumber" name="L550" href="#L550">550</a> <em class="jxr_javadoccomment">     * be stored locally.</em>
+<a class="jxr_linenumber" name="L551" href="#L551">551</a> <em class="jxr_javadoccomment">     *</em>
+<a class="jxr_linenumber" name="L552" href="#L552">552</a> <em class="jxr_javadoccomment">     * @return true if database was prepared, false otherwise.</em>
+<a class="jxr_linenumber" name="L553" href="#L553">553</a> <em class="jxr_javadoccomment">     * @throws IOException if an I/O error occurs.</em>
+<a class="jxr_linenumber" name="L554" href="#L554">554</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L555" href="#L555">555</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">boolean</strong> prepareCountryDatabase() <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L556" href="#L556">556</a>         <strong class="jxr_keyword">if</strong> (mConfiguration.isIPGeolocationCountryDatabaseEmbedded() &amp;&amp;
+<a class="jxr_linenumber" name="L557" href="#L557">557</a>                 mConfiguration.getIPGeolocationCountryEmbeddedResource() != <strong class="jxr_keyword">null</strong> &amp;&amp;
+<a class="jxr_linenumber" name="L558" href="#L558">558</a>                 mConfiguration.getIPGeolocationCountryDatabaseFile() != <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="L559" href="#L559">559</a>             <em class="jxr_comment">// copy embedded resource to destination file</em>
+<a class="jxr_linenumber" name="L560" href="#L560">560</a>             copyResource(mConfiguration.getIPGeolocationCountryEmbeddedResource(),
+<a class="jxr_linenumber" name="L561" href="#L561">561</a>                     mConfiguration.getIPGeolocationCountryDatabaseFile());
+<a class="jxr_linenumber" name="L562" href="#L562">562</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">true</strong>;
+<a class="jxr_linenumber" name="L563" href="#L563">563</a>         }
+<a class="jxr_linenumber" name="L564" href="#L564">564</a> 
+<a class="jxr_linenumber" name="L565" href="#L565">565</a>         <strong class="jxr_keyword">return</strong> false;
+<a class="jxr_linenumber" name="L566" href="#L566">566</a>     }
+<a class="jxr_linenumber" name="L567" href="#L567">567</a> 
+<a class="jxr_linenumber" name="L568" href="#L568">568</a>     <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L569" href="#L569">569</a> <em class="jxr_javadoccomment">     * Copies a given resource embedded in code into provided destination file.</em>
+<a class="jxr_linenumber" name="L570" href="#L570">570</a> <em class="jxr_javadoccomment">     * If file where data is to be stored does not exist, a new one will be</em>
+<a class="jxr_linenumber" name="L571" href="#L571">571</a> <em class="jxr_javadoccomment">     * created. If it already exists, it will be overwritten.</em>
+<a class="jxr_linenumber" name="L572" href="#L572">572</a> <em class="jxr_javadoccomment">     *</em>
+<a class="jxr_linenumber" name="L573" href="#L573">573</a> <em class="jxr_javadoccomment">     * @param resource resource to read data from.</em>
+<a class="jxr_linenumber" name="L574" href="#L574">574</a> <em class="jxr_javadoccomment">     * @param file     file to store data.</em>
+<a class="jxr_linenumber" name="L575" href="#L575">575</a> <em class="jxr_javadoccomment">     * @throws IOException .</em>
+<a class="jxr_linenumber" name="L576" href="#L576">576</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L577" href="#L577">577</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> copyResource(<strong class="jxr_keyword">final</strong> String resource, <strong class="jxr_keyword">final</strong> String file) <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L578" href="#L578">578</a>         <strong class="jxr_keyword">final</strong> File f = <strong class="jxr_keyword">new</strong> File(file);
+<a class="jxr_linenumber" name="L579" href="#L579">579</a>         <strong class="jxr_keyword">final</strong> File parent = f.getParentFile();
+<a class="jxr_linenumber" name="L580" href="#L580">580</a>         <em class="jxr_comment">// attempt to create parent folders if they don't exist</em>
+<a class="jxr_linenumber" name="L581" href="#L581">581</a>         <strong class="jxr_keyword">if</strong> (parent != <strong class="jxr_keyword">null</strong> &amp;&amp; !parent.exists() &amp;&amp; !parent.mkdirs()) {
+<a class="jxr_linenumber" name="L582" href="#L582">582</a>             <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IOException();
+<a class="jxr_linenumber" name="L583" href="#L583">583</a>         }
+<a class="jxr_linenumber" name="L584" href="#L584">584</a> 
+<a class="jxr_linenumber" name="L585" href="#L585">585</a>         <strong class="jxr_keyword">if</strong> (!f.exists()) {
+<a class="jxr_linenumber" name="L586" href="#L586">586</a>             <strong class="jxr_keyword">try</strong> (<strong class="jxr_keyword">final</strong> InputStream inStream = IPGeolocator.<strong class="jxr_keyword">class</strong>.getResourceAsStream(resource)) {
+<a class="jxr_linenumber" name="L587" href="#L587">587</a>                 <strong class="jxr_keyword">try</strong> (<strong class="jxr_keyword">final</strong> OutputStream outStream = <strong class="jxr_keyword">new</strong> FileOutputStream(file)) {
+<a class="jxr_linenumber" name="L588" href="#L588">588</a>                     LOGGER.log(Level.INFO, <span class="jxr_string">"Copying resource: {0}"</span>, resource);
+<a class="jxr_linenumber" name="L589" href="#L589">589</a> 
+<a class="jxr_linenumber" name="L590" href="#L590">590</a> 
+<a class="jxr_linenumber" name="L591" href="#L591">591</a>                     <strong class="jxr_keyword">final</strong> byte[] buffer = <strong class="jxr_keyword">new</strong> byte[BUFFER_SIZE];
+<a class="jxr_linenumber" name="L592" href="#L592">592</a>                     <strong class="jxr_keyword">int</strong> n;
+<a class="jxr_linenumber" name="L593" href="#L593">593</a>                     <strong class="jxr_keyword">while</strong> ((n = inStream.read(buffer)) &gt; 0) {
+<a class="jxr_linenumber" name="L594" href="#L594">594</a>                         outStream.write(buffer, 0, n);
+<a class="jxr_linenumber" name="L595" href="#L595">595</a>                     }
+<a class="jxr_linenumber" name="L596" href="#L596">596</a>                     LOGGER.log(Level.INFO, <span class="jxr_string">"Resource: {0} copied to {1}"</span>,
+<a class="jxr_linenumber" name="L597" href="#L597">597</a>                             <strong class="jxr_keyword">new</strong> Object[]{resource, f.getAbsolutePath()});
+<a class="jxr_linenumber" name="L598" href="#L598">598</a>                 }
+<a class="jxr_linenumber" name="L599" href="#L599">599</a>             }
+<a class="jxr_linenumber" name="L600" href="#L600">600</a>         }
+<a class="jxr_linenumber" name="L601" href="#L601">601</a>     }
+<a class="jxr_linenumber" name="L602" href="#L602">602</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2016&#x2013;2021. All rights reserved.</div>
