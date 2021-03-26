@@ -383,20 +383,6 @@ public class IPGeolocator implements Closeable {
     }
 
     /**
-     * This method is called on garbage collection.
-     * When this method is called, all the location services of this instance
-     * will be closed, and the files where embedded databases were copied will
-     * be deleted.
-     *
-     * @throws Throwable if anything fails.
-     */
-    @Override
-    protected void finalize() throws Throwable {
-        close();
-        super.finalize();
-    }
-
-    /**
      * Gets or create city database reader.
      *
      * @return city database reader.

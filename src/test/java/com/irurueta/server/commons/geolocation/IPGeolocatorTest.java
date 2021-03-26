@@ -85,12 +85,85 @@ public class IPGeolocatorTest {
     }
 
     @Before
-    public void setUp() throws IOException {
+    public void setUp() throws IOException, ConfigurationException {
         IPGeolocator.reset();
+        GeolocationConfigurationFactory.getInstance().reset();
     }
 
     @Test
-    public void testGetInstance() throws IOException {
+    public void testGetInstanceWhenDefaultConfiguration() throws IOException {
+        final IPGeolocator locator1 = IPGeolocator.getInstance();
+        IPGeolocator locator2 = IPGeolocator.getInstance();
+
+        assertSame(locator1, locator2);
+
+        IPGeolocator.reset();
+
+        locator2 = IPGeolocator.getInstance();
+
+        assertNotSame(locator1, locator2);
+    }
+
+    @Test
+    public void testGetInstanceWhenCityLevel() throws ConfigurationException, IOException {
+        final Properties props = new Properties();
+        props.setProperty(GeolocationConfigurationFactory.
+                IP_GEOLOCATION_COUNTRY_DATABASE_FILE_PROPERTY, COUNTRY_FILE);
+        props.setProperty(GeolocationConfigurationFactory.
+                IP_GEOLOCATION_CITY_DATABASE_FILE_PROPERTY, CITY_FILE);
+        props.setProperty(GeolocationConfigurationFactory.IP_GEOLOCATION_LEVEL_PROPERTY,
+                IPGeolocationLevel.CITY.getValue());
+
+        GeolocationConfigurationFactory.getInstance().configure(props);
+
+        final IPGeolocator locator1 = IPGeolocator.getInstance();
+        IPGeolocator locator2 = IPGeolocator.getInstance();
+
+        assertSame(locator1, locator2);
+
+        IPGeolocator.reset();
+
+        locator2 = IPGeolocator.getInstance();
+
+        assertNotSame(locator1, locator2);
+    }
+
+    @Test
+    public void testGetInstanceWhenCountryLevel() throws ConfigurationException, IOException {
+        final Properties props = new Properties();
+        props.setProperty(GeolocationConfigurationFactory.
+                IP_GEOLOCATION_COUNTRY_DATABASE_FILE_PROPERTY, COUNTRY_FILE);
+        props.setProperty(GeolocationConfigurationFactory.
+                IP_GEOLOCATION_CITY_DATABASE_FILE_PROPERTY, CITY_FILE);
+        props.setProperty(GeolocationConfigurationFactory.IP_GEOLOCATION_LEVEL_PROPERTY,
+                IPGeolocationLevel.COUNTRY.getValue());
+
+        GeolocationConfigurationFactory.getInstance().configure(props);
+
+        final IPGeolocator locator1 = IPGeolocator.getInstance();
+        IPGeolocator locator2 = IPGeolocator.getInstance();
+
+        assertSame(locator1, locator2);
+
+        IPGeolocator.reset();
+
+        locator2 = IPGeolocator.getInstance();
+
+        assertNotSame(locator1, locator2);
+    }
+
+    @Test
+    public void testGetInstanceWhenDisabled() throws ConfigurationException, IOException {
+        final Properties props = new Properties();
+        props.setProperty(GeolocationConfigurationFactory.
+                IP_GEOLOCATION_COUNTRY_DATABASE_FILE_PROPERTY, COUNTRY_FILE);
+        props.setProperty(GeolocationConfigurationFactory.
+                IP_GEOLOCATION_CITY_DATABASE_FILE_PROPERTY, CITY_FILE);
+        props.setProperty(GeolocationConfigurationFactory.IP_GEOLOCATION_LEVEL_PROPERTY,
+                IPGeolocationLevel.DISABLED.getValue());
+
+        GeolocationConfigurationFactory.getInstance().configure(props);
+
         final IPGeolocator locator1 = IPGeolocator.getInstance();
         IPGeolocator locator2 = IPGeolocator.getInstance();
 
