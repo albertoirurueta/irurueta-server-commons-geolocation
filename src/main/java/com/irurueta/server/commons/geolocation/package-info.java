@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,14 +16,14 @@
 
 /**
  * This package contains classes related to Geolocation.
- * The main class of this package is the IPGeolocator, that can provide an 
+ * The main class of this package is the IPGeolocator, that can provide an
  * approximate location based on IP addresses.
- * 
+ * <p>
  * This implementation contains embedded Country and City GeoLite2 databases
  * provided free by Maxmind.
  * These databases can be freely downloaded at:
  * http://dev.maxmind.com/geoip/geoip2/geolite2/
- * 
+ * <p>
  * GeoLite2 databases are updated at Maxmind's website the first Tuesday of each
  * month.
  */

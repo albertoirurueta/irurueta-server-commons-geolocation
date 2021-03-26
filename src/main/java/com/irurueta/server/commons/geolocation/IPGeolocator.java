@@ -591,11 +591,9 @@ public class IPGeolocator implements Closeable {
     private void copyResource(final String resource, final String file) throws IOException {
         final File f = new File(file);
         final File parent = f.getParentFile();
-        if (parent != null && !parent.exists()) {
-            // attempt to create parent folders if they don't exist
-            if (!parent.mkdirs()) {
-                throw new IOException();
-            }
+        // attempt to create parent folders if they don't exist
+        if (parent != null && !parent.exists() && !parent.mkdirs()) {
+            throw new IOException();
         }
 
         if (!f.exists()) {

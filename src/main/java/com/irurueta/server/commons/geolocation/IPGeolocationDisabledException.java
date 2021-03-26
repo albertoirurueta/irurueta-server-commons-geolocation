@@ -19,7 +19,7 @@ package com.irurueta.server.commons.geolocation;
  * Raised if attempting to locate by IP address when IP geolocation is disabled.
  */
 public class IPGeolocationDisabledException extends GeolocationException {
-    
+
     /**
      * Constructor.
      */
@@ -29,6 +29,7 @@ public class IPGeolocationDisabledException extends GeolocationException {
 
     /**
      * Constructor with message.
+     *
      * @param message message describing the cause of the exception.
      */
     public IPGeolocationDisabledException(final String message) {
@@ -37,9 +38,10 @@ public class IPGeolocationDisabledException extends GeolocationException {
 
     /**
      * Constructor with message and cause.
+     *
      * @param message message describing the cause of the exception.
-     * @param cause originating exception that caused this exception. This can
-     * be used to obtain stack traces.
+     * @param cause   originating exception that caused this exception. This can
+     *                be used to obtain stack traces.
      */
     public IPGeolocationDisabledException(final String message, final Throwable cause) {
         super(message, cause);
@@ -47,10 +49,11 @@ public class IPGeolocationDisabledException extends GeolocationException {
 
     /**
      * Constructor with cause.
+     *
      * @param cause originating exception that caused this exception. This can
-     * be used to obtain stack traces.
+     *              be used to obtain stack traces.
      */
     public IPGeolocationDisabledException(final Throwable cause) {
         super(cause);
-    }        
+    }
 }
