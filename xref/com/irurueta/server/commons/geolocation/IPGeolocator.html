@@ -599,31 +599,29 @@
 <a class="jxr_linenumber" name="L591" href="#L591">591</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> copyResource(<strong class="jxr_keyword">final</strong> String resource, <strong class="jxr_keyword">final</strong> String file) <strong class="jxr_keyword">throws</strong> IOException {
 <a class="jxr_linenumber" name="L592" href="#L592">592</a>         <strong class="jxr_keyword">final</strong> File f = <strong class="jxr_keyword">new</strong> File(file);
 <a class="jxr_linenumber" name="L593" href="#L593">593</a>         <strong class="jxr_keyword">final</strong> File parent = f.getParentFile();
-<a class="jxr_linenumber" name="L594" href="#L594">594</a>         <strong class="jxr_keyword">if</strong> (parent != <strong class="jxr_keyword">null</strong> &amp;&amp; !parent.exists()) {
-<a class="jxr_linenumber" name="L595" href="#L595">595</a>             <em class="jxr_comment">// attempt to create parent folders if they don't exist</em>
-<a class="jxr_linenumber" name="L596" href="#L596">596</a>             <strong class="jxr_keyword">if</strong> (!parent.mkdirs()) {
-<a class="jxr_linenumber" name="L597" href="#L597">597</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IOException();
-<a class="jxr_linenumber" name="L598" href="#L598">598</a>             }
-<a class="jxr_linenumber" name="L599" href="#L599">599</a>         }
-<a class="jxr_linenumber" name="L600" href="#L600">600</a> 
-<a class="jxr_linenumber" name="L601" href="#L601">601</a>         <strong class="jxr_keyword">if</strong> (!f.exists()) {
-<a class="jxr_linenumber" name="L602" href="#L602">602</a>             <strong class="jxr_keyword">try</strong> (<strong class="jxr_keyword">final</strong> InputStream inStream = IPGeolocator.<strong class="jxr_keyword">class</strong>.getResourceAsStream(resource)) {
-<a class="jxr_linenumber" name="L603" href="#L603">603</a>                 <strong class="jxr_keyword">try</strong> (<strong class="jxr_keyword">final</strong> OutputStream outStream = <strong class="jxr_keyword">new</strong> FileOutputStream(file)) {
-<a class="jxr_linenumber" name="L604" href="#L604">604</a>                     LOGGER.log(Level.INFO, <span class="jxr_string">"Copying resource: {0}"</span>, resource);
-<a class="jxr_linenumber" name="L605" href="#L605">605</a> 
-<a class="jxr_linenumber" name="L606" href="#L606">606</a> 
-<a class="jxr_linenumber" name="L607" href="#L607">607</a>                     <strong class="jxr_keyword">final</strong> byte[] buffer = <strong class="jxr_keyword">new</strong> byte[BUFFER_SIZE];
-<a class="jxr_linenumber" name="L608" href="#L608">608</a>                     <strong class="jxr_keyword">int</strong> n;
-<a class="jxr_linenumber" name="L609" href="#L609">609</a>                     <strong class="jxr_keyword">while</strong> ((n = inStream.read(buffer)) &gt; 0) {
-<a class="jxr_linenumber" name="L610" href="#L610">610</a>                         outStream.write(buffer, 0, n);
-<a class="jxr_linenumber" name="L611" href="#L611">611</a>                     }
-<a class="jxr_linenumber" name="L612" href="#L612">612</a>                     LOGGER.log(Level.INFO, <span class="jxr_string">"Resource: {0} copied to {1}"</span>,
-<a class="jxr_linenumber" name="L613" href="#L613">613</a>                             <strong class="jxr_keyword">new</strong> Object[]{resource, f.getAbsolutePath()});
-<a class="jxr_linenumber" name="L614" href="#L614">614</a>                 }
-<a class="jxr_linenumber" name="L615" href="#L615">615</a>             }
-<a class="jxr_linenumber" name="L616" href="#L616">616</a>         }
-<a class="jxr_linenumber" name="L617" href="#L617">617</a>     }
-<a class="jxr_linenumber" name="L618" href="#L618">618</a> }
+<a class="jxr_linenumber" name="L594" href="#L594">594</a>         <em class="jxr_comment">// attempt to create parent folders if they don't exist</em>
+<a class="jxr_linenumber" name="L595" href="#L595">595</a>         <strong class="jxr_keyword">if</strong> (parent != <strong class="jxr_keyword">null</strong> &amp;&amp; !parent.exists() &amp;&amp; !parent.mkdirs()) {
+<a class="jxr_linenumber" name="L596" href="#L596">596</a>             <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IOException();
+<a class="jxr_linenumber" name="L597" href="#L597">597</a>         }
+<a class="jxr_linenumber" name="L598" href="#L598">598</a> 
+<a class="jxr_linenumber" name="L599" href="#L599">599</a>         <strong class="jxr_keyword">if</strong> (!f.exists()) {
+<a class="jxr_linenumber" name="L600" href="#L600">600</a>             <strong class="jxr_keyword">try</strong> (<strong class="jxr_keyword">final</strong> InputStream inStream = IPGeolocator.<strong class="jxr_keyword">class</strong>.getResourceAsStream(resource)) {
+<a class="jxr_linenumber" name="L601" href="#L601">601</a>                 <strong class="jxr_keyword">try</strong> (<strong class="jxr_keyword">final</strong> OutputStream outStream = <strong class="jxr_keyword">new</strong> FileOutputStream(file)) {
+<a class="jxr_linenumber" name="L602" href="#L602">602</a>                     LOGGER.log(Level.INFO, <span class="jxr_string">"Copying resource: {0}"</span>, resource);
+<a class="jxr_linenumber" name="L603" href="#L603">603</a> 
+<a class="jxr_linenumber" name="L604" href="#L604">604</a> 
+<a class="jxr_linenumber" name="L605" href="#L605">605</a>                     <strong class="jxr_keyword">final</strong> byte[] buffer = <strong class="jxr_keyword">new</strong> byte[BUFFER_SIZE];
+<a class="jxr_linenumber" name="L606" href="#L606">606</a>                     <strong class="jxr_keyword">int</strong> n;
+<a class="jxr_linenumber" name="L607" href="#L607">607</a>                     <strong class="jxr_keyword">while</strong> ((n = inStream.read(buffer)) &gt; 0) {
+<a class="jxr_linenumber" name="L608" href="#L608">608</a>                         outStream.write(buffer, 0, n);
+<a class="jxr_linenumber" name="L609" href="#L609">609</a>                     }
+<a class="jxr_linenumber" name="L610" href="#L610">610</a>                     LOGGER.log(Level.INFO, <span class="jxr_string">"Resource: {0} copied to {1}"</span>,
+<a class="jxr_linenumber" name="L611" href="#L611">611</a>                             <strong class="jxr_keyword">new</strong> Object[]{resource, f.getAbsolutePath()});
+<a class="jxr_linenumber" name="L612" href="#L612">612</a>                 }
+<a class="jxr_linenumber" name="L613" href="#L613">613</a>             }
+<a class="jxr_linenumber" name="L614" href="#L614">614</a>         }
+<a class="jxr_linenumber" name="L615" href="#L615">615</a>     }
+<a class="jxr_linenumber" name="L616" href="#L616">616</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2016&#x2013;2021. All rights reserved.</div>
