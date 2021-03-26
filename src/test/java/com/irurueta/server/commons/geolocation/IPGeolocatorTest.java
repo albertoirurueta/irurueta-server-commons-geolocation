@@ -2711,7 +2711,6 @@ public class IPGeolocatorTest {
         IPGeolocator locator = IPGeolocator.getInstance();
 
         final String address = "37.15.50.115";
-        final InetAddress inetAddress = InetAddress.getByName(address);
         IPLocation location = locator.locate(address);
         assertNotNull(location);
 
@@ -2721,7 +2720,55 @@ public class IPGeolocatorTest {
         // locate again
         assertSame(locator, IPGeolocator.getInstance());
 
-        location = locator.locate(address);
+        locator.locate(address);
+    }
+
+    @Test
+    public void testLocateCityLevelWhenCountryConfigured() throws ConfigurationException,
+            UnknownHostException, IPLocationNotFoundException, IPGeolocationDisabledException {
+        final Properties props = new Properties();
+        props.setProperty(GeolocationConfigurationFactory.
+                IP_GEOLOCATION_COUNTRY_DATABASE_FILE_PROPERTY, COUNTRY_FILE);
+        props.setProperty(GeolocationConfigurationFactory.
+                IP_GEOLOCATION_CITY_DATABASE_FILE_PROPERTY, CITY_FILE);
+        props.setProperty(GeolocationConfigurationFactory.IP_GEOLOCATION_LEVEL_PROPERTY,
+                IPGeolocationLevel.COUNTRY.getValue());
+
+        GeolocationConfigurationFactory.getInstance().configure(props);
+
+        final IPGeolocator locator = IPGeolocator.getInstance();
+
+        final String address = "12.25.205.51";
+
+        // test with default level
+        IPLocation location = locator.locate(address, IPGeolocationLevel.CITY);
+        assertNotNull(location);
+        assertNull(location.getCity());
+        assertNull(location.getTimeZone());
+        assertEquals(location.getAccuracyRadius().intValue(), 937);
+        assertNull(location.getMetroCode());
+        assertEquals(location.getLatitude(), 37.751, ERROR);
+        assertEquals(location.getLongitude(), -97.822, ERROR);
+        assertTrue(location.areCoordinatesAvailable());
+        assertNull(location.getPostalCode());
+        assertTrue(location.getSubdivisionCodes().isEmpty());
+        assertTrue(location.getSubdivisionNames().isEmpty());
+        assertEquals(location.getCountryCode(), "US");
+        assertEquals(location.getCountryName(Locale.ENGLISH),
+                "United States");
+        assertEquals(location.getCountryName(Locale.FRENCH),
+                "États-Unis");
+        assertEquals(location.getRegisteredCountryCode(), "US");
+        assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
+                "United States");
+        assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
+                "États-Unis");
+        assertNull(location.getDomain());
+        assertNull(location.getIsp());
+        assertNull(location.getOrganization());
+        assertEquals(location.getContinentCode(), "NA");
+        assertEquals(location.getContinentName(), "North America");
+        assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
     }
 
     @Test

@@ -457,10 +457,6 @@ public class IPGeolocator implements Closeable {
      */
     private void processCountryResponse(final AbstractCountryResponse response,
                                         final IPLocation location) {
-        if (response == null || location == null) {
-            return;
-        }
-
         final Continent continent = response.getContinent();
         if (continent != null) {
             location.mContinentCode = continent.getCode();
