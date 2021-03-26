@@ -17,6 +17,7 @@ package com.irurueta.server.commons.geolocation;
 
 import com.maxmind.db.CHMCache;
 import com.maxmind.geoip2.DatabaseReader;
+import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.model.AbstractCountryResponse;
 import com.maxmind.geoip2.model.CityResponse;
 import com.maxmind.geoip2.record.City;
@@ -51,8 +52,8 @@ public class IPGeolocator implements Closeable {
     /**
      * Logger of this class.
      */
-<span class="fc" id="L54">    private static final Logger LOGGER = Logger.getLogger(</span>
-<span class="fc" id="L55">            IPGeolocator.class.getName());</span>
+<span class="fc" id="L55">    private static final Logger LOGGER = Logger.getLogger(</span>
+<span class="fc" id="L56">            IPGeolocator.class.getName());</span>
 
     /**
      * Buffer size to copy embedded databases into final locations.
@@ -98,44 +99,44 @@ public class IPGeolocator implements Closeable {
      * Constructor.
      * Creates and configures an IPGeolocator instance.
      */
-<span class="fc" id="L101">    private IPGeolocator() {</span>
-<span class="fc" id="L102">        mEnabled = false;</span>
+<span class="fc" id="L102">    private IPGeolocator() {</span>
+<span class="fc" id="L103">        mEnabled = false;</span>
         try {
-<span class="fc" id="L104">            mConfiguration = GeolocationConfigurationFactory.getInstance().</span>
-<span class="fc" id="L105">                    configure();</span>
+<span class="fc" id="L105">            mConfiguration = GeolocationConfigurationFactory.getInstance().</span>
+<span class="fc" id="L106">                    configure();</span>
 
 
             // copy embedded databases to destination if needed
-<span class="fc" id="L109">            prepareDatabases();</span>
+<span class="fc" id="L110">            prepareDatabases();</span>
 
             // configure lookup services
-<span class="fc" id="L112">            final IPGeolocationLevel level = mConfiguration.getIPGeolocationLevel();</span>
+<span class="fc" id="L113">            final IPGeolocationLevel level = mConfiguration.getIPGeolocationLevel();</span>
 
-<span class="pc bpc" id="L114" title="1 of 2 branches missed.">            if (level != null) {</span>
-<span class="fc bfc" id="L115" title="All 2 branches covered.">                if (level == IPGeolocationLevel.CITY) {</span>
-<span class="fc" id="L116">                    mCityReader = createCityReader();</span>
-<span class="fc bfc" id="L117" title="All 2 branches covered.">                } else if (level == IPGeolocationLevel.COUNTRY) {</span>
-<span class="fc" id="L118">                    mCountryReader = createCountryReader();</span>
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">            if (level != null) {</span>
+<span class="fc bfc" id="L116" title="All 2 branches covered.">                if (level == IPGeolocationLevel.CITY) {</span>
+<span class="fc" id="L117">                    mCityReader = createCityReader();</span>
+<span class="fc bfc" id="L118" title="All 2 branches covered.">                } else if (level == IPGeolocationLevel.COUNTRY) {</span>
+<span class="fc" id="L119">                    mCountryReader = createCountryReader();</span>
                 }
 
-<span class="fc bfc" id="L121" title="All 4 branches covered.">                if (mCityReader != null || mCountryReader != null) {</span>
-<span class="fc" id="L122">                    mEnabled = true;</span>
+<span class="fc bfc" id="L122" title="All 4 branches covered.">                if (mCityReader != null || mCountryReader != null) {</span>
+<span class="fc" id="L123">                    mEnabled = true;</span>
                 }
             }
 
-<span class="fc bfc" id="L126" title="All 2 branches covered.">            if (mEnabled) {</span>
-<span class="fc" id="L127">                LOGGER.log(Level.INFO, &quot;IP geolocation configured&quot;);</span>
+<span class="fc bfc" id="L127" title="All 2 branches covered.">            if (mEnabled) {</span>
+<span class="fc" id="L128">                LOGGER.log(Level.INFO, &quot;IP geolocation configured&quot;);</span>
             } else {
-<span class="fc" id="L129">                LOGGER.log(Level.INFO, &quot;IP geolocation is disabled&quot;);</span>
+<span class="fc" id="L130">                LOGGER.log(Level.INFO, &quot;IP geolocation is disabled&quot;);</span>
             }
-<span class="nc" id="L131">        } catch (final Exception e) {</span>
-<span class="nc bnc" id="L132" title="All 2 branches missed.">            if (mEnabled) {</span>
-<span class="nc" id="L133">                LOGGER.log(Level.INFO, &quot;IP geolocation configured&quot;, e);</span>
+<span class="nc" id="L132">        } catch (final Exception e) {</span>
+<span class="nc bnc" id="L133" title="All 2 branches missed.">            if (mEnabled) {</span>
+<span class="nc" id="L134">                LOGGER.log(Level.INFO, &quot;IP geolocation configured&quot;, e);</span>
             } else {
-<span class="nc" id="L135">                LOGGER.log(Level.INFO, &quot;IP geolocation is disabled&quot;, e);</span>
+<span class="nc" id="L136">                LOGGER.log(Level.INFO, &quot;IP geolocation is disabled&quot;, e);</span>
             }
-<span class="fc" id="L137">        }</span>
-<span class="fc" id="L138">    }</span>
+<span class="fc" id="L138">        }</span>
+<span class="fc" id="L139">    }</span>
 
     /**
      * Factory method to return the singleton instance of IPGeolocator based
@@ -145,11 +146,11 @@ public class IPGeolocator implements Closeable {
      */
     public static synchronized IPGeolocator getInstance() {
         IPGeolocator singleton;
-<span class="pc bpc" id="L148" title="1 of 4 branches missed.">        if (mReference == null || (singleton = mReference.get()) == null) {</span>
-<span class="fc" id="L149">            singleton = new IPGeolocator();</span>
-<span class="fc" id="L150">            mReference = new SoftReference&lt;&gt;(singleton);</span>
+<span class="pc bpc" id="L149" title="1 of 4 branches missed.">        if (mReference == null || (singleton = mReference.get()) == null) {</span>
+<span class="fc" id="L150">            singleton = new IPGeolocator();</span>
+<span class="fc" id="L151">            mReference = new SoftReference&lt;&gt;(singleton);</span>
         }
-<span class="fc" id="L152">        return singleton;</span>
+<span class="fc" id="L153">        return singleton;</span>
     }
 
     /**
@@ -169,13 +170,12 @@ public class IPGeolocator implements Closeable {
             final InetAddress address,
             final IPGeolocationLevel level) throws IPGeolocationDisabledException,
             IPLocationNotFoundException {
-<span class="pc bpc" id="L172" title="1 of 4 branches missed.">        if (!mEnabled || level == IPGeolocationLevel.DISABLED) {</span>
-<span class="fc" id="L173">            throw new IPGeolocationDisabledException();</span>
+<span class="pc bpc" id="L173" title="1 of 4 branches missed.">        if (!mEnabled || level == IPGeolocationLevel.DISABLED) {</span>
+<span class="fc" id="L174">            throw new IPGeolocationDisabledException();</span>
         }
 
         try {
-<span class="fc" id="L177">            final IPLocation location = new IPLocation(level);</span>
-<span class="fc" id="L178">            boolean found = false;</span>
+<span class="fc" id="L178">            final IPLocation location = new IPLocation(level);</span>
             DatabaseReader reader;
 
             // city level
@@ -184,63 +184,55 @@ public class IPGeolocator implements Closeable {
 
                 // search at city level
 <span class="fc" id="L186">                final CityResponse response = reader.city(address);</span>
-<span class="pc bpc" id="L187" title="1 of 2 branches missed.">                if (response != null) {</span>
-<span class="fc" id="L188">                    found = true;</span>
 
-                    // city level
-<span class="fc" id="L191">                    final City city = response.getCity();</span>
-<span class="pc bpc" id="L192" title="1 of 2 branches missed.">                    if (city != null) {</span>
-<span class="fc" id="L193">                        location.mCity = city.getName();</span>
-                    }
-
-<span class="fc" id="L196">                    final Location loc = response.getLocation();</span>
-<span class="pc bpc" id="L197" title="1 of 2 branches missed.">                    if (loc != null) {</span>
-<span class="fc bfc" id="L198" title="All 2 branches covered.">                        location.mTimeZone = loc.getTimeZone() != null ?</span>
-<span class="fc" id="L199">                                TimeZone.getTimeZone(loc.getTimeZone()) : null;</span>
-<span class="fc" id="L200">                        location.mAccuracyRadius = loc.getAccuracyRadius();</span>
-<span class="fc" id="L201">                        location.mMetroCode = loc.getMetroCode();</span>
-<span class="fc" id="L202">                        location.mLatitude = loc.getLatitude();</span>
-<span class="fc" id="L203">                        location.mLongitude = loc.getLongitude();</span>
-                    }
-
-<span class="fc" id="L206">                    final Postal postal = response.getPostal();</span>
-<span class="pc bpc" id="L207" title="1 of 2 branches missed.">                    if (postal != null) {</span>
-<span class="fc" id="L208">                        location.mPostalCode = postal.getCode();</span>
-                    }
-
-<span class="fc" id="L211">                    final List&lt;Subdivision&gt; subdivisions = response.getSubdivisions();</span>
-<span class="pc bpc" id="L212" title="1 of 2 branches missed.">                    if (subdivisions != null) {</span>
-<span class="fc" id="L213">                        location.mSubdivisionCodes = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L214">                        location.mSubdivisionNames = new ArrayList&lt;&gt;();</span>
-<span class="fc bfc" id="L215" title="All 2 branches covered.">                        for (final Subdivision s : subdivisions) {</span>
-<span class="pc bpc" id="L216" title="2 of 4 branches missed.">                            if (s.getIsoCode() != null &amp;&amp; s.getName() != null) {</span>
-<span class="fc" id="L217">                                location.mSubdivisionCodes.add(s.getIsoCode());</span>
-<span class="fc" id="L218">                                location.mSubdivisionNames.add(s.getName());</span>
-                            }
-<span class="fc" id="L220">                        }</span>
-                    }
-
-
-                    // country level
-<span class="fc" id="L225">                    processCountryResponse(response, location);</span>
+                // city level
+<span class="fc" id="L189">                final City city = response.getCity();</span>
+<span class="pc bpc" id="L190" title="1 of 2 branches missed.">                if (city != null) {</span>
+<span class="fc" id="L191">                    location.mCity = city.getName();</span>
                 }
+
+<span class="fc" id="L194">                final Location loc = response.getLocation();</span>
+<span class="pc bpc" id="L195" title="1 of 2 branches missed.">                if (loc != null) {</span>
+<span class="fc bfc" id="L196" title="All 2 branches covered.">                    location.mTimeZone = loc.getTimeZone() != null ?</span>
+<span class="fc" id="L197">                            TimeZone.getTimeZone(loc.getTimeZone()) : null;</span>
+<span class="fc" id="L198">                    location.mAccuracyRadius = loc.getAccuracyRadius();</span>
+<span class="fc" id="L199">                    location.mMetroCode = loc.getMetroCode();</span>
+<span class="fc" id="L200">                    location.mLatitude = loc.getLatitude();</span>
+<span class="fc" id="L201">                    location.mLongitude = loc.getLongitude();</span>
+                }
+
+<span class="fc" id="L204">                final Postal postal = response.getPostal();</span>
+<span class="pc bpc" id="L205" title="1 of 2 branches missed.">                if (postal != null) {</span>
+<span class="fc" id="L206">                    location.mPostalCode = postal.getCode();</span>
+                }
+
+<span class="fc" id="L209">                final List&lt;Subdivision&gt; subdivisions = response.getSubdivisions();</span>
+<span class="pc bpc" id="L210" title="1 of 2 branches missed.">                if (subdivisions != null) {</span>
+<span class="fc" id="L211">                    location.mSubdivisionCodes = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L212">                    location.mSubdivisionNames = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L213" title="All 2 branches covered.">                    for (final Subdivision s : subdivisions) {</span>
+<span class="pc bpc" id="L214" title="2 of 4 branches missed.">                        if (s.getIsoCode() != null &amp;&amp; s.getName() != null) {</span>
+<span class="fc" id="L215">                            location.mSubdivisionCodes.add(s.getIsoCode());</span>
+<span class="fc" id="L216">                            location.mSubdivisionNames.add(s.getName());</span>
+                        }
+<span class="fc" id="L218">                    }</span>
+                }
+
+
+                // country level
+<span class="fc" id="L223">                processCountryResponse(response, location);</span>
             }
 
             // country or city level (if nothing has been found yet)
-<span class="fc bfc" id="L230" title="All 2 branches covered.">            if (level == IPGeolocationLevel.COUNTRY) {</span>
-<span class="fc" id="L231">                reader = getOrCreateCountryReader();</span>
-<span class="fc" id="L232">                final AbstractCountryResponse response = reader.country(address);</span>
-<span class="pc bpc" id="L233" title="1 of 2 branches missed.">                found = response != null;</span>
-<span class="fc" id="L234">                processCountryResponse(response, location);</span>
+<span class="fc bfc" id="L227" title="All 2 branches covered.">            if (level == IPGeolocationLevel.COUNTRY) {</span>
+<span class="fc" id="L228">                reader = getOrCreateCountryReader();</span>
+<span class="fc" id="L229">                final AbstractCountryResponse response = reader.country(address);</span>
+<span class="fc" id="L230">                processCountryResponse(response, location);</span>
             }
 
-<span class="pc bpc" id="L237" title="1 of 2 branches missed.">            if (!found) {</span>
-<span class="nc" id="L238">                throw new IPLocationNotFoundException();</span>
-            }
-
-<span class="fc" id="L241">            return location;</span>
-<span class="fc" id="L242">        } catch (final Exception e) {</span>
-<span class="fc" id="L243">            throw new IPLocationNotFoundException(e);</span>
+<span class="fc" id="L233">            return location;</span>
+<span class="fc" id="L234">        } catch (final GeoIp2Exception | IOException e) {</span>
+<span class="fc" id="L235">            throw new IPLocationNotFoundException(e);</span>
         }
     }
 
@@ -263,7 +255,7 @@ public class IPGeolocator implements Closeable {
     public IPLocation locate(final String address, final IPGeolocationLevel level)
             throws UnknownHostException, IPGeolocationDisabledException,
             IPLocationNotFoundException {
-<span class="fc" id="L266">        return locate(InetAddress.getByName(address), level);</span>
+<span class="fc" id="L258">        return locate(InetAddress.getByName(address), level);</span>
     }
 
     /**
@@ -279,7 +271,7 @@ public class IPGeolocator implements Closeable {
      */
     public IPLocation locate(final InetAddress address)
             throws IPGeolocationDisabledException, IPLocationNotFoundException {
-<span class="fc" id="L282">        return locate(address, mConfiguration.getIPGeolocationLevel());</span>
+<span class="fc" id="L274">        return locate(address, mConfiguration.getIPGeolocationLevel());</span>
     }
 
     /**
@@ -297,7 +289,7 @@ public class IPGeolocator implements Closeable {
      */
     public IPLocation locate(final String address) throws UnknownHostException,
             IPGeolocationDisabledException, IPLocationNotFoundException {
-<span class="fc" id="L300">        return locate(InetAddress.getByName(address));</span>
+<span class="fc" id="L292">        return locate(InetAddress.getByName(address));</span>
     }
 
     /**
@@ -312,60 +304,60 @@ public class IPGeolocator implements Closeable {
     @Override
     public synchronized void close() throws IOException {
         // close location services
-<span class="fc bfc" id="L315" title="All 2 branches covered.">        if (mCityReader != null) {</span>
+<span class="fc bfc" id="L307" title="All 2 branches covered.">        if (mCityReader != null) {</span>
             try {
-<span class="fc" id="L317">                mCityReader.close();</span>
-<span class="nc" id="L318">            } catch (final IOException e) {</span>
-<span class="nc" id="L319">                LOGGER.log(Level.WARNING, &quot;Could not close city database&quot;, e);</span>
-<span class="fc" id="L320">            }</span>
+<span class="fc" id="L309">                mCityReader.close();</span>
+<span class="nc" id="L310">            } catch (final IOException e) {</span>
+<span class="nc" id="L311">                LOGGER.log(Level.WARNING, &quot;Could not close city database&quot;, e);</span>
+<span class="fc" id="L312">            }</span>
         }
-<span class="fc bfc" id="L322" title="All 2 branches covered.">        if (mCountryReader != null) {</span>
+<span class="fc bfc" id="L314" title="All 2 branches covered.">        if (mCountryReader != null) {</span>
             try {
-<span class="fc" id="L324">                mCountryReader.close();</span>
-<span class="nc" id="L325">            } catch (final IOException e) {</span>
-<span class="nc" id="L326">                LOGGER.log(Level.WARNING, &quot;Could not close country database&quot;, e);</span>
-<span class="fc" id="L327">            }</span>
+<span class="fc" id="L316">                mCountryReader.close();</span>
+<span class="nc" id="L317">            } catch (final IOException e) {</span>
+<span class="nc" id="L318">                LOGGER.log(Level.WARNING, &quot;Could not close country database&quot;, e);</span>
+<span class="fc" id="L319">            }</span>
         }
 
-<span class="fc" id="L330">        mEnabled = false;</span>
+<span class="fc" id="L322">        mEnabled = false;</span>
 
         // delete database files if they were copied from embedded resources, as
         // this method will usually be called on server shutdown or application
         // undeployment
-<span class="fc" id="L335">        boolean failed = false;</span>
-<span class="fc bfc" id="L336" title="All 2 branches covered.">        if (mCountryDatabasePrepared) {</span>
+<span class="fc" id="L327">        boolean failed = false;</span>
+<span class="fc bfc" id="L328" title="All 2 branches covered.">        if (mCountryDatabasePrepared) {</span>
             // delete country database file
-<span class="fc" id="L338">            final File f = new File(</span>
-<span class="fc" id="L339">                    mConfiguration.getIPGeolocationCountryDatabaseFile());</span>
-<span class="fc bfc" id="L340" title="All 2 branches covered.">            if (f.exists()) {</span>
+<span class="fc" id="L330">            final File f = new File(</span>
+<span class="fc" id="L331">                    mConfiguration.getIPGeolocationCountryDatabaseFile());</span>
+<span class="fc bfc" id="L332" title="All 2 branches covered.">            if (f.exists()) {</span>
                 try {
-<span class="fc" id="L342">                    Files.delete(f.toPath());</span>
-<span class="nc" id="L343">                } catch (final IOException e) {</span>
-<span class="nc" id="L344">                    failed = true;</span>
-<span class="fc" id="L345">                }</span>
+<span class="fc" id="L334">                    Files.delete(f.toPath());</span>
+<span class="nc" id="L335">                } catch (final IOException e) {</span>
+<span class="nc" id="L336">                    failed = true;</span>
+<span class="fc" id="L337">                }</span>
             }
         }
 
         //city database
-<span class="fc bfc" id="L350" title="All 2 branches covered.">        if (mCityDatabasePrepared) {</span>
+<span class="fc bfc" id="L342" title="All 2 branches covered.">        if (mCityDatabasePrepared) {</span>
             //delete city database file
-<span class="fc" id="L352">            final File f = new File(</span>
-<span class="fc" id="L353">                    mConfiguration.getIPGeolocationCityDatabaseFile());</span>
-<span class="fc bfc" id="L354" title="All 2 branches covered.">            if (f.exists()) {</span>
+<span class="fc" id="L344">            final File f = new File(</span>
+<span class="fc" id="L345">                    mConfiguration.getIPGeolocationCityDatabaseFile());</span>
+<span class="fc bfc" id="L346" title="All 2 branches covered.">            if (f.exists()) {</span>
                 try {
-<span class="fc" id="L356">                    Files.delete(f.toPath());</span>
-<span class="nc" id="L357">                } catch (final IOException e) {</span>
-<span class="nc" id="L358">                    failed = true;</span>
-<span class="fc" id="L359">                }</span>
+<span class="fc" id="L348">                    Files.delete(f.toPath());</span>
+<span class="nc" id="L349">                } catch (final IOException e) {</span>
+<span class="nc" id="L350">                    failed = true;</span>
+<span class="fc" id="L351">                }</span>
             }
         }
 
-<span class="fc" id="L363">        mCityReader = mCountryReader = null;</span>
+<span class="fc" id="L355">        mCityReader = mCountryReader = null;</span>
 
-<span class="pc bpc" id="L365" title="1 of 2 branches missed.">        if (failed) {</span>
-<span class="nc" id="L366">            throw new IOException();</span>
+<span class="pc bpc" id="L357" title="1 of 2 branches missed.">        if (failed) {</span>
+<span class="nc" id="L358">            throw new IOException();</span>
         }
-<span class="fc" id="L368">    }</span>
+<span class="fc" id="L360">    }</span>
 
     /**
      * Closes geolocation services if a configured IPGeolocator exists, and
@@ -376,11 +368,11 @@ public class IPGeolocator implements Closeable {
      */
     protected static synchronized void reset() throws IOException {
         final IPGeolocator singleton;
-<span class="pc bpc" id="L379" title="1 of 4 branches missed.">        if (mReference != null &amp;&amp; (singleton = mReference.get()) != null) {</span>
-<span class="fc" id="L380">            singleton.close();</span>
+<span class="pc bpc" id="L371" title="1 of 4 branches missed.">        if (mReference != null &amp;&amp; (singleton = mReference.get()) != null) {</span>
+<span class="fc" id="L372">            singleton.close();</span>
         }
-<span class="fc" id="L382">        mReference = null;</span>
-<span class="fc" id="L383">    }</span>
+<span class="fc" id="L374">        mReference = null;</span>
+<span class="fc" id="L375">    }</span>
 
     /**
      * Gets or create city database reader.
@@ -389,13 +381,13 @@ public class IPGeolocator implements Closeable {
      * @throws IOException if an I/O error occurs.
      */
     private DatabaseReader getOrCreateCityReader() throws IOException {
-<span class="pc bpc" id="L392" title="1 of 2 branches missed.">        if (mCityReader != null) {</span>
-<span class="fc" id="L393">            return mCityReader;</span>
+<span class="pc bpc" id="L384" title="1 of 2 branches missed.">        if (mCityReader != null) {</span>
+<span class="fc" id="L385">            return mCityReader;</span>
         } else {
-<span class="nc" id="L395">            mCityReader = createCityReader();</span>
+<span class="nc" id="L387">            mCityReader = createCityReader();</span>
         }
 
-<span class="nc" id="L398">        return mCityReader;</span>
+<span class="nc" id="L390">        return mCityReader;</span>
     }
 
     /**
@@ -405,13 +397,13 @@ public class IPGeolocator implements Closeable {
      * @throws IOException if an I/O error occurs.
      */
     private DatabaseReader getOrCreateCountryReader() throws IOException {
-<span class="fc bfc" id="L408" title="All 2 branches covered.">        if (mCountryReader != null) {</span>
-<span class="fc" id="L409">            return mCountryReader;</span>
+<span class="fc bfc" id="L400" title="All 2 branches covered.">        if (mCountryReader != null) {</span>
+<span class="fc" id="L401">            return mCountryReader;</span>
         } else {
-<span class="fc" id="L411">            mCountryReader = createCountryReader();</span>
+<span class="fc" id="L403">            mCountryReader = createCountryReader();</span>
         }
 
-<span class="fc" id="L414">        return mCountryReader;</span>
+<span class="fc" id="L406">        return mCountryReader;</span>
     }
 
     /**
@@ -421,11 +413,11 @@ public class IPGeolocator implements Closeable {
      * @throws IOException if an I/O error occurs.
      */
     private DatabaseReader createCityReader() throws IOException {
-<span class="pc bpc" id="L424" title="1 of 2 branches missed.">        if (!mCityDatabasePrepared) {</span>
-<span class="nc" id="L425">            mCityDatabasePrepared = prepareCityDatabase();</span>
+<span class="pc bpc" id="L416" title="1 of 2 branches missed.">        if (!mCityDatabasePrepared) {</span>
+<span class="nc" id="L417">            mCityDatabasePrepared = prepareCityDatabase();</span>
         }
-<span class="fc" id="L427">        final File f = new File(mConfiguration.getIPGeolocationCityDatabaseFile());</span>
-<span class="fc" id="L428">        return createReader(f);</span>
+<span class="fc" id="L419">        final File f = new File(mConfiguration.getIPGeolocationCityDatabaseFile());</span>
+<span class="fc" id="L420">        return createReader(f);</span>
     }
 
     /**
@@ -435,11 +427,11 @@ public class IPGeolocator implements Closeable {
      * @throws IOException if an I/O error occurs.
      */
     private DatabaseReader createCountryReader() throws IOException {
-<span class="fc bfc" id="L438" title="All 2 branches covered.">        if (!mCountryDatabasePrepared) {</span>
-<span class="fc" id="L439">            mCountryDatabasePrepared = prepareCountryDatabase();</span>
+<span class="fc bfc" id="L430" title="All 2 branches covered.">        if (!mCountryDatabasePrepared) {</span>
+<span class="fc" id="L431">            mCountryDatabasePrepared = prepareCountryDatabase();</span>
         }
-<span class="fc" id="L441">        final File f = new File(mConfiguration.getIPGeolocationCountryDatabaseFile());</span>
-<span class="fc" id="L442">        return createReader(f);</span>
+<span class="fc" id="L433">        final File f = new File(mConfiguration.getIPGeolocationCountryDatabaseFile());</span>
+<span class="fc" id="L434">        return createReader(f);</span>
     }
 
     /**
@@ -450,14 +442,14 @@ public class IPGeolocator implements Closeable {
      * @throws IOException if an I/O error occurs.
      */
     private DatabaseReader createReader(final File file) throws IOException {
-<span class="fc" id="L453">        final boolean cachingEnabled = mConfiguration.isCachingEnabled();</span>
+<span class="fc" id="L445">        final boolean cachingEnabled = mConfiguration.isCachingEnabled();</span>
 
-<span class="fc" id="L455">        final DatabaseReader.Builder builder =</span>
+<span class="fc" id="L447">        final DatabaseReader.Builder builder =</span>
                 new DatabaseReader.Builder(file);
-<span class="pc bpc" id="L457" title="1 of 2 branches missed.">        if (cachingEnabled) {</span>
-<span class="fc" id="L458">            builder.withCache(new CHMCache());</span>
+<span class="pc bpc" id="L449" title="1 of 2 branches missed.">        if (cachingEnabled) {</span>
+<span class="fc" id="L450">            builder.withCache(new CHMCache());</span>
         }
-<span class="fc" id="L460">        return builder.build();</span>
+<span class="fc" id="L452">        return builder.build();</span>
     }
 
     /**
@@ -468,36 +460,36 @@ public class IPGeolocator implements Closeable {
      */
     private void processCountryResponse(final AbstractCountryResponse response,
                                         final IPLocation location) {
-<span class="pc bpc" id="L471" title="2 of 4 branches missed.">        if (response == null || location == null) {</span>
-<span class="nc" id="L472">            return;</span>
+<span class="pc bpc" id="L463" title="2 of 4 branches missed.">        if (response == null || location == null) {</span>
+<span class="nc" id="L464">            return;</span>
         }
 
-<span class="fc" id="L475">        final Continent continent = response.getContinent();</span>
-<span class="pc bpc" id="L476" title="1 of 2 branches missed.">        if (continent != null) {</span>
-<span class="fc" id="L477">            location.mContinentCode = continent.getCode();</span>
-<span class="fc" id="L478">            location.mContinentName = continent.getName();</span>
+<span class="fc" id="L467">        final Continent continent = response.getContinent();</span>
+<span class="pc bpc" id="L468" title="1 of 2 branches missed.">        if (continent != null) {</span>
+<span class="fc" id="L469">            location.mContinentCode = continent.getCode();</span>
+<span class="fc" id="L470">            location.mContinentName = continent.getName();</span>
         }
 
-<span class="fc" id="L481">        Country country = response.getCountry();</span>
-<span class="pc bpc" id="L482" title="1 of 2 branches missed.">        if (country != null) {</span>
-<span class="fc" id="L483">            location.mCountryCode = country.getIsoCode();</span>
-<span class="fc" id="L484">            location.mCountryName = country.getName();</span>
+<span class="fc" id="L473">        Country country = response.getCountry();</span>
+<span class="pc bpc" id="L474" title="1 of 2 branches missed.">        if (country != null) {</span>
+<span class="fc" id="L475">            location.mCountryCode = country.getIsoCode();</span>
+<span class="fc" id="L476">            location.mCountryName = country.getName();</span>
         }
-<span class="fc" id="L486">        country = response.getRegisteredCountry();</span>
-<span class="pc bpc" id="L487" title="1 of 2 branches missed.">        if (country != null) {</span>
-<span class="fc" id="L488">            location.mRegisteredCountryCode = country.getIsoCode();</span>
-<span class="fc" id="L489">            location.mRegisteredCountryName = country.getName();</span>
+<span class="fc" id="L478">        country = response.getRegisteredCountry();</span>
+<span class="pc bpc" id="L479" title="1 of 2 branches missed.">        if (country != null) {</span>
+<span class="fc" id="L480">            location.mRegisteredCountryCode = country.getIsoCode();</span>
+<span class="fc" id="L481">            location.mRegisteredCountryName = country.getName();</span>
         }
 
-<span class="fc" id="L492">        final Traits traits = response.getTraits();</span>
-<span class="pc bpc" id="L493" title="1 of 2 branches missed.">        if (traits != null) {</span>
-<span class="fc" id="L494">            location.mAutonomousSystemNumber =</span>
-<span class="fc" id="L495">                    traits.getAutonomousSystemNumber();</span>
-<span class="fc" id="L496">            location.mDomain = traits.getDomain();</span>
-<span class="fc" id="L497">            location.mIsp = traits.getIsp();</span>
-<span class="fc" id="L498">            location.mOrganization = traits.getOrganization();</span>
+<span class="fc" id="L484">        final Traits traits = response.getTraits();</span>
+<span class="pc bpc" id="L485" title="1 of 2 branches missed.">        if (traits != null) {</span>
+<span class="fc" id="L486">            location.mAutonomousSystemNumber =</span>
+<span class="fc" id="L487">                    traits.getAutonomousSystemNumber();</span>
+<span class="fc" id="L488">            location.mDomain = traits.getDomain();</span>
+<span class="fc" id="L489">            location.mIsp = traits.getIsp();</span>
+<span class="fc" id="L490">            location.mOrganization = traits.getOrganization();</span>
         }
-<span class="fc" id="L500">    }</span>
+<span class="fc" id="L492">    }</span>
 
     /**
      * Copies embedded resources into destination files where databases will be
@@ -508,22 +500,22 @@ public class IPGeolocator implements Closeable {
     private void prepareDatabases() throws IOException {
 
         // city database
-<span class="fc" id="L511">        final IPGeolocationLevel level = mConfiguration.getIPGeolocationLevel();</span>
-<span class="fc bfc" id="L512" title="All 2 branches covered.">        if (level == IPGeolocationLevel.CITY &amp;&amp;</span>
-<span class="pc bpc" id="L513" title="1 of 2 branches missed.">                mConfiguration.isIPGeolocationCityDatabaseEmbedded() &amp;&amp;</span>
-<span class="pc bpc" id="L514" title="1 of 2 branches missed.">                mConfiguration.getIPGeolocationCityEmbeddedResource() != null &amp;&amp;</span>
-<span class="pc bpc" id="L515" title="1 of 2 branches missed.">                mConfiguration.getIPGeolocationCityDatabaseFile() != null) {</span>
-<span class="fc" id="L516">            mCityDatabasePrepared = prepareCityDatabase();</span>
+<span class="fc" id="L503">        final IPGeolocationLevel level = mConfiguration.getIPGeolocationLevel();</span>
+<span class="fc bfc" id="L504" title="All 2 branches covered.">        if (level == IPGeolocationLevel.CITY &amp;&amp;</span>
+<span class="pc bpc" id="L505" title="1 of 2 branches missed.">                mConfiguration.isIPGeolocationCityDatabaseEmbedded() &amp;&amp;</span>
+<span class="pc bpc" id="L506" title="1 of 2 branches missed.">                mConfiguration.getIPGeolocationCityEmbeddedResource() != null &amp;&amp;</span>
+<span class="pc bpc" id="L507" title="1 of 2 branches missed.">                mConfiguration.getIPGeolocationCityDatabaseFile() != null) {</span>
+<span class="fc" id="L508">            mCityDatabasePrepared = prepareCityDatabase();</span>
         }
 
         // country database
-<span class="fc bfc" id="L520" title="All 2 branches covered.">        if (!mCityDatabasePrepared &amp;&amp;</span>
-<span class="pc bpc" id="L521" title="1 of 2 branches missed.">                mConfiguration.isIPGeolocationCountryDatabaseEmbedded() &amp;&amp;</span>
-<span class="pc bpc" id="L522" title="1 of 2 branches missed.">                mConfiguration.getIPGeolocationCountryEmbeddedResource() != null &amp;&amp;</span>
-<span class="pc bpc" id="L523" title="1 of 2 branches missed.">                mConfiguration.getIPGeolocationCountryDatabaseFile() != null) {</span>
-<span class="fc" id="L524">            mCountryDatabasePrepared = prepareCountryDatabase();</span>
+<span class="fc bfc" id="L512" title="All 2 branches covered.">        if (!mCityDatabasePrepared &amp;&amp;</span>
+<span class="pc bpc" id="L513" title="1 of 2 branches missed.">                mConfiguration.isIPGeolocationCountryDatabaseEmbedded() &amp;&amp;</span>
+<span class="pc bpc" id="L514" title="1 of 2 branches missed.">                mConfiguration.getIPGeolocationCountryEmbeddedResource() != null &amp;&amp;</span>
+<span class="pc bpc" id="L515" title="1 of 2 branches missed.">                mConfiguration.getIPGeolocationCountryDatabaseFile() != null) {</span>
+<span class="fc" id="L516">            mCountryDatabasePrepared = prepareCountryDatabase();</span>
         }
-<span class="fc" id="L526">    }</span>
+<span class="fc" id="L518">    }</span>
 
     /**
      * Copies embedded city resource into destination file where database will
@@ -533,16 +525,16 @@ public class IPGeolocator implements Closeable {
      * @throws IOException if an I/O error occurs.
      */
     private boolean prepareCityDatabase() throws IOException {
-<span class="pc bpc" id="L536" title="1 of 2 branches missed.">        if (mConfiguration.isIPGeolocationCityDatabaseEmbedded() &amp;&amp;</span>
-<span class="pc bpc" id="L537" title="1 of 2 branches missed.">                mConfiguration.getIPGeolocationCityEmbeddedResource() != null &amp;&amp;</span>
-<span class="pc bpc" id="L538" title="1 of 2 branches missed.">                mConfiguration.getIPGeolocationCityDatabaseFile() != null) {</span>
+<span class="pc bpc" id="L528" title="1 of 2 branches missed.">        if (mConfiguration.isIPGeolocationCityDatabaseEmbedded() &amp;&amp;</span>
+<span class="pc bpc" id="L529" title="1 of 2 branches missed.">                mConfiguration.getIPGeolocationCityEmbeddedResource() != null &amp;&amp;</span>
+<span class="pc bpc" id="L530" title="1 of 2 branches missed.">                mConfiguration.getIPGeolocationCityDatabaseFile() != null) {</span>
             // copy embedded resource to destination file
-<span class="fc" id="L540">            copyResource(mConfiguration.getIPGeolocationCityEmbeddedResource(),</span>
-<span class="fc" id="L541">                    mConfiguration.getIPGeolocationCityDatabaseFile());</span>
-<span class="fc" id="L542">            return true;</span>
+<span class="fc" id="L532">            copyResource(mConfiguration.getIPGeolocationCityEmbeddedResource(),</span>
+<span class="fc" id="L533">                    mConfiguration.getIPGeolocationCityDatabaseFile());</span>
+<span class="fc" id="L534">            return true;</span>
         }
 
-<span class="nc" id="L545">        return false;</span>
+<span class="nc" id="L537">        return false;</span>
     }
 
     /**
@@ -553,16 +545,16 @@ public class IPGeolocator implements Closeable {
      * @throws IOException if an I/O error occurs.
      */
     private boolean prepareCountryDatabase() throws IOException {
-<span class="pc bpc" id="L556" title="1 of 2 branches missed.">        if (mConfiguration.isIPGeolocationCountryDatabaseEmbedded() &amp;&amp;</span>
-<span class="pc bpc" id="L557" title="1 of 2 branches missed.">                mConfiguration.getIPGeolocationCountryEmbeddedResource() != null &amp;&amp;</span>
-<span class="pc bpc" id="L558" title="1 of 2 branches missed.">                mConfiguration.getIPGeolocationCountryDatabaseFile() != null) {</span>
+<span class="pc bpc" id="L548" title="1 of 2 branches missed.">        if (mConfiguration.isIPGeolocationCountryDatabaseEmbedded() &amp;&amp;</span>
+<span class="pc bpc" id="L549" title="1 of 2 branches missed.">                mConfiguration.getIPGeolocationCountryEmbeddedResource() != null &amp;&amp;</span>
+<span class="pc bpc" id="L550" title="1 of 2 branches missed.">                mConfiguration.getIPGeolocationCountryDatabaseFile() != null) {</span>
             // copy embedded resource to destination file
-<span class="fc" id="L560">            copyResource(mConfiguration.getIPGeolocationCountryEmbeddedResource(),</span>
-<span class="fc" id="L561">                    mConfiguration.getIPGeolocationCountryDatabaseFile());</span>
-<span class="fc" id="L562">            return true;</span>
+<span class="fc" id="L552">            copyResource(mConfiguration.getIPGeolocationCountryEmbeddedResource(),</span>
+<span class="fc" id="L553">                    mConfiguration.getIPGeolocationCountryDatabaseFile());</span>
+<span class="fc" id="L554">            return true;</span>
         }
 
-<span class="nc" id="L565">        return false;</span>
+<span class="nc" id="L557">        return false;</span>
     }
 
     /**
@@ -575,29 +567,29 @@ public class IPGeolocator implements Closeable {
      * @throws IOException .
      */
     private void copyResource(final String resource, final String file) throws IOException {
-<span class="fc" id="L578">        final File f = new File(file);</span>
-<span class="fc" id="L579">        final File parent = f.getParentFile();</span>
+<span class="fc" id="L570">        final File f = new File(file);</span>
+<span class="fc" id="L571">        final File parent = f.getParentFile();</span>
         // attempt to create parent folders if they don't exist
-<span class="pc bpc" id="L581" title="2 of 6 branches missed.">        if (parent != null &amp;&amp; !parent.exists() &amp;&amp; !parent.mkdirs()) {</span>
-<span class="nc" id="L582">            throw new IOException();</span>
+<span class="pc bpc" id="L573" title="2 of 6 branches missed.">        if (parent != null &amp;&amp; !parent.exists() &amp;&amp; !parent.mkdirs()) {</span>
+<span class="nc" id="L574">            throw new IOException();</span>
         }
 
-<span class="fc bfc" id="L585" title="All 2 branches covered.">        if (!f.exists()) {</span>
-<span class="fc" id="L586">            try (final InputStream inStream = IPGeolocator.class.getResourceAsStream(resource)) {</span>
-<span class="fc" id="L587">                try (final OutputStream outStream = new FileOutputStream(file)) {</span>
-<span class="fc" id="L588">                    LOGGER.log(Level.INFO, &quot;Copying resource: {0}&quot;, resource);</span>
+<span class="fc bfc" id="L577" title="All 2 branches covered.">        if (!f.exists()) {</span>
+<span class="fc" id="L578">            try (final InputStream inStream = IPGeolocator.class.getResourceAsStream(resource)) {</span>
+<span class="fc" id="L579">                try (final OutputStream outStream = new FileOutputStream(file)) {</span>
+<span class="fc" id="L580">                    LOGGER.log(Level.INFO, &quot;Copying resource: {0}&quot;, resource);</span>
 
 
-<span class="fc" id="L591">                    final byte[] buffer = new byte[BUFFER_SIZE];</span>
+<span class="fc" id="L583">                    final byte[] buffer = new byte[BUFFER_SIZE];</span>
                     int n;
-<span class="fc bfc" id="L593" title="All 2 branches covered.">                    while ((n = inStream.read(buffer)) &gt; 0) {</span>
-<span class="fc" id="L594">                        outStream.write(buffer, 0, n);</span>
+<span class="fc bfc" id="L585" title="All 2 branches covered.">                    while ((n = inStream.read(buffer)) &gt; 0) {</span>
+<span class="fc" id="L586">                        outStream.write(buffer, 0, n);</span>
                     }
-<span class="fc" id="L596">                    LOGGER.log(Level.INFO, &quot;Resource: {0} copied to {1}&quot;,</span>
-<span class="fc" id="L597">                            new Object[]{resource, f.getAbsolutePath()});</span>
+<span class="fc" id="L588">                    LOGGER.log(Level.INFO, &quot;Resource: {0} copied to {1}&quot;,</span>
+<span class="fc" id="L589">                            new Object[]{resource, f.getAbsolutePath()});</span>
                 }
             }
         }
-<span class="fc" id="L601">    }</span>
+<span class="fc" id="L593">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
