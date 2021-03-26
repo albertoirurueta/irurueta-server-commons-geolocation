@@ -2719,234 +2719,281 @@
 <a class="jxr_linenumber" name="L2711" href="#L2711">2711</a>         IPGeolocator locator = IPGeolocator.getInstance();
 <a class="jxr_linenumber" name="L2712" href="#L2712">2712</a> 
 <a class="jxr_linenumber" name="L2713" href="#L2713">2713</a>         <strong class="jxr_keyword">final</strong> String address = <span class="jxr_string">"37.15.50.115"</span>;
-<a class="jxr_linenumber" name="L2714" href="#L2714">2714</a>         <strong class="jxr_keyword">final</strong> InetAddress inetAddress = InetAddress.getByName(address);
-<a class="jxr_linenumber" name="L2715" href="#L2715">2715</a>         IPLocation location = locator.locate(address);
-<a class="jxr_linenumber" name="L2716" href="#L2716">2716</a>         assertNotNull(location);
-<a class="jxr_linenumber" name="L2717" href="#L2717">2717</a> 
-<a class="jxr_linenumber" name="L2718" href="#L2718">2718</a>         <em class="jxr_comment">// close</em>
-<a class="jxr_linenumber" name="L2719" href="#L2719">2719</a>         locator.close();
-<a class="jxr_linenumber" name="L2720" href="#L2720">2720</a> 
-<a class="jxr_linenumber" name="L2721" href="#L2721">2721</a>         <em class="jxr_comment">// locate again</em>
-<a class="jxr_linenumber" name="L2722" href="#L2722">2722</a>         assertSame(locator, IPGeolocator.getInstance());
-<a class="jxr_linenumber" name="L2723" href="#L2723">2723</a> 
-<a class="jxr_linenumber" name="L2724" href="#L2724">2724</a>         location = locator.locate(address);
-<a class="jxr_linenumber" name="L2725" href="#L2725">2725</a>     }
-<a class="jxr_linenumber" name="L2726" href="#L2726">2726</a> 
-<a class="jxr_linenumber" name="L2727" href="#L2727">2727</a>     @Test
-<a class="jxr_linenumber" name="L2728" href="#L2728">2728</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testLocateWhenDisabledLevel() <strong class="jxr_keyword">throws</strong> ConfigurationException, IOException {
+<a class="jxr_linenumber" name="L2714" href="#L2714">2714</a>         IPLocation location = locator.locate(address);
+<a class="jxr_linenumber" name="L2715" href="#L2715">2715</a>         assertNotNull(location);
+<a class="jxr_linenumber" name="L2716" href="#L2716">2716</a> 
+<a class="jxr_linenumber" name="L2717" href="#L2717">2717</a>         <em class="jxr_comment">// close</em>
+<a class="jxr_linenumber" name="L2718" href="#L2718">2718</a>         locator.close();
+<a class="jxr_linenumber" name="L2719" href="#L2719">2719</a> 
+<a class="jxr_linenumber" name="L2720" href="#L2720">2720</a>         <em class="jxr_comment">// locate again</em>
+<a class="jxr_linenumber" name="L2721" href="#L2721">2721</a>         assertSame(locator, IPGeolocator.getInstance());
+<a class="jxr_linenumber" name="L2722" href="#L2722">2722</a> 
+<a class="jxr_linenumber" name="L2723" href="#L2723">2723</a>         locator.locate(address);
+<a class="jxr_linenumber" name="L2724" href="#L2724">2724</a>     }
+<a class="jxr_linenumber" name="L2725" href="#L2725">2725</a> 
+<a class="jxr_linenumber" name="L2726" href="#L2726">2726</a>     @Test
+<a class="jxr_linenumber" name="L2727" href="#L2727">2727</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testLocateCityLevelWhenCountryConfigured() <strong class="jxr_keyword">throws</strong> ConfigurationException,
+<a class="jxr_linenumber" name="L2728" href="#L2728">2728</a>             UnknownHostException, IPLocationNotFoundException, IPGeolocationDisabledException {
 <a class="jxr_linenumber" name="L2729" href="#L2729">2729</a>         <strong class="jxr_keyword">final</strong> Properties props = <strong class="jxr_keyword">new</strong> Properties();
 <a class="jxr_linenumber" name="L2730" href="#L2730">2730</a>         props.setProperty(GeolocationConfigurationFactory.
 <a class="jxr_linenumber" name="L2731" href="#L2731">2731</a>                 IP_GEOLOCATION_COUNTRY_DATABASE_FILE_PROPERTY, COUNTRY_FILE);
 <a class="jxr_linenumber" name="L2732" href="#L2732">2732</a>         props.setProperty(GeolocationConfigurationFactory.
 <a class="jxr_linenumber" name="L2733" href="#L2733">2733</a>                 IP_GEOLOCATION_CITY_DATABASE_FILE_PROPERTY, CITY_FILE);
 <a class="jxr_linenumber" name="L2734" href="#L2734">2734</a>         props.setProperty(GeolocationConfigurationFactory.IP_GEOLOCATION_LEVEL_PROPERTY,
-<a class="jxr_linenumber" name="L2735" href="#L2735">2735</a>                 IPGeolocationLevel.DISABLED.getValue());
+<a class="jxr_linenumber" name="L2735" href="#L2735">2735</a>                 IPGeolocationLevel.COUNTRY.getValue());
 <a class="jxr_linenumber" name="L2736" href="#L2736">2736</a> 
 <a class="jxr_linenumber" name="L2737" href="#L2737">2737</a>         GeolocationConfigurationFactory.getInstance().configure(props);
 <a class="jxr_linenumber" name="L2738" href="#L2738">2738</a> 
 <a class="jxr_linenumber" name="L2739" href="#L2739">2739</a>         <strong class="jxr_keyword">final</strong> IPGeolocator locator = IPGeolocator.getInstance();
-<a class="jxr_linenumber" name="L2740" href="#L2740">2740</a>         <strong class="jxr_keyword">final</strong> String address = <span class="jxr_string">"64.4.4.4"</span>;
-<a class="jxr_linenumber" name="L2741" href="#L2741">2741</a> 
-<a class="jxr_linenumber" name="L2742" href="#L2742">2742</a>         <em class="jxr_comment">// Force IPLocationDisabledException</em>
-<a class="jxr_linenumber" name="L2743" href="#L2743">2743</a>         <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="L2744" href="#L2744">2744</a>             locator.locate(address);
-<a class="jxr_linenumber" name="L2745" href="#L2745">2745</a>             fail(<span class="jxr_string">"IPLocationDisabledException expected but not thrown"</span>);
-<a class="jxr_linenumber" name="L2746" href="#L2746">2746</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPGeolocationDisabledException | IPLocationNotFoundException ignore) {
-<a class="jxr_linenumber" name="L2747" href="#L2747">2747</a>         }
-<a class="jxr_linenumber" name="L2748" href="#L2748">2748</a>         <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="L2749" href="#L2749">2749</a>             locator.locate(InetAddress.getByName(address));
-<a class="jxr_linenumber" name="L2750" href="#L2750">2750</a>             fail(<span class="jxr_string">"IPLocationDisabledException expected but not thrown"</span>);
-<a class="jxr_linenumber" name="L2751" href="#L2751">2751</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPGeolocationDisabledException | IPLocationNotFoundException ignore) {
-<a class="jxr_linenumber" name="L2752" href="#L2752">2752</a>         }
-<a class="jxr_linenumber" name="L2753" href="#L2753">2753</a> 
-<a class="jxr_linenumber" name="L2754" href="#L2754">2754</a>         <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="L2755" href="#L2755">2755</a>             locator.locate(address, IPGeolocationLevel.CITY);
-<a class="jxr_linenumber" name="L2756" href="#L2756">2756</a>             fail(<span class="jxr_string">"IPLocationDisabledException expected but not thrown"</span>);
-<a class="jxr_linenumber" name="L2757" href="#L2757">2757</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPGeolocationDisabledException | IPLocationNotFoundException ignore) {
-<a class="jxr_linenumber" name="L2758" href="#L2758">2758</a>         }
-<a class="jxr_linenumber" name="L2759" href="#L2759">2759</a>         <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="L2760" href="#L2760">2760</a>             locator.locate(InetAddress.getByName(address),
-<a class="jxr_linenumber" name="L2761" href="#L2761">2761</a>                     IPGeolocationLevel.CITY);
-<a class="jxr_linenumber" name="L2762" href="#L2762">2762</a>             fail(<span class="jxr_string">"IPLocationDisabledException expected but not thrown"</span>);
-<a class="jxr_linenumber" name="L2763" href="#L2763">2763</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPGeolocationDisabledException | IPLocationNotFoundException ignore) {
-<a class="jxr_linenumber" name="L2764" href="#L2764">2764</a>         }
-<a class="jxr_linenumber" name="L2765" href="#L2765">2765</a> 
-<a class="jxr_linenumber" name="L2766" href="#L2766">2766</a>         <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="L2767" href="#L2767">2767</a>             locator.locate(address, IPGeolocationLevel.COUNTRY);
-<a class="jxr_linenumber" name="L2768" href="#L2768">2768</a>             fail(<span class="jxr_string">"IPLocationDisabledException expected but not thrown"</span>);
-<a class="jxr_linenumber" name="L2769" href="#L2769">2769</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPGeolocationDisabledException | IPLocationNotFoundException ignore) {
-<a class="jxr_linenumber" name="L2770" href="#L2770">2770</a>         }
-<a class="jxr_linenumber" name="L2771" href="#L2771">2771</a>         <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="L2772" href="#L2772">2772</a>             locator.locate(InetAddress.getByName(address),
-<a class="jxr_linenumber" name="L2773" href="#L2773">2773</a>                     IPGeolocationLevel.COUNTRY);
-<a class="jxr_linenumber" name="L2774" href="#L2774">2774</a>             fail(<span class="jxr_string">"IPLocationDisabledException expected but not thrown"</span>);
-<a class="jxr_linenumber" name="L2775" href="#L2775">2775</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPGeolocationDisabledException | IPLocationNotFoundException ignore) {
-<a class="jxr_linenumber" name="L2776" href="#L2776">2776</a>         }
-<a class="jxr_linenumber" name="L2777" href="#L2777">2777</a> 
-<a class="jxr_linenumber" name="L2778" href="#L2778">2778</a>         IPGeolocator.reset();
-<a class="jxr_linenumber" name="L2779" href="#L2779">2779</a>     }
-<a class="jxr_linenumber" name="L2780" href="#L2780">2780</a> 
-<a class="jxr_linenumber" name="L2781" href="#L2781">2781</a>     @Test
-<a class="jxr_linenumber" name="L2782" href="#L2782">2782</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testForceIPLocationDisabledException()
-<a class="jxr_linenumber" name="L2783" href="#L2783">2783</a>             <strong class="jxr_keyword">throws</strong> IOException, IPLocationNotFoundException {
-<a class="jxr_linenumber" name="L2784" href="#L2784">2784</a>         <strong class="jxr_keyword">final</strong> IPGeolocator locator = IPGeolocator.getInstance();
-<a class="jxr_linenumber" name="L2785" href="#L2785">2785</a>         <strong class="jxr_keyword">final</strong> String address = <span class="jxr_string">"64.4.4.4"</span>;
-<a class="jxr_linenumber" name="L2786" href="#L2786">2786</a>         locator.close();
-<a class="jxr_linenumber" name="L2787" href="#L2787">2787</a> 
-<a class="jxr_linenumber" name="L2788" href="#L2788">2788</a>         <em class="jxr_comment">// Force IPLocationDisabledException</em>
-<a class="jxr_linenumber" name="L2789" href="#L2789">2789</a>         <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="L2790" href="#L2790">2790</a>             locator.locate(address);
-<a class="jxr_linenumber" name="L2791" href="#L2791">2791</a>             fail(<span class="jxr_string">"IPLocationDisabledException expected but not thrown"</span>);
-<a class="jxr_linenumber" name="L2792" href="#L2792">2792</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPGeolocationDisabledException ignore) {
-<a class="jxr_linenumber" name="L2793" href="#L2793">2793</a>         }
-<a class="jxr_linenumber" name="L2794" href="#L2794">2794</a>         <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="L2795" href="#L2795">2795</a>             locator.locate(InetAddress.getByName(address));
-<a class="jxr_linenumber" name="L2796" href="#L2796">2796</a>             fail(<span class="jxr_string">"IPLocationDisabledException expected but not thrown"</span>);
-<a class="jxr_linenumber" name="L2797" href="#L2797">2797</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPGeolocationDisabledException ignore) {
-<a class="jxr_linenumber" name="L2798" href="#L2798">2798</a>         }
-<a class="jxr_linenumber" name="L2799" href="#L2799">2799</a> 
-<a class="jxr_linenumber" name="L2800" href="#L2800">2800</a>         <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="L2801" href="#L2801">2801</a>             locator.locate(address, IPGeolocationLevel.CITY);
-<a class="jxr_linenumber" name="L2802" href="#L2802">2802</a>             fail(<span class="jxr_string">"IPLocationDisabledException expected but not thrown"</span>);
-<a class="jxr_linenumber" name="L2803" href="#L2803">2803</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPGeolocationDisabledException ignore) {
-<a class="jxr_linenumber" name="L2804" href="#L2804">2804</a>         }
-<a class="jxr_linenumber" name="L2805" href="#L2805">2805</a>         <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="L2806" href="#L2806">2806</a>             locator.locate(InetAddress.getByName(address),
-<a class="jxr_linenumber" name="L2807" href="#L2807">2807</a>                     IPGeolocationLevel.CITY);
-<a class="jxr_linenumber" name="L2808" href="#L2808">2808</a>             fail(<span class="jxr_string">"IPLocationDisabledException expected but not thrown"</span>);
-<a class="jxr_linenumber" name="L2809" href="#L2809">2809</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPGeolocationDisabledException ignore) {
-<a class="jxr_linenumber" name="L2810" href="#L2810">2810</a>         }
-<a class="jxr_linenumber" name="L2811" href="#L2811">2811</a> 
-<a class="jxr_linenumber" name="L2812" href="#L2812">2812</a>         <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="L2813" href="#L2813">2813</a>             locator.locate(address, IPGeolocationLevel.COUNTRY);
-<a class="jxr_linenumber" name="L2814" href="#L2814">2814</a>             fail(<span class="jxr_string">"IPLocationDisabledException expected but not thrown"</span>);
-<a class="jxr_linenumber" name="L2815" href="#L2815">2815</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPGeolocationDisabledException ignore) {
-<a class="jxr_linenumber" name="L2816" href="#L2816">2816</a>         }
-<a class="jxr_linenumber" name="L2817" href="#L2817">2817</a>         <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="L2818" href="#L2818">2818</a>             locator.locate(InetAddress.getByName(address),
-<a class="jxr_linenumber" name="L2819" href="#L2819">2819</a>                     IPGeolocationLevel.COUNTRY);
-<a class="jxr_linenumber" name="L2820" href="#L2820">2820</a>             fail(<span class="jxr_string">"IPLocationDisabledException expected but not thrown"</span>);
-<a class="jxr_linenumber" name="L2821" href="#L2821">2821</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPGeolocationDisabledException ignore) {
-<a class="jxr_linenumber" name="L2822" href="#L2822">2822</a>         }
-<a class="jxr_linenumber" name="L2823" href="#L2823">2823</a> 
-<a class="jxr_linenumber" name="L2824" href="#L2824">2824</a>         IPGeolocator.reset();
-<a class="jxr_linenumber" name="L2825" href="#L2825">2825</a>     }
-<a class="jxr_linenumber" name="L2826" href="#L2826">2826</a> 
-<a class="jxr_linenumber" name="L2827" href="#L2827">2827</a>     @Test
-<a class="jxr_linenumber" name="L2828" href="#L2828">2828</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testCloseWhenNoErrorCityLevel() <strong class="jxr_keyword">throws</strong> ConfigurationException,
-<a class="jxr_linenumber" name="L2829" href="#L2829">2829</a>             NoSuchFieldException, IllegalAccessException, IOException {
-<a class="jxr_linenumber" name="L2830" href="#L2830">2830</a>         <strong class="jxr_keyword">final</strong> Properties props = <strong class="jxr_keyword">new</strong> Properties();
-<a class="jxr_linenumber" name="L2831" href="#L2831">2831</a>         props.setProperty(GeolocationConfigurationFactory.
-<a class="jxr_linenumber" name="L2832" href="#L2832">2832</a>                 IP_GEOLOCATION_COUNTRY_DATABASE_FILE_PROPERTY, COUNTRY_FILE);
-<a class="jxr_linenumber" name="L2833" href="#L2833">2833</a>         props.setProperty(GeolocationConfigurationFactory.
-<a class="jxr_linenumber" name="L2834" href="#L2834">2834</a>                 IP_GEOLOCATION_CITY_DATABASE_FILE_PROPERTY, CITY_FILE);
-<a class="jxr_linenumber" name="L2835" href="#L2835">2835</a>         props.setProperty(GeolocationConfigurationFactory.IP_GEOLOCATION_LEVEL_PROPERTY,
-<a class="jxr_linenumber" name="L2836" href="#L2836">2836</a>                 IPGeolocationLevel.CITY.getValue());
-<a class="jxr_linenumber" name="L2837" href="#L2837">2837</a> 
-<a class="jxr_linenumber" name="L2838" href="#L2838">2838</a>         GeolocationConfigurationFactory.getInstance().configure(props);
-<a class="jxr_linenumber" name="L2839" href="#L2839">2839</a> 
-<a class="jxr_linenumber" name="L2840" href="#L2840">2840</a>         <strong class="jxr_keyword">final</strong> IPGeolocator locator = IPGeolocator.getInstance();
-<a class="jxr_linenumber" name="L2841" href="#L2841">2841</a> 
-<a class="jxr_linenumber" name="L2842" href="#L2842">2842</a>         <em class="jxr_comment">// replace city reader by spy</em>
-<a class="jxr_linenumber" name="L2843" href="#L2843">2843</a>         <strong class="jxr_keyword">final</strong> Field field = IPGeolocator.<strong class="jxr_keyword">class</strong>.getDeclaredField(<span class="jxr_string">"mCityReader"</span>);
-<a class="jxr_linenumber" name="L2844" href="#L2844">2844</a>         field.setAccessible(<strong class="jxr_keyword">true</strong>);
-<a class="jxr_linenumber" name="L2845" href="#L2845">2845</a>         <strong class="jxr_keyword">final</strong> DatabaseReader cityReader = (DatabaseReader) field.get(locator);
+<a class="jxr_linenumber" name="L2740" href="#L2740">2740</a> 
+<a class="jxr_linenumber" name="L2741" href="#L2741">2741</a>         <strong class="jxr_keyword">final</strong> String address = <span class="jxr_string">"12.25.205.51"</span>;
+<a class="jxr_linenumber" name="L2742" href="#L2742">2742</a> 
+<a class="jxr_linenumber" name="L2743" href="#L2743">2743</a>         <em class="jxr_comment">// test with default level</em>
+<a class="jxr_linenumber" name="L2744" href="#L2744">2744</a>         IPLocation location = locator.locate(address, IPGeolocationLevel.CITY);
+<a class="jxr_linenumber" name="L2745" href="#L2745">2745</a>         assertNotNull(location);
+<a class="jxr_linenumber" name="L2746" href="#L2746">2746</a>         assertNull(location.getCity());
+<a class="jxr_linenumber" name="L2747" href="#L2747">2747</a>         assertNull(location.getTimeZone());
+<a class="jxr_linenumber" name="L2748" href="#L2748">2748</a>         assertEquals(location.getAccuracyRadius().intValue(), 937);
+<a class="jxr_linenumber" name="L2749" href="#L2749">2749</a>         assertNull(location.getMetroCode());
+<a class="jxr_linenumber" name="L2750" href="#L2750">2750</a>         assertEquals(location.getLatitude(), 37.751, ERROR);
+<a class="jxr_linenumber" name="L2751" href="#L2751">2751</a>         assertEquals(location.getLongitude(), -97.822, ERROR);
+<a class="jxr_linenumber" name="L2752" href="#L2752">2752</a>         assertTrue(location.areCoordinatesAvailable());
+<a class="jxr_linenumber" name="L2753" href="#L2753">2753</a>         assertNull(location.getPostalCode());
+<a class="jxr_linenumber" name="L2754" href="#L2754">2754</a>         assertTrue(location.getSubdivisionCodes().isEmpty());
+<a class="jxr_linenumber" name="L2755" href="#L2755">2755</a>         assertTrue(location.getSubdivisionNames().isEmpty());
+<a class="jxr_linenumber" name="L2756" href="#L2756">2756</a>         assertEquals(location.getCountryCode(), <span class="jxr_string">"US"</span>);
+<a class="jxr_linenumber" name="L2757" href="#L2757">2757</a>         assertEquals(location.getCountryName(Locale.ENGLISH),
+<a class="jxr_linenumber" name="L2758" href="#L2758">2758</a>                 <span class="jxr_string">"United States"</span>);
+<a class="jxr_linenumber" name="L2759" href="#L2759">2759</a>         assertEquals(location.getCountryName(Locale.FRENCH),
+<a class="jxr_linenumber" name="L2760" href="#L2760">2760</a>                 <span class="jxr_string">"États-Unis"</span>);
+<a class="jxr_linenumber" name="L2761" href="#L2761">2761</a>         assertEquals(location.getRegisteredCountryCode(), <span class="jxr_string">"US"</span>);
+<a class="jxr_linenumber" name="L2762" href="#L2762">2762</a>         assertEquals(location.getRegisteredCountryName(Locale.ENGLISH),
+<a class="jxr_linenumber" name="L2763" href="#L2763">2763</a>                 <span class="jxr_string">"United States"</span>);
+<a class="jxr_linenumber" name="L2764" href="#L2764">2764</a>         assertEquals(location.getRegisteredCountryName(Locale.FRENCH),
+<a class="jxr_linenumber" name="L2765" href="#L2765">2765</a>                 <span class="jxr_string">"États-Unis"</span>);
+<a class="jxr_linenumber" name="L2766" href="#L2766">2766</a>         assertNull(location.getDomain());
+<a class="jxr_linenumber" name="L2767" href="#L2767">2767</a>         assertNull(location.getIsp());
+<a class="jxr_linenumber" name="L2768" href="#L2768">2768</a>         assertNull(location.getOrganization());
+<a class="jxr_linenumber" name="L2769" href="#L2769">2769</a>         assertEquals(location.getContinentCode(), <span class="jxr_string">"NA"</span>);
+<a class="jxr_linenumber" name="L2770" href="#L2770">2770</a>         assertEquals(location.getContinentName(), <span class="jxr_string">"North America"</span>);
+<a class="jxr_linenumber" name="L2771" href="#L2771">2771</a>         assertEquals(location.getLevel(), IPGeolocationLevel.CITY);
+<a class="jxr_linenumber" name="L2772" href="#L2772">2772</a>     }
+<a class="jxr_linenumber" name="L2773" href="#L2773">2773</a> 
+<a class="jxr_linenumber" name="L2774" href="#L2774">2774</a>     @Test
+<a class="jxr_linenumber" name="L2775" href="#L2775">2775</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testLocateWhenDisabledLevel() <strong class="jxr_keyword">throws</strong> ConfigurationException, IOException {
+<a class="jxr_linenumber" name="L2776" href="#L2776">2776</a>         <strong class="jxr_keyword">final</strong> Properties props = <strong class="jxr_keyword">new</strong> Properties();
+<a class="jxr_linenumber" name="L2777" href="#L2777">2777</a>         props.setProperty(GeolocationConfigurationFactory.
+<a class="jxr_linenumber" name="L2778" href="#L2778">2778</a>                 IP_GEOLOCATION_COUNTRY_DATABASE_FILE_PROPERTY, COUNTRY_FILE);
+<a class="jxr_linenumber" name="L2779" href="#L2779">2779</a>         props.setProperty(GeolocationConfigurationFactory.
+<a class="jxr_linenumber" name="L2780" href="#L2780">2780</a>                 IP_GEOLOCATION_CITY_DATABASE_FILE_PROPERTY, CITY_FILE);
+<a class="jxr_linenumber" name="L2781" href="#L2781">2781</a>         props.setProperty(GeolocationConfigurationFactory.IP_GEOLOCATION_LEVEL_PROPERTY,
+<a class="jxr_linenumber" name="L2782" href="#L2782">2782</a>                 IPGeolocationLevel.DISABLED.getValue());
+<a class="jxr_linenumber" name="L2783" href="#L2783">2783</a> 
+<a class="jxr_linenumber" name="L2784" href="#L2784">2784</a>         GeolocationConfigurationFactory.getInstance().configure(props);
+<a class="jxr_linenumber" name="L2785" href="#L2785">2785</a> 
+<a class="jxr_linenumber" name="L2786" href="#L2786">2786</a>         <strong class="jxr_keyword">final</strong> IPGeolocator locator = IPGeolocator.getInstance();
+<a class="jxr_linenumber" name="L2787" href="#L2787">2787</a>         <strong class="jxr_keyword">final</strong> String address = <span class="jxr_string">"64.4.4.4"</span>;
+<a class="jxr_linenumber" name="L2788" href="#L2788">2788</a> 
+<a class="jxr_linenumber" name="L2789" href="#L2789">2789</a>         <em class="jxr_comment">// Force IPLocationDisabledException</em>
+<a class="jxr_linenumber" name="L2790" href="#L2790">2790</a>         <strong class="jxr_keyword">try</strong> {
+<a class="jxr_linenumber" name="L2791" href="#L2791">2791</a>             locator.locate(address);
+<a class="jxr_linenumber" name="L2792" href="#L2792">2792</a>             fail(<span class="jxr_string">"IPLocationDisabledException expected but not thrown"</span>);
+<a class="jxr_linenumber" name="L2793" href="#L2793">2793</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPGeolocationDisabledException | IPLocationNotFoundException ignore) {
+<a class="jxr_linenumber" name="L2794" href="#L2794">2794</a>         }
+<a class="jxr_linenumber" name="L2795" href="#L2795">2795</a>         <strong class="jxr_keyword">try</strong> {
+<a class="jxr_linenumber" name="L2796" href="#L2796">2796</a>             locator.locate(InetAddress.getByName(address));
+<a class="jxr_linenumber" name="L2797" href="#L2797">2797</a>             fail(<span class="jxr_string">"IPLocationDisabledException expected but not thrown"</span>);
+<a class="jxr_linenumber" name="L2798" href="#L2798">2798</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPGeolocationDisabledException | IPLocationNotFoundException ignore) {
+<a class="jxr_linenumber" name="L2799" href="#L2799">2799</a>         }
+<a class="jxr_linenumber" name="L2800" href="#L2800">2800</a> 
+<a class="jxr_linenumber" name="L2801" href="#L2801">2801</a>         <strong class="jxr_keyword">try</strong> {
+<a class="jxr_linenumber" name="L2802" href="#L2802">2802</a>             locator.locate(address, IPGeolocationLevel.CITY);
+<a class="jxr_linenumber" name="L2803" href="#L2803">2803</a>             fail(<span class="jxr_string">"IPLocationDisabledException expected but not thrown"</span>);
+<a class="jxr_linenumber" name="L2804" href="#L2804">2804</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPGeolocationDisabledException | IPLocationNotFoundException ignore) {
+<a class="jxr_linenumber" name="L2805" href="#L2805">2805</a>         }
+<a class="jxr_linenumber" name="L2806" href="#L2806">2806</a>         <strong class="jxr_keyword">try</strong> {
+<a class="jxr_linenumber" name="L2807" href="#L2807">2807</a>             locator.locate(InetAddress.getByName(address),
+<a class="jxr_linenumber" name="L2808" href="#L2808">2808</a>                     IPGeolocationLevel.CITY);
+<a class="jxr_linenumber" name="L2809" href="#L2809">2809</a>             fail(<span class="jxr_string">"IPLocationDisabledException expected but not thrown"</span>);
+<a class="jxr_linenumber" name="L2810" href="#L2810">2810</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPGeolocationDisabledException | IPLocationNotFoundException ignore) {
+<a class="jxr_linenumber" name="L2811" href="#L2811">2811</a>         }
+<a class="jxr_linenumber" name="L2812" href="#L2812">2812</a> 
+<a class="jxr_linenumber" name="L2813" href="#L2813">2813</a>         <strong class="jxr_keyword">try</strong> {
+<a class="jxr_linenumber" name="L2814" href="#L2814">2814</a>             locator.locate(address, IPGeolocationLevel.COUNTRY);
+<a class="jxr_linenumber" name="L2815" href="#L2815">2815</a>             fail(<span class="jxr_string">"IPLocationDisabledException expected but not thrown"</span>);
+<a class="jxr_linenumber" name="L2816" href="#L2816">2816</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPGeolocationDisabledException | IPLocationNotFoundException ignore) {
+<a class="jxr_linenumber" name="L2817" href="#L2817">2817</a>         }
+<a class="jxr_linenumber" name="L2818" href="#L2818">2818</a>         <strong class="jxr_keyword">try</strong> {
+<a class="jxr_linenumber" name="L2819" href="#L2819">2819</a>             locator.locate(InetAddress.getByName(address),
+<a class="jxr_linenumber" name="L2820" href="#L2820">2820</a>                     IPGeolocationLevel.COUNTRY);
+<a class="jxr_linenumber" name="L2821" href="#L2821">2821</a>             fail(<span class="jxr_string">"IPLocationDisabledException expected but not thrown"</span>);
+<a class="jxr_linenumber" name="L2822" href="#L2822">2822</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPGeolocationDisabledException | IPLocationNotFoundException ignore) {
+<a class="jxr_linenumber" name="L2823" href="#L2823">2823</a>         }
+<a class="jxr_linenumber" name="L2824" href="#L2824">2824</a> 
+<a class="jxr_linenumber" name="L2825" href="#L2825">2825</a>         IPGeolocator.reset();
+<a class="jxr_linenumber" name="L2826" href="#L2826">2826</a>     }
+<a class="jxr_linenumber" name="L2827" href="#L2827">2827</a> 
+<a class="jxr_linenumber" name="L2828" href="#L2828">2828</a>     @Test
+<a class="jxr_linenumber" name="L2829" href="#L2829">2829</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testForceIPLocationDisabledException()
+<a class="jxr_linenumber" name="L2830" href="#L2830">2830</a>             <strong class="jxr_keyword">throws</strong> IOException, IPLocationNotFoundException {
+<a class="jxr_linenumber" name="L2831" href="#L2831">2831</a>         <strong class="jxr_keyword">final</strong> IPGeolocator locator = IPGeolocator.getInstance();
+<a class="jxr_linenumber" name="L2832" href="#L2832">2832</a>         <strong class="jxr_keyword">final</strong> String address = <span class="jxr_string">"64.4.4.4"</span>;
+<a class="jxr_linenumber" name="L2833" href="#L2833">2833</a>         locator.close();
+<a class="jxr_linenumber" name="L2834" href="#L2834">2834</a> 
+<a class="jxr_linenumber" name="L2835" href="#L2835">2835</a>         <em class="jxr_comment">// Force IPLocationDisabledException</em>
+<a class="jxr_linenumber" name="L2836" href="#L2836">2836</a>         <strong class="jxr_keyword">try</strong> {
+<a class="jxr_linenumber" name="L2837" href="#L2837">2837</a>             locator.locate(address);
+<a class="jxr_linenumber" name="L2838" href="#L2838">2838</a>             fail(<span class="jxr_string">"IPLocationDisabledException expected but not thrown"</span>);
+<a class="jxr_linenumber" name="L2839" href="#L2839">2839</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPGeolocationDisabledException ignore) {
+<a class="jxr_linenumber" name="L2840" href="#L2840">2840</a>         }
+<a class="jxr_linenumber" name="L2841" href="#L2841">2841</a>         <strong class="jxr_keyword">try</strong> {
+<a class="jxr_linenumber" name="L2842" href="#L2842">2842</a>             locator.locate(InetAddress.getByName(address));
+<a class="jxr_linenumber" name="L2843" href="#L2843">2843</a>             fail(<span class="jxr_string">"IPLocationDisabledException expected but not thrown"</span>);
+<a class="jxr_linenumber" name="L2844" href="#L2844">2844</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPGeolocationDisabledException ignore) {
+<a class="jxr_linenumber" name="L2845" href="#L2845">2845</a>         }
 <a class="jxr_linenumber" name="L2846" href="#L2846">2846</a> 
-<a class="jxr_linenumber" name="L2847" href="#L2847">2847</a>         <strong class="jxr_keyword">final</strong> DatabaseReader cityReaderSpy = spy(cityReader);
-<a class="jxr_linenumber" name="L2848" href="#L2848">2848</a> 
-<a class="jxr_linenumber" name="L2849" href="#L2849">2849</a>         field.set(locator, cityReaderSpy);
-<a class="jxr_linenumber" name="L2850" href="#L2850">2850</a> 
-<a class="jxr_linenumber" name="L2851" href="#L2851">2851</a>         locator.close();
-<a class="jxr_linenumber" name="L2852" href="#L2852">2852</a> 
-<a class="jxr_linenumber" name="L2853" href="#L2853">2853</a>         verify(cityReaderSpy, only()).close();
-<a class="jxr_linenumber" name="L2854" href="#L2854">2854</a>     }
-<a class="jxr_linenumber" name="L2855" href="#L2855">2855</a> 
-<a class="jxr_linenumber" name="L2856" href="#L2856">2856</a>     @Test
-<a class="jxr_linenumber" name="L2857" href="#L2857">2857</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testCloseWhenNoErrorCountryLevel() <strong class="jxr_keyword">throws</strong> ConfigurationException,
-<a class="jxr_linenumber" name="L2858" href="#L2858">2858</a>             NoSuchFieldException, IllegalAccessException, IOException {
-<a class="jxr_linenumber" name="L2859" href="#L2859">2859</a>         <strong class="jxr_keyword">final</strong> Properties props = <strong class="jxr_keyword">new</strong> Properties();
-<a class="jxr_linenumber" name="L2860" href="#L2860">2860</a>         props.setProperty(GeolocationConfigurationFactory.
-<a class="jxr_linenumber" name="L2861" href="#L2861">2861</a>                 IP_GEOLOCATION_COUNTRY_DATABASE_FILE_PROPERTY, COUNTRY_FILE);
-<a class="jxr_linenumber" name="L2862" href="#L2862">2862</a>         props.setProperty(GeolocationConfigurationFactory.
-<a class="jxr_linenumber" name="L2863" href="#L2863">2863</a>                 IP_GEOLOCATION_CITY_DATABASE_FILE_PROPERTY, CITY_FILE);
-<a class="jxr_linenumber" name="L2864" href="#L2864">2864</a>         props.setProperty(GeolocationConfigurationFactory.IP_GEOLOCATION_LEVEL_PROPERTY,
-<a class="jxr_linenumber" name="L2865" href="#L2865">2865</a>                 IPGeolocationLevel.COUNTRY.getValue());
-<a class="jxr_linenumber" name="L2866" href="#L2866">2866</a> 
-<a class="jxr_linenumber" name="L2867" href="#L2867">2867</a>         GeolocationConfigurationFactory.getInstance().configure(props);
-<a class="jxr_linenumber" name="L2868" href="#L2868">2868</a> 
-<a class="jxr_linenumber" name="L2869" href="#L2869">2869</a>         <strong class="jxr_keyword">final</strong> IPGeolocator locator = IPGeolocator.getInstance();
+<a class="jxr_linenumber" name="L2847" href="#L2847">2847</a>         <strong class="jxr_keyword">try</strong> {
+<a class="jxr_linenumber" name="L2848" href="#L2848">2848</a>             locator.locate(address, IPGeolocationLevel.CITY);
+<a class="jxr_linenumber" name="L2849" href="#L2849">2849</a>             fail(<span class="jxr_string">"IPLocationDisabledException expected but not thrown"</span>);
+<a class="jxr_linenumber" name="L2850" href="#L2850">2850</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPGeolocationDisabledException ignore) {
+<a class="jxr_linenumber" name="L2851" href="#L2851">2851</a>         }
+<a class="jxr_linenumber" name="L2852" href="#L2852">2852</a>         <strong class="jxr_keyword">try</strong> {
+<a class="jxr_linenumber" name="L2853" href="#L2853">2853</a>             locator.locate(InetAddress.getByName(address),
+<a class="jxr_linenumber" name="L2854" href="#L2854">2854</a>                     IPGeolocationLevel.CITY);
+<a class="jxr_linenumber" name="L2855" href="#L2855">2855</a>             fail(<span class="jxr_string">"IPLocationDisabledException expected but not thrown"</span>);
+<a class="jxr_linenumber" name="L2856" href="#L2856">2856</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPGeolocationDisabledException ignore) {
+<a class="jxr_linenumber" name="L2857" href="#L2857">2857</a>         }
+<a class="jxr_linenumber" name="L2858" href="#L2858">2858</a> 
+<a class="jxr_linenumber" name="L2859" href="#L2859">2859</a>         <strong class="jxr_keyword">try</strong> {
+<a class="jxr_linenumber" name="L2860" href="#L2860">2860</a>             locator.locate(address, IPGeolocationLevel.COUNTRY);
+<a class="jxr_linenumber" name="L2861" href="#L2861">2861</a>             fail(<span class="jxr_string">"IPLocationDisabledException expected but not thrown"</span>);
+<a class="jxr_linenumber" name="L2862" href="#L2862">2862</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPGeolocationDisabledException ignore) {
+<a class="jxr_linenumber" name="L2863" href="#L2863">2863</a>         }
+<a class="jxr_linenumber" name="L2864" href="#L2864">2864</a>         <strong class="jxr_keyword">try</strong> {
+<a class="jxr_linenumber" name="L2865" href="#L2865">2865</a>             locator.locate(InetAddress.getByName(address),
+<a class="jxr_linenumber" name="L2866" href="#L2866">2866</a>                     IPGeolocationLevel.COUNTRY);
+<a class="jxr_linenumber" name="L2867" href="#L2867">2867</a>             fail(<span class="jxr_string">"IPLocationDisabledException expected but not thrown"</span>);
+<a class="jxr_linenumber" name="L2868" href="#L2868">2868</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IPGeolocationDisabledException ignore) {
+<a class="jxr_linenumber" name="L2869" href="#L2869">2869</a>         }
 <a class="jxr_linenumber" name="L2870" href="#L2870">2870</a> 
-<a class="jxr_linenumber" name="L2871" href="#L2871">2871</a>         <em class="jxr_comment">// replace country reader by spy</em>
-<a class="jxr_linenumber" name="L2872" href="#L2872">2872</a>         <strong class="jxr_keyword">final</strong> Field field = IPGeolocator.<strong class="jxr_keyword">class</strong>.getDeclaredField(<span class="jxr_string">"mCountryReader"</span>);
-<a class="jxr_linenumber" name="L2873" href="#L2873">2873</a>         field.setAccessible(<strong class="jxr_keyword">true</strong>);
-<a class="jxr_linenumber" name="L2874" href="#L2874">2874</a>         <strong class="jxr_keyword">final</strong> DatabaseReader countryReader = (DatabaseReader) field.get(locator);
-<a class="jxr_linenumber" name="L2875" href="#L2875">2875</a> 
-<a class="jxr_linenumber" name="L2876" href="#L2876">2876</a>         <strong class="jxr_keyword">final</strong> DatabaseReader countryReaderSpy = spy(countryReader);
-<a class="jxr_linenumber" name="L2877" href="#L2877">2877</a> 
-<a class="jxr_linenumber" name="L2878" href="#L2878">2878</a>         field.set(locator, countryReaderSpy);
-<a class="jxr_linenumber" name="L2879" href="#L2879">2879</a> 
-<a class="jxr_linenumber" name="L2880" href="#L2880">2880</a>         locator.close();
-<a class="jxr_linenumber" name="L2881" href="#L2881">2881</a> 
-<a class="jxr_linenumber" name="L2882" href="#L2882">2882</a>         verify(countryReaderSpy, only()).close();
-<a class="jxr_linenumber" name="L2883" href="#L2883">2883</a> 
-<a class="jxr_linenumber" name="L2884" href="#L2884">2884</a>     }
-<a class="jxr_linenumber" name="L2885" href="#L2885">2885</a> 
-<a class="jxr_linenumber" name="L2886" href="#L2886">2886</a>     @Test
-<a class="jxr_linenumber" name="L2887" href="#L2887">2887</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testCloseErrorWhenCityLevel() <strong class="jxr_keyword">throws</strong> ConfigurationException,
-<a class="jxr_linenumber" name="L2888" href="#L2888">2888</a>             IOException, NoSuchFieldException, IllegalAccessException {
-<a class="jxr_linenumber" name="L2889" href="#L2889">2889</a>         <strong class="jxr_keyword">final</strong> Properties props = <strong class="jxr_keyword">new</strong> Properties();
-<a class="jxr_linenumber" name="L2890" href="#L2890">2890</a>         props.setProperty(GeolocationConfigurationFactory.
-<a class="jxr_linenumber" name="L2891" href="#L2891">2891</a>                 IP_GEOLOCATION_COUNTRY_DATABASE_FILE_PROPERTY, COUNTRY_FILE);
-<a class="jxr_linenumber" name="L2892" href="#L2892">2892</a>         props.setProperty(GeolocationConfigurationFactory.
-<a class="jxr_linenumber" name="L2893" href="#L2893">2893</a>                 IP_GEOLOCATION_CITY_DATABASE_FILE_PROPERTY, CITY_FILE);
-<a class="jxr_linenumber" name="L2894" href="#L2894">2894</a>         props.setProperty(GeolocationConfigurationFactory.IP_GEOLOCATION_LEVEL_PROPERTY,
-<a class="jxr_linenumber" name="L2895" href="#L2895">2895</a>                 IPGeolocationLevel.CITY.getValue());
-<a class="jxr_linenumber" name="L2896" href="#L2896">2896</a> 
-<a class="jxr_linenumber" name="L2897" href="#L2897">2897</a>         GeolocationConfigurationFactory.getInstance().configure(props);
-<a class="jxr_linenumber" name="L2898" href="#L2898">2898</a> 
-<a class="jxr_linenumber" name="L2899" href="#L2899">2899</a>         <strong class="jxr_keyword">final</strong> IPGeolocator locator = IPGeolocator.getInstance();
-<a class="jxr_linenumber" name="L2900" href="#L2900">2900</a> 
-<a class="jxr_linenumber" name="L2901" href="#L2901">2901</a>         <em class="jxr_comment">// replace country reader by mock</em>
-<a class="jxr_linenumber" name="L2902" href="#L2902">2902</a>         <strong class="jxr_keyword">final</strong> DatabaseReader cityReaderMock = mock(DatabaseReader.<strong class="jxr_keyword">class</strong>);
-<a class="jxr_linenumber" name="L2903" href="#L2903">2903</a>         doThrow(IOException.<strong class="jxr_keyword">class</strong>).when(cityReaderMock).close();
-<a class="jxr_linenumber" name="L2904" href="#L2904">2904</a> 
-<a class="jxr_linenumber" name="L2905" href="#L2905">2905</a>         <strong class="jxr_keyword">final</strong> Field field = IPGeolocator.<strong class="jxr_keyword">class</strong>.getDeclaredField(<span class="jxr_string">"mCityReader"</span>);
-<a class="jxr_linenumber" name="L2906" href="#L2906">2906</a>         field.setAccessible(<strong class="jxr_keyword">true</strong>);
-<a class="jxr_linenumber" name="L2907" href="#L2907">2907</a>         field.set(locator, cityReaderMock);
-<a class="jxr_linenumber" name="L2908" href="#L2908">2908</a> 
-<a class="jxr_linenumber" name="L2909" href="#L2909">2909</a>         locator.close();
-<a class="jxr_linenumber" name="L2910" href="#L2910">2910</a> 
-<a class="jxr_linenumber" name="L2911" href="#L2911">2911</a>         verify(cityReaderMock, only()).close();
-<a class="jxr_linenumber" name="L2912" href="#L2912">2912</a>     }
+<a class="jxr_linenumber" name="L2871" href="#L2871">2871</a>         IPGeolocator.reset();
+<a class="jxr_linenumber" name="L2872" href="#L2872">2872</a>     }
+<a class="jxr_linenumber" name="L2873" href="#L2873">2873</a> 
+<a class="jxr_linenumber" name="L2874" href="#L2874">2874</a>     @Test
+<a class="jxr_linenumber" name="L2875" href="#L2875">2875</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testCloseWhenNoErrorCityLevel() <strong class="jxr_keyword">throws</strong> ConfigurationException,
+<a class="jxr_linenumber" name="L2876" href="#L2876">2876</a>             NoSuchFieldException, IllegalAccessException, IOException {
+<a class="jxr_linenumber" name="L2877" href="#L2877">2877</a>         <strong class="jxr_keyword">final</strong> Properties props = <strong class="jxr_keyword">new</strong> Properties();
+<a class="jxr_linenumber" name="L2878" href="#L2878">2878</a>         props.setProperty(GeolocationConfigurationFactory.
+<a class="jxr_linenumber" name="L2879" href="#L2879">2879</a>                 IP_GEOLOCATION_COUNTRY_DATABASE_FILE_PROPERTY, COUNTRY_FILE);
+<a class="jxr_linenumber" name="L2880" href="#L2880">2880</a>         props.setProperty(GeolocationConfigurationFactory.
+<a class="jxr_linenumber" name="L2881" href="#L2881">2881</a>                 IP_GEOLOCATION_CITY_DATABASE_FILE_PROPERTY, CITY_FILE);
+<a class="jxr_linenumber" name="L2882" href="#L2882">2882</a>         props.setProperty(GeolocationConfigurationFactory.IP_GEOLOCATION_LEVEL_PROPERTY,
+<a class="jxr_linenumber" name="L2883" href="#L2883">2883</a>                 IPGeolocationLevel.CITY.getValue());
+<a class="jxr_linenumber" name="L2884" href="#L2884">2884</a> 
+<a class="jxr_linenumber" name="L2885" href="#L2885">2885</a>         GeolocationConfigurationFactory.getInstance().configure(props);
+<a class="jxr_linenumber" name="L2886" href="#L2886">2886</a> 
+<a class="jxr_linenumber" name="L2887" href="#L2887">2887</a>         <strong class="jxr_keyword">final</strong> IPGeolocator locator = IPGeolocator.getInstance();
+<a class="jxr_linenumber" name="L2888" href="#L2888">2888</a> 
+<a class="jxr_linenumber" name="L2889" href="#L2889">2889</a>         <em class="jxr_comment">// replace city reader by spy</em>
+<a class="jxr_linenumber" name="L2890" href="#L2890">2890</a>         <strong class="jxr_keyword">final</strong> Field field = IPGeolocator.<strong class="jxr_keyword">class</strong>.getDeclaredField(<span class="jxr_string">"mCityReader"</span>);
+<a class="jxr_linenumber" name="L2891" href="#L2891">2891</a>         field.setAccessible(<strong class="jxr_keyword">true</strong>);
+<a class="jxr_linenumber" name="L2892" href="#L2892">2892</a>         <strong class="jxr_keyword">final</strong> DatabaseReader cityReader = (DatabaseReader) field.get(locator);
+<a class="jxr_linenumber" name="L2893" href="#L2893">2893</a> 
+<a class="jxr_linenumber" name="L2894" href="#L2894">2894</a>         <strong class="jxr_keyword">final</strong> DatabaseReader cityReaderSpy = spy(cityReader);
+<a class="jxr_linenumber" name="L2895" href="#L2895">2895</a> 
+<a class="jxr_linenumber" name="L2896" href="#L2896">2896</a>         field.set(locator, cityReaderSpy);
+<a class="jxr_linenumber" name="L2897" href="#L2897">2897</a> 
+<a class="jxr_linenumber" name="L2898" href="#L2898">2898</a>         locator.close();
+<a class="jxr_linenumber" name="L2899" href="#L2899">2899</a> 
+<a class="jxr_linenumber" name="L2900" href="#L2900">2900</a>         verify(cityReaderSpy, only()).close();
+<a class="jxr_linenumber" name="L2901" href="#L2901">2901</a>     }
+<a class="jxr_linenumber" name="L2902" href="#L2902">2902</a> 
+<a class="jxr_linenumber" name="L2903" href="#L2903">2903</a>     @Test
+<a class="jxr_linenumber" name="L2904" href="#L2904">2904</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testCloseWhenNoErrorCountryLevel() <strong class="jxr_keyword">throws</strong> ConfigurationException,
+<a class="jxr_linenumber" name="L2905" href="#L2905">2905</a>             NoSuchFieldException, IllegalAccessException, IOException {
+<a class="jxr_linenumber" name="L2906" href="#L2906">2906</a>         <strong class="jxr_keyword">final</strong> Properties props = <strong class="jxr_keyword">new</strong> Properties();
+<a class="jxr_linenumber" name="L2907" href="#L2907">2907</a>         props.setProperty(GeolocationConfigurationFactory.
+<a class="jxr_linenumber" name="L2908" href="#L2908">2908</a>                 IP_GEOLOCATION_COUNTRY_DATABASE_FILE_PROPERTY, COUNTRY_FILE);
+<a class="jxr_linenumber" name="L2909" href="#L2909">2909</a>         props.setProperty(GeolocationConfigurationFactory.
+<a class="jxr_linenumber" name="L2910" href="#L2910">2910</a>                 IP_GEOLOCATION_CITY_DATABASE_FILE_PROPERTY, CITY_FILE);
+<a class="jxr_linenumber" name="L2911" href="#L2911">2911</a>         props.setProperty(GeolocationConfigurationFactory.IP_GEOLOCATION_LEVEL_PROPERTY,
+<a class="jxr_linenumber" name="L2912" href="#L2912">2912</a>                 IPGeolocationLevel.COUNTRY.getValue());
 <a class="jxr_linenumber" name="L2913" href="#L2913">2913</a> 
-<a class="jxr_linenumber" name="L2914" href="#L2914">2914</a>     @Test
-<a class="jxr_linenumber" name="L2915" href="#L2915">2915</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testCloseErrorWhenCountryLevel() <strong class="jxr_keyword">throws</strong> ConfigurationException,
-<a class="jxr_linenumber" name="L2916" href="#L2916">2916</a>             IOException, NoSuchFieldException, IllegalAccessException {
-<a class="jxr_linenumber" name="L2917" href="#L2917">2917</a>         <strong class="jxr_keyword">final</strong> Properties props = <strong class="jxr_keyword">new</strong> Properties();
-<a class="jxr_linenumber" name="L2918" href="#L2918">2918</a>         props.setProperty(GeolocationConfigurationFactory.
-<a class="jxr_linenumber" name="L2919" href="#L2919">2919</a>                 IP_GEOLOCATION_COUNTRY_DATABASE_FILE_PROPERTY, COUNTRY_FILE);
-<a class="jxr_linenumber" name="L2920" href="#L2920">2920</a>         props.setProperty(GeolocationConfigurationFactory.
-<a class="jxr_linenumber" name="L2921" href="#L2921">2921</a>                 IP_GEOLOCATION_CITY_DATABASE_FILE_PROPERTY, CITY_FILE);
-<a class="jxr_linenumber" name="L2922" href="#L2922">2922</a>         props.setProperty(GeolocationConfigurationFactory.IP_GEOLOCATION_LEVEL_PROPERTY,
-<a class="jxr_linenumber" name="L2923" href="#L2923">2923</a>                 IPGeolocationLevel.COUNTRY.getValue());
+<a class="jxr_linenumber" name="L2914" href="#L2914">2914</a>         GeolocationConfigurationFactory.getInstance().configure(props);
+<a class="jxr_linenumber" name="L2915" href="#L2915">2915</a> 
+<a class="jxr_linenumber" name="L2916" href="#L2916">2916</a>         <strong class="jxr_keyword">final</strong> IPGeolocator locator = IPGeolocator.getInstance();
+<a class="jxr_linenumber" name="L2917" href="#L2917">2917</a> 
+<a class="jxr_linenumber" name="L2918" href="#L2918">2918</a>         <em class="jxr_comment">// replace country reader by spy</em>
+<a class="jxr_linenumber" name="L2919" href="#L2919">2919</a>         <strong class="jxr_keyword">final</strong> Field field = IPGeolocator.<strong class="jxr_keyword">class</strong>.getDeclaredField(<span class="jxr_string">"mCountryReader"</span>);
+<a class="jxr_linenumber" name="L2920" href="#L2920">2920</a>         field.setAccessible(<strong class="jxr_keyword">true</strong>);
+<a class="jxr_linenumber" name="L2921" href="#L2921">2921</a>         <strong class="jxr_keyword">final</strong> DatabaseReader countryReader = (DatabaseReader) field.get(locator);
+<a class="jxr_linenumber" name="L2922" href="#L2922">2922</a> 
+<a class="jxr_linenumber" name="L2923" href="#L2923">2923</a>         <strong class="jxr_keyword">final</strong> DatabaseReader countryReaderSpy = spy(countryReader);
 <a class="jxr_linenumber" name="L2924" href="#L2924">2924</a> 
-<a class="jxr_linenumber" name="L2925" href="#L2925">2925</a>         GeolocationConfigurationFactory.getInstance().configure(props);
+<a class="jxr_linenumber" name="L2925" href="#L2925">2925</a>         field.set(locator, countryReaderSpy);
 <a class="jxr_linenumber" name="L2926" href="#L2926">2926</a> 
-<a class="jxr_linenumber" name="L2927" href="#L2927">2927</a>         <strong class="jxr_keyword">final</strong> IPGeolocator locator = IPGeolocator.getInstance();
+<a class="jxr_linenumber" name="L2927" href="#L2927">2927</a>         locator.close();
 <a class="jxr_linenumber" name="L2928" href="#L2928">2928</a> 
-<a class="jxr_linenumber" name="L2929" href="#L2929">2929</a>         <em class="jxr_comment">// replace country reader by mock</em>
-<a class="jxr_linenumber" name="L2930" href="#L2930">2930</a>         <strong class="jxr_keyword">final</strong> DatabaseReader countryReaderMock = mock(DatabaseReader.<strong class="jxr_keyword">class</strong>);
-<a class="jxr_linenumber" name="L2931" href="#L2931">2931</a>         doThrow(IOException.<strong class="jxr_keyword">class</strong>).when(countryReaderMock).close();
+<a class="jxr_linenumber" name="L2929" href="#L2929">2929</a>         verify(countryReaderSpy, only()).close();
+<a class="jxr_linenumber" name="L2930" href="#L2930">2930</a> 
+<a class="jxr_linenumber" name="L2931" href="#L2931">2931</a>     }
 <a class="jxr_linenumber" name="L2932" href="#L2932">2932</a> 
-<a class="jxr_linenumber" name="L2933" href="#L2933">2933</a>         <strong class="jxr_keyword">final</strong> Field field = IPGeolocator.<strong class="jxr_keyword">class</strong>.getDeclaredField(<span class="jxr_string">"mCountryReader"</span>);
-<a class="jxr_linenumber" name="L2934" href="#L2934">2934</a>         field.setAccessible(<strong class="jxr_keyword">true</strong>);
-<a class="jxr_linenumber" name="L2935" href="#L2935">2935</a>         field.set(locator, countryReaderMock);
-<a class="jxr_linenumber" name="L2936" href="#L2936">2936</a> 
-<a class="jxr_linenumber" name="L2937" href="#L2937">2937</a>         locator.close();
-<a class="jxr_linenumber" name="L2938" href="#L2938">2938</a> 
-<a class="jxr_linenumber" name="L2939" href="#L2939">2939</a>         verify(countryReaderMock, only()).close();
-<a class="jxr_linenumber" name="L2940" href="#L2940">2940</a>     }
-<a class="jxr_linenumber" name="L2941" href="#L2941">2941</a> }
+<a class="jxr_linenumber" name="L2933" href="#L2933">2933</a>     @Test
+<a class="jxr_linenumber" name="L2934" href="#L2934">2934</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testCloseErrorWhenCityLevel() <strong class="jxr_keyword">throws</strong> ConfigurationException,
+<a class="jxr_linenumber" name="L2935" href="#L2935">2935</a>             IOException, NoSuchFieldException, IllegalAccessException {
+<a class="jxr_linenumber" name="L2936" href="#L2936">2936</a>         <strong class="jxr_keyword">final</strong> Properties props = <strong class="jxr_keyword">new</strong> Properties();
+<a class="jxr_linenumber" name="L2937" href="#L2937">2937</a>         props.setProperty(GeolocationConfigurationFactory.
+<a class="jxr_linenumber" name="L2938" href="#L2938">2938</a>                 IP_GEOLOCATION_COUNTRY_DATABASE_FILE_PROPERTY, COUNTRY_FILE);
+<a class="jxr_linenumber" name="L2939" href="#L2939">2939</a>         props.setProperty(GeolocationConfigurationFactory.
+<a class="jxr_linenumber" name="L2940" href="#L2940">2940</a>                 IP_GEOLOCATION_CITY_DATABASE_FILE_PROPERTY, CITY_FILE);
+<a class="jxr_linenumber" name="L2941" href="#L2941">2941</a>         props.setProperty(GeolocationConfigurationFactory.IP_GEOLOCATION_LEVEL_PROPERTY,
+<a class="jxr_linenumber" name="L2942" href="#L2942">2942</a>                 IPGeolocationLevel.CITY.getValue());
+<a class="jxr_linenumber" name="L2943" href="#L2943">2943</a> 
+<a class="jxr_linenumber" name="L2944" href="#L2944">2944</a>         GeolocationConfigurationFactory.getInstance().configure(props);
+<a class="jxr_linenumber" name="L2945" href="#L2945">2945</a> 
+<a class="jxr_linenumber" name="L2946" href="#L2946">2946</a>         <strong class="jxr_keyword">final</strong> IPGeolocator locator = IPGeolocator.getInstance();
+<a class="jxr_linenumber" name="L2947" href="#L2947">2947</a> 
+<a class="jxr_linenumber" name="L2948" href="#L2948">2948</a>         <em class="jxr_comment">// replace country reader by mock</em>
+<a class="jxr_linenumber" name="L2949" href="#L2949">2949</a>         <strong class="jxr_keyword">final</strong> DatabaseReader cityReaderMock = mock(DatabaseReader.<strong class="jxr_keyword">class</strong>);
+<a class="jxr_linenumber" name="L2950" href="#L2950">2950</a>         doThrow(IOException.<strong class="jxr_keyword">class</strong>).when(cityReaderMock).close();
+<a class="jxr_linenumber" name="L2951" href="#L2951">2951</a> 
+<a class="jxr_linenumber" name="L2952" href="#L2952">2952</a>         <strong class="jxr_keyword">final</strong> Field field = IPGeolocator.<strong class="jxr_keyword">class</strong>.getDeclaredField(<span class="jxr_string">"mCityReader"</span>);
+<a class="jxr_linenumber" name="L2953" href="#L2953">2953</a>         field.setAccessible(<strong class="jxr_keyword">true</strong>);
+<a class="jxr_linenumber" name="L2954" href="#L2954">2954</a>         field.set(locator, cityReaderMock);
+<a class="jxr_linenumber" name="L2955" href="#L2955">2955</a> 
+<a class="jxr_linenumber" name="L2956" href="#L2956">2956</a>         locator.close();
+<a class="jxr_linenumber" name="L2957" href="#L2957">2957</a> 
+<a class="jxr_linenumber" name="L2958" href="#L2958">2958</a>         verify(cityReaderMock, only()).close();
+<a class="jxr_linenumber" name="L2959" href="#L2959">2959</a>     }
+<a class="jxr_linenumber" name="L2960" href="#L2960">2960</a> 
+<a class="jxr_linenumber" name="L2961" href="#L2961">2961</a>     @Test
+<a class="jxr_linenumber" name="L2962" href="#L2962">2962</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testCloseErrorWhenCountryLevel() <strong class="jxr_keyword">throws</strong> ConfigurationException,
+<a class="jxr_linenumber" name="L2963" href="#L2963">2963</a>             IOException, NoSuchFieldException, IllegalAccessException {
+<a class="jxr_linenumber" name="L2964" href="#L2964">2964</a>         <strong class="jxr_keyword">final</strong> Properties props = <strong class="jxr_keyword">new</strong> Properties();
+<a class="jxr_linenumber" name="L2965" href="#L2965">2965</a>         props.setProperty(GeolocationConfigurationFactory.
+<a class="jxr_linenumber" name="L2966" href="#L2966">2966</a>                 IP_GEOLOCATION_COUNTRY_DATABASE_FILE_PROPERTY, COUNTRY_FILE);
+<a class="jxr_linenumber" name="L2967" href="#L2967">2967</a>         props.setProperty(GeolocationConfigurationFactory.
+<a class="jxr_linenumber" name="L2968" href="#L2968">2968</a>                 IP_GEOLOCATION_CITY_DATABASE_FILE_PROPERTY, CITY_FILE);
+<a class="jxr_linenumber" name="L2969" href="#L2969">2969</a>         props.setProperty(GeolocationConfigurationFactory.IP_GEOLOCATION_LEVEL_PROPERTY,
+<a class="jxr_linenumber" name="L2970" href="#L2970">2970</a>                 IPGeolocationLevel.COUNTRY.getValue());
+<a class="jxr_linenumber" name="L2971" href="#L2971">2971</a> 
+<a class="jxr_linenumber" name="L2972" href="#L2972">2972</a>         GeolocationConfigurationFactory.getInstance().configure(props);
+<a class="jxr_linenumber" name="L2973" href="#L2973">2973</a> 
+<a class="jxr_linenumber" name="L2974" href="#L2974">2974</a>         <strong class="jxr_keyword">final</strong> IPGeolocator locator = IPGeolocator.getInstance();
+<a class="jxr_linenumber" name="L2975" href="#L2975">2975</a> 
+<a class="jxr_linenumber" name="L2976" href="#L2976">2976</a>         <em class="jxr_comment">// replace country reader by mock</em>
+<a class="jxr_linenumber" name="L2977" href="#L2977">2977</a>         <strong class="jxr_keyword">final</strong> DatabaseReader countryReaderMock = mock(DatabaseReader.<strong class="jxr_keyword">class</strong>);
+<a class="jxr_linenumber" name="L2978" href="#L2978">2978</a>         doThrow(IOException.<strong class="jxr_keyword">class</strong>).when(countryReaderMock).close();
+<a class="jxr_linenumber" name="L2979" href="#L2979">2979</a> 
+<a class="jxr_linenumber" name="L2980" href="#L2980">2980</a>         <strong class="jxr_keyword">final</strong> Field field = IPGeolocator.<strong class="jxr_keyword">class</strong>.getDeclaredField(<span class="jxr_string">"mCountryReader"</span>);
+<a class="jxr_linenumber" name="L2981" href="#L2981">2981</a>         field.setAccessible(<strong class="jxr_keyword">true</strong>);
+<a class="jxr_linenumber" name="L2982" href="#L2982">2982</a>         field.set(locator, countryReaderMock);
+<a class="jxr_linenumber" name="L2983" href="#L2983">2983</a> 
+<a class="jxr_linenumber" name="L2984" href="#L2984">2984</a>         locator.close();
+<a class="jxr_linenumber" name="L2985" href="#L2985">2985</a> 
+<a class="jxr_linenumber" name="L2986" href="#L2986">2986</a>         verify(countryReaderMock, only()).close();
+<a class="jxr_linenumber" name="L2987" href="#L2987">2987</a>     }
+<a class="jxr_linenumber" name="L2988" href="#L2988">2988</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2016&#x2013;2021. All rights reserved.</div>
