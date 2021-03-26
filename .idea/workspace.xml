@@ -7,6 +7,7 @@
     <list default="true" id="ab8c12a9-c5bb-4626-bea6-549dfee5bf16" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/geolocation/IPGeolocator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/geolocation/IPGeolocator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/geolocation/GeolocationConfigurationImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/geolocation/GeolocationConfigurationImplTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/geolocation/IPGeolocatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/geolocation/IPGeolocatorTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -51,7 +52,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.IPGeolocatorTest">
+  <component name="RunManager" selected="JUnit.GeolocationConfigurationImplTest">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
       <module name="" />
       <option name="DEPLOY" value="true" />
@@ -152,13 +153,31 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GeolocationConfigurationImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="irurueta-server-commons-geolocation" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.irurueta.server.commons.geolocation.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.irurueta.server.commons.geolocation" />
+      <option name="MAIN_CLASS_NAME" value="com.irurueta.server.commons.geolocation.GeolocationConfigurationImplTest" />
       <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -179,7 +198,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="IPGeolocatorTest.testLocateDnsAddress" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="IPGeolocatorTest.testCloseErrorWhenCountryLevel" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="irurueta-server-commons-geolocation" />
       <extension name="coverage">
         <pattern>
@@ -189,14 +208,14 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.irurueta.server.commons.geolocation" />
       <option name="MAIN_CLASS_NAME" value="com.irurueta.server.commons.geolocation.IPGeolocatorTest" />
-      <option name="METHOD_NAME" value="testLocateDnsAddress" />
+      <option name="METHOD_NAME" value="testCloseErrorWhenCountryLevel" />
       <option name="TEST_OBJECT" value="method" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="IPGeolocatorTest.testLocateIpv6Address" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="IPGeolocatorTest.testCloseWhenNoErrorCityLevel" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="irurueta-server-commons-geolocation" />
       <extension name="coverage">
         <pattern>
@@ -206,7 +225,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.irurueta.server.commons.geolocation" />
       <option name="MAIN_CLASS_NAME" value="com.irurueta.server.commons.geolocation.IPGeolocatorTest" />
-      <option name="METHOD_NAME" value="testLocateIpv6Address" />
+      <option name="METHOD_NAME" value="testCloseWhenNoErrorCityLevel" />
       <option name="TEST_OBJECT" value="method" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
@@ -232,21 +251,6 @@
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="TEST_OBJECT" value="class" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="com.irurueta.server.commons.geolocation in irurueta-server-commons-geolocation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="irurueta-server-commons-geolocation" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.irurueta.server.commons.geolocation.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.irurueta.server.commons.geolocation" />
-      <option name="TEST_OBJECT" value="package" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -306,18 +310,18 @@
     </configuration>
     <list>
       <item itemvalue="JUnit.IPGeolocatorTest" />
-      <item itemvalue="JUnit.IPGeolocatorTest.testLocateDnsAddress" />
-      <item itemvalue="JUnit.IPGeolocatorTest.testLocateIpv6Address" />
-      <item itemvalue="JUnit.com.irurueta.server.commons.geolocation in irurueta-server-commons-geolocation" />
       <item itemvalue="JUnit.IPGeolocatorTest.testLocateLocalAddress" />
+      <item itemvalue="JUnit.IPGeolocatorTest.testCloseWhenNoErrorCityLevel" />
+      <item itemvalue="JUnit.IPGeolocatorTest.testCloseErrorWhenCountryLevel" />
+      <item itemvalue="JUnit.GeolocationConfigurationImplTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.GeolocationConfigurationImplTest" />
         <item itemvalue="JUnit.IPGeolocatorTest" />
+        <item itemvalue="JUnit.IPGeolocatorTest.testCloseErrorWhenCountryLevel" />
+        <item itemvalue="JUnit.IPGeolocatorTest.testCloseWhenNoErrorCityLevel" />
         <item itemvalue="JUnit.IPGeolocatorTest.testLocateLocalAddress" />
-        <item itemvalue="JUnit.com.irurueta.server.commons.geolocation in irurueta-server-commons-geolocation" />
-        <item itemvalue="JUnit.IPGeolocatorTest.testLocateDnsAddress" />
-        <item itemvalue="JUnit.IPGeolocatorTest.testLocateIpv6Address" />
       </list>
     </recent_temporary>
   </component>
@@ -338,7 +342,8 @@
       <workItem from="1616712995810" duration="3314000" />
       <workItem from="1616762718143" duration="1232000" />
       <workItem from="1616768825224" duration="2166000" />
-      <workItem from="1616772093060" duration="704000" />
+      <workItem from="1616772093060" duration="812000" />
+      <workItem from="1616773261002" duration="993000" />
     </task>
     <servers />
   </component>
@@ -352,17 +357,6 @@
     <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
       <collection />
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/geolocation/IPGeolocatorTest.java</url>
-          <line>2465</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

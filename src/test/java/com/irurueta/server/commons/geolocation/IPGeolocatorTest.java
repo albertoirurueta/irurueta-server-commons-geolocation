@@ -16,6 +16,7 @@
 package com.irurueta.server.commons.geolocation;
 
 import com.irurueta.server.commons.configuration.ConfigurationException;
+import com.maxmind.geoip2.DatabaseReader;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -23,12 +24,14 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Locale;
 import java.util.Properties;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 /**
  * @author albertoirurueta
@@ -2600,5 +2603,120 @@ public class IPGeolocatorTest {
         }
 
         IPGeolocator.reset();
+    }
+
+    @Test
+    public void testCloseWhenNoErrorCityLevel() throws ConfigurationException,
+            NoSuchFieldException, IllegalAccessException, IOException {
+        final Properties props = new Properties();
+        props.setProperty(GeolocationConfigurationFactory.
+                IP_GEOLOCATION_COUNTRY_DATABASE_FILE_PROPERTY, COUNTRY_FILE);
+        props.setProperty(GeolocationConfigurationFactory.
+                IP_GEOLOCATION_CITY_DATABASE_FILE_PROPERTY, CITY_FILE);
+        props.setProperty(GeolocationConfigurationFactory.IP_GEOLOCATION_LEVEL_PROPERTY,
+                IPGeolocationLevel.CITY.getValue());
+
+        GeolocationConfigurationFactory.getInstance().configure(props);
+
+        final IPGeolocator locator = IPGeolocator.getInstance();
+
+        // replace city reader by spy
+        final Field field = IPGeolocator.class.getDeclaredField("mCityReader");
+        field.setAccessible(true);
+        final DatabaseReader cityReader = (DatabaseReader) field.get(locator);
+
+        final DatabaseReader cityReaderSpy = spy(cityReader);
+
+        field.set(locator, cityReaderSpy);
+
+        locator.close();
+
+        verify(cityReaderSpy, only()).close();
+    }
+
+    @Test
+    public void testCloseWhenNoErrorCountryLevel() throws ConfigurationException,
+            NoSuchFieldException, IllegalAccessException, IOException {
+        final Properties props = new Properties();
+        props.setProperty(GeolocationConfigurationFactory.
+                IP_GEOLOCATION_COUNTRY_DATABASE_FILE_PROPERTY, COUNTRY_FILE);
+        props.setProperty(GeolocationConfigurationFactory.
+                IP_GEOLOCATION_CITY_DATABASE_FILE_PROPERTY, CITY_FILE);
+        props.setProperty(GeolocationConfigurationFactory.IP_GEOLOCATION_LEVEL_PROPERTY,
+                IPGeolocationLevel.COUNTRY.getValue());
+
+        GeolocationConfigurationFactory.getInstance().configure(props);
+
+        final IPGeolocator locator = IPGeolocator.getInstance();
+
+        // replace country reader by spy
+        final Field field = IPGeolocator.class.getDeclaredField("mCountryReader");
+        field.setAccessible(true);
+        final DatabaseReader countryReader = (DatabaseReader) field.get(locator);
+
+        final DatabaseReader countryReaderSpy = spy(countryReader);
+
+        field.set(locator, countryReaderSpy);
+
+        locator.close();
+
+        verify(countryReaderSpy, only()).close();
+
+    }
+
+    @Test
+    public void testCloseErrorWhenCityLevel() throws ConfigurationException,
+            IOException, NoSuchFieldException, IllegalAccessException {
+        final Properties props = new Properties();
+        props.setProperty(GeolocationConfigurationFactory.
+                IP_GEOLOCATION_COUNTRY_DATABASE_FILE_PROPERTY, COUNTRY_FILE);
+        props.setProperty(GeolocationConfigurationFactory.
+                IP_GEOLOCATION_CITY_DATABASE_FILE_PROPERTY, CITY_FILE);
+        props.setProperty(GeolocationConfigurationFactory.IP_GEOLOCATION_LEVEL_PROPERTY,
+                IPGeolocationLevel.CITY.getValue());
+
+        GeolocationConfigurationFactory.getInstance().configure(props);
+
+        final IPGeolocator locator = IPGeolocator.getInstance();
+
+        // replace country reader by mock
+        final DatabaseReader cityReaderMock = mock(DatabaseReader.class);
+        doThrow(IOException.class).when(cityReaderMock).close();
+
+        final Field field = IPGeolocator.class.getDeclaredField("mCityReader");
+        field.setAccessible(true);
+        field.set(locator, cityReaderMock);
+
+        locator.close();
+
+        verify(cityReaderMock, only()).close();
+    }
+
+    @Test
+    public void testCloseErrorWhenCountryLevel() throws ConfigurationException,
+            IOException, NoSuchFieldException, IllegalAccessException {
+        final Properties props = new Properties();
+        props.setProperty(GeolocationConfigurationFactory.
+                IP_GEOLOCATION_COUNTRY_DATABASE_FILE_PROPERTY, COUNTRY_FILE);
+        props.setProperty(GeolocationConfigurationFactory.
+                IP_GEOLOCATION_CITY_DATABASE_FILE_PROPERTY, CITY_FILE);
+        props.setProperty(GeolocationConfigurationFactory.IP_GEOLOCATION_LEVEL_PROPERTY,
+                IPGeolocationLevel.COUNTRY.getValue());
+
+        GeolocationConfigurationFactory.getInstance().configure(props);
+
+        final IPGeolocator locator = IPGeolocator.getInstance();
+
+        // replace country reader by mock
+        final DatabaseReader countryReaderMock = mock(DatabaseReader.class);
+        doThrow(IOException.class).when(countryReaderMock).close();
+
+        final Field field = IPGeolocator.class.getDeclaredField("mCountryReader");
+        field.setAccessible(true);
+        field.set(locator, countryReaderMock);
+
+        locator.close();
+
+        verify(countryReaderMock, only()).close();
     }
 }

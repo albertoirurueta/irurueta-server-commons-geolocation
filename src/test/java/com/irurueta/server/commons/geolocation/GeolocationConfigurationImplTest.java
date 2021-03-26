@@ -22,6 +22,9 @@ import java.util.Properties;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class GeolocationConfigurationImplTest {
 
@@ -101,6 +104,15 @@ public class GeolocationConfigurationImplTest {
         assertEquals(cfg.getIPGeolocationCityEmbeddedResource(),
                 "resource_city");
         assertEquals(cfg.getIPGeolocationCityDatabaseFile(), "city.mmdb");
+    }
+
+    @Test(expected = ConfigurationException.class)
+    public void testFromPropertiesWhenError() throws ConfigurationException {
+        final Properties props = mock(Properties.class);
+        when(props.getProperty(anyString(), anyString())).thenThrow(IllegalArgumentException.class);
+
+        final GeolocationConfiguration cfg = new GeolocationConfigurationImpl();
+        cfg.fromProperties(props);
     }
 
     @Test

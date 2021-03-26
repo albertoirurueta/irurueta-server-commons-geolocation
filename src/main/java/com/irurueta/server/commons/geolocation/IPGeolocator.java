@@ -124,16 +124,13 @@ public class IPGeolocator implements Closeable {
                 }
             }
 
+        } catch (final Exception e) {
+            LOGGER.log(Level.WARNING, "IP geolocation configuration not completed", e);
+        } finally {
             if (mEnabled) {
                 LOGGER.log(Level.INFO, "IP geolocation configured");
             } else {
                 LOGGER.log(Level.INFO, "IP geolocation is disabled");
-            }
-        } catch (final Exception e) {
-            if (mEnabled) {
-                LOGGER.log(Level.INFO, "IP geolocation configured", e);
-            } else {
-                LOGGER.log(Level.INFO, "IP geolocation is disabled", e);
             }
         }
     }
