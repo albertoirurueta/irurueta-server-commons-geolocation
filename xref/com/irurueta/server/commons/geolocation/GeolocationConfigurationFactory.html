@@ -183,41 +183,43 @@
 <a class="jxr_linenumber" name="L175" href="#L175">175</a>     @Override
 <a class="jxr_linenumber" name="L176" href="#L176">176</a>     <strong class="jxr_keyword">public</strong> <a href="../../../../../com/irurueta/server/commons/geolocation/GeolocationConfiguration.html">GeolocationConfiguration</a> configure(<strong class="jxr_keyword">final</strong> Properties properties)
 <a class="jxr_linenumber" name="L177" href="#L177">177</a>             <strong class="jxr_keyword">throws</strong> ConfigurationException {
-<a class="jxr_linenumber" name="L178" href="#L178">178</a>         <strong class="jxr_keyword">if</strong> (mConfiguration != <strong class="jxr_keyword">null</strong>) <strong class="jxr_keyword">return</strong> mConfiguration;
-<a class="jxr_linenumber" name="L179" href="#L179">179</a> 
-<a class="jxr_linenumber" name="L180" href="#L180">180</a>         <strong class="jxr_keyword">if</strong> (properties == <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="L181" href="#L181">181</a>             <em class="jxr_comment">// use default configuration</em>
-<a class="jxr_linenumber" name="L182" href="#L182">182</a>             mConfiguration = <strong class="jxr_keyword">new</strong> <a href="../../../../../com/irurueta/server/commons/geolocation/GeolocationConfigurationImpl.html">GeolocationConfigurationImpl</a>();
-<a class="jxr_linenumber" name="L183" href="#L183">183</a>         } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L184" href="#L184">184</a>             mConfiguration = <strong class="jxr_keyword">new</strong> <a href="../../../../../com/irurueta/server/commons/geolocation/GeolocationConfigurationImpl.html">GeolocationConfigurationImpl</a>(properties);
-<a class="jxr_linenumber" name="L185" href="#L185">185</a>         }
-<a class="jxr_linenumber" name="L186" href="#L186">186</a> 
-<a class="jxr_linenumber" name="L187" href="#L187">187</a>         <em class="jxr_comment">// configure IPGeolocator</em>
-<a class="jxr_linenumber" name="L188" href="#L188">188</a>         IPGeolocator.getInstance();
-<a class="jxr_linenumber" name="L189" href="#L189">189</a> 
-<a class="jxr_linenumber" name="L190" href="#L190">190</a>         <strong class="jxr_keyword">return</strong> mConfiguration;
-<a class="jxr_linenumber" name="L191" href="#L191">191</a>     }
-<a class="jxr_linenumber" name="L192" href="#L192">192</a> 
-<a class="jxr_linenumber" name="L193" href="#L193">193</a>     <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L194" href="#L194">194</a> <em class="jxr_javadoccomment">     * Resets configuration by removing any existing configuration if already</em>
-<a class="jxr_linenumber" name="L195" href="#L195">195</a> <em class="jxr_javadoccomment">     * defined.</em>
-<a class="jxr_linenumber" name="L196" href="#L196">196</a> <em class="jxr_javadoccomment">     *</em>
-<a class="jxr_linenumber" name="L197" href="#L197">197</a> <em class="jxr_javadoccomment">     * @return returns this instance so that this method can be chained .</em>
-<a class="jxr_linenumber" name="L198" href="#L198">198</a> <em class="jxr_javadoccomment">     * @throws ConfigurationException if something fails during configuration</em>
-<a class="jxr_linenumber" name="L199" href="#L199">199</a> <em class="jxr_javadoccomment">     *                                reset.</em>
-<a class="jxr_linenumber" name="L200" href="#L200">200</a> <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L201" href="#L201">201</a>     @Override
-<a class="jxr_linenumber" name="L202" href="#L202">202</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">synchronized</strong> BaseConfigurationFactory&lt;GeolocationConfiguration&gt; reset()
-<a class="jxr_linenumber" name="L203" href="#L203">203</a>             <strong class="jxr_keyword">throws</strong> ConfigurationException {
-<a class="jxr_linenumber" name="L204" href="#L204">204</a>         <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="L205" href="#L205">205</a>             IPGeolocator.reset();
-<a class="jxr_linenumber" name="L206" href="#L206">206</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IOException e) {
-<a class="jxr_linenumber" name="L207" href="#L207">207</a>             <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> ConfigurationException(e);
-<a class="jxr_linenumber" name="L208" href="#L208">208</a>         }
-<a class="jxr_linenumber" name="L209" href="#L209">209</a>         mConfiguration = <strong class="jxr_keyword">null</strong>;
-<a class="jxr_linenumber" name="L210" href="#L210">210</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">super</strong>.reset();
-<a class="jxr_linenumber" name="L211" href="#L211">211</a>     }
-<a class="jxr_linenumber" name="L212" href="#L212">212</a> }
+<a class="jxr_linenumber" name="L178" href="#L178">178</a>         <strong class="jxr_keyword">if</strong> (mConfiguration != <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="L179" href="#L179">179</a>             <strong class="jxr_keyword">return</strong> mConfiguration;
+<a class="jxr_linenumber" name="L180" href="#L180">180</a>         }
+<a class="jxr_linenumber" name="L181" href="#L181">181</a> 
+<a class="jxr_linenumber" name="L182" href="#L182">182</a>         <strong class="jxr_keyword">if</strong> (properties == <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="L183" href="#L183">183</a>             <em class="jxr_comment">// use default configuration</em>
+<a class="jxr_linenumber" name="L184" href="#L184">184</a>             mConfiguration = <strong class="jxr_keyword">new</strong> <a href="../../../../../com/irurueta/server/commons/geolocation/GeolocationConfigurationImpl.html">GeolocationConfigurationImpl</a>();
+<a class="jxr_linenumber" name="L185" href="#L185">185</a>         } <strong class="jxr_keyword">else</strong> {
+<a class="jxr_linenumber" name="L186" href="#L186">186</a>             mConfiguration = <strong class="jxr_keyword">new</strong> <a href="../../../../../com/irurueta/server/commons/geolocation/GeolocationConfigurationImpl.html">GeolocationConfigurationImpl</a>(properties);
+<a class="jxr_linenumber" name="L187" href="#L187">187</a>         }
+<a class="jxr_linenumber" name="L188" href="#L188">188</a> 
+<a class="jxr_linenumber" name="L189" href="#L189">189</a>         <em class="jxr_comment">// configure IPGeolocator</em>
+<a class="jxr_linenumber" name="L190" href="#L190">190</a>         IPGeolocator.getInstance();
+<a class="jxr_linenumber" name="L191" href="#L191">191</a> 
+<a class="jxr_linenumber" name="L192" href="#L192">192</a>         <strong class="jxr_keyword">return</strong> mConfiguration;
+<a class="jxr_linenumber" name="L193" href="#L193">193</a>     }
+<a class="jxr_linenumber" name="L194" href="#L194">194</a> 
+<a class="jxr_linenumber" name="L195" href="#L195">195</a>     <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L196" href="#L196">196</a> <em class="jxr_javadoccomment">     * Resets configuration by removing any existing configuration if already</em>
+<a class="jxr_linenumber" name="L197" href="#L197">197</a> <em class="jxr_javadoccomment">     * defined.</em>
+<a class="jxr_linenumber" name="L198" href="#L198">198</a> <em class="jxr_javadoccomment">     *</em>
+<a class="jxr_linenumber" name="L199" href="#L199">199</a> <em class="jxr_javadoccomment">     * @return returns this instance so that this method can be chained .</em>
+<a class="jxr_linenumber" name="L200" href="#L200">200</a> <em class="jxr_javadoccomment">     * @throws ConfigurationException if something fails during configuration</em>
+<a class="jxr_linenumber" name="L201" href="#L201">201</a> <em class="jxr_javadoccomment">     *                                reset.</em>
+<a class="jxr_linenumber" name="L202" href="#L202">202</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L203" href="#L203">203</a>     @Override
+<a class="jxr_linenumber" name="L204" href="#L204">204</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">synchronized</strong> BaseConfigurationFactory&lt;GeolocationConfiguration&gt; reset()
+<a class="jxr_linenumber" name="L205" href="#L205">205</a>             <strong class="jxr_keyword">throws</strong> ConfigurationException {
+<a class="jxr_linenumber" name="L206" href="#L206">206</a>         <strong class="jxr_keyword">try</strong> {
+<a class="jxr_linenumber" name="L207" href="#L207">207</a>             IPGeolocator.reset();
+<a class="jxr_linenumber" name="L208" href="#L208">208</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IOException e) {
+<a class="jxr_linenumber" name="L209" href="#L209">209</a>             <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> ConfigurationException(e);
+<a class="jxr_linenumber" name="L210" href="#L210">210</a>         }
+<a class="jxr_linenumber" name="L211" href="#L211">211</a>         mConfiguration = <strong class="jxr_keyword">null</strong>;
+<a class="jxr_linenumber" name="L212" href="#L212">212</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">super</strong>.reset();
+<a class="jxr_linenumber" name="L213" href="#L213">213</a>     }
+<a class="jxr_linenumber" name="L214" href="#L214">214</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2016&#x2013;2021. All rights reserved.</div>

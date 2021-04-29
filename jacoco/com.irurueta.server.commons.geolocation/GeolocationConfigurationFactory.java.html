@@ -175,19 +175,21 @@ public class GeolocationConfigurationFactory extends
     @Override
     public GeolocationConfiguration configure(final Properties properties)
             throws ConfigurationException {
-<span class="fc bfc" id="L178" title="All 2 branches covered.">        if (mConfiguration != null) return mConfiguration;</span>
+<span class="fc bfc" id="L178" title="All 2 branches covered.">        if (mConfiguration != null) {</span>
+<span class="fc" id="L179">            return mConfiguration;</span>
+        }
 
-<span class="fc bfc" id="L180" title="All 2 branches covered.">        if (properties == null) {</span>
+<span class="fc bfc" id="L182" title="All 2 branches covered.">        if (properties == null) {</span>
             // use default configuration
-<span class="fc" id="L182">            mConfiguration = new GeolocationConfigurationImpl();</span>
+<span class="fc" id="L184">            mConfiguration = new GeolocationConfigurationImpl();</span>
         } else {
-<span class="fc" id="L184">            mConfiguration = new GeolocationConfigurationImpl(properties);</span>
+<span class="fc" id="L186">            mConfiguration = new GeolocationConfigurationImpl(properties);</span>
         }
 
         // configure IPGeolocator
-<span class="fc" id="L188">        IPGeolocator.getInstance();</span>
+<span class="fc" id="L190">        IPGeolocator.getInstance();</span>
 
-<span class="fc" id="L190">        return mConfiguration;</span>
+<span class="fc" id="L192">        return mConfiguration;</span>
     }
 
     /**
@@ -202,12 +204,12 @@ public class GeolocationConfigurationFactory extends
     public synchronized BaseConfigurationFactory&lt;GeolocationConfiguration&gt; reset()
             throws ConfigurationException {
         try {
-<span class="fc" id="L205">            IPGeolocator.reset();</span>
-<span class="nc" id="L206">        } catch (final IOException e) {</span>
-<span class="nc" id="L207">            throw new ConfigurationException(e);</span>
-<span class="fc" id="L208">        }</span>
-<span class="fc" id="L209">        mConfiguration = null;</span>
-<span class="fc" id="L210">        return super.reset();</span>
+<span class="fc" id="L207">            IPGeolocator.reset();</span>
+<span class="nc" id="L208">        } catch (final IOException e) {</span>
+<span class="nc" id="L209">            throw new ConfigurationException(e);</span>
+<span class="fc" id="L210">        }</span>
+<span class="fc" id="L211">        mConfiguration = null;</span>
+<span class="fc" id="L212">        return super.reset();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

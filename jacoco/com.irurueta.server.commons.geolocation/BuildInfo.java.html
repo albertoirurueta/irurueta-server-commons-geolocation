@@ -127,7 +127,7 @@ public final class BuildInfo {
      */
 <span class="fc" id="L128">    private BuildInfo() {</span>
         // loads properties file data
-<span class="fc" id="L130">        try(final InputStream stream = BuildInfo.class.getResourceAsStream(BUILD_INFO_PROPERTIES)) {</span>
+<span class="fc" id="L130">        try (final InputStream stream = BuildInfo.class.getResourceAsStream(BUILD_INFO_PROPERTIES)) {</span>
 <span class="fc" id="L131">            final Properties props = new Properties();</span>
 <span class="fc" id="L132">            props.load(stream);</span>
 
