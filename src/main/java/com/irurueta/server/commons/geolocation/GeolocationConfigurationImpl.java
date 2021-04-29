@@ -32,7 +32,7 @@ public class GeolocationConfigurationImpl implements GeolocationConfiguration {
     /**
      * Indicates whether database must be cached in memory or not.
      * When caching is enabled, performance increases significantly at the
-     * expense of an overhea din memory usage of approximately 2MB.
+     * expense of an overhead in memory usage of approximately 2MB.
      */
     private boolean mCachingEnabled;
 
@@ -54,7 +54,7 @@ public class GeolocationConfigurationImpl implements GeolocationConfiguration {
      * embedded resource will be used instead.
      * By default no embedded resource will be specified, and since an embedded
      * database will be used, it will be use the maxmind geolite database
-     * embeddded in the code.
+     * embedded in the code.
      */
     private String mIpGeolocationCountryEmbeddedResource;
 
@@ -87,7 +87,7 @@ public class GeolocationConfigurationImpl implements GeolocationConfiguration {
      * embedded resource will be used instead.
      * By default no embedded resource will be specified, and since an embedded
      * database will be used, it will be use the maxmind geolite database
-     * embeddded in the code.
+     * embedded in the code.
      */
     private String mIpGeolocationCityEmbeddedResource;
 
@@ -183,7 +183,7 @@ public class GeolocationConfigurationImpl implements GeolocationConfiguration {
      * embedded resource will be used instead.
      * By default no embedded resource will be specified, and since an embedded
      * database will be used, it will be use the maxmind geolite database
-     * embeddded in the code.
+     * embedded in the code.
      *
      * @return embedded resource containing IP geolocation country database.
      */
@@ -234,7 +234,7 @@ public class GeolocationConfigurationImpl implements GeolocationConfiguration {
      * embedded resource will be used instead.
      * By default no embedded resource will be specified, and since an embedded
      * database will be used, it will be use the maxmind geolite database
-     * embeddded in the code.
+     * embedded in the code.
      *
      * @return embedded resource containing IP geolocation city database.
      */
@@ -267,7 +267,7 @@ public class GeolocationConfigurationImpl implements GeolocationConfiguration {
      * @throws ConfigurationException if any properties value is invalid.
      */
     @Override
-    public final void fromProperties(Properties properties)
+    public final void fromProperties(final Properties properties)
             throws ConfigurationException {
         try {
             mIpGeolocationLevel = IPGeolocationLevel.fromValue(

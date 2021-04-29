@@ -61,7 +61,7 @@ public interface GeolocationConfiguration extends Configuration {
      * embedded resource will be used instead.
      * By default no embedded resource will be specified, and since an embedded
      * database will be used, it will be use the maxmind geolite database
-     * embeddded in the code.
+     * embedded in the code.
      *
      * @return embedded resource containing IP geolocation country database.
      */
@@ -103,7 +103,7 @@ public interface GeolocationConfiguration extends Configuration {
      * embedded resource will be used instead.
      * By default no embedded resource will be specified, and since an embedded
      * database will be used, it will be use the maxmind geolite database
-     * embeddded in the code.
+     * embedded in the code.
      *
      * @return embedded resource containing IP geolocation city database.
      */

@@ -127,7 +127,7 @@ public final class BuildInfo {
      */
     private BuildInfo() {
         // loads properties file data
-        try(final InputStream stream = BuildInfo.class.getResourceAsStream(BUILD_INFO_PROPERTIES)) {
+        try (final InputStream stream = BuildInfo.class.getResourceAsStream(BUILD_INFO_PROPERTIES)) {
             final Properties props = new Properties();
             props.load(stream);
 

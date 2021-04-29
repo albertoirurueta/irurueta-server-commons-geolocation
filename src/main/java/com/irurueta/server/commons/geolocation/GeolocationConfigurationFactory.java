@@ -175,7 +175,9 @@ public class GeolocationConfigurationFactory extends
     @Override
     public GeolocationConfiguration configure(final Properties properties)
             throws ConfigurationException {
-        if (mConfiguration != null) return mConfiguration;
+        if (mConfiguration != null) {
+            return mConfiguration;
+        }
 
         if (properties == null) {
             // use default configuration

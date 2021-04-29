@@ -294,7 +294,7 @@ public class IPGeolocator implements Closeable {
      * If databases where embedded, then their destination local files will also
      * be deleted when closing location services.
      * This method should be called at server shutdown or when application is
-     * undeployed.
+     * un-deployed.
      *
      * @throws IOException if an I/O error occurs.
      */
@@ -320,7 +320,7 @@ public class IPGeolocator implements Closeable {
 
         // delete database files if they were copied from embedded resources, as
         // this method will usually be called on server shutdown or application
-        // undeployment
+        // un-deployment
         boolean failed = false;
         if (mCountryDatabasePrepared) {
             // delete country database file
@@ -569,6 +569,10 @@ public class IPGeolocator implements Closeable {
 
         if (!f.exists()) {
             try (final InputStream inStream = IPGeolocator.class.getResourceAsStream(resource)) {
+                if (inStream == null) {
+                    throw new IOException();
+                }
+
                 try (final OutputStream outStream = new FileOutputStream(file)) {
                     LOGGER.log(Level.INFO, "Copying resource: {0}", resource);
 
