@@ -1,7 +1,7 @@
 # irurueta-server-commons-geolocation
 Utility classes for geolocation based on IP address
 
-[![Build Status](https://travis-ci.org/albertoirurueta/irurueta-server-commons-geolocation.svg?branch=master)](https://travis-ci.org/albertoirurueta/irurueta-server-commons-geolocation)
+[![Build Status](https://travis-ci.com/albertoirurueta/irurueta-server-commons-geolocation.svg?branch=master)](https://travis-ci.com/albertoirurueta/irurueta-server-commons-geolocation)
 
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=albertoirurueta_irurueta-server-commons-geolocation&metric=bugs)](https://sonarcloud.io/dashboard?id=albertoirurueta_irurueta-server-commons-geolocation)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=albertoirurueta_irurueta-server-commons-geolocation&metric=code_smells)](https://sonarcloud.io/dashboard?id=albertoirurueta_irurueta-server-commons-geolocation)
